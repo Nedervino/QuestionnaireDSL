@@ -1,34 +1,71 @@
 grammar QL;
-WS          :	(' ' | '\t' | '\n' | '\r')+ -> skip;
-form        : 'form' ID block;
-ID          : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9')*;
-block       : '{'(question | ifexpr | assignment)*'}';
-question    : declaration;
-declaration : STRINGLIT ID ':' type;
-type        : ('boolean' | 'money' | 'int' | 'float' | 'string');
 
-STRING      : ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|',')+;
-STRINGLIT   : '"' STRING '"';
-BOOLEAN     : ('true' | 'false');
-INT         : ('0'..'9')+;
 
-ifexpr      : 'if' condition block;
-condition   : '(' boolexpr ')';
+form            : 'form'  ID  block;
 
-boolval     : (BOOLEAN | ID | boolexpr | comparison);
-boolexpr    : ((boolexpr '&&' boolexpr) | (boolexpr '||' boolexpr) | ('!' boolexpr) | ( '(' boolexpr ')' ) | boolval);
+block           : '{'(statement)*'}';
+statement       : input
+                | output
+                | exprIf
+                | assignment
+                ;
 
-comparison  : (compbool | compnum | compstr);
-compbool    : (boolexpr ('==' | '!=') boolexpr);
-compnum     : (numexpr compsym numexpr);
-compsym     : ('<'|'<='|'>'|'>='|'=='|'!=');
-compstr     : (strexpr ('==' | '!=') strexpr);
 
-numval	    : (INT | ID | numexpr);
-numexpr	    : ((numexpr '+' numexpr) | (numexpr '-' numexpr) | (numexpr '/' numexpr) | (numexpr '*' numexpr) | ('-' numexpr) | ('(' numexpr ')') | numval);
+input           : STRINGLIT declaration;
+declaration     : ID ':' TYPE;
 
-strval	    : (STRINGLIT | ID | strexpr);
-strexpr	    : ((strexpr '+' strexpr) | ('(' strexpr ')') | strval);
+output          : STRINGLIT assignment;
+assignment      : declaration '=' expr;
 
-assignment  : declaration '=' val;
-val	    : (boolval | numval | strval);
+exprIf          : 'if' '(' exprBool ')' block;
+
+
+expr            : exprBool
+                | exprNum
+                | exprStr
+                ;
+
+exprBool        : exprBool '&&' exprBool
+                | exprBool '||' exprBool
+                | exprBool '==' exprBool
+                | exprBool '!=' exprBool
+                | '(' exprBool ')'
+                | '!' exprBool
+                | compNum
+                | compStr
+                | valBool
+                ;
+compNum         : exprNum compNumSym exprNum;
+compNumSym      : ('<'|'<='|'>'|'>='|'=='|'!=');
+compStr         : exprStr '==' exprStr
+                | exprStr '!=' exprStr
+                ;
+valBool         : BOOLEAN | ID;
+
+exprNum	        : exprNum '+' exprNum
+                | exprNum '-' exprNum
+                | exprNum '/' exprNum
+                | exprNum '*' exprNum
+                | '-' exprNum
+                | '(' exprNum ')'
+                | valNum
+                ;
+valNum	        : INT | ID;
+
+exprStr	        : exprStr '+' exprStr
+                | '(' exprStr ')'
+                | valStr
+                ;
+valStr	        : STRINGLIT | ID;
+
+
+//Lexer terms
+//Types
+TYPE            : ('boolean' | 'money' | 'int' | 'float' | 'string');
+BOOLEAN         : ('true' | 'false');
+STRINGLIT       : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
+INT             : ('0'..'9')+;
+
+//Other terms
+ID              : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
+WS              : (' ' | '\t' | '\n' | '\r')+ -> skip;
