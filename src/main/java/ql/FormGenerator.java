@@ -1,16 +1,18 @@
 package ql;
 
 import org.antlr.v4.runtime.*;
-//import org.antlr.v4.gui.*;
-//
-//import ql.QLBaseListener;
-//import ql.QLParser;
-//import ql.QLLexer;
 
 import java.io.IOException;
 
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.gui.TreeViewer;
+
+import java.util.Arrays;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 
 public class FormGenerator {
 
@@ -24,22 +26,37 @@ public class FormGenerator {
         }
 
         QLLexer lexer = new QLLexer(inputStream);
-        CommonTokenStream commonTokenStream = new CommonTokenStream(lexer);
-        QLParser parser = new QLParser(commonTokenStream);
+        CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+        QLParser parser = new QLParser(tokenStream);
+        // parser.removeErrorListeners();
+        ParseTree parseTree = parser.form();
 
-        ParseTreeWalker walker = new ParseTreeWalker();
-//
-//
-//        QLParser.FileContext fileContext = QLParser.file();
-//        QLVisitor visitor = new QLVisitor();
-//        visitor.visit(fileContext);
-//
-//        ANTLRStringStream in = new ANTLRStringStream("hello parrrt");
-//        QLLexer lexer = new QLLexer(in);
-//        CommonTokenStream tokens = new CommonTokenStream(lexer);
-//        QLParser parser = new QLParser(tokens);
-//        parser.eval();
+        //show AST in console
+        System.out.println(parseTree.toStringTree(parser));
+
+        //show AST in JFrame
+        visualiseTree(parser, parseTree);
+
+        QLCustomVisitor visitor = new QLCustomVisitor();
+
+        visitor.visit(parseTree);
+
+
     }
+
+
+    private void visualiseTree(QLParser parser, ParseTree parseTree) {
+        JFrame frame = new JFrame("AST Visualisation");
+        JPanel panel = new JPanel();
+        TreeViewer viewer = new TreeViewer(Arrays.asList(parser.getRuleNames()),parseTree);
+        viewer.setScale(0.8);//scale a little
+        panel.add(viewer);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(panel);
+        frame.setSize(1400,400);
+        frame.setVisible(true);
+    }
+
 
     public static void main(String[] args) {
 

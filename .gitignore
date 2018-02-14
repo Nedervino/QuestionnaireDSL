@@ -1,9 +1,10 @@
-# User-specific stuff:
+# User-specific files:
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
 .idea/misc.xml
 .idea/vcs.xml
+
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/
@@ -14,13 +15,16 @@
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 
-# Maven generated files
+
+# Other Intellij / Maven
+*.iml
 .idea/libraries/Maven*
 
 
 # Generated parsers
 gen/*
 target/*
+
 
 # Custom files
 TODO.txt
