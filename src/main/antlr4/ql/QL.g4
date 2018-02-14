@@ -1,57 +1,34 @@
-//grammar QL;
-//WS          :	(' ' | '\t' | '\n' | '\r')+ -> skip;
-//form        : 'form' ID block;
-//ID          : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
-//block       : '{'(question)*'}';
-//question    : declaration;
-//declaration : STRINGLIT ID ':' type;
-//type        : ('boolean');
-//STRINGLIT   : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|',')+ '"';
-
-
 grammar QL;
-r  : 'hello' (ID | r) ;         // match keyword hello followed by an identifier
-ID : [a-z]+ ;             // match lower-case identifiers
-WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+WS          :	(' ' | '\t' | '\n' | '\r')+ -> skip;
+form        : 'form' ID block;
+ID          : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9')*;
+block       : '{'(question | ifexpr | assignment)*'}';
+question    : declaration;
+declaration : STRINGLIT ID ':' type;
+type        : ('boolean' | 'money' | 'int' | 'float' | 'string');
 
+STRING      : ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|',')+;
+STRINGLIT   : '"' STRING '"';
+BOOLEAN     : ('true' | 'false');
+INT         : ('0'..'9')+;
 
-//grammar QL;
-//
-//
-//
-//form        : 'form'  ID  '{' (formField)*  '}'
-//            ;
-//
-//formField   : condition
-//            | question
-//            | computedQuestion
-//            ;
-//
-//condition   : MULTILINE_COMMENT
-//            ;
-//
-//question    : MULTILINE_COMMENT
-//            ;
-//
-//computedQuestion
-//            : MULTILINE_COMMENT
-//            ;
-//
-//// Tokens
-//WS  :	(' ' | '\t' | '\n' | '\r') -> channel(HIDDEN)
-//    ;
-//
-//MULTILINE_COMMENT
-//    : '/*' .* '*/' -> channel(HIDDEN)
-//    ;
-//
-////?
-//SINGLELINE_COMMENT
-//    :   '//' ~[\r\n]* '\r'? '\n' -> channel(HIDDEN)
-//    ;
-//
-//Ident:   ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
-//
-//Int: ('0'..'9')+;
-//
-//Str: '"' .* '"';
+ifexpr      : 'if' condition block;
+condition   : '(' boolexpr ')';
+
+boolval     : (BOOLEAN | ID | boolexpr | comparison);
+boolexpr    : ((boolexpr '&&' boolexpr) | (boolexpr '||' boolexpr) | ('!' boolexpr) | ( '(' boolexpr ')' ) | boolval);
+
+comparison  : (compbool | compnum | compstr);
+compbool    : (boolexpr ('==' | '!=') boolexpr);
+compnum     : (numexpr compsym numexpr);
+compsym     : ('<'|'<='|'>'|'>='|'=='|'!=');
+compstr     : (strexpr ('==' | '!=') strexpr);
+
+numval	    : (INT | ID | numexpr);
+numexpr	    : ((numexpr '+' numexpr) | (numexpr '-' numexpr) | (numexpr '/' numexpr) | (numexpr '*' numexpr) | ('-' numexpr) | ('(' numexpr ')') | numval);
+
+strval	    : (STRINGLIT | ID | strexpr);
+strexpr	    : ((strexpr '+' strexpr) | ('(' strexpr ')') | strval);
+
+assignment  : declaration '=' val;
+val	    : (boolval | numval | strval);
