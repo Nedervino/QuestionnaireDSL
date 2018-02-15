@@ -75,6 +75,7 @@ exprBool        : exprBool '&&' exprBool
                 | compStr
                 | valBool
                 ;
+
 compNum         : exprNum compNumSym exprNum;
 compNumSym      : ('<'|'<='|'>'|'>='|'=='|'!=');
 compStr         : exprStr '==' exprStr
@@ -96,10 +97,12 @@ exprStr	        : exprStr '+' exprStr
                 | '(' exprStr ')'
                 | valStr
                 ;
+
 valStr	        : STRINGLIT | ID;
 
 
-//Lexer terms
+
+
 //Types
 TYPE            : ('boolean' | 'money' | 'int' | 'float' | 'string');
 BOOLEAN         : ('true' | 'false');
@@ -108,7 +111,11 @@ INT             : ('0'..'9')+;
 
 //Other terms
 ID              : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
-WS              : (' ' | '\t' | '\n' | '\r')+ -> skip;
+WHITESPACE      : (' ' | '\t' | '\n' | '\r')+ -> skip;
+
+MULTI_COMMENT   : '/*' .* '*/' -> channel(HIDDEN);
+
+SINGLE_COMMENT  : '//' ~[\r\n]* '\r'? '\n' -> channel(HIDDEN);
 
 
 
