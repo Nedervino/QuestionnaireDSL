@@ -8,9 +8,6 @@ grammar QL;
     - label (actual question)
     - type
     - (optional) associated to an expression, which makes it computed
--
-
-
 
 // Boolean expressions, e.g.
 &&
@@ -37,8 +34,6 @@ MONEY
 ENUMERATION //(e.g. good, bad, don't know)
 INTEGER_RANGE // (e.g. 1..5)
 */
-
-
 
 
 form            : 'form'  ID  block;
@@ -113,7 +108,7 @@ INT             : ('0'..'9')+;
 ID              : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
 WHITESPACE      : (' ' | '\t' | '\n' | '\r')+ -> skip;
 
-MULTI_COMMENT   : '/*' .* '*/' -> channel(HIDDEN);
+MULTI_COMMENT   : '/*' .*? '*/' -> channel(HIDDEN);
 
 SINGLE_COMMENT  : '//' ~[\r\n]* '\r'? '\n' -> channel(HIDDEN);
 

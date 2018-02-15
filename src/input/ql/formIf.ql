@@ -1,3 +1,7 @@
+/*
+    Form with if statement and computed statement
+*/
+
 form taxOfficeExample {
   "Did you sell a house in 2010?"
     hasSoldHouse: boolean
