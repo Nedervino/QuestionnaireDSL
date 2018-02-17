@@ -10,12 +10,6 @@ import java.io.IOException;
 
 public class TypeChecker {
 
-    public static void main(String[] args){
-        TypeChecker typeCheck = new TypeChecker();
-        typeCheck.start("src/input/ql/form2.ql");
-        System.out.println("No type conflicts found.");
-    }
-
 
     public void start(String fileName) {
 
@@ -50,6 +44,7 @@ public class TypeChecker {
 
         visitor.visit(parseTree);
 
+        System.out.println("No type conflicts found.");
     }
 
 }

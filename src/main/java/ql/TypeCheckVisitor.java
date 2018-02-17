@@ -132,7 +132,6 @@ public class TypeCheckVisitor extends QLBaseVisitor<TypeCheckNode> {
 
         //Anything else was a var
         if(type == null) {
-            //TODO add try except which states that var wasn't declared yet when the lookup fails
             if(!declaredVars.containsKey(content)){
                 try {
                     throw new Exception("Variable has not been declared yet: " + content);
@@ -157,7 +156,7 @@ public class TypeCheckVisitor extends QLBaseVisitor<TypeCheckNode> {
     @Override
     protected TypeCheckNode aggregateResult(TypeCheckNode aggregate, TypeCheckNode nextResult) {
 
-        TypeCheckNode.Type type;
+        TypeCheckNode.Type type = TypeCheckNode.Type.NONE;
 
         if(aggregate.type == null){
             type = nextResult.type;
@@ -172,7 +171,6 @@ public class TypeCheckVisitor extends QLBaseVisitor<TypeCheckNode> {
             type = aggregate.type;
         }
         else{
-            type = TypeCheckNode.Type.INVALID;
             try {
                 throw new Exception("Can't operate on two different types: " + String.valueOf(aggregate.type) + " and " + String.valueOf(nextResult.type));
             } catch (Exception e) {

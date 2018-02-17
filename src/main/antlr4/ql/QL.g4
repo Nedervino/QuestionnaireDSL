@@ -50,7 +50,7 @@ input           : STRINGLIT declaration;
 declaration     : ID ':' TYPE;
 
 output          : STRINGLIT assignment;
-assignment      : declaration '=' expr;
+assignment      : (declaration | ID) '=' expr;
 
 exprIf          : 'if' '(' exprBool ')' block;
 
