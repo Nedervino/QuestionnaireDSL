@@ -32,19 +32,23 @@ public class DefaultRenderVisitor extends QLBaseVisitor<String> {
     }
 
     @Override public String visitOutput(QLParser.OutputContext ctx) {
+        String varName = visit(ctx.children.get(1));
 
+        formView.addElement(varName, new GUIElement());
+        return null;
+    }
+
+    @Override public String visitAssignment(QLParser.AssignmentContext ctx) {
         //An assignment comes in two forms: "declaration" assignment and "an already existing variable" assignment.
         //Using the visitor pattern we let T be a variable name. This way, an output or input only has to sift through which children were none,
         //and pass the correct varname to the formView. We only need to use the leftHand part of the equals sign for assignments,
         //so we can just visit the first of the children.
 
         //The two calls this pertains to are visitDeclaration and visitTerminal.
-        String varName = visit(ctx.children.get(0));
 
-
-        formView.addElement(varName, new GUIElement());
-        return null;
+        return visit(ctx.children.get(0));
     }
+
 
     @Override public String visitDeclaration(QLParser.DeclarationContext ctx) {
         TerminalNode idNode = (TerminalNode) ctx.children.get(0);
