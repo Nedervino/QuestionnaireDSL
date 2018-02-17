@@ -5,9 +5,17 @@ import ql.QLParser;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.*;
+import java.util.LinkedList;
 
 
 public class FormView extends JPanel{
+
+    LinkedList<Wrapper> elements;
+
+    public FormView(){
+        elements = new LinkedList<>();
+    }
 
     public void start(ParseTree parseTree) {
 
@@ -29,24 +37,45 @@ public class FormView extends JPanel{
         DefaultRenderVisitor visitor = new DefaultRenderVisitor(this);
         visitor.visit(parseTree);
 
+        repaint();
     }
 
+    @Override
+    public void paintComponent(Graphics g){
+        int pointer = 100;
+
+        g.setColor(Color.BLACK);
+
+        for(Wrapper wrapper : elements){
+            g.drawString(wrapper.varName, 50, pointer);
+            pointer+=40;
+        }
+    }
+
+    static class Wrapper{
+
+        String varName;
+        GUIElement element;
+
+        public Wrapper(String varName, GUIElement element){
+            this.varName = varName;
+            this.element = element;
+        }
+
+    }
 
     private void init() {
         JFrame frame = new JFrame("Form Viewer");
         JPanel panel = this;
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1400,400);
+        frame.setSize(600,900);
         frame.setVisible(true);
         frame.add(panel);
     }
 
-    public void renderInput(QLParser.InputContext ctx) {
-
+    public void addElement(String name, GUIElement element){
+        elements.add(new Wrapper(name, element));
     }
 
-    public void renderOutput(QLParser.OutputContext ctx) {
-        
-    }
 }
