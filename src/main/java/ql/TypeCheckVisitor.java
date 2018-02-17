@@ -3,29 +3,18 @@ package ql;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 
 public class TypeCheckVisitor extends QLBaseVisitor<TypeCheckNode> {
 
+    //TODO visualize tree with each of their types to help in debugging
 
-
-    //TODO
-    //visualize tree with each of their types
-    //write types for variables (refered somewhere else)
-    //write types for special nodes such as compnum
-    //write hashmap of variables with their types
-    //DONE wrote type check for all terminal nodes
-    //Find a way to distringuish stringlits and ids
-
-    HashMap<String, TypeCheckNode.Type> declaredVars;
+    HashMap<String, TypeCheckNode.Type> varsDeclared;
 
     public TypeCheckVisitor(){
-        declaredVars = new HashMap<>();
+        varsDeclared = new HashMap<>();
     }
 
     public static boolean isFloat(String str) {
-        //TODO
-        //Add distinct functions for money and int.
         try {
             Double.parseDouble(str);
         }
@@ -36,11 +25,18 @@ public class TypeCheckVisitor extends QLBaseVisitor<TypeCheckNode> {
     }
 
     public static boolean isMoney(String str){
+        //TODO Add a distinct function for money.
         return isFloat(str);
     }
 
     public static boolean isInt(String str){
-        return isFloat(str);
+        try {
+            Integer.parseInt(str);
+        }
+        catch(NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 
     public TypeCheckNode visitTerminal(TerminalNode node) {
@@ -81,7 +77,7 @@ public class TypeCheckVisitor extends QLBaseVisitor<TypeCheckNode> {
         }
 
 
-        //check whether the nonterminal is an int or some other numeric value.
+        //check whether the non-terminal is an int or some other numeric value.
         if(isInt(content)){
             type = TypeCheckNode.Type.INT;
         }
@@ -132,14 +128,14 @@ public class TypeCheckVisitor extends QLBaseVisitor<TypeCheckNode> {
 
         //Anything else was a var
         if(type == null) {
-            if(!declaredVars.containsKey(content)){
+            if(!varsDeclared.containsKey(content)){
                 try {
                     throw new Exception("Variable has not been declared yet: " + content);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-            type = declaredVars.get(content);
+            type = varsDeclared.get(content);
         }
 
         TypeCheckNode tcNode = new TypeCheckNode(type);
@@ -187,7 +183,7 @@ public class TypeCheckVisitor extends QLBaseVisitor<TypeCheckNode> {
     @Override
     public TypeCheckNode visitDeclaration(QLParser.DeclarationContext ctx) {
         //when visiting a declaration, manually visit the children, such that we have the type. We obtain the var name before visiting,
-        //and we can assign the type of the var in the declaredVars set before we visit the terminal node.
+        //and we can assign the type of the var in the varsDeclared set before we visit the terminal node.
         //This way we don't lookup the var before we finished declaring it.
 
 
@@ -202,14 +198,14 @@ public class TypeCheckVisitor extends QLBaseVisitor<TypeCheckNode> {
         TypeCheckNode.Type type = TypeCheckNode.getType(typeNode.getText());
 
 
-        if(declaredVars.containsKey(varName)){
+        if(varsDeclared.containsKey(varName)){
             try {
                 throw new Exception("Variable has been declared before.");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        declaredVars.put(varName, type);
+        varsDeclared.put(varName, type);
 
         //TODO most rules will return none. Implement this. So block, ifexpr etc
         return new TypeCheckNode(TypeCheckNode.Type.NONE);
