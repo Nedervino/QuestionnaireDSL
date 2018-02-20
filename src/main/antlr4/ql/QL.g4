@@ -7,7 +7,7 @@ grammar QL;
     - id,
     - label (actual question)
     - type
-    - (optional) associated to an expression, which makes it computed
+    - (optional) associated to an expression
 
 // Boolean expressions, e.g.
 &&
@@ -33,6 +33,12 @@ MONEY
 // Additional options. Only requirement is the data type can be automatically mapped to a widget
 ENUMERATION //(e.g. good, bad, don't know)
 INTEGER_RANGE // (e.g. 1..5)
+
+
+
+TODO:
+- Refactor lexer/parser divisiion
+- Reconsider money / decimal separation
 */
 
 
@@ -52,7 +58,9 @@ declaration     : ID ':' TYPE;
 output          : STRINGLIT assignment;
 assignment      : (declaration | ID) '=' expr;
 
-exprIf          : 'if' '(' exprBool ')' block;
+
+exprIf          : 'if' '(' exprBool ')' block elseBlock?;
+elseBlock       : 'else' block;
 
 
 expr            : exprBool
@@ -60,23 +68,24 @@ expr            : exprBool
                 | exprStr
                 ;
 
-exprBool        : exprBool '&&' exprBool
+exprBool        : '(' exprBool ')'
+                | '!' exprBool
+                | exprBool '&&' exprBool
                 | exprBool '||' exprBool
                 | exprBool '==' exprBool
                 | exprBool '!=' exprBool
-                | '(' exprBool ')'
-                | '!' exprBool
                 | compNum
                 | compStr
                 | valBool
                 ;
 
+// Compare Numerical
 compNum         : exprNum compNumSym exprNum;
 compNumSym      : ('<'|'<='|'>'|'>='|'=='|'!=');
 compStr         : exprStr '==' exprStr
                 | exprStr '!=' exprStr
                 ;
-valBool         : BOOLEAN | ID;
+valBool         : BOOLEAN_LITERAL | ID;
 
 exprNum	        : exprNum '+' exprNum
                 | exprNum '-' exprNum
@@ -95,12 +104,15 @@ exprStr	        : exprStr '+' exprStr
 
 valStr	        : STRINGLIT | ID;
 
-
+//Literals
+//MONEY_LITERAL   : '-'? INT+ '.' INT INT;
+DECIMAL_LITERAL : '-'? INT+ '.' INT+;
+BOOLEAN_LITERAL : ('true' | 'false');
+//STRING_LITERAL  : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
 
 
 //Types
 TYPE            : ('boolean' | 'money' | 'int' | 'float' | 'string');
-BOOLEAN         : ('true' | 'false');
 STRINGLIT       : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
 INT             : ('0'..'9')+;
 
@@ -111,56 +123,3 @@ WHITESPACE      : (' ' | '\t' | '\n' | '\r')+ -> skip;
 MULTI_COMMENT   : '/*' .*? '*/' -> skip;
 
 SINGLE_COMMENT  : '//' ~[\r\n]* '\r'? '\n' -> skip;
-
-
-
-
-
-
-
-
-/*
-    OLD
-*/
-
-//
-//grammar QL;
-//form        : 'form'  ID  '{' (formField)*  '}'
-//            ;
-//
-//formField   : condition
-//            | question
-//            | computedQuestion
-//            ;
-//
-//condition   : MULTILINE_COMMENT
-//            ;
-//
-//question    :
-//            ;
-//
-//computedQuestion
-//            : MULTILINE_COMMENT
-//            ;
-//
-//// Tokens
-//ID          : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
-//
-//
-//WS  :	(' ' | '\t' | '\n' | '\r') -> channel(HIDDEN)
-//    ;
-//
-//MULTILINE_COMMENT
-//    : '/*' .* '*/' -> channel(HIDDEN)
-//    ;
-//
-////?
-//SINGLELINE_COMMENT
-//    :   '//' ~[\r\n]* '\r'? '\n' -> channel(HIDDEN)
-//    ;
-//
-//Ident:   ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
-//
-//Int: ('0'..'9')+;
-//
-//Str: '"' .* '"';
