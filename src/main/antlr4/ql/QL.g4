@@ -39,6 +39,7 @@ INTEGER_RANGE // (e.g. 1..5)
 TODO:
 - Refactor lexer/parser divisiion
 - Reconsider money / decimal separation
+- Implement DATE type
 */
 
 
@@ -105,10 +106,10 @@ exprStr	        : exprStr '+' exprStr
 valStr	        : STRINGLIT | ID;
 
 //Literals
+//TODO replace "INT" in the line valNum with INT | DECIMAL | MONEY_LITERAL and test this.
 //MONEY_LITERAL   : '-'? INT+ '.' INT INT;
 DECIMAL_LITERAL : '-'? INT+ '.' INT+;
 BOOLEAN_LITERAL : ('true' | 'false');
-//STRING_LITERAL  : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
 
 
 //Types

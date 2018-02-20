@@ -24,8 +24,8 @@ public class TypeCheckVisitor extends QLBaseVisitor<TypeCheckNode> {
         return true;
     }
 
+    //TODO Add a distinct function for money.
     public static boolean isMoney(String str){
-        //TODO Add a distinct function for money.
         return isFloat(str);
     }
 
@@ -180,13 +180,11 @@ public class TypeCheckVisitor extends QLBaseVisitor<TypeCheckNode> {
         return node;
     }
 
+    //when visiting a declaration, manually visit the children, such that we have the type. We obtain the var name before visiting,
+    //and we can assign the type of the var in the varsDeclared set before we visit the terminal node.
+    //This way we don't lookup the var before we finished declaring it.
     @Override
     public TypeCheckNode visitDeclaration(QLParser.DeclarationContext ctx) {
-        //when visiting a declaration, manually visit the children, such that we have the type. We obtain the var name before visiting,
-        //and we can assign the type of the var in the varsDeclared set before we visit the terminal node.
-        //This way we don't lookup the var before we finished declaring it.
-
-
         //varname
         TerminalNode varNameNode = (TerminalNode) ctx.children.get(0);
         String varName = varNameNode.getText();
@@ -207,7 +205,6 @@ public class TypeCheckVisitor extends QLBaseVisitor<TypeCheckNode> {
         }
         varsDeclared.put(varName, type);
 
-        //TODO most rules will return none. Implement this. So block, ifexpr etc
         return new TypeCheckNode(TypeCheckNode.Type.NONE);
     }
 
@@ -220,8 +217,8 @@ public class TypeCheckVisitor extends QLBaseVisitor<TypeCheckNode> {
         return new TypeCheckNode(TypeCheckNode.Type.BOOLEAN);
     }
 
+    //The form itself doesn't have a type, so we only visit the code block for type checking for faster checking.
     @Override public TypeCheckNode visitForm(QLParser.FormContext ctx) {
-        //Only visit the code block for type checking
         return visit(ctx.children.get(2));
     }
 
