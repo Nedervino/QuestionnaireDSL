@@ -8,8 +8,9 @@ This repository, managed by team Kazan, contains work on two DSLs (QL and QLS) t
 
 ## Setup requirements
 * Java 1.8
-* Maven >=3.0
 * ANTLR4
+* JUnit 4
+* Maven >=3.0
 
 ## How does it work?
 A .g4 file containing Lexer/Parser rules for the DSLs can be found in src/main/antlr4. src/input contains example input files used for generating actual forms in a GUI.
