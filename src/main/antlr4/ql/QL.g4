@@ -53,10 +53,10 @@ statement       : input
                 ;
 
 
-input           : STRINGLIT declaration;
+input           : STRLIT declaration;
 declaration     : ID ':' TYPE;
 
-output          : STRINGLIT assignment;
+output          : STRLIT assignment;
 assignment      : (declaration | ID) '=' expr;
 
 
@@ -82,11 +82,13 @@ exprBool        : '(' exprBool ')'
 
 // Compare Numerical
 compNum         : exprNum compNumSym exprNum;
+//TODO turn compNumSym into a lexer term, and update the visitTerminal method accordingly when building the AST tree. We could also visit this terminal from the compNum visit, because
+//this is the only legal moment when we can encounter these characters (and in the other comparisons)
 compNumSym      : ('<'|'<='|'>'|'>='|'=='|'!=');
 compStr         : exprStr '==' exprStr
                 | exprStr '!=' exprStr
                 ;
-valBool         : BOOLEAN_LITERAL | ID;
+valBool         : BOOLLIT | ID;
 
 exprNum	        : exprNum '+' exprNum
                 | exprNum '-' exprNum
@@ -96,26 +98,27 @@ exprNum	        : exprNum '+' exprNum
                 | '(' exprNum ')'
                 | valNum
                 ;
-valNum	        : INT | ID;
+valNum	        : INTLIT | ID;
 
 exprStr	        : exprStr '+' exprStr
                 | '(' exprStr ')'
                 | valStr
                 ;
 
-valStr	        : STRINGLIT | ID;
-
-//Literals
-//TODO replace "INT" in the line valNum with INT | DECIMAL | MONEY_LITERAL and test this.
-//MONEY_LITERAL   : '-'? INT+ '.' INT INT;
-DECIMAL_LITERAL : '-'? INT+ '.' INT+;
-BOOLEAN_LITERAL : ('true' | 'false');
+valStr	        : STRLIT | ID;
 
 
 //Types
 TYPE            : ('boolean' | 'money' | 'int' | 'float' | 'string');
-STRINGLIT       : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
-INT             : ('0'..'9')+;
+STRLIT       : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
+INTLIT             : ('0'..'9')+;
+//TODO replace "INT" in the line valNum with INT | DECIMAL | MONEY_LITERAL. This will allow using numericals interchangeably. Test this thoroughly.
+
+//TODO the line which defines MONLIT is incorrect. The two INTLIT terms would allow integers of any length at these positions. We could either reuse a DIGIT term, or inline this.
+//MONLIT   : '-'? INTLIT+ '.' INTLIT INTLIT;
+DECLIT : '-'? INTLIT+ '.' INTLIT+;
+BOOLLIT : ('true' | 'false');
+
 
 //Other terms
 ID              : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
