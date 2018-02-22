@@ -59,7 +59,7 @@ declaration     : ID ':' TYPE;
 output          : STRLIT assignment;
 assignment      : (declaration | ID) '=' expr;
 
-
+//TODO rename exprIf to if, as it is not a type of expression.
 exprIf          : 'if' '(' exprBool ')' block elseBlock?;
 elseBlock       : 'else' block;
 
@@ -81,10 +81,7 @@ exprBool        : '(' exprBool ')'
                 ;
 
 // Compare Numerical
-compNum         : exprNum compNumSym exprNum;
-//TODO turn compNumSym into a lexer term, and update the visitTerminal method accordingly when building the AST tree. We could also visit this terminal from the compNum visit, because
-//this is the only legal moment when we can encounter these characters (and in the other comparisons)
-compNumSym      : ('<'|'<='|'>'|'>='|'=='|'!=');
+compNum         : exprNum COMPNUMSYM exprNum;
 compStr         : exprStr '==' exprStr
                 | exprStr '!=' exprStr
                 ;
@@ -121,6 +118,7 @@ BOOLLIT : ('true' | 'false');
 
 
 //Other terms
+COMPNUMSYM      : ('<'|'<='|'>'|'>='|'=='|'!=');
 ID              : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
 WHITESPACE      : (' ' | '\t' | '\n' | '\r')+ -> skip;
 

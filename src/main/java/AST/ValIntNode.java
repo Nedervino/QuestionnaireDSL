@@ -1,14 +1,15 @@
 package AST;
 
-public class IDNode extends ExprNode {
+public class ValIntNode extends ASTNode {
 
     String content;
 
-    public IDNode(String content) {
+    public ValIntNode(String content) {
         this.content = content;
     }
 
     public <T> T accept(ASTVisitor<? extends T> visitor){
-        return visitor.visitID(this);
+        return visitor.visitInt(this);
     }
+
 }

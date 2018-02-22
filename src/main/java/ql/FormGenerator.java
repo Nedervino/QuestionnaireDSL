@@ -1,5 +1,7 @@
 package ql;
 
+import AST.ASTNode;
+import AST.ASTConstructionVisitor;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -43,8 +45,15 @@ public class FormGenerator {
             TypeCheckVisitor typeCheckVisitor = new TypeCheckVisitor();
             typeCheckVisitor.visit(parseTree);
 
+
             FormView formViewer = new FormView();
             formViewer.start(parseTree);
+
+
+            ASTConstructionVisitor astVisitor = new ASTConstructionVisitor();
+            ASTNode root = astVisitor.visit(parseTree);
+
+            //TODO write a visitor for the AST which checks types.
     }
 
 }

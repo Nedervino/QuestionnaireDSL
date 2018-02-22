@@ -1,14 +1,29 @@
 package AST;
 
+import org.antlr.v4.runtime.tree.ParseTreeVisitor;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class ASTNode {
+public abstract class ASTNode {
 
     ASTNode parent;
-    LinkedList<ASTNode> children;
+    ArrayList<ASTNode> children;
 
     public ASTNode(){
-        children = new LinkedList();
+        children = new ArrayList();
     }
+
+    public int getChildCount() {
+        return children.size();
+    }
+
+    public ASTNode getChild(int i) {
+        return children.get(i);
+    }
+
+    //implementations should call 'visitDeclaration' if they are declarations in the ASTVisitor class.
+    //To make sure these methods exist, we will declare a method for each node type in the ASTVisitor class.
+    public abstract <T> T accept(ASTVisitor<? extends T> visitor);
 
 }
