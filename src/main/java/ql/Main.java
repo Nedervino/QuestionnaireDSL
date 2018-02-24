@@ -6,5 +6,4 @@ public class Main {
         FormGenerator formGenerator = new FormGenerator();
         formGenerator.loadFile(fileName);
     }
-
 }
