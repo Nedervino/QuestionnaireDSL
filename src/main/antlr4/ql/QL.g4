@@ -46,10 +46,9 @@ TODO:
 form            : 'form'  ID  block;
 
 block           : '{'(statement)*'}';
-statement       : input
-                | output
+statement       : input                                 //question
+                | output                                //computed question
                 | exprIf
-                | assignment
                 ;
 
 
