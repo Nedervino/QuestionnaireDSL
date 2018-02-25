@@ -2,8 +2,7 @@ package ql.gui;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
 

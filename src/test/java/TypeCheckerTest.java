@@ -1,20 +1,16 @@
 import org.antlr.v4.runtime.misc.ParseCancellationException;
-import org.junit.Rule;
-import org.junit.Test;
 import org.junit.Before;
-import org.junit.rules.ExpectedException;
-import ql.FormGenerator;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.*;
+import org.junit.Test;
+import ql.parser.ASTBuilder;
 
 
 public class TypeCheckerTest {
 
-    private FormGenerator formGenerator;
+    private ASTBuilder formGenerator;
 
     @Before
     public void setUp() throws Exception {
-        formGenerator = new FormGenerator();
+        formGenerator = new ASTBuilder();
     }
 
     // @Rule
