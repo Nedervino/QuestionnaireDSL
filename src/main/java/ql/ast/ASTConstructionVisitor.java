@@ -6,6 +6,9 @@ import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import ql.QLBaseVisitor;
 import ql.QLParser;
+import ql.ast.statements.ComputedQuestionNode;
+import ql.ast.statements.IfStatementNode;
+import ql.ast.statements.QuestionNode;
 
 
 //TODO define classes for binary and unary operations. When constructing the ql.ast, make sure that each ExprNum is replaced with a ExprNumUnary, or ExprNumBinary. Do the same
@@ -186,9 +189,9 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
     }
 
     @Override
-    public ASTNode visitInput(QLParser.InputContext ctx) {
+    public ASTNode visitQuestion(QLParser.QuestionContext ctx) {
         // return visitChildren(ctx);
-        InputNode in = new InputNode();
+        QuestionNode in = new QuestionNode();
         in.label = ((StrLitNode)visitTerminal((TerminalNode)ctx.children.get(0))).content;
         DeclarationNode dn = (DeclarationNode) visit(ctx.children.get(1));
         in.id = dn.id;
@@ -206,9 +209,9 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
     }
 
     @Override
-    public ASTNode visitOutput(QLParser.OutputContext ctx) {
+    public ASTNode visitComputedQuestion(QLParser.ComputedQuestionContext ctx) {
         // return visitChildren(ctx);
-        OutputNode on = new OutputNode();
+        ComputedQuestionNode on = new ComputedQuestionNode();
         on.label = ((StrLitNode)visitTerminal((TerminalNode)ctx.children.get(0))).content;
         AssignmentNode an = (AssignmentNode) visit(ctx.children.get(1));
         on.id = an.id;
@@ -230,9 +233,9 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
     }
 
     @Override
-    public ASTNode visitExprIf(QLParser.ExprIfContext ctx) {
+    public ASTNode visitIfStatement(QLParser.IfStatementContext ctx) {
         // return visitChildren(ctx);
-        ExprIfNode en = new ExprIfNode();
+        IfStatementNode en = new IfStatementNode();
         en.cond = (ExprNode) visit(ctx.children.get(2));
         en.block = visit(ctx.children.get(4)).children;
         return en;

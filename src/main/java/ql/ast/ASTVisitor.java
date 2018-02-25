@@ -1,6 +1,10 @@
 package ql.ast;
 
 
+import ql.ast.statements.ComputedQuestionNode;
+import ql.ast.statements.IfStatementNode;
+import ql.ast.statements.QuestionNode;
+
 public class ASTVisitor<T> {
 
     public T visit(ASTNode node) {
@@ -45,7 +49,7 @@ public class ASTVisitor<T> {
         return visitChildren(node);
     }
 
-    public T visitExprIf(ExprIfNode node){
+    public T visitIfStatement(IfStatementNode node){
         return visitChildren(node);
     }
 
@@ -65,7 +69,7 @@ public class ASTVisitor<T> {
         return visitChildren(node);
     }
 
-    public T visitInput(InputNode node){
+    public T visitQuestion(QuestionNode node){
         return visitChildren(node);
     }
 
@@ -73,7 +77,7 @@ public class ASTVisitor<T> {
         return visitChildren(node);
     }
 
-    public T visitOutput(OutputNode node){
+    public T visitComputedQuestion(ComputedQuestionNode node){
         return visitChildren(node);
     }
 

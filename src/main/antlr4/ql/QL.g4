@@ -46,20 +46,19 @@ TODO:
 form            : 'form'  ID  block;
 
 block           : '{'(statement)*'}';
-statement       : input                                 //question
-                | output                                //computed question
-                | exprIf
+statement       : question
+                | computedQuestion
+                | ifStatement
                 ;
 
 
-input           : STRLIT declaration;
+question        : STRLIT declaration;
 declaration     : ID ':' TYPE;
 
-output          : STRLIT assignment;
+computedQuestion: STRLIT assignment;
 assignment      : (declaration | ID) '=' expr;
 
-//TODO rename exprIf to if, as it is not a type of expression.
-exprIf          : 'if' '(' exprBool ')' block elseBlock?;
+ifStatement          : 'if' '(' exprBool ')' block elseBlock?;
 elseBlock       : 'else' block;
 
 

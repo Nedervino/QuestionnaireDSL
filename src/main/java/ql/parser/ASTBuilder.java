@@ -5,7 +5,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import ql.QLLexer;
 import ql.QLParser;
-import ql.TypeCheckVisitor;
+import ql.typechecker.TypeCheckVisitor;
 import ql.ast.ASTConstructionVisitor;
 import ql.ast.FormNode;
 import ql.gui.FormView;

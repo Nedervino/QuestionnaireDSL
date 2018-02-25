@@ -23,14 +23,14 @@ public class DefaultRenderVisitor extends QLBaseVisitor<String> {
 
     //Identify the variable name which belongs to this question
     //Find the declaration part of the question
-    @Override public String visitInput(QLParser.InputContext ctx) {
+    @Override public String visitQuestion(QLParser.QuestionContext ctx) {
         String varName = visit(ctx.children.get(1));
 
         formView.addElement(varName, new GUIElement());
         return null;
     }
 
-    @Override public String visitOutput(QLParser.OutputContext ctx) {
+    @Override public String visitComputedQuestion(QLParser.ComputedQuestionContext ctx) {
         String varName = visit(ctx.children.get(1));
 
         formView.addElement(varName, new GUIElement());
