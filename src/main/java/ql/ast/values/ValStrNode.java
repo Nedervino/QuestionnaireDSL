@@ -5,13 +5,21 @@ import ql.ast.ASTVisitor;
 
 public class ValStrNode extends ASTNode {
 
-    public String content;
+    private String content;
 
     public ValStrNode(String content) {
-        this.content = content;
+        this.setContent(content);
     }
 
     public <T> T accept(ASTVisitor<? extends T> visitor){
         return visitor.visitValStr(this);
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

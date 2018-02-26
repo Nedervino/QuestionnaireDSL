@@ -5,13 +5,21 @@ import ql.ast.expressions.ExprNode;
 
 public class IDNode extends ExprNode {
 
-    public String content;
+    private String content;
 
     public IDNode(String content) {
-        this.content = content;
+        this.setContent(content);
     }
 
     public <T> T accept(ASTVisitor<? extends T> visitor){
         return visitor.visitID(this);
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }
