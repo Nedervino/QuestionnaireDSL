@@ -1,4 +1,4 @@
-package ql.typechecker;
+package ql.typechecker.legacy;
 
 public class TypeCheckNode {
 

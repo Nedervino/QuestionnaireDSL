@@ -1,4 +1,7 @@
-package ql.ast;
+package ql.ast.values;
+
+import ql.ast.ASTNode;
+import ql.ast.ASTVisitor;
 
 public class ValIntNode extends ASTNode {
 
@@ -9,7 +12,7 @@ public class ValIntNode extends ASTNode {
     }
 
     public <T> T accept(ASTVisitor<? extends T> visitor){
-        return visitor.visitInt(this);
+        return visitor.visitValInt(this);
     }
 
 }

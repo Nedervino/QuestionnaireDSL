@@ -1,4 +1,4 @@
-package ql.ast.types;
+package ql.typechecker.types;
 
 public abstract class Type {
 }

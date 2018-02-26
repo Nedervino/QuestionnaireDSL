@@ -1,8 +1,11 @@
-package ql.ast;
+package ql.ast.statements;
+
+import ql.ast.ASTNode;
+import ql.ast.ASTVisitor;
 
 public class TypeNode extends ASTNode {
 
-    String content;
+    public String content;
 
     public TypeNode(String content) {
         this.content = content;

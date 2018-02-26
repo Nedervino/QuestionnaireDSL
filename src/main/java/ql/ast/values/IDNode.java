@@ -1,8 +1,11 @@
-package ql.ast;
+package ql.ast.values;
+
+import ql.ast.ASTVisitor;
+import ql.ast.expressions.ExprNode;
 
 public class IDNode extends ExprNode {
 
-    String content;
+    public String content;
 
     public IDNode(String content) {
         this.content = content;

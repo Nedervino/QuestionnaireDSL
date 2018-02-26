@@ -1,8 +1,11 @@
-package ql.ast;
+package ql.ast.operations;
+
+import ql.ast.ASTNode;
+import ql.ast.ASTVisitor;
 
 public class OpNode extends ASTNode {
 
-    String content;
+    public String content;
 
     public OpNode(String content) {
         this.content = content;

@@ -1,4 +1,4 @@
-package ql.ast;
+package ql.typechecker;
 
 public class ASTTypeNode {
 

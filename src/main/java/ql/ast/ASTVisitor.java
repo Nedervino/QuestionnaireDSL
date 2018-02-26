@@ -1,9 +1,17 @@
 package ql.ast;
 
 
-import ql.ast.statements.ComputedQuestionNode;
-import ql.ast.statements.IfStatementNode;
-import ql.ast.statements.QuestionNode;
+import ql.ast.expressions.ExprBoolNode;
+import ql.ast.expressions.ExprNode;
+import ql.ast.expressions.ExprNumNode;
+import ql.ast.expressions.ExprStrNode;
+import ql.ast.operations.CompNode;
+import ql.ast.operations.OpNode;
+import ql.ast.values.IDNode;
+import ql.ast.values.ValBoolNode;
+import ql.ast.values.ValIntNode;
+import ql.ast.values.ValStrNode;
+import ql.ast.statements.*;
 
 public class ASTVisitor<T> {
 
@@ -34,10 +42,6 @@ public class ASTVisitor<T> {
 
 
     public T visitAssignment(AssignmentNode node){
-        return visitChildren(node);
-    }
-
-    public T visitBoolean(ValBoolNode node){
         return visitChildren(node);
     }
 
@@ -73,7 +77,7 @@ public class ASTVisitor<T> {
         return visitChildren(node);
     }
 
-    public T visitInt(ValIntNode node){
+    public T visitValInt(ValIntNode node){
         return visitChildren(node);
     }
 
@@ -81,11 +85,7 @@ public class ASTVisitor<T> {
         return visitChildren(node);
     }
 
-    public T visitStrLit(StrLitNode node){
-        return visitChildren(node);
-    }
-
-    public T visitStr(StrNode node){
+    public T visitValStr(ValStrNode node){
         return visitChildren(node);
     }
 
@@ -105,7 +105,7 @@ public class ASTVisitor<T> {
         return visitChildren(node);
     }
 
-    public T visitBool(ValBoolNode node) {
+    public T visitValBool(ValBoolNode node) {
         return visitChildren(node);
     }
 }

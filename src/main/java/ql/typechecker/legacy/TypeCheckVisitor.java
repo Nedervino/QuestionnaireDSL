@@ -1,4 +1,4 @@
-package ql.typechecker;
+package ql.typechecker.legacy;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 import ql.QLBaseVisitor;

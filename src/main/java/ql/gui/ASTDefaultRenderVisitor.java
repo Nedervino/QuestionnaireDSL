@@ -1,4 +1,6 @@
-package ql.ast;
+package ql.gui;
+
+import ql.ast.ASTVisitor;
 
 public class ASTDefaultRenderVisitor extends ASTVisitor<String> {
 
