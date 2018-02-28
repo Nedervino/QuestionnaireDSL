@@ -1,11 +1,25 @@
 package ql.ast;
 
-import java.util.ArrayList;
+import ql.ast.statements.Statement;
+import java.util.List;
 
 public class FormNode extends ASTNode {
 
-    String label;
-    ArrayList<ASTNode> block;
+    private String formId;
+    private List<Statement> statements;
+
+    public FormNode(String formId, List<Statement> statements){
+        this.formId = formId;
+        this.statements = statements;
+    }
+
+    public String getFormId() {
+        return formId;
+    }
+
+    public List<Statement> getStatements() {
+        return this.statements;
+    }
 
     public <T> T accept(ASTVisitor<? extends T> visitor){
         return visitor.visitForm(this);
