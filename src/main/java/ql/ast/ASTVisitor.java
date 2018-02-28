@@ -1,16 +1,11 @@
 package ql.ast;
 
 
-import ql.ast.expressions.ExprBoolNode;
 import ql.ast.expressions.ExprNode;
-import ql.ast.expressions.ExprNumNode;
-import ql.ast.expressions.ExprStrNode;
-import ql.ast.operations.CompNode;
-import ql.ast.operations.OpNode;
-import ql.ast.values.IDNode;
-import ql.ast.values.ValBoolNode;
-import ql.ast.values.ValIntNode;
-import ql.ast.values.ValStrNode;
+import ql.ast.expressions.BinOpNode;
+import ql.ast.expressions.OpSymNode;
+import ql.ast.expressions.UnOpNode;
+import ql.ast.values.*;
 import ql.ast.statements.*;
 
 public class ASTVisitor<T> {
@@ -40,16 +35,11 @@ public class ASTVisitor<T> {
         return null;
     }
 
-
     public T visitAssignment(AssignmentNode node){
         return visitChildren(node);
     }
 
     public T visitDeclaration(DeclarationNode node){
-        return visitChildren(node);
-    }
-
-    public T visitExprBool(ExprBoolNode node){
         return visitChildren(node);
     }
 
@@ -61,14 +51,6 @@ public class ASTVisitor<T> {
         return visitChildren(node);
     }
 
-    public T visitExprNum(ExprNumNode node){
-        return visitChildren(node);
-    }
-
-    public T visitExprStr(ExprStrNode node){
-        return visitChildren(node);
-    }
-
     public T visitID(IDNode node){
         return visitChildren(node);
     }
@@ -77,15 +59,7 @@ public class ASTVisitor<T> {
         return visitChildren(node);
     }
 
-    public T visitValInt(ValIntNode node){
-        return visitChildren(node);
-    }
-
     public T visitComputedQuestion(ComputedQuestionNode node){
-        return visitChildren(node);
-    }
-
-    public T visitValStr(ValStrNode node){
         return visitChildren(node);
     }
 
@@ -93,11 +67,7 @@ public class ASTVisitor<T> {
         return visitChildren(node);
     }
 
-    public T visitOp(OpNode node) {
-        return visitChildren(node);
-    }
-
-    public T visitComp(CompNode node) {
+    public T visitOpSym(OpSymNode node) {
         return visitChildren(node);
     }
 
@@ -105,7 +75,15 @@ public class ASTVisitor<T> {
         return visitChildren(node);
     }
 
-    public T visitValBool(ValBoolNode node) {
+    public T visitBinOp(BinOpNode node) {
+        return visitChildren(node);
+    }
+
+    public T visitUnOp(UnOpNode node) {
+        return visitChildren(node);
+    }
+
+    public T visitVal(ValNode node) {
         return visitChildren(node);
     }
 }

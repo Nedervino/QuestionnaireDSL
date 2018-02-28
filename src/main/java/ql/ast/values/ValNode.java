@@ -3,16 +3,16 @@ package ql.ast.values;
 import ql.ast.ASTNode;
 import ql.ast.ASTVisitor;
 
-public class ValStrNode extends ASTNode {
+public class ValNode extends ASTNode {
 
     private String content;
 
-    public ValStrNode(String content) {
+    public ValNode(String content) {
         this.setContent(content);
     }
 
     public <T> T accept(ASTVisitor<? extends T> visitor){
-        return visitor.visitValStr(this);
+        return visitor.visitVal(this);
     }
 
     public String getContent() {

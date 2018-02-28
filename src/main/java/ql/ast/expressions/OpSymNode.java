@@ -1,18 +1,18 @@
-package ql.ast.operations;
+package ql.ast.expressions;
 
 import ql.ast.ASTNode;
 import ql.ast.ASTVisitor;
 
-public class OpNode extends ASTNode {
+public class OpSymNode extends ASTNode {
 
     private String content;
 
-    public OpNode(String content) {
+    public OpSymNode(String content) {
         this.setContent(content);
     }
 
     public <T> T accept(ASTVisitor<? extends T> visitor){
-        return visitor.visitOp(this);
+        return visitor.visitOpSym(this);
     }
 
     public String getContent() {

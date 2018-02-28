@@ -6,17 +6,11 @@ import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import ql.QLBaseVisitor;
 import ql.QLParser;
-import ql.ast.expressions.ExprBoolNode;
 import ql.ast.expressions.ExprNode;
-import ql.ast.expressions.ExprNumNode;
-import ql.ast.expressions.ExprStrNode;
-import ql.ast.operations.CompNode;
-import ql.ast.operations.CompSymNode;
-import ql.ast.operations.OpNode;
-import ql.ast.values.IDNode;
-import ql.ast.values.ValBoolNode;
-import ql.ast.values.ValIntNode;
-import ql.ast.values.ValStrNode;
+import ql.ast.expressions.BinOpNode;
+import ql.ast.expressions.OpSymNode;
+import ql.ast.expressions.UnOpNode;
+import ql.ast.values.*;
 import ql.ast.statements.*;
 
 
@@ -44,55 +38,47 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
             }
         }
 
-        String[] comparison = new String[]{
+        String[] op = new String[]{
+                "!",
+                "(",
+                ")",
+                "-",
+                "&&",
+                "||",
                 "==",
                 "<",
                 ">",
                 "<=",
-                "=>"
-        };
-
-        for(String str : comparison){
-            if(content.equals(str)){
-                return new CompSymNode(content);
-            }
-        }
-
-        String[] op = new String[]{
-                "&&",
-                "||",
+                "=>",
                 "+",
-                "-",
                 "*",
-                "/",
-                "(",
-                ")"
+                "/"
         };
 
         for(String str : op){
             if(content.equals(str)){
-                return new OpNode(content);
+                return new OpSymNode(content);
             }
         }
 
         //check whether the terminal is an int or some other numeric value.
         if(isInt(content)){
-            return new ValIntNode(content);
+            return new ValNode(content);
         }
         else if(isMoney(content)){
-            return new ValIntNode(content);
+            return new ValNode(content);
         }
         else if(isFloat(content)){
-            return new ValIntNode(content);
+            return new ValNode(content);
         }
 
         //Keywords with semantic value
         switch (content) {
             case "true":{
-                return new ValBoolNode(content);
+                return new ValNode(content);
             }
             case "false":{
-                return new ValBoolNode(content);
+                return new ValNode(content);
             }
             case "boolean": {
                 return new TypeNode(content);
@@ -113,7 +99,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
         //String literal check
         if(content.substring(0, 1).equals("\"")) {
-            return new ValStrNode(content.substring(1, content.length()-1));
+            return new ValNode(content.substring(1, content.length()-1));
         }
 
         //Anything else was a var
@@ -204,7 +190,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         // return visitChildren(ctx);
         QuestionNode in = new QuestionNode();
         TerminalNode labelNode = (TerminalNode)ctx.children.get(0);
-        ValStrNode ln = (ValStrNode)visitTerminal(labelNode);
+        ValNode ln = (ValNode)visitTerminal(labelNode);
         in.setLabel(ln.getContent());
         DeclarationNode dn = (DeclarationNode) visit(ctx.children.get(1));
         in.setId(dn.getId());
@@ -228,7 +214,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         // return visitChildren(ctx);
         ComputedQuestionNode on = new ComputedQuestionNode();
         TerminalNode labelNode = (TerminalNode)ctx.children.get(0);
-        ValStrNode vn = ((ValStrNode)visitTerminal(labelNode));
+        ValNode vn = ((ValNode)visitTerminal(labelNode));
         on.setLabel(vn.getContent());
         AssignmentNode an = (AssignmentNode)visit(ctx.children.get(1));
         on.setId(an.getId());
@@ -266,172 +252,44 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitExpr(QLParser.ExprContext ctx) {
-        // return visitChildren(ctx);
-        return visit(ctx.children.get(0));
-    }
-
-    //Catch valnum
-
-    @Override
-    public ASTNode visitExprBool(QLParser.ExprBoolContext ctx) {
-        // return visitChildren(ctx, new ExprBoolNode());
-
         //Must be a value or id
         if(ctx.children.size()==1) {
             return visit(ctx.children.get(0));
         }
         //Must be a negation
         else if(ctx.children.size()==2){
-            ExprBoolNode en = new ExprBoolNode();
+            UnOpNode un = new UnOpNode();
             TerminalNode symbolNode = (TerminalNode)ctx.children.get(0);
-            OpNode on = (OpNode)visitTerminal(symbolNode);
-            en.setSymbol(on.getContent());
-            en.setFirst((ExprNode)visit(ctx.children.get(1)));
-            return en;
+            OpSymNode on = (OpSymNode)visitTerminal(symbolNode);
+            un.setSymbol(on.getContent());
+            un.setTerm((ExprNode)visit(ctx.children.get(1)));
+            return un;
         }
         //Must be parenthesis
         else if(ctx.children.get(0) instanceof TerminalNode){
-            ExprBoolNode en = new ExprBoolNode();
+            UnOpNode un = new UnOpNode();
             TerminalNode symbolNode = (TerminalNode)ctx.children.get(0);
-            OpNode on = (OpNode)visitTerminal(symbolNode);
-            en.setSymbol(on.getContent());
-            en.setFirst((ExprNode)visit(ctx.children.get(1)));
-            return en;
+            OpSymNode on = (OpSymNode)visitTerminal(symbolNode);
+            un.setSymbol(on.getContent());
+            un.setTerm((ExprNode)visit(ctx.children.get(1)));
+            return un;
         }
         //must be a binary operation
         else{
+            BinOpNode bn = new BinOpNode();
             TerminalNode opNode = (TerminalNode)ctx.children.get(1);
-            OpNode on = (OpNode)visitTerminal(opNode);
-            //must be a comparison
-            //TODO leave this instanceof condition to a BinaryOp class which can handle types better
-            if(on instanceof CompSymNode) {
-                CompNode cn = new CompNode();
-                //TODO rename symbol variable to op in all classes (or the superclass)
-                cn.setSymbol(on.getContent());
-                cn.setFirst(visit(ctx.children.get(0)));
-                cn.setSecond(visit(ctx.children.get(2)));
-                return cn;
-            }
-            //must be a boolean binary operation
-            else{
-                ExprBoolNode en = new ExprBoolNode();
-                en.setSymbol(on.getContent());
-                en.setFirst((ExprNode)visit(ctx.children.get(0)));
-                en.setSecond((ExprNode)visit(ctx.children.get(2)));
-                return en;
-            }
+            OpSymNode on = (OpSymNode)visitTerminal(opNode);
+            bn.setSymbol(on.getContent());
+            bn.setTerm((ExprNode)visit(ctx.children.get(0)));
+            bn.setSecond((ExprNode)visit(ctx.children.get(2)));
+            return bn;
         }
     }
 
     @Override
-    public ASTNode visitCompNum(QLParser.CompNumContext ctx) {
-        // return visitChildren(ctx);
-        CompNode cn = new CompNode();
-        cn.setFirst(visit(ctx.children.get(0)));
-        TerminalNode symbolNode = (TerminalNode)ctx.children.get(1);
-        CompSymNode csn = (CompSymNode)visitTerminal(symbolNode);
-        cn.setSymbol(csn.getContent());
-        cn.setSecond(visit(ctx.children.get(2)));
-        return cn;
-    }
-
-    @Override
-    public ASTNode visitCompStr(QLParser.CompStrContext ctx) {
-        // return visitChildren(ctx);
-        CompNode cn = new CompNode();
-        cn.setFirst(visit(ctx.children.get(0)));
-        TerminalNode symbolNode = (TerminalNode)ctx.children.get(1);
-        CompSymNode csn = (CompSymNode)visitTerminal(symbolNode);
-        cn.setSymbol(csn.getContent());
-        cn.setSecond(visit(ctx.children.get(2)));
-        return cn;
-    }
-
-    @Override
-    public ASTNode visitValBool(QLParser.ValBoolContext ctx) {
+    public ASTNode visitVal(QLParser.ValContext ctx) {
         // return visitChildren(ctx);
         return visit(ctx.children.get(0));
     }
 
-    //Note: Every numerical expression is an operation.
-    @Override
-    public ASTNode visitExprNum(QLParser.ExprNumContext ctx) {
-        // return visitChildren(ctx, new ExprNumNode());
-
-        //Must be a value or id
-        if(ctx.children.size()==1) {
-            return visit(ctx.children.get(0));
-        }
-        //Must be a negation
-        else if(ctx.children.size()==2){
-            ExprNumNode en = new ExprNumNode();
-            TerminalNode symbolNode = (TerminalNode)ctx.children.get(0);
-            OpNode on = (OpNode)visitTerminal(symbolNode);
-            en.setSymbol(on.getContent());
-            en.setFirst((ExprNode)visit(ctx.children.get(1)));
-            return en;
-        }
-        //Must be parenthesis
-        else if(ctx.children.get(0) instanceof TerminalNode){
-            ExprNumNode en = new ExprNumNode();
-            TerminalNode symbolNode = (TerminalNode)ctx.children.get(0);
-            OpNode on = (OpNode)visitTerminal(symbolNode);
-            en.setSymbol(on.getContent());
-            en.setFirst((ExprNode)visit(ctx.children.get(1)));
-            return en;
-        }
-        //must be a binary operation
-        else{
-            ExprNumNode en = new ExprNumNode();
-            en.setFirst((ExprNode)visit(ctx.children.get(0)));
-            TerminalNode symbolNode = (TerminalNode)ctx.children.get(1);
-            OpNode on = (OpNode)visitTerminal(symbolNode);
-            en.setSymbol(on.getContent());
-            en.setSecond((ExprNode)visit(ctx.children.get(2)));
-            return en;
-        }
-    }
-
-    @Override
-    public ASTNode visitValNum(QLParser.ValNumContext ctx) {
-        // return visitChildren(ctx);
-        return visit(ctx.children.get(0));
-    }
-
-    @Override
-    public ASTNode visitExprStr(QLParser.ExprStrContext ctx) {
-        // return visitChildren(ctx, new ExprStrNode());
-
-        //Must be a value or id
-        if(ctx.children.size()==1) {
-            return visit(ctx.children.get(0));
-        }
-        //Must be parenthesis
-        else if(ctx.children.get(0) instanceof TerminalNode){
-            ExprStrNode en = new ExprStrNode();
-            TerminalNode symbolNode = (TerminalNode)ctx.children.get(0);
-            OpNode on = (OpNode)visitTerminal(symbolNode);
-            en.setSymbol(on.getContent());
-            en.setFirst((ExprNode)visit(ctx.children.get(1)));
-            return en;
-        }
-        //must be the binary operation, addition
-        else{
-            ExprStrNode en = new ExprStrNode();
-            en.setFirst((ExprNode)visit(ctx.children.get(0)));
-            TerminalNode symbolNode = (TerminalNode)ctx.children.get(1);
-            OpNode on = (OpNode) visitTerminal(symbolNode);
-            en.setSymbol(on.getContent());
-            en.setSecond((ExprNode)visit(ctx.children.get(2)));
-            return en;
-        }
-    }
-
-    //A valStr can only contain an actual string assigned as STRLIT, or an ID which refers to a variable.
-    @Override
-    public ASTNode visitValStr(QLParser.ValStrContext ctx) {
-        // return visitChildren(ctx);
-        return visit(ctx.children.get(0));
-    }
-    
 }

@@ -6,8 +6,7 @@ import ql.ast.ASTVisitor;
 public class ExprNode extends ASTNode {
 
     private String symbol;
-    private ExprNode first;
-    private ExprNode second;
+    protected ExprNode term;
 
     public <T> T accept(ASTVisitor<? extends T> visitor){
         return visitor.visitExpr(this);
@@ -21,19 +20,12 @@ public class ExprNode extends ASTNode {
         this.symbol = symbol;
     }
 
-    public ExprNode getFirst() {
-        return first;
+    public ExprNode getTerm() {
+        return term;
     }
 
-    public void setFirst(ExprNode first) {
-        this.first = first;
+    public void setTerm(ExprNode first) {
+        this.term = term;
     }
 
-    public ExprNode getSecond() {
-        return second;
-    }
-
-    public void setSecond(ExprNode second) {
-        this.second = second;
-    }
 }

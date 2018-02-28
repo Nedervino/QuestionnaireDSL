@@ -38,8 +38,8 @@ public class ASTBuilder {
             treeViewer.start(parser, parseTree);
 
 
-            TypeCheckVisitor typeCheckVisitor = new TypeCheckVisitor();
-            typeCheckVisitor.visit(parseTree);
+            // TypeCheckVisitor typeCheckVisitor = new TypeCheckVisitor();
+            // typeCheckVisitor.visit(parseTree);
 
 
             FormView formViewer = new FormView();

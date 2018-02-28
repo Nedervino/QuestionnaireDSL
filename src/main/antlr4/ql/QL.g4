@@ -58,49 +58,25 @@ declaration     : ID ':' TYPE;
 computedQuestion: STRLIT assignment;
 assignment      : (declaration | ID) '=' expr;
 
-ifStatement          : 'if' '(' exprBool ')' block elseBlock?;
+ifStatement          : 'if' '(' expr ')' block elseBlock?;
 elseBlock       : 'else' block;
 
 
-expr            : exprBool
-                | exprNum
-                | exprStr
+expr            : unOp
+                | expr BINOPSYM expr
+                | val
                 ;
 
-exprBool        : '(' exprBool ')'
-                | '!' exprBool
-                | exprBool '&&' exprBool
-                | exprBool '||' exprBool
-                | exprBool '==' exprBool
-                | exprBool '!=' exprBool
-                | compNum
-                | compStr
-                | valBool
+unOp         : '(' expr ')'
+                | '!' expr
+                | '-' expr
                 ;
 
-// Compare Numerical
-compNum         : exprNum COMPNUMSYM exprNum;
-compStr         : exprStr '==' exprStr
-                | exprStr '!=' exprStr
+val             : BOOLLIT
+                | INTLIT
+                | STRLIT
+                | ID
                 ;
-valBool         : BOOLLIT | ID;
-
-exprNum	        : exprNum '+' exprNum
-                | exprNum '-' exprNum
-                | exprNum '/' exprNum
-                | exprNum '*' exprNum
-                | '-' exprNum
-                | '(' exprNum ')'
-                | valNum
-                ;
-valNum	        : INTLIT | ID;
-
-exprStr	        : exprStr '+' exprStr
-                | '(' exprStr ')'
-                | valStr
-                ;
-
-valStr	        : STRLIT | ID;
 
 
 //Types
@@ -116,7 +92,7 @@ BOOLLIT : ('true' | 'false');
 
 
 //Other terms
-COMPNUMSYM      : ('<'|'<='|'>'|'>='|'=='|'!=');
+BINOPSYM        : ('&&'|'||'|'+'|'-'|'/'|'*'|'<'|'<='|'>'|'>='|'=='|'!=');
 ID              : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
 WHITESPACE      : (' ' | '\t' | '\n' | '\r')+ -> skip;
 
