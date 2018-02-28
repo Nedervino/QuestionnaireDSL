@@ -14,6 +14,9 @@ import ql.ast.expressions.values.IDNode;
 import ql.ast.expressions.values.ValNode;
 import ql.ast.statements.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 //TODO define classes for binary and unary operations. When constructing the ql.ast, make sure that each ExprNum is replaced with a ExprNumUnary, or ExprNumBinary. Do the same
 //for boolean and strings. With booleans, we might have fiddle with the comparisons to make sure they are recognized as boolean expressions.
@@ -167,12 +170,15 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitForm(QLParser.FormContext ctx) {
-        FormNode fn = new FormNode();
         TerminalNode labelNode = (TerminalNode)ctx.children.get(1);
         IDNode in = (IDNode) visitTerminal(labelNode);
-        fn.label = in.getContent();
-        fn.block = visit(ctx.children.get(2)).children;
-        return fn;
+
+        String formId = ctx.ID().getText();
+        List<Statement> statements = new ArrayList();
+
+        ctx.block().statement().forEach(statementContext -> statements.add((Statement) visit(statementContext)));
+
+        return new FormNode(formId, statements);
     }
 
     @Override
