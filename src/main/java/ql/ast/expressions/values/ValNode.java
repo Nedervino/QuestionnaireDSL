@@ -1,9 +1,10 @@
-package ql.ast.values;
+package ql.ast.expressions.values;
 
 import ql.ast.ASTNode;
 import ql.ast.ASTVisitor;
+import ql.ast.expressions.ExprNode;
 
-public class ValNode extends ASTNode {
+public class ValNode extends ExprNode {
 
     private String content;
 

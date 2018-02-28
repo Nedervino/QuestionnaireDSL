@@ -1,11 +1,12 @@
 package ql.ast;
 
 
-import ql.ast.expressions.ExprNode;
-import ql.ast.expressions.BinOpNode;
-import ql.ast.expressions.OpSymNode;
-import ql.ast.expressions.UnOpNode;
-import ql.ast.values.*;
+import ql.ast.expressions.*;
+import ql.ast.expressions.binary.BinOpNode;
+import ql.ast.expressions.binary.OpSymHelperNode;
+import ql.ast.expressions.unary.UnOpNode;
+import ql.ast.expressions.values.IDNode;
+import ql.ast.expressions.values.ValNode;
 import ql.ast.statements.*;
 
 public class ASTVisitor<T> {
@@ -67,7 +68,7 @@ public class ASTVisitor<T> {
         return visitChildren(node);
     }
 
-    public T visitOpSym(OpSymNode node) {
+    public T visitOpSym(OpSymHelperNode node) {
         return visitChildren(node);
     }
 

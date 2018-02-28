@@ -6,11 +6,12 @@ import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import ql.QLBaseVisitor;
 import ql.QLParser;
-import ql.ast.expressions.ExprNode;
-import ql.ast.expressions.BinOpNode;
-import ql.ast.expressions.OpSymNode;
-import ql.ast.expressions.UnOpNode;
-import ql.ast.values.*;
+import ql.ast.expressions.*;
+import ql.ast.expressions.binary.*;
+import ql.ast.expressions.unary.NegNode;
+import ql.ast.expressions.unary.ParNode;
+import ql.ast.expressions.values.IDNode;
+import ql.ast.expressions.values.ValNode;
 import ql.ast.statements.*;
 
 
@@ -46,6 +47,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
                 "&&",
                 "||",
                 "==",
+                "!=",
                 "<",
                 ">",
                 "<=",
@@ -57,7 +59,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
         for(String str : op){
             if(content.equals(str)){
-                return new OpSymNode(content);
+                return new OpSymHelperNode(content);
             }
         }
 
@@ -165,7 +167,6 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitForm(QLParser.FormContext ctx) {
-        // return visitChildren(ctx, new FormNode());
         FormNode fn = new FormNode();
         TerminalNode labelNode = (TerminalNode)ctx.children.get(1);
         IDNode in = (IDNode) visitTerminal(labelNode);
@@ -181,13 +182,11 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitStatement(QLParser.StatementContext ctx) {
-        // return visitChildren(ctx);
         return visit(ctx.children.get(0));
     }
 
     @Override
     public ASTNode visitQuestion(QLParser.QuestionContext ctx) {
-        // return visitChildren(ctx);
         QuestionNode in = new QuestionNode();
         TerminalNode labelNode = (TerminalNode)ctx.children.get(0);
         ValNode ln = (ValNode)visitTerminal(labelNode);
@@ -200,7 +199,6 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitDeclaration(QLParser.DeclarationContext ctx) {
-        // return visitChildren(ctx);
         DeclarationNode dn = new DeclarationNode();
         IDNode in = (IDNode)visit(ctx.children.get(0));
         dn.setId(in.getContent());
@@ -211,7 +209,6 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitComputedQuestion(QLParser.ComputedQuestionContext ctx) {
-        // return visitChildren(ctx);
         ComputedQuestionNode on = new ComputedQuestionNode();
         TerminalNode labelNode = (TerminalNode)ctx.children.get(0);
         ValNode vn = ((ValNode)visitTerminal(labelNode));
@@ -225,7 +222,6 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitAssignment(QLParser.AssignmentContext ctx) {
-        // return visitChildren(ctx);
         AssignmentNode an = new AssignmentNode();
         DeclarationNode dn = (DeclarationNode) visit(ctx.children.get(0));
         an.setId(dn.getId());
@@ -237,7 +233,6 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitIfStatement(QLParser.IfStatementContext ctx) {
-        // return visitChildren(ctx);
         IfStatementNode en = new IfStatementNode();
         en.setCond((ExprNode) visit(ctx.children.get(2)));
         ASTNode blockNode = visit(ctx.children.get(4));
@@ -258,29 +253,74 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         }
         //Must be a negation
         else if(ctx.children.size()==2){
-            UnOpNode un = new UnOpNode();
-            TerminalNode symbolNode = (TerminalNode)ctx.children.get(0);
-            OpSymNode on = (OpSymNode)visitTerminal(symbolNode);
-            un.setSymbol(on.getContent());
-            un.setTerm((ExprNode)visit(ctx.children.get(1)));
-            return un;
+            NegNode nn = new NegNode();
+            nn.setTerm((ExprNode)visit(ctx.children.get(1)));
+            return nn;
         }
         //Must be parenthesis
+        //TODO get rid of this instanceof
         else if(ctx.children.get(0) instanceof TerminalNode){
-            UnOpNode un = new UnOpNode();
-            TerminalNode symbolNode = (TerminalNode)ctx.children.get(0);
-            OpSymNode on = (OpSymNode)visitTerminal(symbolNode);
-            un.setSymbol(on.getContent());
-            un.setTerm((ExprNode)visit(ctx.children.get(1)));
-            return un;
+            ParNode pn = new ParNode();
+            pn.setTerm((ExprNode)visit(ctx.children.get(1)));
+            return pn;
         }
         //must be a binary operation
         else{
-            BinOpNode bn = new BinOpNode();
             TerminalNode opNode = (TerminalNode)ctx.children.get(1);
-            OpSymNode on = (OpSymNode)visitTerminal(opNode);
-            bn.setSymbol(on.getContent());
-            bn.setTerm((ExprNode)visit(ctx.children.get(0)));
+            OpSymHelperNode on = (OpSymHelperNode)visitTerminal(opNode);
+
+            String symbol = on.getContent();
+
+            BinOpNode bn = null;
+
+            switch(symbol){
+                case "&&":{
+                    bn = new AndNode();
+                    break;
+                }
+                case "||":{
+                    bn = new OrNode();
+                    break;
+                }
+                case "==":{
+                    bn = new EqNode();
+                    break;
+                }
+                case "!=":{
+                    bn = new NeqNode();
+                    break;
+                }
+                case "<":{
+                    bn = new LtNode();
+                    break;
+                }
+                case ">":{
+                    bn = new GtNode();
+                    break;
+                }
+                case "<=":{
+                    bn = new LteNode();
+                    break;
+                }
+                case "=>":{
+                    bn = new GteNode();
+                    break;
+                }
+                case "+":{
+                    bn = new AddNode();
+                    break;
+                }
+                case "*":{
+                    bn = new MulNode();
+                    break;
+                }
+                case "/":{
+                    bn = new DivNode();
+                    break;
+                }
+            }
+
+            bn.setFirst((ExprNode)visit(ctx.children.get(0)));
             bn.setSecond((ExprNode)visit(ctx.children.get(2)));
             return bn;
         }
@@ -288,7 +328,6 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitVal(QLParser.ValContext ctx) {
-        // return visitChildren(ctx);
         return visit(ctx.children.get(0));
     }
 

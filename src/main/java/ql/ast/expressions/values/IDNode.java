@@ -1,4 +1,4 @@
-package ql.ast.values;
+package ql.ast.expressions.values;
 
 import ql.ast.ASTVisitor;
 import ql.ast.expressions.ExprNode;
