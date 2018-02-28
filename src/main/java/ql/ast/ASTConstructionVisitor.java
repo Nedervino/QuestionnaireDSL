@@ -181,11 +181,6 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
     }
 
     @Override
-    public ASTNode visitStatement(QLParser.StatementContext ctx) {
-        return visit(ctx.children.get(0));
-    }
-
-    @Override
     public ASTNode visitQuestion(QLParser.QuestionContext ctx) {
         QuestionNode in = new QuestionNode();
         TerminalNode labelNode = (TerminalNode)ctx.children.get(0);
