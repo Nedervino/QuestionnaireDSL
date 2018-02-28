@@ -4,7 +4,7 @@ import ql.ast.ASTNode;
 import ql.ast.ASTVisitor;
 import ql.ast.expressions.ExprNode;
 
-public class UnOpNode extends ExprNode {
+public abstract class UnOpNode extends ExprNode {
 
     private ExprNode term;
 
