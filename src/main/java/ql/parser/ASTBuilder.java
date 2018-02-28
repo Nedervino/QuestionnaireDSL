@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import ql.QLLexer;
 import ql.QLParser;
+import ql.typechecker.TypeChecker;
 import ql.typechecker.legacy.TypeCheckVisitor;
 import ql.ast.ASTConstructionVisitor;
 import ql.ast.FormNode;
@@ -20,13 +21,24 @@ import java.nio.file.Paths;
 
 public class ASTBuilder {
 
-    public void loadFile(String filePath) {
+    public void buildAST(String filePath) {
         try {
-            String formContent = new String(Files.readAllBytes(Paths.get(filePath)));
+
+            String formContent = loadFile(filePath);
             FormNode form = buildASTFromString(formContent);
+
+            if (!passesTypeChecks(form)) {
+                System.err.println("Form not passing type checks.");
+            }
+
         } catch (IOException e) {
             System.err.println("Couldn't read source: " + e.getMessage());
         }
+    }
+
+    private String loadFile(String filePath) throws IOException{
+        String formContent = new String(Files.readAllBytes(Paths.get(filePath)));
+        return formContent;
     }
 
     public FormNode buildASTFromString(String formContent) throws IOException {
@@ -37,21 +49,16 @@ public class ASTBuilder {
             TreeView treeViewer = new TreeView();
             treeViewer.start(parser, parseTree);
 
-
-            // TypeCheckVisitor typeCheckVisitor = new TypeCheckVisitor();
-            // typeCheckVisitor.visit(parseTree);
-
-
-            FormView formViewer = new FormView();
-            formViewer.start(parseTree);
-
+            // FormView formViewer = new FormView();
+            // formViewer.start(parseTree);
 
             ASTConstructionVisitor astVisitor = new ASTConstructionVisitor();
             FormNode form = (FormNode) astVisitor.visit(parseTree);
-
-            //TODO write a visitor for the ql.ast which checks types.
-
             return form;
+    }
+
+    public boolean passesTypeChecks (FormNode form) {
+        return new TypeChecker().passesTypeChecks(form);
     }
 
     public QLParser createParser (String input) throws IOException {
