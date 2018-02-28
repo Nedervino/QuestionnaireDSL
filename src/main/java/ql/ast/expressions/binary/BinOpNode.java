@@ -6,7 +6,7 @@ import ql.ast.expressions.ExprNode;
 
 public abstract class BinOpNode extends ExprNode {
 
-    protected ExprNode first;
+    private ExprNode first;
     private ExprNode second;
 
     public <T> T accept(ASTVisitor<? extends T> visitor){

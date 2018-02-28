@@ -6,7 +6,7 @@ import ql.ast.expressions.ExprNode;
 
 public class UnOpNode extends ExprNode {
 
-    protected ExprNode term;
+    private ExprNode term;
 
     public <T> T accept(ASTVisitor<? extends T> visitor){
         return visitor.visitUnOp(this);
