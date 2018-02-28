@@ -2,15 +2,18 @@ package ql.ast.statements;
 
 import ql.ast.ASTNode;
 import ql.ast.ASTVisitor;
+import ql.ast.types.Type;
 
 public class QuestionNode extends ASTNode {
 
     private String label;
     private String id;
-    private String type;
+    private Type type;
 
-    public <T> T accept(ASTVisitor<? extends T> visitor){
-        return visitor.visitQuestion(this);
+    public QuestionNode(String id, String label, Type type) {
+        this.id = id;
+        this.label = label;
+        this.type = type;
     }
 
     public String getLabel() {
@@ -29,11 +32,15 @@ public class QuestionNode extends ASTNode {
         this.id = id;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
+    }
+
+    public <T> T accept(ASTVisitor<? extends T> visitor){
+        return visitor.visitQuestion(this);
     }
 }

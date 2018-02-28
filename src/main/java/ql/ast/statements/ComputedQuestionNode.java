@@ -3,40 +3,15 @@ package ql.ast.statements;
 import ql.ast.ASTNode;
 import ql.ast.ASTVisitor;
 import ql.ast.expressions.ExprNode;
+import ql.ast.types.Type;
 
-public class ComputedQuestionNode extends ASTNode {
+public class ComputedQuestionNode extends QuestionNode {
 
-    private String label;
-    private String id;
-    private String type;
     private ExprNode expr;
 
-    public <T> T accept(ASTVisitor<? extends T> visitor){
-        return visitor.visitComputedQuestion(this);
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public ComputedQuestionNode(String id, String label, Type type, ExprNode expr) {
+        super(id, label, type);
+        this.expr = expr;
     }
 
     public ExprNode getExpr() {
@@ -45,5 +20,9 @@ public class ComputedQuestionNode extends ASTNode {
 
     public void setExpr(ExprNode expr) {
         this.expr = expr;
+    }
+
+    public <T> T accept(ASTVisitor<? extends T> visitor){
+        return visitor.visitComputedQuestion(this);
     }
 }
