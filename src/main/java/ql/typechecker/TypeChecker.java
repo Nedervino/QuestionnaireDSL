@@ -1,10 +1,11 @@
 package ql.typechecker;
 
+import ql.ast.ASTNode;
 import ql.ast.FormNode;
 
 public class TypeChecker {
 
-    public boolean passesTypeChecks(FormNode form) {
+    public boolean passesTypeChecks(ASTNode form) {
 
         //Check reference to undefined questions
 

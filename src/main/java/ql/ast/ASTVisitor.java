@@ -2,8 +2,7 @@ package ql.ast;
 
 
 import ql.ast.expressions.*;
-import ql.ast.expressions.binary.BinOpNode;
-import ql.ast.expressions.binary.OpSymHelperNode;
+import ql.ast.expressions.binary.*;
 import ql.ast.expressions.unary.UnOpNode;
 import ql.ast.expressions.values.IDNode;
 import ql.ast.expressions.values.ValNode;
@@ -81,6 +80,54 @@ public class ASTVisitor<T> {
     }
 
     public T visitVal(ValNode node) {
+        return visitChildren(node);
+    }
+
+    public T visitEq(EqNode node) {
+        return visitChildren(node);
+    }
+
+    public T visitGte(GteNode node) {
+        return visitChildren(node);
+    }
+
+    public T visitGt(GtNode node) {
+        return visitChildren(node);
+    }
+
+    public T visitLte(LteNode node) {
+        return visitChildren(node);
+    }
+
+    public T visitLt(LtNode node) {
+        return visitChildren(node);
+    }
+
+    public T visitMul(MulNode node) {
+        return visitChildren(node);
+    }
+
+    public T visitNeq(NeqNode node) {
+        return visitChildren(node);
+    }
+
+    public T visitOr(OrNode node) {
+        return visitChildren(node);
+    }
+
+    public T visitSub(SubNode node) {
+        return visitChildren(node);
+    }
+
+    public T visitDiv(DivNode node) {
+        return visitChildren(node);
+    }
+
+    public T visitAdd(AddNode node) {
+        return visitChildren(node);
+    }
+
+    public T visitAnd(AndNode node) {
         return visitChildren(node);
     }
 }
