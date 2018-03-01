@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import ql.QLLexer;
 import ql.QLParser;
+import ql.ast.ASTNode;
 import ql.typechecker.TypeChecker;
 import ql.typechecker.legacy.TypeCheckVisitor;
 import ql.ast.ASTConstructionVisitor;
@@ -25,7 +26,7 @@ public class ASTBuilder {
         try {
 
             String formContent = loadFile(filePath);
-            FormNode form = buildASTFromString(formContent);
+            ASTNode form = buildASTFromString(formContent);
 
             if (!passesTypeChecks(form)) {
                 System.err.println("Form not passing type checks.");
@@ -41,7 +42,7 @@ public class ASTBuilder {
         return formContent;
     }
 
-    public FormNode buildASTFromString(String formContent) throws IOException {
+    public ASTNode buildASTFromString(String formContent) throws IOException {
             QLParser parser = createParser(formContent);
 
             ParseTree parseTree = parser.form();
@@ -49,15 +50,16 @@ public class ASTBuilder {
             TreeView treeViewer = new TreeView();
             treeViewer.start(parser, parseTree);
 
-            // FormView formViewer = new FormView();
-            // formViewer.start(parseTree);
+            ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
+            ASTNode form = astConstructionVisitor.visit(parseTree);
 
-            ASTConstructionVisitor astVisitor = new ASTConstructionVisitor();
-            FormNode form = (FormNode) astVisitor.visit(parseTree);
+            FormView formViewer = new FormView();
+            formViewer.start(form);
+
             return form;
     }
 
-    public boolean passesTypeChecks (FormNode form) {
+    public boolean passesTypeChecks (ASTNode form) {
         return new TypeChecker().passesTypeChecks(form);
     }
 

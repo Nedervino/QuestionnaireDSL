@@ -9,9 +9,10 @@ public abstract class BinOpNode extends ExprNode {
     private ExprNode first;
     private ExprNode second;
 
-    public <T> T accept(ASTVisitor<? extends T> visitor){
-        return visitor.visitBinOp(this);
-    }
+    public abstract <T> T accept(ASTVisitor<? extends T> visitor);
+    //{
+        // return visitor.visitBinOp(this);
+    // }
 
     public ASTNode getFirst() {
         return first;

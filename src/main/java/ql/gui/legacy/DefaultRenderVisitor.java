@@ -1,8 +1,10 @@
-package ql.gui;
+package ql.gui.legacy;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 import ql.QLBaseVisitor;
 import ql.QLParser;
+import ql.gui.FormView;
+import ql.gui.GUIElement;
 
 
 public class DefaultRenderVisitor extends QLBaseVisitor<String> {

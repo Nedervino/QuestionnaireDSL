@@ -8,9 +8,10 @@ public abstract class UnOpNode extends ExprNode {
 
     private ExprNode term;
 
-    public <T> T accept(ASTVisitor<? extends T> visitor){
-        return visitor.visitUnOp(this);
-    }
+    public abstract <T> T accept(ASTVisitor<? extends T> visitor);
+    // {
+        // return visitor.visitUnOp(this);
+    // }
 
     public ExprNode getTerm() {
         return term;

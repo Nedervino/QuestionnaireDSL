@@ -7,14 +7,16 @@ import ql.ast.FormNode;
 import ql.ast.expressions.binary.BinOpNode;
 import ql.ast.statements.DeclarationNode;
 import ql.ast.statements.QuestionNode;
+import ql.ast.statements.Statement;
 
 import java.util.HashMap;
+import java.util.List;
 
-public class ASTTypeCheckVisitor extends ASTVisitor<TypeCheckNode> {
+public class TypeCheckVisitor extends ASTVisitor<TypeCheckNode> {
 
     HashMap<String, TypeCheckNode.Type> varsDeclared;
 
-    public ASTTypeCheckVisitor(){
+    public TypeCheckVisitor(){
         varsDeclared = new HashMap<>();
     }
 
@@ -75,6 +77,10 @@ public class ASTTypeCheckVisitor extends ASTVisitor<TypeCheckNode> {
     }
 
     @Override public TypeCheckNode visitForm(FormNode node) {
+        List<Statement> sl = node.getStatements();
+        for(Statement s : sl){
+            visit(s);
+        }
         return new TypeCheckNode(TypeCheckNode.Type.NONE);
     }
 

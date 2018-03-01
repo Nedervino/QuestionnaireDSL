@@ -1,6 +1,6 @@
 package ql.gui;
 
-import org.antlr.v4.runtime.tree.ParseTree;
+import ql.ast.ASTNode;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,11 +27,11 @@ public class FormView extends JPanel{
     an error.
      */
 
-    public void start(ParseTree parseTree) {
+    public void start(ASTNode node) {
         init();
 
-        DefaultRenderVisitor visitor = new DefaultRenderVisitor(this);
-        visitor.visit(parseTree);
+        RenderVisitor visitor = new RenderVisitor(this);
+        visitor.visit(node);
 
         repaint();
     }
