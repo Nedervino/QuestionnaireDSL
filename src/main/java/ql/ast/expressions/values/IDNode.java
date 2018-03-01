@@ -12,10 +12,6 @@ public class IDNode extends Expression {
         this.setContent(content);
     }
 
-    public <T> T accept(ASTVisitor<? extends T> visitor){
-        return visitor.visitID(this);
-    }
-
     public String getContent() {
         return content;
     }

@@ -3,131 +3,167 @@ package ql.ast;
 
 import ql.ast.expressions.*;
 import ql.ast.expressions.binary.*;
+import ql.ast.expressions.unary.NegNode;
+import ql.ast.expressions.unary.ParNode;
 import ql.ast.expressions.unary.UnOpNode;
 import ql.ast.expressions.values.IDNode;
 import ql.ast.expressions.values.ValNode;
 import ql.ast.statements.*;
+import ql.ast.types.*;
+import ql.ast.visitors.ExpressionVisitor;
+import ql.ast.visitors.StatementVisitor;
+import ql.ast.visitors.TypeVisitor;
 
-public class ASTVisitor<T> {
+public class ASTVisitor<T> implements ExpressionVisitor<T>, StatementVisitor<T>, TypeVisitor<T>{
 
-    public T visit(ASTNode node) {
-        return node.accept(this);
-    }
 
-    public T visitChildren(ASTNode node) {
-        T result = this.defaultResult();
-        int n = node.getChildCount();
-
-        for(int i = 0; i < n; ++i) {
-            ASTNode c = node.getChild(i);
-            T childResult = c.accept(this);
-            result = this.aggregateResult(result, childResult);
-        }
-
-        return result;
-    }
-
-    protected T aggregateResult(T aggregate, T nextResult) {
-        return nextResult;
-    }
-
-    protected T defaultResult() {
+    public T visit(FormNode formNode) {
         return null;
     }
 
-    public T visitDeclaration(DeclarationNode node){
-        return visitChildren(node);
+    /*
+    *    Statements
+    **/
+
+    @Override
+    public T visit(IfStatementNode ifStatement) {
+        return null;
     }
 
-    public T visitIfStatement(IfStatementNode node){
-        return visitChildren(node);
+    @Override
+    public T visit(QuestionNode question) {
+        return null;
     }
 
-    public T visitExpr(Expression node){
-        return visitChildren(node);
+    @Override
+    public T visit(ComputedQuestionNode computedQuestion) {
+        return null;
     }
 
-    public T visitID(IDNode node){
-        return visitChildren(node);
+    /*
+    *    Binary expressions
+    **/
+
+    @Override
+    public T visit(AddNode addNode) {
+        return null;
     }
 
-    public T visitQuestion(QuestionNode node){
-        return visitChildren(node);
+    @Override
+    public T visit(AndNode andNode) {
+        return null;
     }
 
-    public T visitComputedQuestion(ComputedQuestionNode node){
-        return visitChildren(node);
+    @Override
+    public T visit(DivNode divNode) {
+        return null;
     }
 
-    public T visitType(TypeNode node){
-        return visitChildren(node);
+    @Override
+    public T visit(EqNode eqNode) {
+        return null;
     }
 
-    public T visitOpSym(OpSymHelperNode node) {
-        return visitChildren(node);
+    @Override
+    public T visit(GteNode gteNode) {
+        return null;
     }
 
-    public T visitForm(FormNode node) {
-        return visitChildren(node);
+    @Override
+    public T visit(GtNode gtNode) {
+        return null;
     }
 
-    public T visitBinOp(BinOpNode node) {
-        return visitChildren(node);
+    @Override
+    public T visit(LteNode lteNode) {
+        return null;
     }
 
-    public T visitUnOp(UnOpNode node) {
-        return visitChildren(node);
+    @Override
+    public T visit(LtNode ltNode) {
+        return null;
     }
 
-    public T visitVal(ValNode node) {
-        return visitChildren(node);
+    @Override
+    public T visit(MulNode mulNode) {
+        return null;
     }
 
-    public T visitEq(EqNode node) {
-        return visitChildren(node);
+    @Override
+    public T visit(NeqNode neqNode) {
+        return null;
     }
 
-    public T visitGte(GteNode node) {
-        return visitChildren(node);
+    @Override
+    public T visit(OpSymHelperNode opSymHelperNode) {
+        return null;
     }
 
-    public T visitGt(GtNode node) {
-        return visitChildren(node);
+    @Override
+    public T visit(OrNode orNode) {
+        return null;
     }
 
-    public T visitLte(LteNode node) {
-        return visitChildren(node);
+    @Override
+    public T visit(SubNode subNode) {
+        return null;
     }
 
-    public T visitLt(LtNode node) {
-        return visitChildren(node);
+    /*
+    *    Unary expressions
+    * */
+
+    @Override
+    public T visit(NegNode negNode) {
+        return null;
     }
 
-    public T visitMul(MulNode node) {
-        return visitChildren(node);
+    /*
+    *    Values
+    * */
+
+    @Override
+    public T visit(IDNode idNode) {
+        return null;
     }
 
-    public T visitNeq(NeqNode node) {
-        return visitChildren(node);
+    @Override
+    public T visit(ValNode valNode) {
+        return null;
     }
 
-    public T visitOr(OrNode node) {
-        return visitChildren(node);
+    @Override
+    public T visit(ParNode parNode) {
+        return null;
     }
 
-    public T visitSub(SubNode node) {
-        return visitChildren(node);
+    /*
+    *    Type
+    **/
+
+    @Override
+    public T visit(BooleanType booleanType) {
+        return null;
     }
 
-    public T visitDiv(DivNode node) {
-        return visitChildren(node);
+    @Override
+    public T visit(DecimalType decimalType) {
+        return null;
     }
 
-    public T visitAdd(AddNode node) {
-        return visitChildren(node);
+    @Override
+    public T visit(IntegerType integerType) {
+        return null;
     }
 
-    public T visitAnd(AndNode node) {
-        return visitChildren(node);
+    @Override
+    public T visit(MoneyType moneyType) {
+        return null;
     }
+
+    @Override
+    public T visit(StringType stringType) {
+        return null;
+    }
+
 }

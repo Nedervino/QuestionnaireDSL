@@ -21,4 +21,5 @@ public class ComputedQuestionNode extends QuestionNode {
     public <T> T accept(StatementVisitor<T> visitor){
         return visitor.visit(this);
     }
+
 }
