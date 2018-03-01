@@ -35,10 +35,6 @@ public class ASTVisitor<T> {
         return null;
     }
 
-    public T visitAssignment(AssignmentNode node){
-        return visitChildren(node);
-    }
-
     public T visitDeclaration(DeclarationNode node){
         return visitChildren(node);
     }

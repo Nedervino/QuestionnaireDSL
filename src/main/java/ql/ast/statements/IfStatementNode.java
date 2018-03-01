@@ -4,34 +4,27 @@ import ql.ast.ASTNode;
 import ql.ast.ASTVisitor;
 import ql.ast.expressions.ExprNode;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class IfStatementNode extends ASTNode {
 
-    private ExprNode cond;
-    private ArrayList<ASTNode> block;
+    private ExprNode condition;
+    private List<Statement> statements;
 
-    public IfStatementNode(){
-        setBlock(new ArrayList<ASTNode>());
+    public IfStatementNode(ExprNode condition, List<Statement> statements) {
+        this.condition = condition;
+        this.statements = statements;
+    }
+
+    public ExprNode getCondition() {
+        return condition;
+    }
+
+    public List<Statement> getStatements() {
+        return statements;
     }
 
     public <T> T accept(ASTVisitor<? extends T> visitor){
         return visitor.visitIfStatement(this);
-    }
-
-    public ExprNode getCond() {
-        return cond;
-    }
-
-    public void setCond(ExprNode cond) {
-        this.cond = cond;
-    }
-
-    public ArrayList<ASTNode> getBlock() {
-        return block;
-    }
-
-    public void setBlock(ArrayList<ASTNode> block) {
-        this.block = block;
     }
 }

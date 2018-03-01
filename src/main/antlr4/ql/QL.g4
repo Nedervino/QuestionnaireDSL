@@ -55,8 +55,7 @@ statement       : question
 question        : STRLIT declaration;
 declaration     : ID ':' TYPE;
 
-computedQuestion: STRLIT assignment;
-assignment      : (declaration | ID) '=' expr;
+computedQuestion: STRLIT declaration '=' expr;
 
 ifStatement          : 'if' '(' expr ')' block elseBlock?;
 elseBlock       : 'else' block;
@@ -67,7 +66,7 @@ expr            : unOp
                 | val
                 ;
 
-unOp         : '(' expr ')'
+unOp            : '(' expr ')'
                 | '!' expr
                 | '-' expr
                 ;

@@ -13,6 +13,7 @@ import ql.ast.expressions.unary.ParNode;
 import ql.ast.expressions.values.IDNode;
 import ql.ast.expressions.values.ValNode;
 import ql.ast.statements.*;
+import ql.ast.types.Type;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -170,20 +171,11 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitForm(QLParser.FormContext ctx) {
-        TerminalNode labelNode = (TerminalNode)ctx.children.get(1);
-        IDNode in = (IDNode) visitTerminal(labelNode);
-
         String formId = ctx.ID().getText();
         List<Statement> statements = new ArrayList();
-
         ctx.block().statement().forEach(statementContext -> statements.add((Statement) visit(statementContext)));
 
         return new FormNode(formId, statements);
-    }
-
-    @Override
-    public ASTNode visitBlock(QLParser.BlockContext ctx) {
-        return visitChildren(ctx, new BlockNode());
     }
 
     @Override
@@ -210,35 +202,25 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitComputedQuestion(QLParser.ComputedQuestionContext ctx) {
-        ComputedQuestionNode on = new ComputedQuestionNode();
-        TerminalNode labelNode = (TerminalNode)ctx.children.get(0);
-        ValNode vn = ((ValNode)visitTerminal(labelNode));
-        on.setLabel(vn.getContent());
-        AssignmentNode an = (AssignmentNode)visit(ctx.children.get(1));
-        on.setId(an.getId());
-        on.setType(an.getType());
-        on.setExpr(an.getExpr());
-        return on;
-    }
 
-    @Override
-    public ASTNode visitAssignment(QLParser.AssignmentContext ctx) {
-        AssignmentNode an = new AssignmentNode();
-        DeclarationNode dn = (DeclarationNode) visit(ctx.children.get(0));
-        an.setId(dn.getId());
-        an.setType(dn.getType());
-        ExprNode en = (ExprNode) visit(ctx.children.get(2));
-        an.setExpr(en);
-        return an;
+
+        String label = ctx.STRLIT().getText();
+        String id = ctx.declaration().ID().getText();
+        Type type = (Type) visit(ctx.declaration().TYPE());
+        ExprNode expression = ctx.expr();
+
+        ComputedQuestionNode computedQuestionNode = new ComputedQuestionNode(id, label, type, expression);
+
+        return computedQuestionNode;
     }
 
     @Override
     public ASTNode visitIfStatement(QLParser.IfStatementContext ctx) {
-        IfStatementNode en = new IfStatementNode();
-        en.setCond((ExprNode) visit(ctx.children.get(2)));
-        ASTNode blockNode = visit(ctx.children.get(4));
-        en.setBlock(blockNode.children);
-        return en;
+        ExprNode condition = (ExprNode) visit(ctx.expr());
+        List<Statement> statements = new ArrayList<>();
+        ctx.block().statement().forEach(statementContext -> statements.add((Statement) visit(statementContext)));
+        IfStatementNode ifStatementNode = new IfStatementNode(condition, statements);
+        return ifStatementNode;
     }
 
     @Override
