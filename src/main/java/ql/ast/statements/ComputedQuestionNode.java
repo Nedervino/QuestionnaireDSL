@@ -1,28 +1,24 @@
 package ql.ast.statements;
 
-import ql.ast.ASTNode;
-import ql.ast.ASTVisitor;
-import ql.ast.expressions.ExprNode;
+import ql.ast.expressions.Expression;
 import ql.ast.types.Type;
+import ql.ast.visitors.StatementVisitor;
 
 public class ComputedQuestionNode extends QuestionNode {
 
-    private ExprNode expr;
+    private Expression expr;
 
-    public ComputedQuestionNode(String id, String label, Type type, ExprNode expr) {
+    public ComputedQuestionNode(String id, String label, Type type, Expression expr) {
         super(id, label, type);
         this.expr = expr;
     }
 
-    public ExprNode getExpr() {
+    public Expression getExpr() {
         return expr;
     }
 
-    public void setExpr(ExprNode expr) {
-        this.expr = expr;
-    }
-
-    public <T> T accept(ASTVisitor<? extends T> visitor){
-        return visitor.visitComputedQuestion(this);
+    @Override
+    public <T> T accept(StatementVisitor<T> visitor){
+        return visitor.visit(this);
     }
 }

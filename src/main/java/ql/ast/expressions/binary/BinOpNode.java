@@ -2,12 +2,12 @@ package ql.ast.expressions.binary;
 
 import ql.ast.ASTNode;
 import ql.ast.ASTVisitor;
-import ql.ast.expressions.ExprNode;
+import ql.ast.expressions.Expression;
 
-public abstract class BinOpNode extends ExprNode {
+public abstract class BinOpNode extends Expression {
 
-    private ExprNode first;
-    private ExprNode second;
+    private Expression first;
+    private Expression second;
 
     public <T> T accept(ASTVisitor<? extends T> visitor){
         return visitor.visitBinOp(this);
@@ -17,7 +17,7 @@ public abstract class BinOpNode extends ExprNode {
         return first;
     }
 
-    public void setFirst(ExprNode first) {
+    public void setFirst(Expression first) {
         this.first = first;
     }
 
@@ -25,7 +25,7 @@ public abstract class BinOpNode extends ExprNode {
         return second;
     }
 
-    public void setSecond(ExprNode second) {
+    public void setSecond(Expression second) {
         this.second = second;
     }
 }

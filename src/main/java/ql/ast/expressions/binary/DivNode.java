@@ -1,4 +1,12 @@
 package ql.ast.expressions.binary;
 
-public class DivNode extends BinOpNode  {
+import ql.ast.visitors.ExpressionVisitor;
+
+public class DivNode extends BinOpNode {
+
+    @Override
+    public <T> T accept(ExpressionVisitor<T> visitor){
+        return visitor.visit(this);
+    }
+
 }

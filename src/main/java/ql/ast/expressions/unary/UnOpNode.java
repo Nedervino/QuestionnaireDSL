@@ -1,22 +1,17 @@
 package ql.ast.expressions.unary;
 
-import ql.ast.ASTNode;
 import ql.ast.ASTVisitor;
-import ql.ast.expressions.ExprNode;
+import ql.ast.expressions.Expression;
 
-public abstract class UnOpNode extends ExprNode {
+public abstract class UnOpNode extends Expression {
 
-    private ExprNode term;
+    private Expression term;
 
-    public <T> T accept(ASTVisitor<? extends T> visitor){
-        return visitor.visitUnOp(this);
-    }
-
-    public ExprNode getTerm() {
+    public Expression getTerm() {
         return term;
     }
 
-    public void setTerm(ExprNode first) {
+    public void setTerm(Expression first) {
         this.term = term;
     }
 }

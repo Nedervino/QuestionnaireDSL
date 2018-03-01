@@ -1,22 +1,21 @@
 package ql.ast.statements;
 
-import ql.ast.ASTNode;
-import ql.ast.ASTVisitor;
-import ql.ast.expressions.ExprNode;
+import ql.ast.expressions.Expression;
+import ql.ast.visitors.StatementVisitor;
 
 import java.util.List;
 
-public class IfStatementNode extends ASTNode {
+public class IfStatementNode extends Statement {
 
-    private ExprNode condition;
+    private Expression condition;
     private List<Statement> statements;
 
-    public IfStatementNode(ExprNode condition, List<Statement> statements) {
+    public IfStatementNode(Expression condition, List<Statement> statements) {
         this.condition = condition;
         this.statements = statements;
     }
 
-    public ExprNode getCondition() {
+    public Expression getCondition() {
         return condition;
     }
 
@@ -24,7 +23,9 @@ public class IfStatementNode extends ASTNode {
         return statements;
     }
 
-    public <T> T accept(ASTVisitor<? extends T> visitor){
-        return visitor.visitIfStatement(this);
+    @Override
+    public <T> T accept(StatementVisitor<T> visitor){
+        return visitor.visit(this);
     }
+
 }

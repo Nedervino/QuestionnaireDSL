@@ -1,10 +1,9 @@
 package ql.ast.statements;
 
-import ql.ast.ASTNode;
-import ql.ast.ASTVisitor;
 import ql.ast.types.Type;
+import ql.ast.visitors.StatementVisitor;
 
-public class QuestionNode extends ASTNode {
+public class QuestionNode extends Statement {
 
     private String label;
     private String id;
@@ -20,27 +19,17 @@ public class QuestionNode extends ASTNode {
         return label;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public Type getType() {
         return type;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    @Override
+    public <T> T accept(StatementVisitor<T> visitor){
+        return visitor.visit(this);
     }
 
-    public <T> T accept(ASTVisitor<? extends T> visitor){
-        return visitor.visitQuestion(this);
-    }
 }

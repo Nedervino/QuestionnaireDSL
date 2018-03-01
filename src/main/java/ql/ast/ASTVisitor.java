@@ -44,7 +44,7 @@ public class ASTVisitor<T> {
         return visitChildren(node);
     }
 
-    public T visitExpr(ExprNode node){
+    public T visitExpr(Expression node){
         return visitChildren(node);
     }
 

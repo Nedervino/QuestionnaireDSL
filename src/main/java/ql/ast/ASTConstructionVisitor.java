@@ -207,7 +207,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String label = ctx.STRLIT().getText();
         String id = ctx.declaration().ID().getText();
         Type type = (Type) visit(ctx.declaration().TYPE());
-        ExprNode expression = ctx.expr();
+        Expression expression = ctx.expr();
 
         ComputedQuestionNode computedQuestionNode = new ComputedQuestionNode(id, label, type, expression);
 
@@ -216,7 +216,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitIfStatement(QLParser.IfStatementContext ctx) {
-        ExprNode condition = (ExprNode) visit(ctx.expr());
+        Expression condition = (Expression) visit(ctx.expr());
         List<Statement> statements = new ArrayList<>();
         ctx.block().statement().forEach(statementContext -> statements.add((Statement) visit(statementContext)));
         IfStatementNode ifStatementNode = new IfStatementNode(condition, statements);
@@ -237,14 +237,14 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         //Must be a negation
         else if(ctx.children.size()==2){
             NegNode nn = new NegNode();
-            nn.setTerm((ExprNode)visit(ctx.children.get(1)));
+            nn.setTerm((Expression)visit(ctx.children.get(1)));
             return nn;
         }
         //Must be parenthesis
         //TODO get rid of this instanceof
         else if(ctx.children.get(0) instanceof TerminalNode){
             ParNode pn = new ParNode();
-            pn.setTerm((ExprNode)visit(ctx.children.get(1)));
+            pn.setTerm((Expression)visit(ctx.children.get(1)));
             return pn;
         }
         //must be a binary operation
@@ -303,8 +303,8 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
                 }
             }
 
-            bn.setFirst((ExprNode)visit(ctx.children.get(0)));
-            bn.setSecond((ExprNode)visit(ctx.children.get(2)));
+            bn.setFirst((Expression)visit(ctx.children.get(0)));
+            bn.setSecond((Expression)visit(ctx.children.get(2)));
             return bn;
         }
     }
