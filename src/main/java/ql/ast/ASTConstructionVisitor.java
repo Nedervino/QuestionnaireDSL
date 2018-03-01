@@ -170,20 +170,11 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitForm(QLParser.FormContext ctx) {
-        TerminalNode labelNode = (TerminalNode)ctx.children.get(1);
-        IDNode in = (IDNode) visitTerminal(labelNode);
-
         String formId = ctx.ID().getText();
         List<Statement> statements = new ArrayList();
-
         ctx.block().statement().forEach(statementContext -> statements.add((Statement) visit(statementContext)));
 
         return new FormNode(formId, statements);
-    }
-
-    @Override
-    public ASTNode visitBlock(QLParser.BlockContext ctx) {
-        return visitChildren(ctx, new BlockNode());
     }
 
     @Override
@@ -234,11 +225,11 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitIfStatement(QLParser.IfStatementContext ctx) {
-        IfStatementNode en = new IfStatementNode();
-        en.setCond((ExprNode) visit(ctx.children.get(2)));
-        ASTNode blockNode = visit(ctx.children.get(4));
-        en.setBlock(blockNode.children);
-        return en;
+        ExprNode condition = (ExprNode) visit(ctx.expr());
+        List<Statement> statements = new ArrayList<>();
+        ctx.block().statement().forEach(statementContext -> statements.add((Statement) visit(statementContext)));
+        IfStatementNode ifStatementNode = new IfStatementNode(condition, statements);
+        return ifStatementNode;
     }
 
     @Override
