@@ -5,13 +5,14 @@ import ql.ast.expressions.Expression;
 
 public abstract class UnOpNode extends Expression {
 
-    private Expression term;
+    private Expression expression;
 
-    public Expression getTerm() {
-        return term;
+    public UnOpNode(Expression expression) {
+        this.expression = expression;
     }
 
-    public void setTerm(Expression first) {
-        this.term = term;
+    public Expression getExpression() {
+        return expression;
     }
+
 }
