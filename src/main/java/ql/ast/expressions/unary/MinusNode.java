@@ -1,12 +1,12 @@
-package ql.ast.expressions.binary;
+package ql.ast.expressions.unary;
 
 import ql.ast.expressions.Expression;
 import ql.ast.visitors.ExpressionVisitor;
 
-public class LtNode extends BinOpNode {
+public class MinusNode extends UnOpNode {
 
-    public LtNode(Expression left, Expression right) {
-        super(left, right);
+    public MinusNode(Expression expression) {
+        super(expression);
     }
 
     @Override
@@ -15,4 +15,3 @@ public class LtNode extends BinOpNode {
     }
 
 }
-

@@ -8,19 +8,19 @@ import java.util.List;
 public class IfStatementNode extends Statement {
 
     private Expression condition;
-    private List<Statement> statements;
+    private List<Statement> ifStatements;
 
-    public IfStatementNode(Expression condition, List<Statement> statements) {
+    public IfStatementNode(Expression condition, List<Statement> ifStatements) {
         this.condition = condition;
-        this.statements = statements;
+        this.ifStatements = ifStatements;
     }
 
     public Expression getCondition() {
         return condition;
     }
 
-    public List<Statement> getStatements() {
-        return statements;
+    public List<Statement> getIfStatements() {
+        return ifStatements;
     }
 
     @Override
