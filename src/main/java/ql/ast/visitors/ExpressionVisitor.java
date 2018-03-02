@@ -1,8 +1,11 @@
 package ql.ast.visitors;
 
 import ql.ast.expressions.binary.*;
+import ql.ast.expressions.literals.BooleanLiteral;
+import ql.ast.expressions.literals.IntegerLiteral;
+import ql.ast.expressions.literals.StringLiteral;
+import ql.ast.expressions.unary.MinusNode;
 import ql.ast.expressions.unary.NegNode;
-import ql.ast.expressions.unary.ParNode;
 import ql.ast.expressions.values.IDNode;
 import ql.ast.expressions.values.ValNode;
 
@@ -38,11 +41,18 @@ public interface ExpressionVisitor <T> {
     // Unary expressions
     T visit(NegNode negNode);
 
-    // ValuesValues
-    T visit(IDNode idNode);
+    T visit(MinusNode minusNode);
 
+    // Values
     T visit(ValNode valNode);
 
-    T visit(ParNode parNode);
+    T visit(IDNode idNode);
+
+    //Literals
+    T visit(StringLiteral stringLiteral);
+
+    T visit(IntegerLiteral integerLiteral);
+
+    T visit(BooleanLiteral booleanLiteral);
 
 }
