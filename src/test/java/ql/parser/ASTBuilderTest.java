@@ -20,23 +20,23 @@ public class ASTBuilderTest {
 
     @Test(expected = ParseCancellationException.class)
     public void throwsParseCancellationExceptionForParseErrors() {
-        astBuilder.buildAST("src/input/ql/formError.ql");
+        astBuilder.buildASTFromFile("src/input/ql/formError.ql");
         // exception.expect(ParseCancellationException.class);
     }
 
     @Test
     public void canParseSimpleForm() {
-        astBuilder.buildAST("src/input/ql/formSimple.ql");
+        astBuilder.buildASTFromFile("src/input/ql/formSimple.ql");
     }
 
     @Test
     public void canParseIfBlocks() {
-        astBuilder.buildAST("src/input/ql/formIf.ql");
+        astBuilder.buildASTFromFile("src/input/ql/formIf.ql");
     }
 
     @Test
     public void canParseIfElseBlocks() {
-        astBuilder.buildAST("src/input/ql/formIfElse.ql");
+        astBuilder.buildASTFromFile("src/input/ql/formIfElse.ql");
     }
 
 

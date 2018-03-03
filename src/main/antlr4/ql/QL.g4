@@ -2,44 +2,11 @@ grammar QL;
 
 /* Requirements
 
-- grouping construct (for assigning characteristics to a group of questions, like style)
-- question
-    - id,
-    - label (actual question)
-    - type
-    - (optional) associated to an expression
-
-// Boolean expressions, e.g.
-&&
-||
-!
-
-// Comparisons
-<
->
->=
-<=
-!=
-==
-
-// Required types
-BOOL
-STRING
-INTEGER
-DATE
-DECIMAL
-MONEY
-
-// Additional options. Only requirement is the data type can be automatically mapped to a widget
-ENUMERATION //(e.g. good, bad, don't know)
-INTEGER_RANGE // (e.g. 1..5)
-
-
-
 TODO:
 - Refactor lexer/parser divisiion
 - Reconsider money / decimal separation
 - Implement DATE type
+
 */
 
 
