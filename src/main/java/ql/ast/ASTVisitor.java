@@ -1,13 +1,13 @@
 package ql.ast;
 
 
-import ql.ast.expressions.*;
 import ql.ast.expressions.binary.*;
+import ql.ast.expressions.literals.BooleanLiteral;
+import ql.ast.expressions.literals.IntegerLiteral;
+import ql.ast.expressions.literals.StringLiteral;
+import ql.ast.expressions.unary.MinusNode;
 import ql.ast.expressions.unary.NegNode;
-import ql.ast.expressions.unary.ParNode;
-import ql.ast.expressions.unary.UnOpNode;
 import ql.ast.expressions.values.IDNode;
-import ql.ast.expressions.values.ValNode;
 import ql.ast.statements.*;
 import ql.ast.types.*;
 import ql.ast.visitors.ExpressionVisitor;
@@ -95,11 +95,6 @@ public class ASTVisitor<T> implements ExpressionVisitor<T>, StatementVisitor<T>,
     }
 
     @Override
-    public T visit(OpSymHelperNode opSymHelperNode) {
-        return null;
-    }
-
-    @Override
     public T visit(OrNode orNode) {
         return null;
     }
@@ -118,27 +113,13 @@ public class ASTVisitor<T> implements ExpressionVisitor<T>, StatementVisitor<T>,
         return null;
     }
 
-    /*
-    *    Values
-    * */
-
     @Override
-    public T visit(IDNode idNode) {
-        return null;
-    }
-
-    @Override
-    public T visit(ValNode valNode) {
-        return null;
-    }
-
-    @Override
-    public T visit(ParNode parNode) {
+    public T visit(MinusNode minusNode) {
         return null;
     }
 
     /*
-    *    Type
+    *    Types
     **/
 
     @Override
@@ -165,5 +146,34 @@ public class ASTVisitor<T> implements ExpressionVisitor<T>, StatementVisitor<T>,
     public T visit(StringType stringType) {
         return null;
     }
+
+    /*
+    *    Literals
+    **/
+
+    @Override
+    public T visit(StringLiteral stringLiteral) {
+        return null;
+    }
+
+    @Override
+    public T visit(IntegerLiteral integerLiteral) {
+        return null;
+    }
+
+    @Override
+    public T visit(BooleanLiteral booleanLiteral) {
+        return null;
+    }
+
+        /*
+    *    Values
+    * */
+
+    @Override
+    public T visit(IDNode idNode) {
+        return null;
+    }
+
 
 }

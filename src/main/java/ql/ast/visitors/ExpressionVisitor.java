@@ -7,7 +7,6 @@ import ql.ast.expressions.literals.StringLiteral;
 import ql.ast.expressions.unary.MinusNode;
 import ql.ast.expressions.unary.NegNode;
 import ql.ast.expressions.values.IDNode;
-import ql.ast.expressions.values.ValNode;
 
 public interface ExpressionVisitor <T> {
 
@@ -32,8 +31,6 @@ public interface ExpressionVisitor <T> {
 
     T visit(NeqNode neqNode);
 
-    T visit(OpSymHelperNode opSymHelperNode);
-
     T visit(OrNode orNode);
 
     T visit(SubNode subNode);
@@ -44,8 +41,6 @@ public interface ExpressionVisitor <T> {
     T visit(MinusNode minusNode);
 
     // Values
-    T visit(ValNode valNode);
-
     T visit(IDNode idNode);
 
     //Literals
