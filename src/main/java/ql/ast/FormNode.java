@@ -1,6 +1,5 @@
 package ql.ast;
 
-import ql.QLBaseVisitor;
 import ql.ast.statements.Statement;
 import ql.ast.visitors.BaseVisitor;
 

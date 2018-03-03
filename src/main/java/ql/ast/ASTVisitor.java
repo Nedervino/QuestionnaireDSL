@@ -1,14 +1,14 @@
 package ql.ast;
 
 
+import ql.ast.expressions.IDNode;
 import ql.ast.expressions.binary.*;
-import ql.ast.expressions.literals.BooleanLiteral;
-import ql.ast.expressions.literals.IntegerLiteral;
-import ql.ast.expressions.literals.StringLiteral;
+import ql.ast.expressions.literals.*;
 import ql.ast.expressions.unary.MinusNode;
 import ql.ast.expressions.unary.NegNode;
-import ql.ast.expressions.IDNode;
-import ql.ast.statements.*;
+import ql.ast.statements.ComputedQuestionNode;
+import ql.ast.statements.IfStatementNode;
+import ql.ast.statements.QuestionNode;
 import ql.ast.types.*;
 import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.StatementVisitor;
@@ -147,6 +147,11 @@ public class ASTVisitor<T> implements ExpressionVisitor<T>, StatementVisitor<T>,
         return null;
     }
 
+    @Override
+    public T visit(DateType dateType) {
+        return null;
+    }
+
     /*
     *    Literals
     **/
@@ -163,6 +168,21 @@ public class ASTVisitor<T> implements ExpressionVisitor<T>, StatementVisitor<T>,
 
     @Override
     public T visit(BooleanLiteral booleanLiteral) {
+        return null;
+    }
+
+    @Override
+    public T visit(DateLiteral dateLiteral) {
+        return null;
+    }
+
+    @Override
+    public T visit(DecimalLiteral decimalLiteral) {
+        return null;
+    }
+
+    @Override
+    public T visit(MoneyLiteral moneyLiteral) {
         return null;
     }
 

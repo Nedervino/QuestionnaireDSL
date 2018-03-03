@@ -5,12 +5,12 @@ import ql.QLBaseVisitor;
 import ql.QLParser;
 import ql.ast.ASTNode;
 import ql.ast.FormNode;
-import ql.ast.expressions.*;
+import ql.ast.expressions.Expression;
+import ql.ast.expressions.IDNode;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
 import ql.ast.expressions.unary.MinusNode;
 import ql.ast.expressions.unary.NegNode;
-import ql.ast.expressions.IDNode;
 import ql.ast.statements.*;
 import ql.ast.types.Type;
 

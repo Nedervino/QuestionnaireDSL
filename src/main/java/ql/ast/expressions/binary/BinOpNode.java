@@ -1,7 +1,5 @@
 package ql.ast.expressions.binary;
 
-import ql.ast.ASTNode;
-import ql.ast.ASTVisitor;
 import ql.ast.expressions.Expression;
 
 public abstract class BinOpNode extends Expression {

@@ -1,7 +1,5 @@
 package ql.ast.types;
 
-import ql.ast.ASTNode;
-import ql.ast.ASTVisitor;
 import ql.ast.visitors.TypeVisitor;
 
 public class BooleanType extends Type {

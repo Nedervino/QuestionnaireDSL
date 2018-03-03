@@ -1,7 +1,6 @@
 package ql.typechecker;
 
 import ql.ast.ASTNode;
-import ql.ast.FormNode;
 
 public class TypeChecker {
 

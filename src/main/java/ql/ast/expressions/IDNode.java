@@ -1,6 +1,5 @@
 package ql.ast.expressions;
 
-import ql.ast.expressions.Expression;
 import ql.ast.visitors.ExpressionVisitor;
 
 public class IDNode extends Expression {

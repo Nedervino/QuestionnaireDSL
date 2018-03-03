@@ -1,10 +1,10 @@
 package ql.ast.visitors;
 
+import ql.ast.expressions.IDNode;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
 import ql.ast.expressions.unary.MinusNode;
 import ql.ast.expressions.unary.NegNode;
-import ql.ast.expressions.IDNode;
 
 public interface ExpressionVisitor<T> {
 
