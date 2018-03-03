@@ -11,11 +11,12 @@ public class DefaultRenderVisitor extends QLBaseVisitor<String> {
 
     FormView formView;
 
-    public DefaultRenderVisitor(FormView formView){
+    public DefaultRenderVisitor(FormView formView) {
         this.formView = formView;
     }
 
-    @Override public String visitForm(QLParser.FormContext ctx) {
+    @Override
+    public String visitForm(QLParser.FormContext ctx) {
         //Identify the form name
         String formName = visit(ctx.children.get(1));
 
@@ -25,14 +26,16 @@ public class DefaultRenderVisitor extends QLBaseVisitor<String> {
 
     //Identify the variable name which belongs to this question
     //Find the declaration part of the question
-    @Override public String visitQuestion(QLParser.QuestionContext ctx) {
+    @Override
+    public String visitQuestion(QLParser.QuestionContext ctx) {
         String varName = visit(ctx.children.get(1));
 
         formView.addElement(varName, new GUIElement());
         return null;
     }
 
-    @Override public String visitComputedQuestion(QLParser.ComputedQuestionContext ctx) {
+    @Override
+    public String visitComputedQuestion(QLParser.ComputedQuestionContext ctx) {
         String varName = visit(ctx.children.get(1));
 
         formView.addElement(varName, new GUIElement());
@@ -42,9 +45,10 @@ public class DefaultRenderVisitor extends QLBaseVisitor<String> {
     //Since we will only use visitTerminal for the purpose of getting variable names from identifier nodes and form terminal nodes,
     //and we never call a terminal node when it is not the identifier node, we will simply return the text
     //even though this would return keywords or reserved characters when called on non-identifier nodes.
-    @Override public String visitTerminal(TerminalNode node) {
+    @Override
+    public String visitTerminal(TerminalNode node) {
         String varName = node.getText();
         return varName;
     }
 
-    }
+}

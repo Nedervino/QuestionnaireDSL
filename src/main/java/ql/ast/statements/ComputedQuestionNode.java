@@ -18,7 +18,7 @@ public class ComputedQuestionNode extends QuestionNode {
     }
 
     @Override
-    public <T> T accept(StatementVisitor<T> visitor){
+    public <T> T accept(StatementVisitor<T> visitor) {
         return visitor.visit(this);
     }
 

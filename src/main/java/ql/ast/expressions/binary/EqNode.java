@@ -10,7 +10,7 @@ public class EqNode extends BinOpNode {
     }
 
     @Override
-    public <T> T accept(ExpressionVisitor<T> visitor){
+    public <T> T accept(ExpressionVisitor<T> visitor) {
         return visitor.visit(this);
     }
 

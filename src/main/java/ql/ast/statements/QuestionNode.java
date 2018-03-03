@@ -28,7 +28,7 @@ public class QuestionNode extends Statement {
     }
 
     @Override
-    public <T> T accept(StatementVisitor<T> visitor){
+    public <T> T accept(StatementVisitor<T> visitor) {
         return visitor.visit(this);
     }
 

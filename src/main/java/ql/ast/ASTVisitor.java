@@ -14,7 +14,7 @@ import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.StatementVisitor;
 import ql.ast.visitors.TypeVisitor;
 
-public class ASTVisitor<T> implements ExpressionVisitor<T>, StatementVisitor<T>, TypeVisitor<T>{
+public class ASTVisitor<T> implements ExpressionVisitor<T>, StatementVisitor<T>, TypeVisitor<T> {
 
 
     public T visit(FormNode formNode) {

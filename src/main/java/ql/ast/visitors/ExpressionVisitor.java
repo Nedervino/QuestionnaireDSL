@@ -8,7 +8,7 @@ import ql.ast.expressions.unary.MinusNode;
 import ql.ast.expressions.unary.NegNode;
 import ql.ast.expressions.IDNode;
 
-public interface ExpressionVisitor <T> {
+public interface ExpressionVisitor<T> {
 
     // Binary expressions
     T visit(AddNode addNode);

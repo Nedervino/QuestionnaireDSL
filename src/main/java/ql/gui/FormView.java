@@ -7,11 +7,11 @@ import java.awt.*;
 import java.util.LinkedList;
 
 
-public class FormView extends JPanel{
+public class FormView extends JPanel {
 
     LinkedList<Wrapper> elements;
 
-    public FormView(){
+    public FormView() {
         elements = new LinkedList<>();
     }
 
@@ -37,23 +37,23 @@ public class FormView extends JPanel{
     }
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         int pointer = 100;
 
         g.setColor(Color.BLACK);
 
-        for(Wrapper wrapper : elements){
+        for (Wrapper wrapper : elements) {
             g.drawString(wrapper.varName, 50, pointer);
-            pointer+=40;
+            pointer += 40;
         }
     }
 
-    static class Wrapper{
+    static class Wrapper {
 
         String varName;
         GUIElement element;
 
-        public Wrapper(String varName, GUIElement element){
+        public Wrapper(String varName, GUIElement element) {
             this.varName = varName;
             this.element = element;
         }
@@ -65,12 +65,12 @@ public class FormView extends JPanel{
         JPanel panel = this;
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600,900);
+        frame.setSize(600, 900);
         frame.setVisible(true);
         frame.add(panel);
     }
 
-    public void addElement(String name, GUIElement element){
+    public void addElement(String name, GUIElement element) {
         elements.add(new Wrapper(name, element));
     }
 

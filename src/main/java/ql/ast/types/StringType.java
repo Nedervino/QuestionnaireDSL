@@ -5,7 +5,7 @@ import ql.ast.visitors.TypeVisitor;
 public class StringType extends Type {
 
     @Override
-    public String toString (){
+    public String toString() {
         return "string";
     }
 

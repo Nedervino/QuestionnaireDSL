@@ -2,7 +2,7 @@ package ql.evaluator;
 
 import ql.ast.ASTVisitor;
 
-public class EvaluationVisitor extends ASTVisitor<EvaluationNode>{
+public class EvaluationVisitor extends ASTVisitor<EvaluationNode> {
 
     //GUI shows current state, with text boxes where relevant
 

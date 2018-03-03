@@ -38,13 +38,13 @@ public class ASTBuilder {
         // treeViewer.start(parser, parseTree);
 
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
-        QLParser.FormContext formContext =  parser.form();
+        QLParser.FormContext formContext = parser.form();
         FormNode form = (FormNode) astConstructionVisitor.visit(formContext);
 
         return form;
     }
 
-    public QLParser createParser (String input) {
+    public QLParser createParser(String input) {
         CharStream charStream = CharStreams.fromString(input);
         QLLexer lexer = new QLLexer(charStream);
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);

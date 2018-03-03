@@ -26,7 +26,7 @@ public class TypeCheckNode {
                 type = Type.STRING;
                 break;
             }
-            default:{
+            default: {
                 type = Type.INVALID;
                 break;
             }
@@ -43,16 +43,18 @@ public class TypeCheckNode {
         INT,
         MONEY,
         FLOAT
-    };
+    }
+
+    ;
 
     Type type;
 
-    public TypeCheckNode(){
+    public TypeCheckNode() {
 
     }
 
-    public TypeCheckNode(Type type){
-        if(type == null) {
+    public TypeCheckNode(Type type) {
+        if (type == null) {
             try {
                 throw new Exception("Can't assign null keyword as a Node type");
             } catch (Exception e) {

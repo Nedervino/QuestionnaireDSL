@@ -2,7 +2,7 @@ package ql.ast.visitors;
 
 import ql.ast.types.*;
 
-public interface TypeVisitor <T> {
+public interface TypeVisitor<T> {
 
     T visit(BooleanType booleanType);
 

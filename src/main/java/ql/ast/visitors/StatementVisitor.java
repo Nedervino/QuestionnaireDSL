@@ -4,7 +4,7 @@ import ql.ast.statements.ComputedQuestionNode;
 import ql.ast.statements.IfStatementNode;
 import ql.ast.statements.QuestionNode;
 
-public interface StatementVisitor <T> {
+public interface StatementVisitor<T> {
 
     T visit(IfStatementNode ifStatement);
 

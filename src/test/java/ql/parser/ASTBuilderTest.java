@@ -12,7 +12,7 @@ public class ASTBuilderTest {
 
     @Before
     public void setUp() throws Exception {
-       astBuilder = new ASTBuilder();
+        astBuilder = new ASTBuilder();
     }
 
     @Rule

@@ -12,7 +12,7 @@ public class BooleanLiteral extends Expression {
     }
 
     @Override
-    public <T> T accept(ExpressionVisitor<T> visitor){
+    public <T> T accept(ExpressionVisitor<T> visitor) {
         return visitor.visit(this);
     }
 

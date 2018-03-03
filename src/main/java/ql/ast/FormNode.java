@@ -11,7 +11,7 @@ public class FormNode extends ASTNode {
     private String formId;
     private List<Statement> statements;
 
-    public FormNode(String formId, List<Statement> statements){
+    public FormNode(String formId, List<Statement> statements) {
         this.formId = formId;
         this.statements = statements;
     }
@@ -24,7 +24,7 @@ public class FormNode extends ASTNode {
         return this.statements;
     }
 
-    public <T> T accept(BaseVisitor<T> visitor){
+    public <T> T accept(BaseVisitor<T> visitor) {
         return visitor.visit(this);
     }
 

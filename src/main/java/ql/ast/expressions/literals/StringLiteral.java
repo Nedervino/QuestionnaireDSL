@@ -3,7 +3,7 @@ package ql.ast.expressions.literals;
 import ql.ast.expressions.Expression;
 import ql.ast.visitors.ExpressionVisitor;
 
-public class StringLiteral extends Expression{
+public class StringLiteral extends Expression {
 
     private final String value;
 
@@ -12,7 +12,7 @@ public class StringLiteral extends Expression{
     }
 
     @Override
-    public <T> T accept(ExpressionVisitor<T> visitor){
+    public <T> T accept(ExpressionVisitor<T> visitor) {
         return visitor.visit(this);
     }
 }
