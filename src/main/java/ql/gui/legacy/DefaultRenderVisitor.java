@@ -39,12 +39,6 @@ public class DefaultRenderVisitor extends QLBaseVisitor<String> {
         return null;
     }
 
-    @Override public String visitDeclaration(QLParser.DeclarationContext ctx) {
-        TerminalNode idNode = (TerminalNode) ctx.children.get(0);
-        String varName = idNode.getText();
-        return varName;
-    }
-
     //Since we will only use visitTerminal for the purpose of getting variable names from identifier nodes and form terminal nodes,
     //and we never call a terminal node when it is not the identifier node, we will simply return the text
     //even though this would return keywords or reserved characters when called on non-identifier nodes.
