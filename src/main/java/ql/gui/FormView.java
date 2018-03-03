@@ -31,7 +31,7 @@ public class FormView extends JPanel{
         init();
 
         RenderVisitor visitor = new RenderVisitor(this);
-        visitor.visit(node);
+        // visitor.visit(node);
 
         repaint();
     }

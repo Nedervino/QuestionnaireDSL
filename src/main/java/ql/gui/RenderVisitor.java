@@ -13,25 +13,25 @@ public class RenderVisitor extends ASTVisitor<String> {
             this.formView = formView;
         }
 
-        @Override public String visitForm(FormNode node) {
+        @Override public String visit(FormNode formNode) {
             //Identify the form name
-            String formName = node.getFormId();
+            String formName = formNode.getFormId();
 
             formView.addElement(formName, new GUIElement());
-            return super.visitForm(node);
+            return super.visit(formNode);
         }
 
         //Identify the variable name which belongs to this question
         //Find the declaration part of the question
-        @Override public String visitQuestion(QuestionNode node) {
-            String varName = node.getId();
+        @Override public String visit(QuestionNode questionNode) {
+            String varName = questionNode.getId();
 
             formView.addElement(varName, new GUIElement());
             return null;
         }
 
-        @Override public String visitComputedQuestion(ComputedQuestionNode node) {
-            String varName = node.getId();
+        @Override public String visit(ComputedQuestionNode computedQuestionNode) {
+            String varName = computedQuestionNode.getId();
 
             formView.addElement(varName, new GUIElement());
             return null;
