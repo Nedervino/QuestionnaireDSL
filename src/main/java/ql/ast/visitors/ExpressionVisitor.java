@@ -1,9 +1,7 @@
 package ql.ast.visitors;
 
 import ql.ast.expressions.binary.*;
-import ql.ast.expressions.literals.BooleanLiteral;
-import ql.ast.expressions.literals.IntegerLiteral;
-import ql.ast.expressions.literals.StringLiteral;
+import ql.ast.expressions.literals.*;
 import ql.ast.expressions.unary.MinusNode;
 import ql.ast.expressions.unary.NegNode;
 import ql.ast.expressions.IDNode;
@@ -49,5 +47,11 @@ public interface ExpressionVisitor<T> {
     T visit(IntegerLiteral integerLiteral);
 
     T visit(BooleanLiteral booleanLiteral);
+
+    T visit(DateLiteral dateLiteral);
+
+    T visit(DecimalLiteral decimalLiteral);
+
+    T visit(MoneyLiteral moneyLiteral);
 
 }

@@ -43,6 +43,9 @@ unaryOperation  : UNARY expression
 value           : BOOLEANLITERAL                                #booleanLiteral
                 | INTEGERLITERAL                                #integerLiteral
                 | STRINGLITERAL                                 #stringLiteral
+                | MONEYLITERAL                                  #moneyLiteral
+                | DECIMALLITERAL                                #decimalLiteral
+                | DATELITERAL                                   #dateLiteral
                 | IDENTIFIER                                    #identifier
                 ;
 
@@ -52,12 +55,13 @@ TYPE            : ('boolean' | 'money' | 'int' | 'float' | 'string');
 DIGIT           : ('0'..'9');
 
 //Literals
-STRINGLITERAL   : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
+BOOLEANLITERAL  : ('true' | 'false');
 INTEGERLITERAL  : DIGIT+;
+STRINGLITERAL   : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
 MONEYLITERAL    : '-'? DIGIT+ '.' DIGIT DIGIT;
 DECIMALLITERAL  : '-'? DIGIT+ '.' DIGIT+;
 DATELITERAL     : DIGIT DIGIT '-' DIGIT DIGIT '-' DIGIT DIGIT DIGIT DIGIT;
-BOOLEANLITERAL  : ('true' | 'false');
+
 
 IDENTIFIER      : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
 

@@ -14,5 +14,6 @@ public interface TypeVisitor<T> {
 
     T visit(StringType stringType);
 
-
+    T visit(DateType dateType);
+    
 }

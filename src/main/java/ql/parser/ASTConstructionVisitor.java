@@ -7,15 +7,14 @@ import ql.ast.ASTNode;
 import ql.ast.FormNode;
 import ql.ast.expressions.*;
 import ql.ast.expressions.binary.*;
-import ql.ast.expressions.literals.BooleanLiteral;
-import ql.ast.expressions.literals.IntegerLiteral;
-import ql.ast.expressions.literals.StringLiteral;
+import ql.ast.expressions.literals.*;
 import ql.ast.expressions.unary.MinusNode;
 import ql.ast.expressions.unary.NegNode;
 import ql.ast.expressions.IDNode;
 import ql.ast.statements.*;
 import ql.ast.types.Type;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -292,6 +291,25 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitIntegerLiteral(QLParser.IntegerLiteralContext ctx) {
         return new IntegerLiteral(ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitDecimalLiteral(QLParser.DecimalLiteralContext ctx) {
+        return new DecimalLiteral(ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitMoneyLiteral(QLParser.MoneyLiteralContext ctx) {
+        return new MoneyLiteral(ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitDateLiteral(QLParser.DateLiteralContext ctx) {
+        try {
+            return new DateLiteral(ctx.getText());
+        } catch  (ParseException e) {
+            throw new IllegalArgumentException(String.format("Invalid date: %s", ctx.getText()));
+        }
     }
 
     @Override
