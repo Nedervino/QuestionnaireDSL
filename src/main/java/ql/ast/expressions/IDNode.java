@@ -1,4 +1,4 @@
-package ql.ast.expressions.values;
+package ql.ast.expressions;
 
 import ql.ast.expressions.Expression;
 import ql.ast.visitors.ExpressionVisitor;

@@ -1,5 +1,6 @@
 package ql.parser;
 
+import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -7,7 +8,6 @@ import ql.QLLexer;
 import ql.QLParser;
 import ql.ast.ASTNode;
 import ql.typechecker.TypeChecker;
-import ql.typechecker.legacy.TypeCheckVisitor;
 import ql.ast.ASTConstructionVisitor;
 import ql.ast.FormNode;
 import ql.gui.FormView;
@@ -22,56 +22,47 @@ import java.nio.file.Paths;
 
 public class ASTBuilder {
 
-    public void buildAST(String filePath) {
+    public FormNode buildAST(String filePath) {
+        String formContent = loadFile(filePath);
+        FormNode form = buildASTFromString(formContent);
+
+        return form;
+    }
+
+    private String loadFile(String filePath) {
+        String fileContent = "";
         try {
-
-            String formContent = loadFile(filePath);
-            ASTNode form = buildASTFromString(formContent);
-
-            if (!passesTypeChecks(form)) {
-                System.err.println("Form not passing type checks.");
-            }
-
+            fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
         } catch (IOException e) {
-            System.err.println("Couldn't read source: " + e.getMessage());
+            System.err.println("Couldn't process input source: " + e.getMessage());
         }
+        return fileContent;
     }
 
-    private String loadFile(String filePath) throws IOException{
-        String formContent = new String(Files.readAllBytes(Paths.get(filePath)));
-        return formContent;
+    public FormNode buildASTFromString(String formContent) {
+        QLParser parser = createParser(formContent);
+
+        // ParseTree parseTree = parser.form();
+        // TreeView treeViewer = new TreeView();
+        // treeViewer.start(parser, parseTree);
+
+        ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
+        QLParser.FormContext formContext =  parser.form();
+        FormNode form = (FormNode) astConstructionVisitor.visit(formContext);
+
+        return form;
     }
 
-    public ASTNode buildASTFromString(String formContent) throws IOException {
-            QLParser parser = createParser(formContent);
-
-            ParseTree parseTree = parser.form();
-
-            TreeView treeViewer = new TreeView();
-            treeViewer.start(parser, parseTree);
-
-            ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
-            ASTNode form = astConstructionVisitor.visit(parseTree);
-
-            FormView formViewer = new FormView();
-            formViewer.start(form);
-
-            return form;
-    }
-
-    public boolean passesTypeChecks (ASTNode form) {
-        return new TypeChecker().passesTypeChecks(form);
-    }
-
-    public QLParser createParser (String input) throws IOException {
-        InputStream stream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
-        QLLexer lexer = new QLLexer(CharStreams.fromStream(stream, StandardCharsets.UTF_8));
+    public QLParser createParser (String input) {
+        CharStream charStream = CharStreams.fromString(input);
+        QLLexer lexer = new QLLexer(charStream);
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
-
         QLParser parser = new QLParser(tokenStream);
+
         parser.removeErrorListeners();
         ExceptionErrorListener throwErrorListener = new ExceptionErrorListener();
         parser.addErrorListener(throwErrorListener);
+
         return parser;
     }
 }

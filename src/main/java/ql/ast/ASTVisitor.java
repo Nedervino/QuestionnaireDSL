@@ -7,7 +7,7 @@ import ql.ast.expressions.literals.IntegerLiteral;
 import ql.ast.expressions.literals.StringLiteral;
 import ql.ast.expressions.unary.MinusNode;
 import ql.ast.expressions.unary.NegNode;
-import ql.ast.expressions.values.IDNode;
+import ql.ast.expressions.IDNode;
 import ql.ast.statements.*;
 import ql.ast.types.*;
 import ql.ast.visitors.ExpressionVisitor;
