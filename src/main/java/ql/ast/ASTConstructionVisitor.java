@@ -1,17 +1,16 @@
 package ql.ast;
 
 
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.RuleNode;
-import org.antlr.v4.runtime.tree.TerminalNode;
 import ql.QLBaseVisitor;
 import ql.QLParser;
 import ql.ast.expressions.*;
 import ql.ast.expressions.binary.*;
+import ql.ast.expressions.literals.BooleanLiteral;
+import ql.ast.expressions.literals.IntegerLiteral;
+import ql.ast.expressions.literals.StringLiteral;
+import ql.ast.expressions.unary.MinusNode;
 import ql.ast.expressions.unary.NegNode;
-import ql.ast.expressions.unary.ParNode;
 import ql.ast.expressions.values.IDNode;
-import ql.ast.expressions.values.ValNode;
 import ql.ast.statements.*;
 import ql.ast.types.Type;
 
@@ -24,150 +23,137 @@ import java.util.List;
 
 public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
-    public ASTNode visitTerminal(TerminalNode node) {
-
-        String content = node.getText();
-
-
-        String[] irrelevant = new String[]{
-                "form",
-                "{",
-                "}",
-                ":",
-                "if",
-        };
-
-        for(String str : irrelevant){
-            if(content.equals(str)){
-                return null;
-            }
-        }
-
-        String[] op = new String[]{
-                "!",
-                "(",
-                ")",
-                "-",
-                "&&",
-                "||",
-                "==",
-                "!=",
-                "<",
-                ">",
-                "<=",
-                "=>",
-                "+",
-                "*",
-                "/"
-        };
-
-        for(String str : op){
-            if(content.equals(str)){
-                return new OpSymHelperNode(content);
-            }
-        }
-
-        //check whether the terminal is an int or some other numeric value.
-        if(isInt(content)){
-            return new ValNode(content);
-        }
-        else if(isMoney(content)){
-            return new ValNode(content);
-        }
-        else if(isFloat(content)){
-            return new ValNode(content);
-        }
-
-        //Keywords with semantic value
-        switch (content) {
-            case "true":{
-                return new ValNode(content);
-            }
-            case "false":{
-                return new ValNode(content);
-            }
-            case "boolean": {
-                return new TypeNode(content);
-            }
-            case "money": {
-                return new TypeNode(content);
-            }
-            case "int": {
-                return new TypeNode(content);
-            }
-            case "float": {
-                return new TypeNode(content);
-            }
-            case "string": {
-                return new TypeNode(content);
-            }
-        }
-
-        //String literal check
-        if(content.substring(0, 1).equals("\"")) {
-            return new ValNode(content.substring(1, content.length()-1));
-        }
-
-        //Anything else was a var
-        return new IDNode(content);
-
-    }
-
-    public static boolean isFloat(String str) {
-        try {
-            Double.parseDouble(str);
-        }
-        catch(NumberFormatException nfe) {
-            return false;
-        }
-        return true;
-    }
-
-    //TODO Add a distinct function for money.
-    public static boolean isMoney(String str){
-        return isFloat(str);
-    }
-
-    public static boolean isInt(String str){
-        try {
-            Integer.parseInt(str);
-        }
-        catch(NumberFormatException nfe) {
-            return false;
-        }
-        return true;
-    }
-
-
-    @Override
-    protected ASTNode defaultResult() {
-        return null;   //This use of ASTNode should be eliminated, by creating a class for each type of node.
-    }
-
-    //aggregate is the tree which the parent is constructing
-    //nextResult should be the child node
-    //This method should add the node to the parent's child list
-    @Override
-    protected ASTNode aggregateResult(ASTNode aggregate, ASTNode nextResult) {
-        if(nextResult==null){
-            return aggregate;
-        }
-        aggregate.children.add(nextResult);
-        return aggregate;
-    }
-
-    public ASTNode visitChildren(RuleNode node, ASTNode parentNode) {
-        ASTNode result = parentNode;
-        int n = node.getChildCount();
-
-        for(int i = 0; i < n && this.shouldVisitNextChild(node, result); ++i) {
-            ParseTree c = node.getChild(i);
-            ASTNode childResult = c.accept(this);
-            result = this.aggregateResult(result, childResult);
-        }
-
-        return result;
-    }
+    // public ASTNode visitTerminal(TerminalNode node) {
+    //
+    //     String content = node.getText();
+    //
+    //
+    //     String[] irrelevant = new String[]{
+    //             "form",
+    //             "{",
+    //             "}",
+    //             ":",
+    //             "if",
+    //     };
+    //
+    //     for(String str : irrelevant){
+    //         if(content.equals(str)){
+    //             return null;
+    //         }
+    //     }
+    //
+    //     String[] op = new String[]{
+    //             "!",
+    //             "(",
+    //             ")",
+    //             "-",
+    //             "&&",
+    //             "||",
+    //             "==",
+    //             "!=",
+    //             "<",
+    //             ">",
+    //             "<=",
+    //             "=>",
+    //             "+",
+    //             "*",
+    //             "/"
+    //     };
+    //
+    //     for(String str : op){
+    //         if(content.equals(str)){
+    //             return new OpSymHelperNode(content);
+    //         }
+    //     }
+    //
+    //     //check whether the terminal is an int or some other numeric value.
+    //     if(isInt(content)){
+    //         return new ValNode(content);
+    //     }
+    //     else if(isMoney(content)){
+    //         return new ValNode(content);
+    //     }
+    //     else if(isFloat(content)){
+    //         return new ValNode(content);
+    //     }
+    //
+    //     //Keywords with semantic value
+    //     switch (content) {
+    //         case "true":{
+    //             return new ValNode(content);
+    //         }
+    //         case "false":{
+    //             return new ValNode(content);
+    //         }
+    //         case "boolean": {
+    //             return new TypeNode(content);
+    //         }
+    //         case "money": {
+    //             return new TypeNode(content);
+    //         }
+    //         case "int": {
+    //             return new TypeNode(content);
+    //         }
+    //         case "float": {
+    //             return new TypeNode(content);
+    //         }
+    //         case "string": {
+    //             return new TypeNode(content);
+    //         }
+    //     }
+    //
+    //     //String literal check
+    //     if(content.substring(0, 1).equals("\"")) {
+    //         return new ValNode(content.substring(1, content.length()-1));
+    //     }
+    //
+    //     //Anything else was a var
+    //     return new IDNode(content);
+    //
+    // }
+    //
+    // public static boolean isFloat(String str) {
+    //     try {
+    //         Double.parseDouble(str);
+    //     }
+    //     catch(NumberFormatException nfe) {
+    //         return false;
+    //     }
+    //     return true;
+    // }
+    //
+    // //TODO Add a distinct function for money.
+    // public static boolean isMoney(String str){
+    //     return isFloat(str);
+    // }
+    //
+    // public static boolean isInt(String str){
+    //     try {
+    //         Integer.parseInt(str);
+    //     }
+    //     catch(NumberFormatException nfe) {
+    //         return false;
+    //     }
+    //     return true;
+    // }
+    //
+    //
+    // @Override
+    // protected ASTNode defaultResult() {
+    //     return null;   //This use of ASTNode should be eliminated, by creating a class for each type of node.
+    // }
+    //
+    // //aggregate is the tree which the parent is constructing
+    // //nextResult should be the child node
+    // //This method should add the node to the parent's child list
+    // @Override
+    // protected ASTNode aggregateResult(ASTNode aggregate, ASTNode nextResult) {
+    //     if(nextResult==null){
+    //         return aggregate;
+    //     }
+    //     aggregate.children.add(nextResult);
+    //     return aggregate;
+    // }
 
     @Override
     public ASTNode visitForm(QLParser.FormContext ctx) {
@@ -180,38 +166,21 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitQuestion(QLParser.QuestionContext ctx) {
-        QuestionNode in = new QuestionNode();
-        TerminalNode labelNode = (TerminalNode)ctx.children.get(0);
-        ValNode ln = (ValNode)visitTerminal(labelNode);
-        in.setLabel(ln.getContent());
-        DeclarationNode dn = (DeclarationNode) visit(ctx.children.get(1));
-        in.setId(dn.getId());
-        in.setType(dn.getType());
-        return in;
-    }
+        String id = ctx.declaration().ID().getText();
+        String label = ctx.STRLIT().getText();
+        Type type = (Type) visit(ctx.declaration().TYPE());
 
-    @Override
-    public ASTNode visitDeclaration(QLParser.DeclarationContext ctx) {
-        DeclarationNode dn = new DeclarationNode();
-        IDNode in = (IDNode)visit(ctx.children.get(0));
-        dn.setId(in.getContent());
-        TypeNode tn = (TypeNode)visit(ctx.children.get(2));
-        dn.setType(tn.getContent());
-        return dn;
+        return new QuestionNode(id, label, type);
     }
 
     @Override
     public ASTNode visitComputedQuestion(QLParser.ComputedQuestionContext ctx) {
-
-
-        String label = ctx.STRLIT().getText();
         String id = ctx.declaration().ID().getText();
+        String label = ctx.STRLIT().getText();
         Type type = (Type) visit(ctx.declaration().TYPE());
-        Expression expression = ctx.expr();
+        Expression expression = (Expression) visit(ctx.expr());
 
-        ComputedQuestionNode computedQuestionNode = new ComputedQuestionNode(id, label, type, expression);
-
-        return computedQuestionNode;
+        return new ComputedQuestionNode(id, label, type, expression);
     }
 
     @Override
@@ -219,99 +188,113 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         Expression condition = (Expression) visit(ctx.expr());
         List<Statement> statements = new ArrayList<>();
         ctx.block().statement().forEach(statementContext -> statements.add((Statement) visit(statementContext)));
-        IfStatementNode ifStatementNode = new IfStatementNode(condition, statements);
-        return ifStatementNode;
-    }
 
-    @Override
-    public ASTNode visitElseBlock(QLParser.ElseBlockContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override
-    public ASTNode visitExpr(QLParser.ExprContext ctx) {
-        //Must be a value or id
-        if(ctx.children.size()==1) {
-            return visit(ctx.children.get(0));
-        }
-        //Must be a negation
-        else if(ctx.children.size()==2){
-            NegNode nn = new NegNode();
-            nn.setTerm((Expression)visit(ctx.children.get(1)));
-            return nn;
-        }
-        //Must be parenthesis
-        //TODO get rid of this instanceof
-        else if(ctx.children.get(0) instanceof TerminalNode){
-            ParNode pn = new ParNode();
-            pn.setTerm((Expression)visit(ctx.children.get(1)));
-            return pn;
-        }
-        //must be a binary operation
-        else{
-            TerminalNode opNode = (TerminalNode)ctx.children.get(1);
-            OpSymHelperNode on = (OpSymHelperNode)visitTerminal(opNode);
-
-            String symbol = on.getContent();
-
-            BinOpNode bn = null;
-
-            switch(symbol){
-                case "&&":{
-                    bn = new AndNode();
-                    break;
-                }
-                case "||":{
-                    bn = new OrNode();
-                    break;
-                }
-                case "==":{
-                    bn = new EqNode();
-                    break;
-                }
-                case "!=":{
-                    bn = new NeqNode();
-                    break;
-                }
-                case "<":{
-                    bn = new LtNode();
-                    break;
-                }
-                case ">":{
-                    bn = new GtNode();
-                    break;
-                }
-                case "<=":{
-                    bn = new LteNode();
-                    break;
-                }
-                case "=>":{
-                    bn = new GteNode();
-                    break;
-                }
-                case "+":{
-                    bn = new AddNode();
-                    break;
-                }
-                case "*":{
-                    bn = new MulNode();
-                    break;
-                }
-                case "/":{
-                    bn = new DivNode();
-                    break;
-                }
-            }
-
-            bn.setFirst((Expression)visit(ctx.children.get(0)));
-            bn.setSecond((Expression)visit(ctx.children.get(2)));
-            return bn;
+        if(ctx.elseBlock() != null) {
+            List<Statement> elseStatements = new ArrayList<>();
+            ctx.elseBlock().block().statement().forEach(statementContext -> elseStatements.add((Statement) visit(statementContext)));
+            return new IfElseStatementNode(condition, statements, elseStatements);
+        } else {
+            return new IfStatementNode(condition, statements);
         }
     }
 
     @Override
-    public ASTNode visitVal(QLParser.ValContext ctx) {
-        return visit(ctx.children.get(0));
+    public ASTNode visitUnaryOperation(QLParser.UnaryOperationContext ctx) {
+        String operator = ctx.unOp().UNARY().getText();
+        switch(operator) {
+            case "-":
+                return new MinusNode((Expression) visit(ctx.unOp().expr()));
+            case "!":
+                return new NegNode((Expression) visit(ctx.unOp().expr()));
+            default:
+                throw new IllegalArgumentException(String.format("Invalid unary operator: %s", operator));
+        }
+    }
+
+    @Override
+    public ASTNode visitArithMeticBinary(QLParser.ArithMeticBinaryContext ctx) {
+        Expression left = (Expression) visit(ctx.left);
+        Expression right = (Expression) visit(ctx.right);
+
+        String operator = ctx.ARITHMETIC().getText();
+        switch(operator) {
+            case "+":
+                return new AddNode(left,right);
+            case "-":
+                return new SubNode(left,right);
+            case "*":
+                return new MulNode(left,right);
+            case "/":
+                return new DivNode(left,right);
+            default:
+                throw new IllegalArgumentException(String.format("Invalid arithmetic operator: %s", operator));
+        }
+    }
+
+    @Override
+    public ASTNode visitLogicalBinary(QLParser.LogicalBinaryContext ctx) {
+        Expression left = (Expression) visit(ctx.left);
+        Expression right = (Expression) visit(ctx.right);
+
+        String operator = ctx.LOGICAL().getText();
+        switch(operator) {
+            case "&&":
+                return new AndNode(left,right);
+            case "||":
+                return new OrNode(left,right);
+            default:
+                throw new IllegalArgumentException(String.format("Invalid logical operator: %s", operator));
+        }
+    }
+
+    @Override
+    public ASTNode visitRelationalBinary(QLParser.RelationalBinaryContext ctx) {
+        Expression left = (Expression) visit(ctx.left);
+        Expression right = (Expression) visit(ctx.right);
+
+        String operator = ctx.RELATIONAL().getText();
+        switch(operator) {
+            case "<":
+                return new LtNode(left,right);
+            case "<=":
+                return new LteNode(left,right);
+            case ">":
+                return new GtNode(left,right);
+            case ">=":
+                return new GteNode(left,right);
+            case "==":
+                return new EqNode(left,right);
+            case "!=":
+                return new NeqNode(left,right);
+            default:
+                throw new IllegalArgumentException(String.format("Invalid relational operator: %s", operator));
+        }
+    }
+
+    // @Override
+    // public ASTNode visitNestedExpression(QLParser.NestedExpressionContext ctx) {
+    //     return super.visitNestedExpression(ctx);
+    // }
+
+
+    @Override
+    public ASTNode visitBooleanLiteral(QLParser.BooleanLiteralContext ctx) {
+        return new BooleanLiteral(ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitStringLiteral(QLParser.StringLiteralContext ctx) {
+        return new StringLiteral(ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitIntegerLiteral(QLParser.IntegerLiteralContext ctx) {
+        return new IntegerLiteral(ctx.getText());
+    }
+
+    @Override
+    public ASTNode visitIdentifier(QLParser.IdentifierContext ctx) {
+        return new IDNode(ctx.getText());
     }
 
 }

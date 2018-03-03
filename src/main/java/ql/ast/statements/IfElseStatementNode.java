@@ -7,7 +7,7 @@ public class IfElseStatementNode extends IfStatementNode {
 
     private List<Statement> elseStatements;
 
-    public IfElseStatementNode(Expression condition, List<Statement> ifStatements) {
+    public IfElseStatementNode(Expression condition, List<Statement> ifStatements, List<Statement> elseStatements) {
         super(condition, ifStatements);
         this.elseStatements = elseStatements;
     }

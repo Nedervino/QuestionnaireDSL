@@ -57,41 +57,46 @@ declaration     : ID ':' TYPE;
 
 computedQuestion: STRLIT declaration '=' expr;
 
-ifStatement          : 'if' '(' expr ')' block elseBlock?;
+ifStatement     : 'if' '(' expr ')' block elseBlock?;
 elseBlock       : 'else' block;
 
-
-expr            : unOp
-                | expr BINOPSYM expr
-                | val
+expr            : '('expr')'                        #nestedExpression
+                | unOp                              #unaryOperation
+                | left=expr ARITHMETIC right=expr   #arithMeticBinary
+                | left=expr RELATIONAL right=expr   #relationalBinary
+                | left=expr LOGICAL right=expr      #logicalBinary
+                | val                               #value
                 ;
 
-unOp            : '(' expr ')'
-                | '!' expr
-                | '-' expr
+unOp            : UNARY expr
                 ;
 
-val             : BOOLLIT
-                | INTLIT
-                | STRLIT
-                | ID
+val             : BOOLLIT                           #booleanLiteral
+                | INTLIT                            #integerLiteral
+                | STRLIT                            #stringLiteral
+                | ID                                #identifier
                 ;
 
 
-//Types
 TYPE            : ('boolean' | 'money' | 'int' | 'float' | 'string');
-STRLIT       : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
-INTLIT             : ('0'..'9')+;
+STRLIT          : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
+INTLIT          : ('0'..'9')+;
 //TODO replace "INT" in the line valNum with INT | DECIMAL | MONEY_LITERAL. This will allow using numericals interchangeably. Test this thoroughly.
 
 //TODO the line which defines MONLIT is incorrect. The two INTLIT terms would allow integers of any length at these positions. We could either reuse a DIGIT term, or inline this.
-//MONLIT   : '-'? INTLIT+ '.' INTLIT INTLIT;
-DECLIT : '-'? INTLIT+ '.' INTLIT+;
-BOOLLIT : ('true' | 'false');
+//MONLIT        : '-'? INTLIT+ '.' INTLIT INTLIT;
+DECLIT          : '-'? INTLIT+ '.' INTLIT+;
+BOOLLIT         : ('true' | 'false');
+
+//Binary Operators
+ARITHMETIC      : ('+'|'-'|'/'|'*');
+RELATIONAL      : ('<'|'<='|'>'|'>='|'=='|'!=');
+LOGICAL         : ('&&'|'||');
+
+//Unary Operators
+UNARY           : ('!'|'-');
 
 
-//Other terms
-BINOPSYM        : ('&&'|'||'|'+'|'-'|'/'|'*'|'<'|'<='|'>'|'>='|'=='|'!=');
 ID              : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
 WHITESPACE      : (' ' | '\t' | '\n' | '\r')+ -> skip;
 
