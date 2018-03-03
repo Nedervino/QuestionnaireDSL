@@ -159,7 +159,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitForm(QLParser.FormContext ctx) {
-        String formId = ctx.ID().getText();
+        String formId = ctx.IDENTIFIER().getText();
         List<Statement> statements = new ArrayList();
         ctx.block().statement().forEach(statementContext -> statements.add((Statement) visit(statementContext)));
 
@@ -168,8 +168,8 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitQuestion(QLParser.QuestionContext ctx) {
-        String id = ctx.declaration().ID().getText();
-        String label = ctx.STRLIT().getText();
+        String id = ctx.declaration().IDENTIFIER().getText();
+        String label = ctx.STRINGLITERAL().getText();
         Type type = (Type) visit(ctx.declaration().TYPE());
 
         return new QuestionNode(id, label, type);
@@ -177,17 +177,17 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitComputedQuestion(QLParser.ComputedQuestionContext ctx) {
-        String id = ctx.declaration().ID().getText();
-        String label = ctx.STRLIT().getText();
+        String id = ctx.declaration().IDENTIFIER().getText();
+        String label = ctx.STRINGLITERAL().getText();
         Type type = (Type) visit(ctx.declaration().TYPE());
-        Expression expression = (Expression) visit(ctx.expr());
+        Expression expression = (Expression) visit(ctx.expression());
 
         return new ComputedQuestionNode(id, label, type, expression);
     }
 
     @Override
     public ASTNode visitIfStatement(QLParser.IfStatementContext ctx) {
-        Expression condition = (Expression) visit(ctx.expr());
+        Expression condition = (Expression) visit(ctx.expression());
         List<Statement> statements = new ArrayList<>();
         ctx.block().statement().forEach(statementContext -> statements.add((Statement) visit(statementContext)));
 
@@ -201,13 +201,13 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
     }
 
     @Override
-    public ASTNode visitUnaryOperation(QLParser.UnaryOperationContext ctx) {
-        String operator = ctx.unOp().UNARY().getText();
+    public ASTNode visitUnaryExpression(QLParser.UnaryExpressionContext ctx) {
+        String operator = ctx.unaryOperation().UNARY().getText();
         switch (operator) {
             case "-":
-                return new MinusNode((Expression) visit(ctx.unOp().expr()));
+                return new MinusNode((Expression) visit(ctx.unaryOperation().expression()));
             case "!":
-                return new NegNode((Expression) visit(ctx.unOp().expr()));
+                return new NegNode((Expression) visit(ctx.unaryOperation().expression()));
             default:
                 throw new IllegalArgumentException(String.format("Invalid unary operator: %s", operator));
         }

@@ -3,14 +3,16 @@ grammar QL;
 /* Requirements
 
 TODO:
-- Refactor lexer/parser divisiion
+- Refactor lexer/parser division
 - Reconsider money / decimal separation
 - Implement DATE type
+- replace "INT" in the line valNum with INT | DECIMAL | MONEY_LITERAL to allow using numericals interchangeably (?)
 
 */
 
 
-form            : 'form'  ID  block;
+
+form            : 'form' IDENTIFIER block;
 
 block           : '{'(statement)*'}';
 statement       : question
@@ -19,41 +21,46 @@ statement       : question
                 ;
 
 
-question        : STRLIT declaration;
-declaration     : ID ':' TYPE;
+question        : STRINGLITERAL declaration;
+declaration     : IDENTIFIER ':' TYPE;
 
-computedQuestion: STRLIT declaration '=' expr;
+computedQuestion: STRINGLITERAL declaration '=' expression;
 
-ifStatement     : 'if' '(' expr ')' block elseBlock?;
+ifStatement     : 'if' '(' expression ')' block elseBlock?;
 elseBlock       : 'else' block;
 
-expr            : '('expr')'                        #nestedExpression
-                | unOp                              #unaryOperation
-                | left=expr ARITHMETIC right=expr   #arithMeticBinary
-                | left=expr RELATIONAL right=expr   #relationalBinary
-                | left=expr LOGICAL right=expr      #logicalBinary
-                | val                               #value
+expression      : '('expression')'                              #nestedExpression
+                | unaryOperation                                #unaryExpression
+                | left=expression ARITHMETIC right=expression   #arithMeticBinary
+                | left=expression RELATIONAL right=expression   #relationalBinary
+                | left=expression LOGICAL right=expression      #logicalBinary
+                | value                                         #expressionValue
                 ;
 
-unOp            : UNARY expr
+unaryOperation  : UNARY expression
                 ;
 
-val             : BOOLLIT                           #booleanLiteral
-                | INTLIT                            #integerLiteral
-                | STRLIT                            #stringLiteral
-                | ID                                #identifier
+value           : BOOLEANLITERAL                                #booleanLiteral
+                | INTEGERLITERAL                                #integerLiteral
+                | STRINGLITERAL                                 #stringLiteral
+                | IDENTIFIER                                    #identifier
                 ;
 
 
 TYPE            : ('boolean' | 'money' | 'int' | 'float' | 'string');
-STRLIT          : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
-INTLIT          : ('0'..'9')+;
-//TODO replace "INT" in the line valNum with INT | DECIMAL | MONEY_LITERAL. This will allow using numericals interchangeably. Test this thoroughly.
 
-//TODO the line which defines MONLIT is incorrect. The two INTLIT terms would allow integers of any length at these positions. We could either reuse a DIGIT term, or inline this.
-//MONLIT        : '-'? INTLIT+ '.' INTLIT INTLIT;
-DECLIT          : '-'? INTLIT+ '.' INTLIT+;
-BOOLLIT         : ('true' | 'false');
+DIGIT           : ('0'..'9');
+
+//Literals
+STRINGLITERAL   : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
+INTEGERLITERAL  : DIGIT+;
+MONEYLITERAL    : '-'? DIGIT+ '.' DIGIT DIGIT;
+DECIMALLITERAL  : '-'? DIGIT+ '.' DIGIT+;
+DATELITERAL     : DIGIT DIGIT '-' DIGIT DIGIT '-' DIGIT DIGIT DIGIT DIGIT;
+BOOLEANLITERAL  : ('true' | 'false');
+
+IDENTIFIER      : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
+
 
 //Binary Operators
 ARITHMETIC      : ('+'|'-'|'/'|'*');
@@ -64,9 +71,8 @@ LOGICAL         : ('&&'|'||');
 UNARY           : ('!'|'-');
 
 
-ID              : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
 WHITESPACE      : (' ' | '\t' | '\n' | '\r')+ -> skip;
 
-MULTI_COMMENT   : '/*' .*? '*/' -> skip;
+MULTICOMMENT    : '/*' .*? '*/' -> skip;
 
-SINGLE_COMMENT  : '//' ~[\r\n]* '\r'? '\n' -> skip;
+SINGLECOMMENT   : '//' ~[\r\n]* '\r'? '\n' -> skip;
