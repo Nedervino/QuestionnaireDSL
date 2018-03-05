@@ -1,6 +1,6 @@
 package ql.validator;
 
-import ql.ast.expressions.IDNode;
+import ql.ast.expressions.Variable;
 import ql.ast.types.Type;
 
 import java.util.HashMap;
@@ -14,15 +14,15 @@ public class SymbolTable {
         this.table = new HashMap();
     }
 
-    public void declare(IDNode identifier, Type type) {
-        table.put(identifier.toString(), type);
+    public void declare(Variable variable, Type type) {
+        table.put(variable.toString(), type);
     }
 
-    public boolean isDeclared(IDNode identifier) {
-        return table.containsKey(identifier.toString());
+    public boolean isDeclared(Variable variable) {
+        return table.containsKey(variable.toString());
     }
 
-    public Type lookup(IDNode identifier) {
-        return table.get(identifier.toString());
+    public Type lookup(Variable variable) {
+        return table.get(variable.toString());
     }
 }

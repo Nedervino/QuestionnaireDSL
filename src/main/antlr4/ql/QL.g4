@@ -46,7 +46,7 @@ value           : BOOLEANLITERAL                                #booleanLiteral
                 | MONEYLITERAL                                  #moneyLiteral
                 | DECIMALLITERAL                                #decimalLiteral
                 | DATELITERAL                                   #dateLiteral
-                | IDENTIFIER                                    #identifier
+                | IDENTIFIER                                    #variable
                 ;
 
 

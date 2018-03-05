@@ -3,9 +3,9 @@ package ql.ast.expressions.binary;
 import ql.ast.expressions.Expression;
 import ql.ast.visitors.ExpressionVisitor;
 
-public class OrNode extends BinOpNode {
+public class LogicalOr extends BinaryOperation {
 
-    public OrNode(Expression left, Expression right) {
+    public LogicalOr(Expression left, Expression right) {
         super(left, right);
     }
 

@@ -3,9 +3,9 @@ package ql.ast.expressions.binary;
 import ql.ast.expressions.Expression;
 import ql.ast.visitors.ExpressionVisitor;
 
-public class GteNode extends BinOpNode {
+public class LessThanEqual extends BinaryOperation {
 
-    public GteNode(Expression left, Expression right) {
+    public LessThanEqual(Expression left, Expression right) {
         super(left, right);
     }
 

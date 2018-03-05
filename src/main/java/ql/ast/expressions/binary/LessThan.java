@@ -3,9 +3,9 @@ package ql.ast.expressions.binary;
 import ql.ast.expressions.Expression;
 import ql.ast.visitors.ExpressionVisitor;
 
-public class LteNode extends BinOpNode {
+public class LessThan extends BinaryOperation {
 
-    public LteNode(Expression left, Expression right) {
+    public LessThan(Expression left, Expression right) {
         super(left, right);
     }
 
@@ -15,3 +15,4 @@ public class LteNode extends BinOpNode {
     }
 
 }
+

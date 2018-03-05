@@ -3,9 +3,9 @@ package ql.ast.expressions.binary;
 import ql.ast.expressions.Expression;
 import ql.ast.visitors.ExpressionVisitor;
 
-public class NeqNode extends BinOpNode {
+public class Subtraction extends BinaryOperation {
 
-    public NeqNode(Expression left, Expression right) {
+    public Subtraction(Expression left, Expression right) {
         super(left, right);
     }
 

@@ -1,14 +1,14 @@
 package ql.ast;
 
 
-import ql.ast.expressions.IDNode;
+import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
-import ql.ast.expressions.unary.MinusNode;
-import ql.ast.expressions.unary.NegNode;
-import ql.ast.statements.ComputedQuestionNode;
-import ql.ast.statements.IfStatementNode;
-import ql.ast.statements.QuestionNode;
+import ql.ast.expressions.unary.ArithmeticNegation;
+import ql.ast.expressions.unary.LogicalNegation;
+import ql.ast.statements.ComputedQuestion;
+import ql.ast.statements.IfStatement;
+import ql.ast.statements.Question;
 import ql.ast.types.*;
 import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.StatementVisitor;
@@ -17,7 +17,7 @@ import ql.ast.visitors.TypeVisitor;
 public class BaseASTVisitor<T> implements ExpressionVisitor<T>, StatementVisitor<T>, TypeVisitor<T> {
 
 
-    public T visit(FormNode formNode) {
+    public T visit(Form form) {
         return null;
     }
 
@@ -26,17 +26,17 @@ public class BaseASTVisitor<T> implements ExpressionVisitor<T>, StatementVisitor
     **/
 
     @Override
-    public T visit(IfStatementNode ifStatement) {
+    public T visit(IfStatement ifStatement) {
         return null;
     }
 
     @Override
-    public T visit(QuestionNode question) {
+    public T visit(Question question) {
         return null;
     }
 
     @Override
-    public T visit(ComputedQuestionNode computedQuestion) {
+    public T visit(ComputedQuestion computedQuestion) {
         return null;
     }
 
@@ -45,62 +45,62 @@ public class BaseASTVisitor<T> implements ExpressionVisitor<T>, StatementVisitor
     **/
 
     @Override
-    public T visit(AddNode addNode) {
+    public T visit(Addition addition) {
         return null;
     }
 
     @Override
-    public T visit(AndNode andNode) {
+    public T visit(LogicalAnd logicalAnd) {
         return null;
     }
 
     @Override
-    public T visit(DivNode divNode) {
+    public T visit(Division division) {
         return null;
     }
 
     @Override
-    public T visit(EqNode eqNode) {
+    public T visit(Equal equal) {
         return null;
     }
 
     @Override
-    public T visit(GteNode gteNode) {
+    public T visit(GreaterThanEqual greaterThanEqual) {
         return null;
     }
 
     @Override
-    public T visit(GtNode gtNode) {
+    public T visit(GreaterThan greaterThan) {
         return null;
     }
 
     @Override
-    public T visit(LteNode lteNode) {
+    public T visit(LessThanEqual lessThanEqual) {
         return null;
     }
 
     @Override
-    public T visit(LtNode ltNode) {
+    public T visit(LessThan lessThan) {
         return null;
     }
 
     @Override
-    public T visit(MulNode mulNode) {
+    public T visit(Multiplication multiplication) {
         return null;
     }
 
     @Override
-    public T visit(NeqNode neqNode) {
+    public T visit(NotEqual notEqual) {
         return null;
     }
 
     @Override
-    public T visit(OrNode orNode) {
+    public T visit(LogicalOr logicalOr) {
         return null;
     }
 
     @Override
-    public T visit(SubNode subNode) {
+    public T visit(Subtraction subtraction) {
         return null;
     }
 
@@ -109,12 +109,12 @@ public class BaseASTVisitor<T> implements ExpressionVisitor<T>, StatementVisitor
     * */
 
     @Override
-    public T visit(NegNode negNode) {
+    public T visit(LogicalNegation logicalNegation) {
         return null;
     }
 
     @Override
-    public T visit(MinusNode minusNode) {
+    public T visit(ArithmeticNegation arithmeticNegation) {
         return null;
     }
 
@@ -191,7 +191,7 @@ public class BaseASTVisitor<T> implements ExpressionVisitor<T>, StatementVisitor
     * */
 
     @Override
-    public T visit(IDNode idNode) {
+    public T visit(Variable variable) {
         return null;
     }
 

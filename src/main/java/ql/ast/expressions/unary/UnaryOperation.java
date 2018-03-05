@@ -2,11 +2,11 @@ package ql.ast.expressions.unary;
 
 import ql.ast.expressions.Expression;
 
-public abstract class UnOpNode extends Expression {
+public abstract class UnaryOperation extends Expression {
 
     private Expression expression;
 
-    public UnOpNode(Expression expression) {
+    public UnaryOperation(Expression expression) {
         this.expression = expression;
     }
 

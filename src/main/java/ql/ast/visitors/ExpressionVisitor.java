@@ -1,42 +1,42 @@
 package ql.ast.visitors;
 
-import ql.ast.expressions.IDNode;
+import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
-import ql.ast.expressions.unary.MinusNode;
-import ql.ast.expressions.unary.NegNode;
+import ql.ast.expressions.unary.ArithmeticNegation;
+import ql.ast.expressions.unary.LogicalNegation;
 
 public interface ExpressionVisitor<T> {
 
     // Binary expressions
-    T visit(AddNode addNode);
+    T visit(Addition addition);
 
-    T visit(AndNode andNode);
+    T visit(LogicalAnd logicalAnd);
 
-    T visit(DivNode divNode);
+    T visit(Division division);
 
-    T visit(EqNode eqNode);
+    T visit(Equal equal);
 
-    T visit(GteNode gteNode);
+    T visit(GreaterThanEqual greaterThanEqual);
 
-    T visit(GtNode gtNode);
+    T visit(GreaterThan greaterThan);
 
-    T visit(LteNode lteNode);
+    T visit(LessThanEqual lessThanEqual);
 
-    T visit(LtNode ltNode);
+    T visit(LessThan lessThan);
 
-    T visit(MulNode mulNode);
+    T visit(Multiplication multiplication);
 
-    T visit(NeqNode neqNode);
+    T visit(NotEqual notEqual);
 
-    T visit(OrNode orNode);
+    T visit(LogicalOr logicalOr);
 
-    T visit(SubNode subNode);
+    T visit(Subtraction subtraction);
 
     // Unary expressions
-    T visit(NegNode negNode);
+    T visit(LogicalNegation logicalNegation);
 
-    T visit(MinusNode minusNode);
+    T visit(ArithmeticNegation arithmeticNegation);
 
     //Literals
     T visit(StringLiteral stringLiteral);
@@ -51,7 +51,7 @@ public interface ExpressionVisitor<T> {
 
     T visit(MoneyLiteral moneyLiteral);
 
-    // Identifier
-    T visit(IDNode idNode);
+    // Variable
+    T visit(Variable variable);
 
 }

@@ -1,12 +1,12 @@
-package ql.ast.expressions.binary;
+package ql.ast.expressions.unary;
 
 import ql.ast.expressions.Expression;
 import ql.ast.visitors.ExpressionVisitor;
 
-public class DivNode extends BinOpNode {
+public class LogicalNegation extends UnaryOperation {
 
-    public DivNode(Expression left, Expression right) {
-        super(left, right);
+    public LogicalNegation(Expression expression) {
+        super(expression);
     }
 
     @Override

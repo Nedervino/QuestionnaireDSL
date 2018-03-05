@@ -1,9 +1,9 @@
 package ql.gui;
 
 import ql.ast.BaseASTVisitor;
-import ql.ast.FormNode;
-import ql.ast.statements.ComputedQuestionNode;
-import ql.ast.statements.QuestionNode;
+import ql.ast.Form;
+import ql.ast.statements.ComputedQuestion;
+import ql.ast.statements.Question;
 
 public class RenderVisitor extends BaseASTVisitor<String> {
 
@@ -14,26 +14,26 @@ public class RenderVisitor extends BaseASTVisitor<String> {
     }
 
     @Override
-    public String visit(FormNode formNode) {
+    public String visit(Form form) {
         //Identify the form name
-        String formName = formNode.getFormId();
+        String formName = form.getFormId();
 
         formView.addElement(formName, new GUIElement());
-        return super.visit(formNode);
+        return super.visit(form);
     }
 
     //Identify the variable name which belongs to this question
     //Find the declaration part of the question
     @Override
-    public String visit(QuestionNode questionNode) {
-        String varName = questionNode.getId();
+    public String visit(Question question) {
+        String varName = question.getId();
 
         formView.addElement(varName, new GUIElement());
         return null;
     }
 
     @Override
-    public String visit(ComputedQuestionNode computedQuestionNode) {
+    public String visit(ComputedQuestion computedQuestionNode) {
         String varName = computedQuestionNode.getId();
 
         formView.addElement(varName, new GUIElement());

@@ -4,13 +4,13 @@ package ql.parser;
 import ql.QLBaseVisitor;
 import ql.QLParser;
 import ql.ast.ASTNode;
-import ql.ast.FormNode;
+import ql.ast.Form;
 import ql.ast.expressions.Expression;
-import ql.ast.expressions.IDNode;
+import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
-import ql.ast.expressions.unary.MinusNode;
-import ql.ast.expressions.unary.NegNode;
+import ql.ast.expressions.unary.ArithmeticNegation;
+import ql.ast.expressions.unary.LogicalNegation;
 import ql.ast.statements.*;
 import ql.ast.types.Type;
 
@@ -109,7 +109,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
     //     }
     //
     //     //Anything else was a var
-    //     return new IDNode(content);
+    //     return new Variable(content);
     //
     // }
     //
@@ -162,7 +162,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         List<Statement> statements = new ArrayList();
         ctx.block().statement().forEach(statementContext -> statements.add((Statement) visit(statementContext)));
 
-        return new FormNode(formId, statements);
+        return new Form(formId, statements);
     }
 
     @Override
@@ -171,7 +171,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String label = ctx.STRINGLITERAL().getText();
         Type type = (Type) visit(ctx.declaration().TYPE());
 
-        return new QuestionNode(id, label, type);
+        return new Question(id, label, type);
     }
 
     @Override
@@ -181,7 +181,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         Type type = (Type) visit(ctx.declaration().TYPE());
         Expression expression = (Expression) visit(ctx.expression());
 
-        return new ComputedQuestionNode(id, label, type, expression);
+        return new ComputedQuestion(id, label, type, expression);
     }
 
     @Override
@@ -193,9 +193,9 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         if (ctx.elseBlock() != null) {
             List<Statement> elseStatements = new ArrayList<>();
             ctx.elseBlock().block().statement().forEach(statementContext -> elseStatements.add((Statement) visit(statementContext)));
-            return new IfElseStatementNode(condition, statements, elseStatements);
+            return new IfElseStatement(condition, statements, elseStatements);
         } else {
-            return new IfStatementNode(condition, statements);
+            return new IfStatement(condition, statements);
         }
     }
 
@@ -204,9 +204,9 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String operator = ctx.unaryOperation().UNARY().getText();
         switch (operator) {
             case "-":
-                return new MinusNode((Expression) visit(ctx.unaryOperation().expression()));
+                return new ArithmeticNegation((Expression) visit(ctx.unaryOperation().expression()));
             case "!":
-                return new NegNode((Expression) visit(ctx.unaryOperation().expression()));
+                return new LogicalNegation((Expression) visit(ctx.unaryOperation().expression()));
             default:
                 throw new IllegalArgumentException(String.format("Invalid unary operator: %s", operator));
         }
@@ -220,13 +220,13 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String operator = ctx.ARITHMETIC().getText();
         switch (operator) {
             case "+":
-                return new AddNode(left, right);
+                return new Addition(left, right);
             case "-":
-                return new SubNode(left, right);
+                return new Subtraction(left, right);
             case "*":
-                return new MulNode(left, right);
+                return new Multiplication(left, right);
             case "/":
-                return new DivNode(left, right);
+                return new Division(left, right);
             default:
                 throw new IllegalArgumentException(String.format("Invalid arithmetic operator: %s", operator));
         }
@@ -240,9 +240,9 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String operator = ctx.LOGICAL().getText();
         switch (operator) {
             case "&&":
-                return new AndNode(left, right);
+                return new LogicalAnd(left, right);
             case "||":
-                return new OrNode(left, right);
+                return new LogicalOr(left, right);
             default:
                 throw new IllegalArgumentException(String.format("Invalid logical operator: %s", operator));
         }
@@ -256,17 +256,17 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String operator = ctx.RELATIONAL().getText();
         switch (operator) {
             case "<":
-                return new LtNode(left, right);
+                return new LessThan(left, right);
             case "<=":
-                return new LteNode(left, right);
+                return new LessThanEqual(left, right);
             case ">":
-                return new GtNode(left, right);
+                return new GreaterThan(left, right);
             case ">=":
-                return new GteNode(left, right);
+                return new GreaterThanEqual(left, right);
             case "==":
-                return new EqNode(left, right);
+                return new Equal(left, right);
             case "!=":
-                return new NeqNode(left, right);
+                return new NotEqual(left, right);
             default:
                 throw new IllegalArgumentException(String.format("Invalid relational operator: %s", operator));
         }
@@ -314,7 +314,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitIdentifier(QLParser.IdentifierContext ctx) {
-        return new IDNode(ctx.getText());
+        return new Variable(ctx.getText());
     }
 
 }

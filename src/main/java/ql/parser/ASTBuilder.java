@@ -5,7 +5,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import ql.QLLexer;
 import ql.QLParser;
-import ql.ast.FormNode;
+import ql.ast.Form;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,9 +13,9 @@ import java.nio.file.Paths;
 
 public class ASTBuilder {
 
-    public FormNode buildASTFromFile(String filePath) {
+    public Form buildASTFromFile(String filePath) {
         String formContent = loadFile(filePath);
-        FormNode form = buildASTFromString(formContent);
+        Form form = buildASTFromString(formContent);
 
         return form;
     }
@@ -30,7 +30,7 @@ public class ASTBuilder {
         return fileContent;
     }
 
-    public FormNode buildASTFromString(String formContent) {
+    public Form buildASTFromString(String formContent) {
         QLParser parser = createParser(formContent);
 
         // ParseTree parseTree = parser.form();
@@ -39,7 +39,7 @@ public class ASTBuilder {
 
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
         QLParser.FormContext formContext = parser.form();
-        FormNode form = (FormNode) astConstructionVisitor.visit(formContext);
+        Form form = (Form) astConstructionVisitor.visit(formContext);
 
         return form;
     }

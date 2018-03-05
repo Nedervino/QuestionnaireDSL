@@ -5,12 +5,12 @@ import ql.ast.visitors.StatementVisitor;
 
 import java.util.List;
 
-public class IfStatementNode extends Statement {
+public class IfStatement extends Statement {
 
     private Expression condition;
     private List<Statement> ifStatements;
 
-    public IfStatementNode(Expression condition, List<Statement> ifStatements) {
+    public IfStatement(Expression condition, List<Statement> ifStatements) {
         this.condition = condition;
         this.ifStatements = ifStatements;
     }

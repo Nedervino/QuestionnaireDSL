@@ -4,11 +4,11 @@ import ql.ast.expressions.Expression;
 
 import java.util.List;
 
-public class IfElseStatementNode extends IfStatementNode {
+public class IfElseStatement extends IfStatement {
 
     private List<Statement> elseStatements;
 
-    public IfElseStatementNode(Expression condition, List<Statement> ifStatements, List<Statement> elseStatements) {
+    public IfElseStatement(Expression condition, List<Statement> ifStatements, List<Statement> elseStatements) {
         super(condition, ifStatements);
         this.elseStatements = elseStatements;
     }

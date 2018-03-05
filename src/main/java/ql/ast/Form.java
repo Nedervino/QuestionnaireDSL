@@ -5,12 +5,12 @@ import ql.ast.visitors.FormVisitor;
 
 import java.util.List;
 
-public class FormNode extends ASTNode {
+public class Form extends ASTNode {
 
     private String formId;
     private List<Statement> statements;
 
-    public FormNode(String formId, List<Statement> statements) {
+    public Form(String formId, List<Statement> statements) {
         this.formId = formId;
         this.statements = statements;
     }

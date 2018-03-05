@@ -1,14 +1,14 @@
 package ql.ast.visitors;
 
-import ql.ast.statements.ComputedQuestionNode;
-import ql.ast.statements.IfStatementNode;
-import ql.ast.statements.QuestionNode;
+import ql.ast.statements.ComputedQuestion;
+import ql.ast.statements.IfStatement;
+import ql.ast.statements.Question;
 
 public interface StatementVisitor<T> {
 
-    T visit(IfStatementNode ifStatement);
+    T visit(IfStatement ifStatement);
 
-    T visit(QuestionNode question);
+    T visit(Question question);
 
-    T visit(ComputedQuestionNode computedQuestion);
+    T visit(ComputedQuestion computedQuestion);
 }

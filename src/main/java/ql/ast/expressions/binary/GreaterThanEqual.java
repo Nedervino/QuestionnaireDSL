@@ -1,12 +1,12 @@
-package ql.ast.expressions.unary;
+package ql.ast.expressions.binary;
 
 import ql.ast.expressions.Expression;
 import ql.ast.visitors.ExpressionVisitor;
 
-public class NegNode extends UnOpNode {
+public class GreaterThanEqual extends BinaryOperation {
 
-    public NegNode(Expression expression) {
-        super(expression);
+    public GreaterThanEqual(Expression left, Expression right) {
+        super(left, right);
     }
 
     @Override

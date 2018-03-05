@@ -1,9 +1,9 @@
 package ql.ast.visitors;
 
-import ql.ast.FormNode;
+import ql.ast.Form;
 
 public interface FormVisitor<T> {
 
-    T visit(FormNode formNode);
+    T visit(Form form);
 
 }

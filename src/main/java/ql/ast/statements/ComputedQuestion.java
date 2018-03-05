@@ -4,11 +4,11 @@ import ql.ast.expressions.Expression;
 import ql.ast.types.Type;
 import ql.ast.visitors.StatementVisitor;
 
-public class ComputedQuestionNode extends QuestionNode {
+public class ComputedQuestion extends Question {
 
     private Expression expr;
 
-    public ComputedQuestionNode(String id, String label, Type type, Expression expr) {
+    public ComputedQuestion(String id, String label, Type type, Expression expr) {
         super(id, label, type);
         this.expr = expr;
     }

@@ -1,6 +1,6 @@
 package ql;
 
-import ql.ast.FormNode;
+import ql.ast.Form;
 import ql.gui.FormView;
 import ql.parser.ASTBuilder;
 import ql.validator.Validator;
@@ -10,7 +10,7 @@ public class Main {
         String fileName = "src/input/ql/formIf.ql";
 
         ASTBuilder astBuilder = new ASTBuilder();
-        FormNode form = astBuilder.buildASTFromFile(fileName);
+        Form form = astBuilder.buildASTFromFile(fileName);
 
         Validator validator = new Validator();
         if (!validator.passesTypeChecks(form)) {

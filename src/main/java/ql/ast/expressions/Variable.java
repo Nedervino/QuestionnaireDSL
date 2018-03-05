@@ -2,11 +2,11 @@ package ql.ast.expressions;
 
 import ql.ast.visitors.ExpressionVisitor;
 
-public class IDNode extends Expression {
+public class Variable extends Expression {
 
     private final String content;
 
-    public IDNode(String content) {
+    public Variable(String content) {
         this.content = content;
     }
 
