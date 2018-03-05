@@ -38,9 +38,6 @@ public interface ExpressionVisitor<T> {
 
     T visit(MinusNode minusNode);
 
-    // Values
-    T visit(IDNode idNode);
-
     //Literals
     T visit(StringLiteral stringLiteral);
 
@@ -53,5 +50,8 @@ public interface ExpressionVisitor<T> {
     T visit(DecimalLiteral decimalLiteral);
 
     T visit(MoneyLiteral moneyLiteral);
+
+    // Identifier
+    T visit(IDNode idNode);
 
 }

@@ -2,7 +2,7 @@ package ql.ast.visitors;
 
 import ql.ast.FormNode;
 
-public interface BaseVisitor<T> {
+public interface FormVisitor<T> {
 
     T visit(FormNode formNode);
 

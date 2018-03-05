@@ -1,11 +1,11 @@
 package ql.gui;
 
-import ql.ast.ASTVisitor;
+import ql.ast.BaseASTVisitor;
 import ql.ast.FormNode;
 import ql.ast.statements.ComputedQuestionNode;
 import ql.ast.statements.QuestionNode;
 
-public class RenderVisitor extends ASTVisitor<String> {
+public class RenderVisitor extends BaseASTVisitor<String> {
 
     FormView formView;
 

@@ -1,8 +1,8 @@
 package ql.typechecker;
 
-import ql.ast.ASTVisitor;
+import ql.ast.BaseASTVisitor;
 
-public class TypeCheckVisitor extends ASTVisitor<TypeCheckNode> {
+public class TypeCheckVisitor extends BaseASTVisitor<TypeCheckNode> {
 
     // HashMap<String, TypeCheckNode.Type> varsDeclared;
     //
