@@ -1,8 +1,8 @@
-package ql.typechecker;
+package ql.validator;
 
 import ql.ast.ASTNode;
 
-public class TypeChecker {
+public class Validator {
 
     public boolean passesTypeChecks(ASTNode form) {
 

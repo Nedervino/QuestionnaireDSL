@@ -3,7 +3,7 @@ package ql;
 import ql.ast.FormNode;
 import ql.gui.FormView;
 import ql.parser.ASTBuilder;
-import ql.typechecker.TypeChecker;
+import ql.validator.Validator;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,8 +12,8 @@ public class Main {
         ASTBuilder astBuilder = new ASTBuilder();
         FormNode form = astBuilder.buildASTFromFile(fileName);
 
-        TypeChecker typeChecker = new TypeChecker();
-        if (!typeChecker.passesTypeChecks(form)) {
+        Validator validator = new Validator();
+        if (!validator.passesTypeChecks(form)) {
             System.err.println("Form not passing type checks.");
         }
 
