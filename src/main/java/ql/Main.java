@@ -11,7 +11,7 @@ public class Main {
 
         ASTBuilder astBuilder = new ASTBuilder();
         Form form = astBuilder.buildASTFromFile(fileName);
-        
+
         Validator validator = new Validator();
         if (!validator.passesTypeChecks(form)) {
             System.err.println("Form not passing validation");

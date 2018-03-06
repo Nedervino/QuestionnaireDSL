@@ -1,6 +1,5 @@
 package ql.validator;
 
-import ql.ast.ASTNode;
 import ql.ast.Form;
 
 public class Validator {
@@ -22,18 +21,18 @@ public class Validator {
         //Check reference to undefined questions
         //Check duplicate question declarations with different types
         //Check duplicate labels (Print warning instead of exception)
-        if(!questionDuplicationChecker.passesTests(form, symbolTable)) {
+        if (!questionDuplicationChecker.passesTests(form, symbolTable)) {
             return false;
         }
 
         //Check conditions that are not of the type boolean
         //Check operands of invalid type to operators
-        if(!expressionChecker.passesTests(form, symbolTable)) {
+        if (!expressionChecker.passesTests(form, symbolTable)) {
             return false;
         }
 
         //Check cyclic dependencies between questions
-        if(!cyclicDependencyChecker.passesTests(form)) {
+        if (!cyclicDependencyChecker.passesTests(form)) {
             return false;
         }
 

@@ -168,7 +168,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
     public ASTNode visitDateLiteral(QLParser.DateLiteralContext ctx) {
         try {
             return new DateLiteral(ctx.getText());
-        } catch  (ParseException e) {
+        } catch (ParseException e) {
             throw new IllegalArgumentException(String.format("Invalid date: %s", ctx.getText()));
         }
     }

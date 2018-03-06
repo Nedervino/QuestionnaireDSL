@@ -48,18 +48,6 @@ public class FormView extends JPanel {
         }
     }
 
-    static class Wrapper {
-
-        String varName;
-        GUIElement element;
-
-        public Wrapper(String varName, GUIElement element) {
-            this.varName = varName;
-            this.element = element;
-        }
-
-    }
-
     private void init() {
         JFrame frame = new JFrame("Form Viewer");
         JPanel panel = this;
@@ -72,6 +60,18 @@ public class FormView extends JPanel {
 
     public void addElement(String name, GUIElement element) {
         elements.add(new Wrapper(name, element));
+    }
+
+    static class Wrapper {
+
+        String varName;
+        GUIElement element;
+
+        public Wrapper(String varName, GUIElement element) {
+            this.varName = varName;
+            this.element = element;
+        }
+
     }
 
 }

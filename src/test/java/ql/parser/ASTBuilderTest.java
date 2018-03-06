@@ -10,13 +10,13 @@ public class ASTBuilderTest {
 
     private ASTBuilder astBuilder;
 
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
+
     @Before
     public void setUp() throws Exception {
         astBuilder = new ASTBuilder();
     }
-
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
 
     @Test(expected = ParseCancellationException.class)
     public void throwsParseCancellationExceptionForParseErrors() {

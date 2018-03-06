@@ -2,7 +2,7 @@ package ql.ast.types;
 
 import ql.ast.visitors.TypeVisitor;
 
-public class DateType extends Type{
+public class DateType extends Type {
 
     @Override
     public String toString() {
