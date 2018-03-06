@@ -8,7 +8,11 @@ public class MoneyLiteral extends Expression {
     private final double value;
 
     public MoneyLiteral(String value) {
-        this.value = Double.parseDouble(value);
+        this.value = Double.parseDouble(value.replace(',','.'));
+    }
+
+    public double getValue() {
+        return value;
     }
 
     @Override

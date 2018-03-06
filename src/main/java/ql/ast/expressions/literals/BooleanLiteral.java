@@ -11,6 +11,10 @@ public class BooleanLiteral extends Expression {
         this.value = Boolean.parseBoolean(value);
     }
 
+    public Boolean getValue() {
+        return value;
+    }
+
     @Override
     public <T> T accept(ExpressionVisitor<T> visitor) {
         return visitor.visit(this);

@@ -4,14 +4,14 @@ import ql.ast.visitors.ExpressionVisitor;
 
 public class Variable extends Expression {
 
-    private final String content;
+    private final String value;
 
-    public Variable(String content) {
-        this.content = content;
+    public Variable(String value) {
+        this.value = value;
     }
 
-    public String getContent() {
-        return content;
+    public String toString() {
+        return value;
     }
 
     @Override

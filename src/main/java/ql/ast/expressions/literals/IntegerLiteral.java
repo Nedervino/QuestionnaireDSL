@@ -11,6 +11,10 @@ public class IntegerLiteral extends Expression {
         this.value = Integer.parseInt(value);
     }
 
+    public int getValue() {
+        return value;
+    }
+
     @Override
     public <T> T accept(ExpressionVisitor<T> visitor) {
         return visitor.visit(this);

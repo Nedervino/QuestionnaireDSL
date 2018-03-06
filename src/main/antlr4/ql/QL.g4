@@ -64,7 +64,7 @@ DIGIT           : ('0'..'9');
 BOOLEANLITERAL  : ('true' | 'false');
 INTEGERLITERAL  : DIGIT+;
 STRINGLITERAL   : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
-MONEYLITERAL    : '-'? DIGIT+ '.' DIGIT DIGIT;
+MONEYLITERAL    : '-'? DIGIT+ ',' DIGIT DIGIT;
 DECIMALLITERAL  : '-'? DIGIT+ '.' DIGIT+;
 DATELITERAL     : DIGIT DIGIT '-' DIGIT DIGIT '-' DIGIT DIGIT DIGIT DIGIT;
 

@@ -11,6 +11,10 @@ public class DecimalLiteral extends Expression {
         this.value = Double.parseDouble(value);
     }
 
+    public double getValue() {
+        return value;
+    }
+
     @Override
     public <T> T accept(ExpressionVisitor<T> visitor) {
         return visitor.visit(this);

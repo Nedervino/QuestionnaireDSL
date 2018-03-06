@@ -18,6 +18,10 @@ public class DateLiteral extends Expression {
         this.value = dateFormat.parse(value);
     }
 
+    public Date getValue() {
+        return value;
+    }
+
     @Override
     public <T> T accept(ExpressionVisitor<T> visitor) {
         return visitor.visit(this);
