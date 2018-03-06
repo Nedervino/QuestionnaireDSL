@@ -18,6 +18,8 @@ public abstract class ASTNode {
         return this.line;
     }
 
-    public int getColumn() { return this.column;}
+    public int getColumn() {
+        return this.column;
+    }
 
 }

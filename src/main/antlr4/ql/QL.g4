@@ -4,7 +4,7 @@ grammar QL;
 
 TODO:
 - Refactor lexer/parser division
-- Reconsider money / decimal separation
+- Remove MONEY / DECIMAL ambiguity (add money-specific symbol?)
 - Implement DATE type
 - replace "INT" in the line valNum with INT | DECIMAL | MONEY_LITERAL to allow using numericals interchangeably (?)
 
@@ -22,7 +22,7 @@ statement       : question
 
 
 question        : STRINGLITERAL declaration;
-declaration     : IDENTIFIER ':' TYPE;
+declaration     : IDENTIFIER ':' type;
 
 computedQuestion: STRINGLITERAL declaration '=' expression;
 
@@ -50,7 +50,13 @@ value           : BOOLEANLITERAL                                #booleanLiteral
                 ;
 
 
-TYPE            : ('boolean' | 'money' | 'int' | 'float' | 'string');
+type            : 'boolean'                                     #booleanType
+                | 'integer'                                     #integerType
+                | 'string'                                      #stringType
+                | 'money'                                       #moneyType
+                | 'decimal'                                     #decimalType
+                | 'date'                                        #dateType
+                ;
 
 DIGIT           : ('0'..'9');
 

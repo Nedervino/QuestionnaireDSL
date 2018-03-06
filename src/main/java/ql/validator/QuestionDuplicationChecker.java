@@ -13,8 +13,8 @@ import java.util.Set;
  */
 public class QuestionDuplicationChecker implements FormVisitor<Void>, StatementVisitor<Void> {
 
-    private SymbolTable symbolTable;
     private final Set<String> questionLabels;
+    private SymbolTable symbolTable;
 
     public QuestionDuplicationChecker() {
         questionLabels = new HashSet<>();
@@ -30,7 +30,7 @@ public class QuestionDuplicationChecker implements FormVisitor<Void>, StatementV
 
     @Override
     public Void visit(Form form) {
-        for(Statement statement : form.getStatements()) {
+        for (Statement statement : form.getStatements()) {
             statement.accept(this);
         }
         return null;
@@ -38,7 +38,7 @@ public class QuestionDuplicationChecker implements FormVisitor<Void>, StatementV
 
     @Override
     public Void visit(IfStatement ifStatement) {
-        for(Statement statement : ifStatement.getIfStatements()) {
+        for (Statement statement : ifStatement.getIfStatements()) {
             statement.accept(this);
         }
         return null;
@@ -46,10 +46,10 @@ public class QuestionDuplicationChecker implements FormVisitor<Void>, StatementV
 
     @Override
     public Void visit(IfElseStatement ifElseStatement) {
-        for(Statement statement : ifElseStatement.getIfStatements()) {
+        for (Statement statement : ifElseStatement.getIfStatements()) {
             statement.accept(this);
         }
-        for(Statement statement : ifElseStatement.getElseStatements()) {
+        for (Statement statement : ifElseStatement.getElseStatements()) {
             statement.accept(this);
         }
         return null;
