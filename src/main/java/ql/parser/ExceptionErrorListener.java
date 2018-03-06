@@ -5,6 +5,9 @@ import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
 import org.antlr.v4.runtime.misc.ParseCancellationException;
 
+/**
+ * Adds a catchable exception to default ANTLR exception
+ */
 public class ExceptionErrorListener extends BaseErrorListener {
 
     @Override

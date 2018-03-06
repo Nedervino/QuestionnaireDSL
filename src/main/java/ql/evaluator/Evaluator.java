@@ -1,8 +1,6 @@
 package ql.evaluator;
 
-import ql.ast.BaseASTVisitor;
-
-public class Evaluator extends BaseASTVisitor<EvaluationNode> {
+public class Evaluator {
 
     //GUI shows current state, with text boxes where relevant
 
@@ -13,6 +11,5 @@ public class Evaluator extends BaseASTVisitor<EvaluationNode> {
     //after passing the type check, this will call to evaluator
 
     //evaluator updates the current state, and validates it. The GUI is then invalidated. (or do this invalidation call at the start which sets everything in motion)
-
 
 }

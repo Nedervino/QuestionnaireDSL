@@ -5,6 +5,10 @@ import ql.ast.types.Type;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * Storage for encountered identifiers and their datatypes
+ */
 public class SymbolTable {
 
     private final Map<String, Type> table;

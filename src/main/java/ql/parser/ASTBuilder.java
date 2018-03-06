@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * This parses a QL input file using ANTLR, and creates a custom AST
+ */
 public class ASTBuilder {
 
     public Form buildASTFromFile(String filePath) {

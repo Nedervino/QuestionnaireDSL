@@ -8,6 +8,9 @@ import ql.ast.visitors.StatementVisitor;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Checks AST for question duplications, giving errors for duplicate identifiers and warnings for duplicate labels
+ */
 public class QuestionDuplicationChecker implements FormVisitor<Void>, StatementVisitor<Void> {
 
     private SymbolTable symbolTable;
