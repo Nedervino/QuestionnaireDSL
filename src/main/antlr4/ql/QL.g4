@@ -4,8 +4,7 @@ grammar QL;
 
 TODO:
 - Refactor lexer/parser division
-- Remove MONEY / DECIMAL ambiguity (add money-specific symbol?)
-- Implement DATE type
+- Remove MONEY / DECIMAL ambiguity (add money-specific symbols in front such as $ ?)
 - replace "INT" in the line valNum with INT | DECIMAL | MONEY_LITERAL to allow using numericals interchangeably (?)
 
 */
@@ -58,7 +57,7 @@ type            : 'boolean'                                     #booleanType
                 | 'date'                                        #dateType
                 ;
 
-DIGIT           : ('0'..'9');
+
 
 //Literals
 BOOLEANLITERAL  : ('true' | 'false');
@@ -68,9 +67,8 @@ MONEYLITERAL    : '-'? DIGIT+ ',' DIGIT DIGIT;
 DECIMALLITERAL  : '-'? DIGIT+ '.' DIGIT+;
 DATELITERAL     : DIGIT DIGIT '-' DIGIT DIGIT '-' DIGIT DIGIT DIGIT DIGIT;
 
-
 IDENTIFIER      : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
-
+DIGIT           : [0-9];
 
 //Binary Operators
 ARITHMETIC      : ('+'|'-'|'/'|'*');

@@ -19,25 +19,58 @@ public class ASTBuilderTest {
     }
 
     @Test(expected = ParseCancellationException.class)
-    public void throwsParseCancellationExceptionForParseErrors() {
-        astBuilder.buildASTFromFile("src/input/ql/formError.ql");
-        // exception.expect(ParseCancellationException.class);
+    public void throwsParseCancellationExceptionForMissingQuote() {
+        astBuilder.buildASTFromFile("src/input/ql/incorrect/missingClosingQuote.ql");
+    }
+
+    @Test(expected = ParseCancellationException.class)
+    public void throwsParseCancellationExceptionForMissingCurlyBracket() {
+        astBuilder.buildASTFromFile("src/input/ql/incorrect/missingClosingCurlyBracket.ql");
     }
 
     @Test
     public void canParseSimpleForm() {
-        astBuilder.buildASTFromFile("src/input/ql/formSimple.ql");
+        astBuilder.buildASTFromFile("src/input/ql/correct/simple.ql");
     }
 
     @Test
     public void canParseIfBlocks() {
-        astBuilder.buildASTFromFile("src/input/ql/formIf.ql");
+        astBuilder.buildASTFromFile("src/input/ql/correct/if.ql");
     }
 
     @Test
     public void canParseIfElseBlocks() {
-        astBuilder.buildASTFromFile("src/input/ql/formIfElse.ql");
+        astBuilder.buildASTFromFile("src/input/ql/correct/ifElse.ql");
     }
 
+    @Test
+    public void canParseMultipleNests() {
+        astBuilder.buildASTFromFile("src/input/ql/correct/nestedExpressions.ql");
+    }
+
+    @Test
+    public void canParseSingleLineComments() {
+        astBuilder.buildASTFromFile("src/input/ql/correct/singleLineComment.ql");
+    }
+
+    @Test
+    public void canParseMultiLineComments() {
+        astBuilder.buildASTFromFile("src/input/ql/correct/multiLineComment.ql");
+    }
+
+    @Test
+    public void canParseLogicalOperators() {
+        astBuilder.buildASTFromFile("src/input/ql/correct/logicalExpressions.ql");
+    }
+
+    @Test
+    public void canParseArithmeticOperators() {
+        astBuilder.buildASTFromFile("src/input/ql/correct/arithmeticExpressions.ql");
+    }
+
+    @Test
+    public void canParseComparisonOperators() {
+        astBuilder.buildASTFromFile("src/input/ql/correct/comparisonExpressions.ql");
+    }
 
 }
