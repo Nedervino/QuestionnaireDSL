@@ -4,6 +4,6 @@ import java.util.HashMap;
 
 public class FormState {
 
-    HashMap<String, Object> varValues;
+    HashMap<String, Object> values;
 
 }

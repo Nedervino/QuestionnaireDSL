@@ -1,6 +1,5 @@
 package ql.parser;
 
-
 import ql.QLBaseVisitor;
 import ql.QLParser;
 import ql.ast.ASTNode;
@@ -23,138 +22,6 @@ import java.util.List;
 //for boolean and strings. With booleans, we might have fiddle with the comparisons to make sure they are recognized as boolean expressions.
 
 public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
-
-    // public ASTNode visitTerminal(TerminalNode node) {
-    //
-    //     String content = node.getText();
-    //
-    //
-    //     String[] irrelevant = new String[]{
-    //             "form",
-    //             "{",
-    //             "}",
-    //             ":",
-    //             "if",
-    //     };
-    //
-    //     for(String str : irrelevant){
-    //         if(content.equals(str)){
-    //             return null;
-    //         }
-    //     }
-    //
-    //     String[] op = new String[]{
-    //             "!",
-    //             "(",
-    //             ")",
-    //             "-",
-    //             "&&",
-    //             "||",
-    //             "==",
-    //             "!=",
-    //             "<",
-    //             ">",
-    //             "<=",
-    //             "=>",
-    //             "+",
-    //             "*",
-    //             "/"
-    //     };
-    //
-    //     for(String str : op){
-    //         if(content.equals(str)){
-    //             return new OpSymHelperNode(content);
-    //         }
-    //     }
-    //
-    //     //check whether the terminal is an int or some other numeric value.
-    //     if(isInt(content)){
-    //         return new ValNode(content);
-    //     }
-    //     else if(isMoney(content)){
-    //         return new ValNode(content);
-    //     }
-    //     else if(isFloat(content)){
-    //         return new ValNode(content);
-    //     }
-    //
-    //     //Keywords with semantic value
-    //     switch (content) {
-    //         case "true":{
-    //             return new ValNode(content);
-    //         }
-    //         case "false":{
-    //             return new ValNode(content);
-    //         }
-    //         case "boolean": {
-    //             return new TypeNode(content);
-    //         }
-    //         case "money": {
-    //             return new TypeNode(content);
-    //         }
-    //         case "int": {
-    //             return new TypeNode(content);
-    //         }
-    //         case "float": {
-    //             return new TypeNode(content);
-    //         }
-    //         case "string": {
-    //             return new TypeNode(content);
-    //         }
-    //     }
-    //
-    //     //String literal check
-    //     if(content.substring(0, 1).equals("\"")) {
-    //         return new ValNode(content.substring(1, content.length()-1));
-    //     }
-    //
-    //     //Anything else was a var
-    //     return new Variable(content);
-    //
-    // }
-    //
-    // public static boolean isFloat(String str) {
-    //     try {
-    //         Double.parseDouble(str);
-    //     }
-    //     catch(NumberFormatException nfe) {
-    //         return false;
-    //     }
-    //     return true;
-    // }
-    //
-    // //TODO Add a distinct function for money.
-    // public static boolean isMoney(String str){
-    //     return isFloat(str);
-    // }
-    //
-    // public static boolean isInt(String str){
-    //     try {
-    //         Integer.parseInt(str);
-    //     }
-    //     catch(NumberFormatException nfe) {
-    //         return false;
-    //     }
-    //     return true;
-    // }
-    //
-    //
-    // @Override
-    // protected ASTNode defaultResult() {
-    //     return null;   //This use of ASTNode should be eliminated, by creating a class for each type of node.
-    // }
-    //
-    // //aggregate is the tree which the parent is constructing
-    // //nextResult should be the child node
-    // //This method should add the node to the parent's child list
-    // @Override
-    // protected ASTNode aggregateResult(ASTNode aggregate, ASTNode nextResult) {
-    //     if(nextResult==null){
-    //         return aggregate;
-    //     }
-    //     aggregate.children.add(nextResult);
-    //     return aggregate;
-    // }
 
     @Override
     public ASTNode visitForm(QLParser.FormContext ctx) {
@@ -271,12 +138,6 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
                 throw new IllegalArgumentException(String.format("Invalid relational operator: %s", operator));
         }
     }
-
-    // @Override
-    // public ASTNode visitNestedExpression(QLParser.NestedExpressionContext ctx) {
-    //     return super.visitNestedExpression(ctx);
-    // }
-
 
     @Override
     public ASTNode visitBooleanLiteral(QLParser.BooleanLiteralContext ctx) {
