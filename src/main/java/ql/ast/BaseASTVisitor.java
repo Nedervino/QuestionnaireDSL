@@ -7,6 +7,7 @@ import ql.ast.expressions.literals.*;
 import ql.ast.expressions.unary.ArithmeticNegation;
 import ql.ast.expressions.unary.LogicalNegation;
 import ql.ast.statements.ComputedQuestion;
+import ql.ast.statements.IfElseStatement;
 import ql.ast.statements.IfStatement;
 import ql.ast.statements.Question;
 import ql.ast.types.*;
@@ -27,6 +28,11 @@ public class BaseASTVisitor<T> implements ExpressionVisitor<T>, StatementVisitor
 
     @Override
     public T visit(IfStatement ifStatement) {
+        return null;
+    }
+
+    @Override
+    public T visit(IfElseStatement ifStatement) {
         return null;
     }
 
