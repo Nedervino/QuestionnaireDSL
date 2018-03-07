@@ -1,4 +1,17 @@
 package ql.gui;
 
-public class GUIElement {
+import java.awt.*;
+
+public abstract class GUIElement {
+
+    int yLoc;
+    int height;
+
+    public GUIElement(int pointer){
+        this.yLoc = pointer;
+        height = 30;
+    }
+
+    public abstract void render(Graphics g);
+
 }

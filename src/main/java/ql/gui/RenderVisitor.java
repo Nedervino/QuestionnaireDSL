@@ -8,51 +8,44 @@ import ql.ast.statements.Question;
 import ql.ast.visitors.FormVisitor;
 import ql.ast.visitors.StatementVisitor;
 
-public class RenderVisitor implements FormVisitor<String>, StatementVisitor<String> {
+public class RenderVisitor implements FormVisitor<Void>, StatementVisitor<Void> {
 
-    FormView formView;
+        FormViewer formViewer;
+        int pointer = 100;
 
-    public RenderVisitor(FormView formView) {
-        this.formView = formView;
-    }
+        public RenderVisitor(FormViewer formViewer){
+            this.formViewer = formViewer;
+        }
 
-    @Override
-    public String visit(Form form) {
-        //Identify the form name
-        String formName = form.getFormId();
-
-        formView.addElement(formName, new GUIElement());
-        // visit(form);
-        return null;
-    }
-
+        @Override public Void visit(Form node) {
+            GUIElement element = new FormElement(node, pointer);
+            formViewer.addElement(element);
+            pointer+=element.height;
+            return null;
+        }
 
     @Override
-    public String visit(IfStatement ifStatement) {
-        return null;
-    }
-
-    @Override
-    public String visit(IfElseStatement ifElseStatement) {
-        return null;
-    }
-
-    //Identify the variable name which belongs to this question
-    //Find the declaration part of the question
-    @Override
-    public String visit(Question question) {
-        String varName = question.getId();
-
-        formView.addElement(varName, new GUIElement());
+    public Void visit(IfStatement ifStatement) {
         return null;
     }
 
     @Override
-    public String visit(ComputedQuestion computedQuestionNode) {
-        String varName = computedQuestionNode.getId();
-
-        formView.addElement(varName, new GUIElement());
+    public Void visit(IfElseStatement ifElseStatement) {
         return null;
     }
+
+    @Override public Void visit(Question node) {
+            GUIElement element = new QuestionElement(node, pointer, formViewer, formViewer.evaluator);
+            formViewer.addElement(element);
+            pointer+=element.height;
+            return null;
+        }
+
+        @Override public Void visit(ComputedQuestion node) {
+            GUIElement element = new ComputedQuestionElement(node, pointer, formViewer.evaluator);
+            formViewer.addElement(element);
+            pointer+=element.height;
+            return null;
+        }
 
 }
