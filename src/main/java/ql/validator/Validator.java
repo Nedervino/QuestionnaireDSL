@@ -11,12 +11,14 @@ public class Validator {
     private QuestionDuplicationChecker questionDuplicationChecker;
     private ExpressionChecker expressionChecker;
     private CyclicDependencyChecker cyclicDependencyChecker;
+    private UndeclaredVariableChecker undeclaredVariableChecker;
     private SymbolTable symbolTable;
 
     public Validator() {
         questionDuplicationChecker = new QuestionDuplicationChecker();
         expressionChecker = new ExpressionChecker();
         cyclicDependencyChecker = new CyclicDependencyChecker();
+        undeclaredVariableChecker = new UndeclaredVariableChecker();
         symbolTable = new SymbolTable();
     }
 
@@ -24,6 +26,11 @@ public class Validator {
 
         //Check for duplicate question identifiers and labels
         if (!questionDuplicationChecker.passesTests(form, symbolTable)) {
+            return false;
+        }
+
+        //Check for references to variables which were never declared.
+        if(!undeclaredVariableChecker.passesTests(form, symbolTable)) {
             return false;
         }
 

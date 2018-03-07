@@ -1,58 +1,39 @@
 package ql.gui;
 
-import ql.ast.Form;
-import ql.ast.statements.ComputedQuestion;
-import ql.ast.statements.IfElseStatement;
-import ql.ast.statements.IfStatement;
-import ql.ast.statements.Question;
-import ql.ast.visitors.FormVisitor;
-import ql.ast.visitors.StatementVisitor;
+import ql.ast.ASTVisitor;
+import ql.ast.FormNode;
+import ql.ast.statements.ComputedQuestionNode;
+import ql.ast.statements.QuestionNode;
 
-public class RenderVisitor implements FormVisitor<String>, StatementVisitor<String> {
+public class RenderVisitor extends ASTVisitor {
 
-    FormView formView;
+        FormView formView;
+        int pointer = 100;
 
-    public RenderVisitor(FormView formView) {
-        this.formView = formView;
-    }
+        public RenderVisitor(FormView formView){
+            this.formView = formView;
+        }
 
-    @Override
-    public String visit(Form form) {
-        //Identify the form name
-        String formName = form.getFormId();
+        @Override public Object visitForm(FormNode node) {
+            GUIElement element = new FormElement(node, pointer);
+            formView.addElement(element);
+            pointer+=element.height;
+            super.visitForm(node);
+            return null;
+        }
 
-        formView.addElement(formName, new GUIElement());
-        // visit(form);
-        return null;
-    }
+        @Override public Object visitQuestion(QuestionNode node) {
+            GUIElement element = new QuestionElement(node, pointer, formView);
+            formView.addElement(element);
+            pointer+=element.height;
+            return null;
+        }
 
-
-    @Override
-    public String visit(IfStatement ifStatement) {
-        return null;
-    }
-
-    @Override
-    public String visit(IfElseStatement ifElseStatement) {
-        return null;
-    }
-
-    //Identify the variable name which belongs to this question
-    //Find the declaration part of the question
-    @Override
-    public String visit(Question question) {
-        String varName = question.getId();
-
-        formView.addElement(varName, new GUIElement());
-        return null;
-    }
-
-    @Override
-    public String visit(ComputedQuestion computedQuestionNode) {
-        String varName = computedQuestionNode.getId();
-
-        formView.addElement(varName, new GUIElement());
-        return null;
-    }
+        @Override public Object visitComputedQuestion(ComputedQuestionNode node) {
+            GUIElement element = new ComputedQuestionElement(node, pointer, formView.evaluator);
+            formView.addElement(element);
+            pointer+=element.height;
+            return null;
+        }
 
 }

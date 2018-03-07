@@ -22,12 +22,12 @@ public class TreeView {
     private void visualiseTree(QLParser parser, ParseTree parseTree) {
         JFrame frame = new JFrame("ql.ast Visualisation");
         JPanel panel = new JPanel();
-        org.antlr.v4.gui.TreeViewer viewer = new org.antlr.v4.gui.TreeViewer(Arrays.asList(parser.getRuleNames()), parseTree);
+        org.antlr.v4.gui.TreeViewer viewer = new org.antlr.v4.gui.TreeViewer(Arrays.asList(parser.getRuleNames()),parseTree);
         viewer.setScale(0.8);//scale a little
         panel.add(viewer);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
-        frame.setSize(1400, 400);
+        frame.setSize(1400,400);
         frame.setVisible(true);
     }
 
