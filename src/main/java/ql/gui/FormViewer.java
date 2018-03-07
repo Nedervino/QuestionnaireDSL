@@ -1,6 +1,7 @@
 package ql.gui;
 
 import ql.ast.ASTNode;
+import ql.ast.Form;
 import ql.evaluator.Evaluator;
 
 import javax.swing.*;
@@ -8,17 +9,17 @@ import java.awt.*;
 import java.util.LinkedList;
 
 
-public class FormView extends JPanel{
+public class FormViewer extends JPanel{
 
     Evaluator evaluator;
     LinkedList<GUIElement> elements;
 
-    public FormView(Evaluator evaluator){
+    public FormViewer(Evaluator evaluator){
         elements = new LinkedList<>();
     }
 
 
-    public void start(ASTNode node) {
+    public void start(Form node) {
         init();
 
         RenderVisitor visitor = new RenderVisitor(this);

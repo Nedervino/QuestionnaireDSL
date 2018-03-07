@@ -1,21 +1,21 @@
 package ql.gui;
 
-import ql.ast.FormNode;
+import ql.ast.Form;
 
 import java.awt.*;
 
 public class FormElement extends GUIElement {
 
-    FormNode node;
+    Form node;
 
-    public FormElement(FormNode node, int yLoc) {
+    public FormElement(Form node, int yLoc) {
         super(yLoc);
         this.node = node;
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawString(node.getId(), 30, yLoc);
+        g.drawString(node.getFormId(), 30, yLoc);
         yLoc +=30;
     }
 

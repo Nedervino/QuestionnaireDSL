@@ -2,7 +2,7 @@ package ql;
 
 import ql.ast.Form;
 import ql.evaluator.Evaluator;
-import ql.gui.FormView;
+import ql.gui.FormViewer;
 import ql.parser.ASTBuilder;
 import ql.validator.Validator;
 
@@ -28,7 +28,7 @@ public class Main {
         Evaluator evaluator = new Evaluator();
         evaluator.start(form);
 
-        FormView formViewer = new FormView(evaluator);
+        FormViewer formViewer = new FormViewer(evaluator);
         formViewer.start(form);
     }
 

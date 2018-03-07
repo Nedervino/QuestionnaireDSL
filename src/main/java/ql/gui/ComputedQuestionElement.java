@@ -1,16 +1,16 @@
 package ql.gui;
 
-import ql.ast.statements.ComputedQuestionNode;
+import ql.ast.statements.ComputedQuestion;
 import ql.evaluator.Evaluator;
 
 import java.awt.*;
 
 public class ComputedQuestionElement extends GUIElement {
 
-    ComputedQuestionNode node;
+    ComputedQuestion node;
     Evaluator evaluator;
 
-    public ComputedQuestionElement(ComputedQuestionNode node, int yLoc, Evaluator evaluator) {
+    public ComputedQuestionElement(ComputedQuestion node, int yLoc, Evaluator evaluator) {
         super(yLoc);
         this.node = node;
         this.evaluator = evaluator;

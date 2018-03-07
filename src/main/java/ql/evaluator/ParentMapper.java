@@ -1,5 +1,6 @@
 package ql.evaluator;
 
+import ql.ast.ASTNode;
 import ql.ast.Form;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
@@ -13,18 +14,18 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ReferenceMapVisitor implements FormVisitor<Void>, ExpressionVisitor<Void> {
+public class ParentMapper implements FormVisitor<Void>, ExpressionVisitor<Void> {
 
-    HashMap<String, List<Variable>> referenceMap;
+    HashMap<ASTNode, ASTNode> parentMap;
 
-    public ReferenceMapVisitor(){
-        referenceMap = new HashMap<>();
+    public ParentMapper(){
+        parentMap = new HashMap<>();
     }
 
-    public HashMap<String, List<Variable>> getMap(Form form){
+    public HashMap<ASTNode, ASTNode> getMap(Form form){
         visit(form);
 
-        return referenceMap;
+        return parentMap;
     }
 
     @Override
@@ -129,18 +130,6 @@ public class ReferenceMapVisitor implements FormVisitor<Void>, ExpressionVisitor
 
     @Override
     public Void visit(Variable node){
-        String varName = node.toString();
-
-        List<Variable> referenceList;
-        if(!referenceMap.containsKey(varName)) {
-            referenceList = new LinkedList();
-            referenceMap.put(varName, referenceList);
-        }
-        else{
-            referenceList = referenceMap.get(varName);
-        }
-        referenceList.add(node);
-
         return null;
     }
 

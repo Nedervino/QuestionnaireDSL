@@ -1,10 +1,13 @@
 package ql.evaluator;
 
+import ql.ast.ASTNode;
 import ql.ast.Form;
 import ql.ast.expressions.Expression;
 import ql.ast.expressions.Variable;
+import ql.ast.statements.ComputedQuestion;
+import ql.ast.statements.IfStatement;
 import ql.ast.statements.Question;
-import ql.gui.FormView;
+import ql.gui.FormViewer;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,28 +18,38 @@ import java.util.List;
 
 public class Evaluator {
 
-    FormView formView;
-    HashMap<Question, String> storedValue;
+    FormViewer formViewer;
+    HashMap<ASTNode, String> storedValues;
     HashMap<String, List<Variable>> referenceMap;
+    HashMap<ASTNode, ASTNode> parentMap;
+    boolean repaintFlag;
 
-    public void setFormView(FormView formView){
-        this.formView = formView;
-    }
 
     public void update(Question node, String value) {
-
         //Recognize whether answers to question match the declared type
 
         //Update what value is stored at this node in the current state
-        storedValue.put(node, value);
+        repaintFlag = false;
+        storedValues.put(node, value);
         evaluate(node);
 
-
         //repaint the GUI
-        formView.repaint();
+        //TODO only repaint the gui when computedQuestions or IfStatements'expressions have different evaluations than before
+        if(repaintFlag) {
+            formViewer.repaint();
+        }
     }
 
     private void evaluate(Question node) {
+        evaluateQuestion(node);
+    }
+
+    private void evaluate(ComputedQuestion node) {
+        //If all variables are known at the point of evaluation, set the repaint Flag to true, as we will actually store a value for this expression now.
+        evaluateQuestion(node);
+    }
+
+    private void evaluateQuestion(Question node) {
         //Call the evaluator to calculate the new values of the referring nodes, and their parents. Deposit these in the Evaluator object.
         String varName = node.getId();
         List<Variable> referringNodes = referenceMap.get(varName);
@@ -44,18 +57,31 @@ public class Evaluator {
         //then we evaluate its parent. This will be an overloaded method. When it encounters expressions it evaluates and stores their results.
         //When it encounters a computedQuestion parent, it will look up the referring nodes for that node, and call evaluate that node and it's parents,
         //until all necessary parents have been evaluated.
+
+        String value = storedValues.get(node);
+        for(Variable referringNode : referringNodes){
+            storedValues.put(referringNode, value);
+            evaluate(referringNode);
+        }
+
     }
 
-    private void evaluate(Expression node){
+    private void evaluate(Expression node) {
+
+    }
+
+    private void evaluate(IfStatement node) {
 
     }
 
     public String get(String varName) {
-        return storedValue.get(varName);
+        return storedValues.get(varName);
     }
 
     public void start(Form form) {
-        ReferenceMapVisitor referenceMapper = new ReferenceMapVisitor();
+        ReferenceMapper referenceMapper = new ReferenceMapper();
         referenceMap = referenceMapper.getMap(form);
+        ParentMapper parentMapper = new ParentMapper();
+        parentMap = parentMapper.getMap(form);
     }
 }
