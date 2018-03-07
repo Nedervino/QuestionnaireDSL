@@ -8,10 +8,9 @@ import org.junit.rules.ExpectedException;
 
 public class ASTBuilderTest {
 
-    private ASTBuilder astBuilder;
-
     @Rule
     public final ExpectedException exception = ExpectedException.none();
+    private ASTBuilder astBuilder;
 
     @Before
     public void setUp() throws Exception {

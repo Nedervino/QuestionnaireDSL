@@ -1,10 +1,8 @@
 package ql.ast.expressions.literals;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.junit.Before;
 import org.junit.Test;
 import ql.QLParser;
-import ql.ast.statements.Question;
 import ql.parser.ASTBuilder;
 
 import static org.junit.Assert.assertEquals;

@@ -1,11 +1,14 @@
 package ql.gui;
 
-import ql.ast.BaseASTVisitor;
 import ql.ast.Form;
 import ql.ast.statements.ComputedQuestion;
+import ql.ast.statements.IfElseStatement;
+import ql.ast.statements.IfStatement;
 import ql.ast.statements.Question;
+import ql.ast.visitors.FormVisitor;
+import ql.ast.visitors.StatementVisitor;
 
-public class RenderVisitor extends BaseASTVisitor<String> {
+public class RenderVisitor implements FormVisitor<String>, StatementVisitor<String> {
 
     FormView formView;
 
@@ -19,7 +22,19 @@ public class RenderVisitor extends BaseASTVisitor<String> {
         String formName = form.getFormId();
 
         formView.addElement(formName, new GUIElement());
-        return super.visit(form);
+        // visit(form);
+        return null;
+    }
+
+
+    @Override
+    public String visit(IfStatement ifStatement) {
+        return null;
+    }
+
+    @Override
+    public String visit(IfElseStatement ifElseStatement) {
+        return null;
     }
 
     //Identify the variable name which belongs to this question
