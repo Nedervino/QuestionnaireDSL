@@ -17,7 +17,7 @@ public class LiteralTest {
     }
 
     @Test
-    public void CanParseBooleanLiteral() {
+    public void canParseBooleanLiteral() {
         final Boolean EXPECTED_RESULT = true;
         QLParser parser = astBuilder.createParser("true");
         BooleanLiteral booleanLiteral = (BooleanLiteral) astBuilder.getExpression(parser);
@@ -27,7 +27,7 @@ public class LiteralTest {
 
 
     @Test
-    public void CanParseIntegerLiteral() {
+    public void canParseIntegerLiteral() {
         final int EXPECTED_RESULT = 123;
         QLParser parser = astBuilder.createParser(Integer.toString(EXPECTED_RESULT));
         IntegerLiteral integerLiteral = (IntegerLiteral) astBuilder.getExpression(parser);
@@ -36,7 +36,7 @@ public class LiteralTest {
     }
 
     @Test
-    public void CanParseDecimalLiteral() {
+    public void canParseDecimalLiteral() {
         final double DELTA = 1e-15;
         final double EXPECTED_RESULT = 123.45;
         QLParser parser = astBuilder.createParser(Double.toString(EXPECTED_RESULT));
@@ -46,7 +46,7 @@ public class LiteralTest {
     }
 
     @Test
-    public void CanParseMoneyLiteral() {
+    public void canParseMoneyLiteral() {
         final double DELTA = 1e-15;
         final double EXPECTED_RESULT = 123.45;
         QLParser parser = astBuilder.createParser("123,45");
@@ -56,7 +56,7 @@ public class LiteralTest {
     }
 
     @Test
-    public void CanParseStringLiteral() {
+    public void canParseStringLiteral() {
         final String EXPECTED_RESULT = "\"testString\"";
         QLParser parser = astBuilder.createParser(EXPECTED_RESULT);
         StringLiteral stringLiteral = (StringLiteral) astBuilder.getExpression(parser);

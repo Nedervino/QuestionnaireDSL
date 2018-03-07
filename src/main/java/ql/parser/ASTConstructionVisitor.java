@@ -35,7 +35,9 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitQuestion(QLParser.QuestionContext ctx) {
         String id = ctx.declaration().IDENTIFIER().getText();
-        String label = ctx.STRINGLITERAL().getText();
+
+        //Strip quotation marks
+        String label = ctx.STRINGLITERAL().getText().substring(1,ctx.STRINGLITERAL().getText().length()-1);
         Type type = (Type) visit(ctx.declaration().type());
 
         return new Question(id, label, type);
@@ -45,7 +47,9 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitComputedQuestion(QLParser.ComputedQuestionContext ctx) {
         String id = ctx.declaration().IDENTIFIER().getText();
-        String label = ctx.STRINGLITERAL().getText();
+
+        //Strip quotation marks
+        String label = ctx.STRINGLITERAL().getText().substring(1,ctx.STRINGLITERAL().getText().length()-1);
         Type type = (Type) visit(ctx.declaration().type());
         Expression expression = (Expression) visit(ctx.expression());
 
@@ -65,6 +69,11 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         } else {
             return new IfStatement(condition, statements);
         }
+    }
+
+    @Override
+    public ASTNode visitNestedExpression(QLParser.NestedExpressionContext ctx) {
+        return visit(ctx.expression());
     }
 
     @Override

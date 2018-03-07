@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import ql.ast.Form;
 
 public class ASTBuilderTest {
 
@@ -29,7 +30,8 @@ public class ASTBuilderTest {
 
     @Test
     public void canParseSimpleForm() {
-        astBuilder.buildASTFromFile("src/input/ql/correct/simple.ql");
+        Form form = astBuilder.buildASTFromFile("src/input/ql/correct/simple.ql");
+
     }
 
     @Test
