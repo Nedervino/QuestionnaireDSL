@@ -31,7 +31,7 @@ public class QuestionElement extends GUIElement implements ActionListener {
 
     @Override
     public void render(Graphics g) {
-        g.drawString(node.getId(), 50, yLoc);
+        g.drawString(node.getId(), 50, yLocation);
     }
 
     @Override

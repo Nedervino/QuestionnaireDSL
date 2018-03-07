@@ -4,11 +4,11 @@ import java.awt.*;
 
 public abstract class GUIElement {
 
-    int yLoc;
+    int yLocation;
     int height;
 
     public GUIElement(int pointer){
-        this.yLoc = pointer;
+        this.yLocation = pointer;
         height = 30;
     }
 

@@ -19,8 +19,8 @@ public class ComputedQuestionElement extends GUIElement {
     @Override
     public void render(Graphics g) {
         String varName = node.getId();
-        Object value = evaluator.get(varName);
-        g.drawString(varName + ": " + String.valueOf(value), 50, yLoc);
-        yLoc+=40;
+        Object value = evaluator.get(node);
+        g.drawString(varName + ": " + String.valueOf(value), 50, yLocation);
+        yLocation +=40;
     }
 }
