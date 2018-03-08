@@ -11,13 +11,13 @@ import java.util.logging.Logger;
  */
 public class Validator {
 
+    private final static Logger LOGGER = Logger.getLogger(Validator.class.getName());
     private final IssueTracker issueTracker;
     private final QuestionDuplicationChecker questionDuplicationChecker;
     private final ExpressionChecker expressionChecker;
     private final CyclicDependencyChecker cyclicDependencyChecker;
     private final UndeclaredVariableChecker undeclaredVariableChecker;
     private final SymbolTable symbolTable;
-    private final static Logger LOGGER = Logger.getLogger(Validator.class.getName());
 
 
     public Validator() {
@@ -38,7 +38,7 @@ public class Validator {
         }
 
         //Check for references to variables which were never declared.
-        if(!undeclaredVariableChecker.passesTests(form, symbolTable)) {
+        if (!undeclaredVariableChecker.passesTests(form, symbolTable)) {
             return false;
         }
 

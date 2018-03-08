@@ -1,6 +1,5 @@
 package ql.validator;
 
-import org.hamcrest.core.Is;
 import org.junit.Before;
 import org.junit.Test;
 import ql.ast.Form;

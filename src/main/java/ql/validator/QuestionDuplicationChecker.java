@@ -75,18 +75,17 @@ public class QuestionDuplicationChecker implements FormVisitor<Void>, StatementV
      * This will generate issues for:
      * <li>duplicate question declarations with different types (Error)
      * <li>duplicate question labels (Warning)
-     *
      */
     public void checkDuplication(Question question) {
         if (symbolTable.isDeclared(question.getId())) {
-            if(!symbolTable.lookup(question.getId()).toString().equals(question.getType().toString())) {
-                issueTracker.addError(0,0,String.format("Question with identifier \"%s\" declared on multiple locations", question.getId()));
+            if (!symbolTable.lookup(question.getId()).toString().equals(question.getType().toString())) {
+                issueTracker.addError(0, 0, String.format("Question with identifier \"%s\" declared on multiple locations", question.getId()));
             }
         } else {
             symbolTable.declare(question.getId(), question.getType());
         }
         if (questionLabels.contains(question.getLabel())) {
-            issueTracker.addWarning(0,0,String.format("Duplicate question label \"%s\" used on multiple locations", question.getLabel()));
+            issueTracker.addWarning(0, 0, String.format("Duplicate question label \"%s\" used on multiple locations", question.getLabel()));
         } else {
             questionLabels.add(question.getLabel());
         }

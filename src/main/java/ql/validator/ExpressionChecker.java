@@ -1,8 +1,6 @@
 package ql.validator;
 
 import ql.ast.Form;
-import ql.ast.visitors.ExpressionVisitor;
-import ql.ast.visitors.StatementVisitor;
 import ql.validator.issuetracker.IssueTracker;
 
 /**

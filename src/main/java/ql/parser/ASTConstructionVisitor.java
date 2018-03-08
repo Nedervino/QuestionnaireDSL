@@ -37,7 +37,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String id = ctx.declaration().IDENTIFIER().getText();
 
         //Strip quotation marks
-        String label = ctx.STRINGLITERAL().getText().substring(1,ctx.STRINGLITERAL().getText().length()-1);
+        String label = ctx.STRINGLITERAL().getText().substring(1, ctx.STRINGLITERAL().getText().length() - 1);
         Type type = (Type) visit(ctx.declaration().type());
 
         return new Question(id, label, type);
@@ -49,10 +49,10 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String id = ctx.declaration().IDENTIFIER().getText();
 
         //Strip quotation marks
-        String label = ctx.STRINGLITERAL().getText().substring(1,ctx.STRINGLITERAL().getText().length()-1);
+        String label = ctx.STRINGLITERAL().getText().substring(1, ctx.STRINGLITERAL().getText().length() - 1);
         Type type = (Type) visit(ctx.declaration().type());
         Expression expression = (Expression) visit(ctx.expression());
-
+        
         return new ComputedQuestion(id, label, type, expression);
     }
 

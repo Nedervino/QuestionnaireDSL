@@ -167,9 +167,9 @@ public class UndeclaredVariableChecker implements FormVisitor<Void>, StatementVi
     }
 
     @Override
-    public Void visit(Variable variable){
+    public Void visit(Variable variable) {
         String varName = variable.toString();
-        if(!symbolTable.isDeclared(varName)){
+        if (!symbolTable.isDeclared(varName)) {
             try {
                 throw new Exception("Variable was referenced but never declared: " + varName);
             } catch (Exception e) {

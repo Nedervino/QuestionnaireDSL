@@ -3,20 +3,11 @@ package ql.parser;
 import org.junit.Before;
 import org.junit.Test;
 import ql.QLParser;
-import ql.ast.ASTNode;
 import ql.ast.Form;
 import ql.ast.expressions.Variable;
-import ql.ast.expressions.literals.BooleanLiteral;
 import ql.ast.expressions.literals.IntegerLiteral;
-import ql.ast.expressions.unary.ArithmeticNegation;
-import ql.ast.expressions.unary.LogicalNegation;
 import ql.ast.statements.IfStatement;
 import ql.ast.statements.Question;
-import ql.ast.statements.Statement;
-import ql.ast.types.BooleanType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
