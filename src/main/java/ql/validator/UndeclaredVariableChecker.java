@@ -15,8 +15,8 @@ import ql.validator.issuetracker.IssueTracker;
 
 public class UndeclaredVariableChecker implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Void> {
 
-    SymbolTable symbolTable;
-    IssueTracker issueTracker;
+    private final IssueTracker issueTracker;
+    private SymbolTable symbolTable;
 
     public UndeclaredVariableChecker(IssueTracker issueTracker) {
         this.issueTracker = issueTracker;
