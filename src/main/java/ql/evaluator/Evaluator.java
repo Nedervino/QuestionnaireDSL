@@ -76,8 +76,8 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         String varName = node.getId();
         List<Variable> referringNodes = referenceMap.get(varName);
         //Starting at the first reference node, we update the value of the reference node in the state object,
-        //then we evaluate its parent. This will be an overloaded method. When it encounters expressions it evaluates and stores their results.
-        //When it encounters a computedQuestion parent, it will look up the referring nodes for that node, and call evaluate that node and it's parents,
+        //then we evaluate its parent. When we encounter expressions it evaluates and stores their results.
+        //When we encounter a computedQuestion parent, we will look up the referring nodes for that node, and evaluate those nodes and their parents,
         //until all necessary parents have been evaluated.
 
         if(referringNodes == null){

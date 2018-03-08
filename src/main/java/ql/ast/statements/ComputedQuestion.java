@@ -6,15 +6,15 @@ import ql.ast.visitors.StatementVisitor;
 
 public class ComputedQuestion extends Question {
 
-    private Expression expr;
+    private Expression expression;
 
-    public ComputedQuestion(String id, String label, Type type, Expression expr) {
+    public ComputedQuestion(String id, String label, Type type, Expression expression) {
         super(id, label, type);
-        this.expr = expr;
+        this.expression = expression;
     }
 
-    public Expression getExpr() {
-        return expr;
+    public Expression getExpression() {
+        return expression;
     }
 
     @Override
