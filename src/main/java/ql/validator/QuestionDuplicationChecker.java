@@ -26,8 +26,8 @@ public class QuestionDuplicationChecker implements FormVisitor<Void>, StatementV
 
     public boolean passesTests(Form form, SymbolTable symbolTable) {
         this.symbolTable = symbolTable;
-        visit(form);
-        return issueTracker.getErrors().size() == 0;
+        form.accept(this);
+        return !issueTracker.hasErrors();
     }
 
     @Override
@@ -69,14 +69,24 @@ public class QuestionDuplicationChecker implements FormVisitor<Void>, StatementV
         return null;
     }
 
+    /**
+     * Check question for previously used labels and identifiers.
+     * <p>
+     * This will generate issues for:
+     * <li>duplicate question declarations with different types (Error)
+     * <li>duplicate question labels (Warning)
+     *
+     */
     public void checkDuplication(Question question) {
         if (symbolTable.isDeclared(question.getId())) {
-            issueTracker.addError(0,0,String.format("VALIDATION ERROR: Question with identifier \"%s\" declared on multiple locations", question.getId()));
+            if(!symbolTable.lookup(question.getId()).toString().equals(question.getType().toString())) {
+                issueTracker.addError(0,0,String.format("Question with identifier \"%s\" declared on multiple locations", question.getId()));
+            }
         } else {
             symbolTable.declare(question.getId(), question.getType());
         }
         if (questionLabels.contains(question.getLabel())) {
-            issueTracker.addWarning(0,0,String.format("VALIDATION WARNING: Duplicate question label \"%s\" used on multiple locations", question.getLabel()));
+            issueTracker.addWarning(0,0,String.format("Duplicate question label \"%s\" used on multiple locations", question.getLabel()));
         } else {
             questionLabels.add(question.getLabel());
         }

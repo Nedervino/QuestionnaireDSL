@@ -40,6 +40,15 @@ public class IssueTracker {
         errors.add(error);
     }
 
+    public void reset() {
+        errors.clear();
+        warnings.clear();
+    }
+
+    public boolean hasErrors() {
+        return errors.size() > 0;
+    }
+
     public List<Error> getErrors() {
         return errors;
     }
