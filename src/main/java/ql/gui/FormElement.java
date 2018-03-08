@@ -16,7 +16,6 @@ public class FormElement extends GUIElement {
     @Override
     public void render(Graphics g) {
         g.drawString(node.getFormId(), 30, yLocation);
-        yLocation +=30;
     }
 
 }

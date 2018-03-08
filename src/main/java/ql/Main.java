@@ -12,7 +12,7 @@ import ql.validator.Validator;
 public class Main {
 
     public static void main(String[] args) {
-        String fileName = "src/input/ql/correct/ifElse.ql";
+        String fileName = "src/input/ql/correct/if.ql";
 
         ASTBuilder astBuilder = new ASTBuilder();
         Form form = astBuilder.buildASTFromFile(fileName);

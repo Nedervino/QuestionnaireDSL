@@ -28,6 +28,9 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     HashMap<ASTNode, ASTNode> parentMap;
     boolean repaintFlag;
 
+    public Evaluator(){
+        storedValues = new HashMap<>();
+    }
 
     public Object get(ASTNode varName) {
         return storedValues.get(varName);
@@ -41,7 +44,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         parentMap = parentMapper.getMap(form);
     }
 
-    public void update(Question node, String value) {
+    public void update(Question node, Object value) {
         //Recognize whether answers to question match the declared type
 
         //Update what value is stored at this node in the current state
@@ -77,6 +80,9 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         //When it encounters a computedQuestion parent, it will look up the referring nodes for that node, and call evaluate that node and it's parents,
         //until all necessary parents have been evaluated.
 
+        if(referringNodes == null){
+            return;
+        }
         Object value = storedValues.get(node);
         for(Variable referringNode : referringNodes){
             storedValues.put(referringNode, value);

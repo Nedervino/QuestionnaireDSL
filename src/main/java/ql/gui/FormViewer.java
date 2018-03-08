@@ -1,6 +1,5 @@
 package ql.gui;
 
-import ql.ast.ASTNode;
 import ql.ast.Form;
 import ql.evaluator.Evaluator;
 
@@ -15,6 +14,7 @@ public class FormViewer extends JPanel{
     LinkedList<GUIElement> elements;
 
     public FormViewer(Evaluator evaluator){
+        this.evaluator = evaluator;
         elements = new LinkedList<>();
     }
 
@@ -22,16 +22,15 @@ public class FormViewer extends JPanel{
     public void start(Form node) {
         init();
 
-        RenderVisitor visitor = new RenderVisitor(this);
+        GUIElementConstructionVisitor visitor = new GUIElementConstructionVisitor(this);
         visitor.visit(node);
 
         repaint();
     }
 
     @Override
-    public void paintComponent(Graphics g){
-        g.setColor(Color.BLACK);
-
+    public void paint(Graphics g){
+        super.paint(g);
         for(GUIElement element : elements){
             element.render(g);
         }

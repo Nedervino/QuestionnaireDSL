@@ -8,35 +8,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class QuestionElement extends GUIElement implements ActionListener {
+public class QuestionElement extends GUIElement {
 
     Evaluator evaluator;
     Question node;
-    JTextArea textArea;
 
-    public QuestionElement(Question node, int yLoc, FormViewer formViewer, Evaluator evaluator) {
-        super(yLoc);
+    public QuestionElement(Question node, int yLocation, Evaluator evaluator) {
+        super(yLocation);
         this.node = node;
-        height = 40;
-
-        textArea = new JTextArea("Some text\nSome other text");
-        textArea.setBounds(50, yLoc+10, 150, yLoc+40);
-        formViewer.add(textArea);
-
-        JButton updateButton = new JButton("Update");
-        updateButton.addActionListener(this);
-        formViewer.add(updateButton);
         this.evaluator = evaluator;
+        height = 70;
     }
 
     @Override
     public void render(Graphics g) {
-        g.drawString(node.getId(), 50, yLocation);
+        g.setColor(Color.black);
+        g.drawString(node.getLabel(), 50, yLocation);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String value = textArea.getText();
-        evaluator.update(node, value);
-    }
 }

@@ -20,7 +20,7 @@ public class ComputedQuestionElement extends GUIElement {
     public void render(Graphics g) {
         String varName = node.getId();
         Object value = evaluator.get(node);
+        g.setColor(Color.black);
         g.drawString(varName + ": " + String.valueOf(value), 50, yLocation);
-        yLocation +=40;
     }
 }
