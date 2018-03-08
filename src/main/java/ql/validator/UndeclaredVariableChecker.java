@@ -10,11 +10,17 @@ import ql.ast.statements.*;
 import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormVisitor;
 import ql.ast.visitors.StatementVisitor;
+import ql.validator.issuetracker.IssueTracker;
 
 
 public class UndeclaredVariableChecker implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Void> {
 
     SymbolTable symbolTable;
+    IssueTracker issueTracker;
+
+    public UndeclaredVariableChecker(IssueTracker issueTracker) {
+        this.issueTracker = issueTracker;
+    }
 
     public boolean passesTests(Form form, SymbolTable symbolTable) {
         this.symbolTable = symbolTable;

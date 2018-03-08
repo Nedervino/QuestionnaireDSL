@@ -23,9 +23,9 @@ public class Validator {
     public Validator() {
         issueTracker = new IssueTracker();
         questionDuplicationChecker = new QuestionDuplicationChecker(issueTracker);
-        expressionChecker = new ExpressionChecker();
-        cyclicDependencyChecker = new CyclicDependencyChecker();
-        undeclaredVariableChecker = new UndeclaredVariableChecker();
+        expressionChecker = new ExpressionChecker(issueTracker);
+        cyclicDependencyChecker = new CyclicDependencyChecker(issueTracker);
+        undeclaredVariableChecker = new UndeclaredVariableChecker(issueTracker);
         symbolTable = new SymbolTable();
     }
 

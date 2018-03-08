@@ -45,7 +45,7 @@ public class QuestionDuplicationCheckerTest {
     }
 
     @Test
-    public void shouldIssueNoErrorForDuplicateIDWithSameType() {
+    public void shouldIssueNothingForDuplicateIDWithSameType() {
         issueTracker.reset();
         Form form = astBuilder.buildASTFromFile("src/input/ql/incorrect/duplicateQuestionIDsSameTypes.ql");
         boolean passesTests = questionDuplicationChecker.passesTests(form, new SymbolTable());
@@ -60,6 +60,8 @@ public class QuestionDuplicationCheckerTest {
         Form form = astBuilder.buildASTFromFile("src/input/ql/correct/simple.ql");
         boolean passesTests = questionDuplicationChecker.passesTests(form, new SymbolTable());
         assertTrue(passesTests);
+        assertEquals(issueTracker.getWarnings().size(), 0);
+        assertEquals(issueTracker.getErrors().size(), 0);
     }
 
 }
