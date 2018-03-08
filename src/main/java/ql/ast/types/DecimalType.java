@@ -3,7 +3,7 @@ package ql.ast.types;
 import ql.ast.SourceLocation;
 import ql.ast.visitors.TypeVisitor;
 
-public class DecimalType extends Type {
+public class DecimalType extends NumberType {
 
     public DecimalType(SourceLocation sourceLocation) {
         super(sourceLocation);
