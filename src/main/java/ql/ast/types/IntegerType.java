@@ -1,8 +1,13 @@
 package ql.ast.types;
 
+import ql.ast.SourceLocation;
 import ql.ast.visitors.TypeVisitor;
 
 public class IntegerType extends Type {
+
+    public IntegerType(SourceLocation sourceLocation) {
+        super(sourceLocation);
+    }
 
     @Override
     public String toString() {

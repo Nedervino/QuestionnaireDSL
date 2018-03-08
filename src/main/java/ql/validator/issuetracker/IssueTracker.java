@@ -1,6 +1,8 @@
 package ql.validator.issuetracker;
 
 
+import ql.ast.SourceLocation;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,14 +31,14 @@ public class IssueTracker {
         warnings = new ArrayList<>();
     }
 
-    public void addWarning(int line, int column, String warningMessage) {
-        Warning warning = new Warning(line, column, warningMessage);
+    public void addWarning(SourceLocation sourceLocation, String warningMessage) {
+        Warning warning = new Warning(sourceLocation, warningMessage);
         warnings.add(warning);
     }
 
 
-    public void addError(int line, int column, String errorMessage) {
-        Error error = new Error(line, column, errorMessage);
+    public void addError(SourceLocation sourceLocation, String errorMessage) {
+        Error error = new Error(sourceLocation, errorMessage);
         errors.add(error);
     }
 

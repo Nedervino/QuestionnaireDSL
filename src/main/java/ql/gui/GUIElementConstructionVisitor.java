@@ -125,4 +125,9 @@ public class GUIElementConstructionVisitor implements FormVisitor<Void>, Stateme
         createTextWidget(newElement);
         return null;
     }
+
+    @Override
+    public Void visit(ErrorType errorType) {
+        return null;
+    }
 }

@@ -1,12 +1,13 @@
 package ql.ast.expressions.binary;
 
+import ql.ast.SourceLocation;
 import ql.ast.expressions.Expression;
 import ql.ast.visitors.ExpressionVisitor;
 
 public class LessThanEqual extends BinaryOperation {
 
-    public LessThanEqual(Expression left, Expression right) {
-        super(left, right);
+    public LessThanEqual(Expression left, Expression right, SourceLocation sourceLocation) {
+        super(left, right, sourceLocation);
     }
 
     @Override

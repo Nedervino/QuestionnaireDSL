@@ -1,9 +1,11 @@
 package ql.parser;
 
+import org.antlr.v4.runtime.ParserRuleContext;
 import ql.QLBaseVisitor;
 import ql.QLParser;
 import ql.ast.ASTNode;
 import ql.ast.Form;
+import ql.ast.SourceLocation;
 import ql.ast.expressions.Expression;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
@@ -29,7 +31,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         List<Statement> statements = new ArrayList();
         ctx.block().statement().forEach(statementContext -> statements.add((Statement) visit(statementContext)));
 
-        return new Form(formId, statements);
+        return new Form(formId, statements, getSourceLocation(ctx));
     }
 
     @Override
@@ -40,7 +42,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String label = ctx.STRINGLITERAL().getText().substring(1, ctx.STRINGLITERAL().getText().length() - 1);
         Type type = (Type) visit(ctx.declaration().type());
 
-        return new Question(id, label, type);
+        return new Question(id, label, type, getSourceLocation(ctx));
     }
 
 
@@ -52,8 +54,8 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String label = ctx.STRINGLITERAL().getText().substring(1, ctx.STRINGLITERAL().getText().length() - 1);
         Type type = (Type) visit(ctx.declaration().type());
         Expression expression = (Expression) visit(ctx.expression());
-        
-        return new ComputedQuestion(id, label, type, expression);
+
+        return new ComputedQuestion(id, label, type, expression, getSourceLocation(ctx));
     }
 
     @Override
@@ -65,9 +67,9 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         if (ctx.elseBlock() != null) {
             List<Statement> elseStatements = new ArrayList<>();
             ctx.elseBlock().block().statement().forEach(statementContext -> elseStatements.add((Statement) visit(statementContext)));
-            return new IfElseStatement(condition, statements, elseStatements);
+            return new IfElseStatement(condition, statements, elseStatements, getSourceLocation(ctx));
         } else {
-            return new IfStatement(condition, statements);
+            return new IfStatement(condition, statements, getSourceLocation(ctx));
         }
     }
 
@@ -81,9 +83,9 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String operator = ctx.unaryOperation().UNARY().getText();
         switch (operator) {
             case "-":
-                return new ArithmeticNegation((Expression) visit(ctx.unaryOperation().expression()));
+                return new ArithmeticNegation((Expression) visit(ctx.unaryOperation().expression()), getSourceLocation(ctx));
             case "!":
-                return new LogicalNegation((Expression) visit(ctx.unaryOperation().expression()));
+                return new LogicalNegation((Expression) visit(ctx.unaryOperation().expression()), getSourceLocation(ctx));
             default:
                 throw new IllegalArgumentException(String.format("Invalid unary operator: %s", operator));
         }
@@ -97,13 +99,13 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String operator = ctx.ARITHMETIC().getText();
         switch (operator) {
             case "+":
-                return new Addition(left, right);
+                return new Addition(left, right, getSourceLocation(ctx));
             case "-":
-                return new Subtraction(left, right);
+                return new Subtraction(left, right, getSourceLocation(ctx));
             case "*":
-                return new Multiplication(left, right);
+                return new Multiplication(left, right, getSourceLocation(ctx));
             case "/":
-                return new Division(left, right);
+                return new Division(left, right, getSourceLocation(ctx));
             default:
                 throw new IllegalArgumentException(String.format("Invalid arithmetic operator: %s", operator));
         }
@@ -117,9 +119,9 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String operator = ctx.LOGICAL().getText();
         switch (operator) {
             case "&&":
-                return new LogicalAnd(left, right);
+                return new LogicalAnd(left, right, getSourceLocation(ctx));
             case "||":
-                return new LogicalOr(left, right);
+                return new LogicalOr(left, right, getSourceLocation(ctx));
             default:
                 throw new IllegalArgumentException(String.format("Invalid logical operator: %s", operator));
         }
@@ -133,17 +135,17 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String operator = ctx.RELATIONAL().getText();
         switch (operator) {
             case "<":
-                return new LessThan(left, right);
+                return new LessThan(left, right, getSourceLocation(ctx));
             case "<=":
-                return new LessThanEqual(left, right);
+                return new LessThanEqual(left, right, getSourceLocation(ctx));
             case ">":
-                return new GreaterThan(left, right);
+                return new GreaterThan(left, right, getSourceLocation(ctx));
             case ">=":
-                return new GreaterThanEqual(left, right);
+                return new GreaterThanEqual(left, right, getSourceLocation(ctx));
             case "==":
-                return new Equal(left, right);
+                return new Equal(left, right, getSourceLocation(ctx));
             case "!=":
-                return new NotEqual(left, right);
+                return new NotEqual(left, right, getSourceLocation(ctx));
             default:
                 throw new IllegalArgumentException(String.format("Invalid relational operator: %s", operator));
         }
@@ -151,33 +153,33 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitBooleanLiteral(QLParser.BooleanLiteralContext ctx) {
-        return new BooleanLiteral(ctx.BOOLEANLITERAL().getText());
+        return new BooleanLiteral(ctx.BOOLEANLITERAL().getText(), getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitStringLiteral(QLParser.StringLiteralContext ctx) {
-        return new StringLiteral(ctx.STRINGLITERAL().getText());
+        return new StringLiteral(ctx.STRINGLITERAL().getText(), getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitIntegerLiteral(QLParser.IntegerLiteralContext ctx) {
-        return new IntegerLiteral(ctx.INTEGERLITERAL().getText());
+        return new IntegerLiteral(ctx.INTEGERLITERAL().getText(), getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitDecimalLiteral(QLParser.DecimalLiteralContext ctx) {
-        return new DecimalLiteral(ctx.DECIMALLITERAL().getText());
+        return new DecimalLiteral(ctx.DECIMALLITERAL().getText(), getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitMoneyLiteral(QLParser.MoneyLiteralContext ctx) {
-        return new MoneyLiteral(ctx.MONEYLITERAL().getText());
+        return new MoneyLiteral(ctx.MONEYLITERAL().getText(), getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitDateLiteral(QLParser.DateLiteralContext ctx) {
         try {
-            return new DateLiteral(ctx.getText());
+            return new DateLiteral(ctx.getText(), getSourceLocation(ctx));
         } catch (ParseException e) {
             throw new IllegalArgumentException(String.format("Invalid date: %s", ctx.getText()));
         }
@@ -185,37 +187,40 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitBooleanType(QLParser.BooleanTypeContext ctx) {
-        return new BooleanType();
+        return new BooleanType(getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitIntegerType(QLParser.IntegerTypeContext ctx) {
-        return new IntegerType();
+        return new IntegerType(getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitStringType(QLParser.StringTypeContext ctx) {
-        return new StringType();
+        return new StringType(getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitDecimalType(QLParser.DecimalTypeContext ctx) {
-        return new DecimalType();
+        return new DecimalType(getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitDateType(QLParser.DateTypeContext ctx) {
-        return new DateType();
+        return new DateType(getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitMoneyType(QLParser.MoneyTypeContext ctx) {
-        return new MoneyType();
+        return new MoneyType(getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitVariable(QLParser.VariableContext ctx) {
-        return new Variable(ctx.IDENTIFIER().getText());
+        return new Variable(ctx.IDENTIFIER().getText(), getSourceLocation(ctx));
     }
 
+    public SourceLocation getSourceLocation(ParserRuleContext ctx) {
+        return new SourceLocation(ctx.start.getLine(), ctx.start.getCharPositionInLine());
+    }
 }

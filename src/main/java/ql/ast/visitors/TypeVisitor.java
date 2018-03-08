@@ -16,4 +16,6 @@ public interface TypeVisitor<T> {
 
     T visit(DateType dateType);
 
+    T visit(ErrorType errorType);
+
 }

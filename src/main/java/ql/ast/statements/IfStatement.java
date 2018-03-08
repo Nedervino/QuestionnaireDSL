@@ -1,5 +1,6 @@
 package ql.ast.statements;
 
+import ql.ast.SourceLocation;
 import ql.ast.expressions.Expression;
 import ql.ast.visitors.StatementVisitor;
 
@@ -10,7 +11,8 @@ public class IfStatement extends Statement {
     private Expression condition;
     private List<Statement> ifStatements;
 
-    public IfStatement(Expression condition, List<Statement> ifStatements) {
+    public IfStatement(Expression condition, List<Statement> ifStatements, SourceLocation sourceLocation) {
+        super(sourceLocation);
         this.condition = condition;
         this.ifStatements = ifStatements;
     }

@@ -1,23 +1,19 @@
 package ql.validator.issuetracker;
 
+import ql.ast.SourceLocation;
+
 public abstract class Issue {
 
-    protected final int line;
-    protected final int column;
+    protected final SourceLocation sourceLocation;
     protected final String message;
 
-    public Issue(int line, int column, String message) {
-        this.line = line;
-        this.column = column;
+    public Issue(SourceLocation sourceLocation, String message) {
+        this.sourceLocation = sourceLocation;
         this.message = message;
     }
 
-    public int getLine() {
-        return line;
-    }
-
-    public int getColumn() {
-        return column;
+    public SourceLocation getSourceLocation() {
+        return sourceLocation;
     }
 
     public String getMessage() {
