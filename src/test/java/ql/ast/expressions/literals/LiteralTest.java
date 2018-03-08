@@ -22,7 +22,7 @@ public class LiteralTest {
         QLParser parser = astBuilder.createParser("true");
         BooleanLiteral booleanLiteral = (BooleanLiteral) astBuilder.getExpression(parser);
 
-        assertEquals(booleanLiteral.getValue(), EXPECTED_RESULT);
+        assertEquals(EXPECTED_RESULT, booleanLiteral.getValue());
     }
 
 
@@ -32,7 +32,7 @@ public class LiteralTest {
         QLParser parser = astBuilder.createParser(Integer.toString(EXPECTED_RESULT));
         IntegerLiteral integerLiteral = (IntegerLiteral) astBuilder.getExpression(parser);
 
-        assertEquals(integerLiteral.getValue(), EXPECTED_RESULT);
+        assertEquals(EXPECTED_RESULT, integerLiteral.getValue());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class LiteralTest {
         QLParser parser = astBuilder.createParser(Double.toString(EXPECTED_RESULT));
         DecimalLiteral decimalLiteral = (DecimalLiteral) astBuilder.getExpression(parser);
 
-        assertEquals(decimalLiteral.getValue(), EXPECTED_RESULT, DELTA);
+        assertEquals(EXPECTED_RESULT, decimalLiteral.getValue(), DELTA);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class LiteralTest {
         QLParser parser = astBuilder.createParser("123,45");
         MoneyLiteral moneyLiteral = (MoneyLiteral) astBuilder.getExpression(parser);
 
-        assertEquals(moneyLiteral.getValue(), EXPECTED_RESULT, DELTA);
+        assertEquals(EXPECTED_RESULT, moneyLiteral.getValue(), DELTA);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class LiteralTest {
         QLParser parser = astBuilder.createParser(EXPECTED_RESULT);
         StringLiteral stringLiteral = (StringLiteral) astBuilder.getExpression(parser);
 
-        assertEquals(stringLiteral.getValue(), EXPECTED_RESULT);
+        assertEquals(EXPECTED_RESULT, stringLiteral.getValue());
     }
 
 }

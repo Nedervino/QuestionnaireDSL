@@ -1,5 +1,5 @@
 # Software Construction 2017/2018
-This repository, managed by team Kazan, contains work on two DSLs (QL and QLS) tailored for creating questionnaires. ANTLR4 is used for parser generation from created grammars.
+This repository, managed by team Kazan, contains work on two DSLs (QL and QLS) tailored for creating questionnaires. QL is used to define the functionality of the form, while QLS files can be used as stylesheets. ANTLR4 is used for parser generation from the specified grammars.
 
 
 ## Collaborators:
@@ -13,4 +13,6 @@ This repository, managed by team Kazan, contains work on two DSLs (QL and QLS) t
 * Maven >=3.0
 
 ## How does it work?
-A .g4 file containing Lexer/Parser rules for the DSLs can be found in src/main/antlr4. src/input contains example input files used for generating actual forms in a GUI.
+A .g4 file containing Lexer/Parser rules for the DSLs can be found in src/main/antlr4. Before running, Maven will need to generate the required classes from this grammar using the included ANTLR v4 plugin.
+Once this is done, you can define the form you wish to create in src/main/java/ql/Main. src/input contains example input questionnaires used for generating the form interface.
+

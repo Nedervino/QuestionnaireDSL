@@ -23,7 +23,7 @@ public class TypeTest {
         QLParser parser = astBuilder.createParser("\"test\" testQuestion: boolean");
         Question question = (Question) astBuilder.getStatement(parser);
 
-        assertEquals(question.getType().toString(), EXPECTED_RESULT);
+        assertEquals(EXPECTED_RESULT, question.getType().toString());
     }
 
     @Test
@@ -32,7 +32,7 @@ public class TypeTest {
         QLParser parser = astBuilder.createParser("\"test\" testQuestion: decimal");
         Question question = (Question) astBuilder.getStatement(parser);
 
-        assertEquals(question.getType().toString(), EXPECTED_RESULT);
+        assertEquals(EXPECTED_RESULT, question.getType().toString());
     }
 
     @Test
@@ -41,7 +41,7 @@ public class TypeTest {
         QLParser parser = astBuilder.createParser("\"test\" testQuestion: integer");
         Question question = (Question) astBuilder.getStatement(parser);
 
-        assertEquals(question.getType().toString(), EXPECTED_RESULT);
+        assertEquals(EXPECTED_RESULT, question.getType().toString());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class TypeTest {
         QLParser parser = astBuilder.createParser("\"test\" testQuestion: money");
         Question question = (Question) astBuilder.getStatement(parser);
 
-        assertEquals(question.getType().toString(), EXPECTED_RESULT);
+        assertEquals(EXPECTED_RESULT, question.getType().toString());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class TypeTest {
         QLParser parser = astBuilder.createParser("\"test\" testQuestion: string");
         Question question = (Question) astBuilder.getStatement(parser);
 
-        assertEquals(question.getType().toString(), EXPECTED_RESULT);
+        assertEquals(EXPECTED_RESULT, question.getType().toString());
     }
 
 }

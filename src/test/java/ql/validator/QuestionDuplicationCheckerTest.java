@@ -27,9 +27,9 @@ public class QuestionDuplicationCheckerTest {
         Form form = astBuilder.buildASTFromFile("src/input/ql/incorrect/duplicateQuestionLabels.ql");
         boolean passesTests = questionDuplicationChecker.passesTests(form, new SymbolTable());
         assertTrue(passesTests);
-        assertEquals(issueTracker.getWarnings().size(), 1);
-        assertEquals(issueTracker.getErrors().size(), 0);
-        assertEquals(issueTracker.getWarnings().get(0).getMessage(), "Duplicate question label \"Question 1?\" used on multiple locations");
+        assertEquals(1, issueTracker.getWarnings().size());
+        assertEquals(0, issueTracker.getErrors().size());
+        assertEquals("Duplicate question label \"Question 1?\" used on multiple locations", issueTracker.getWarnings().get(0).getMessage());
     }
 
     @Test
@@ -38,9 +38,9 @@ public class QuestionDuplicationCheckerTest {
         Form form = astBuilder.buildASTFromFile("src/input/ql/incorrect/duplicateQuestionIDsDifferentTypes.ql");
         boolean passesTests = questionDuplicationChecker.passesTests(form, new SymbolTable());
         assertFalse(passesTests);
-        assertEquals(issueTracker.getWarnings().size(), 0);
-        assertEquals(issueTracker.getErrors().size(), 1);
-        assertEquals(issueTracker.getErrors().get(0).getMessage(), "Question with identifier \"q1\" declared on multiple locations");
+        assertEquals(0, issueTracker.getWarnings().size());
+        assertEquals(1, issueTracker.getErrors().size());
+        assertEquals("Question with identifier \"q1\" declared on multiple locations", issueTracker.getErrors().get(0).getMessage());
     }
 
     @Test
@@ -49,8 +49,8 @@ public class QuestionDuplicationCheckerTest {
         Form form = astBuilder.buildASTFromFile("src/input/ql/incorrect/duplicateQuestionIDsSameTypes.ql");
         boolean passesTests = questionDuplicationChecker.passesTests(form, new SymbolTable());
         assertTrue(passesTests);
-        assertEquals(issueTracker.getWarnings().size(), 0);
-        assertEquals(issueTracker.getErrors().size(), 0);
+        assertEquals(0, issueTracker.getWarnings().size());
+        assertEquals(0, issueTracker.getErrors().size());
     }
 
     @Test
@@ -59,8 +59,8 @@ public class QuestionDuplicationCheckerTest {
         Form form = astBuilder.buildASTFromFile("src/input/ql/correct/simple.ql");
         boolean passesTests = questionDuplicationChecker.passesTests(form, new SymbolTable());
         assertTrue(passesTests);
-        assertEquals(issueTracker.getWarnings().size(), 0);
-        assertEquals(issueTracker.getErrors().size(), 0);
+        assertEquals(0, issueTracker.getWarnings().size());
+        assertEquals(0, issueTracker.getErrors().size());
     }
 
 }

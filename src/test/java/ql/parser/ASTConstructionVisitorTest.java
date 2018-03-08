@@ -26,14 +26,14 @@ public class ASTConstructionVisitorTest {
         QLParser parser = astBuilder.createParser("((((4))))");
         IntegerLiteral integerLiteral = (IntegerLiteral) astBuilder.getExpression(parser);
 
-        assertEquals(integerLiteral.getValue(), EXPECTED_RESULT);
+        assertEquals(EXPECTED_RESULT, integerLiteral.getValue());
     }
 
     @Test
     public void visitForm() {
         Form form = astBuilder.buildASTFromFile("src/input/ql/correct/simple.ql");
-        assertEquals(form.getFormId(), "taxOfficeExample");
-        assertEquals(form.getStatements().size(), 3);
+        assertEquals("taxOfficeExample", form.getFormId());
+        assertEquals(3, form.getStatements().size());
     }
 
     @Test
@@ -42,9 +42,9 @@ public class ASTConstructionVisitorTest {
         Form form = astBuilder.buildASTFromFile("src/input/ql/correct/simple.ql");
         Question question = (Question) form.getStatements().get(0);
 
-        assertEquals(question.getType().toString(), "boolean");
-        assertEquals(question.getId(), "hasSoldHouse");
-        assertEquals(question.getLabel(), "Did you sell a house in 2010?");
+        assertEquals("boolean", question.getType().toString());
+        assertEquals("hasSoldHouse", question.getId());
+        assertEquals("Did you sell a house in 2010?", question.getLabel());
     }
 
     @Test
@@ -52,9 +52,9 @@ public class ASTConstructionVisitorTest {
         Form form = astBuilder.buildASTFromFile("src/input/ql/correct/simple.ql");
         Question question = (Question) form.getStatements().get(0);
 
-        assertEquals(question.getType().toString(), "boolean");
-        assertEquals(question.getId(), "hasSoldHouse");
-        assertEquals(question.getLabel(), "Did you sell a house in 2010?");
+        assertEquals("boolean", question.getType().toString());
+        assertEquals("hasSoldHouse", question.getId());
+        assertEquals("Did you sell a house in 2010?", question.getLabel());
     }
 
     @Test
@@ -69,9 +69,10 @@ public class ASTConstructionVisitorTest {
                 "        (sellingPrice - privateDebt)\n" +
                 "  }");
         IfStatement ifStatement = (IfStatement) astBuilder.getStatement(parser);
-        assertEquals(ifStatement.getIfStatements().size(), 3);
         Variable variable = (Variable) ifStatement.getCondition();
-        assertEquals(variable.toString(), "hasSoldHouse");
+
+        assertEquals(3, ifStatement.getIfStatements().size());
+        assertEquals("hasSoldHouse", variable.toString());
     }
 
     // @Test
