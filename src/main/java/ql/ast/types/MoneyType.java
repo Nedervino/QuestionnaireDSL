@@ -3,7 +3,7 @@ package ql.ast.types;
 import ql.ast.SourceLocation;
 import ql.ast.visitors.TypeVisitor;
 
-public class MoneyType extends Type {
+public class MoneyType extends NumberType {
 
     public MoneyType(SourceLocation sourceLocation) {
         super(sourceLocation);

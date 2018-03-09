@@ -34,18 +34,18 @@ public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Vo
     public boolean passesTests(Form form, SymbolTable symbolTable) {
         this.symbolTable = symbolTable;
         form.accept(this);
-        return issueTracker.hasErrors();
+        return !issueTracker.hasErrors();
     }
 
     public Type checkTypeCompatibility(BinaryOperation binaryOperation) {
         Type leftType = binaryOperation.getLeft().accept(this);
         Type rightType = binaryOperation.getRight().accept(this);
 
-        if (!leftType.isCompatibleWith(rightType)) {
+        if (!leftType.isCompatibleWith(rightType) && (!leftType.isOfType("error") || rightType.isOfType("error"))) {
             issueTracker.addError(binaryOperation.getSourceLocation(), "Incompatible types within binary operation");
             return new ErrorType(binaryOperation.getSourceLocation());
         }
-        return leftType.toString().equals("decimal") ? leftType : rightType;
+        return leftType.isOfType("decimal") ? leftType : rightType;
     }
 
     private void visitStatements(List<Statement> statements) {
@@ -56,17 +56,19 @@ public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Vo
 
     private void visitCondition(IfStatement statement) {
         Type type = statement.getCondition().accept(this);
-        if(!type.toString().equals("boolean")) {
+        if(!type.isOfType("boolean") && !type.isOfType("error")) {
             issueTracker.addError(statement.getSourceLocation(), "Non-boolean conditional");
         }
     }
 
     private Type verifyType(Type actualType, String expectedType) {
-        if(!actualType.toString().equals(expectedType) || (expectedType.equals("numeric") && (actualType.toString().equals("integer") || actualType.toString().equals("decimal")))) {
+        //If issue logged further down the tree, don't log new error
+        if(actualType.isOfType(expectedType) || (expectedType.equals("numeric") && (actualType.isOfType("integer") || actualType.isOfType("decimal"))) || actualType.isOfType("error")) {
+            return actualType;
+        } else {
             issueTracker.addError(actualType.getSourceLocation(), String.format("Type mismatch. Actual: %s Expected: %s", actualType.toString(), expectedType));
             return new ErrorType(actualType.getSourceLocation());
         }
-        return actualType;
     }
 
     @Override
@@ -98,7 +100,7 @@ public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Vo
     @Override
     public Void visit(ComputedQuestion computedQuestion) {
         Type computedType = computedQuestion.getExpression().accept(this);
-        if(!computedQuestion.getType().isCompatibleWith(computedType)) {
+        if(!computedQuestion.getType().isCompatibleWith(computedType) && !computedType.isOfType("error")) {
             issueTracker.addError(computedQuestion.getSourceLocation(), "Computed question type doesn't match expression type");
         }
         return null;
@@ -106,7 +108,7 @@ public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Vo
 
     @Override
     public Type visit(Addition addition) {
-        return checkTypeCompatibility(addition);
+        return verifyType(checkTypeCompatibility(addition), "numeric");
     }
 
     @Override

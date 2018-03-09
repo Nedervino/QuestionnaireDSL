@@ -38,13 +38,14 @@ public class Validator {
         }
 
         //Check for references to variables which were never declared.
-        if (!undeclaredVariableChecker.passesTests(form, symbolTable)) {
-            return false;
-        }
+        // if (!undeclaredVariableChecker.passesTests(form, symbolTable)) {
+        //     return false;
+        // }
 
 
         //Check for reference to undefined questions, non-boolean conditionals, and invalid operand types
         if (!expressionChecker.passesTests(form, symbolTable)) {
+            issueTracker.getErrors().forEach(issue -> LOGGER.severe(issue.toString()));
             return false;
         }
 

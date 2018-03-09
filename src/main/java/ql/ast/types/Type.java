@@ -12,6 +12,10 @@ public abstract class Type extends ASTNode {
 
     public abstract String toString();
 
+    public boolean isOfType(String type) {
+        return toString().equals(type);
+    }
+
     public boolean isCompatibleWith(Type type) {
         return this.toString().equals(type.toString()) ||
                 (this.toString().equals("integer") && type.toString().equals("decimal")) ||
