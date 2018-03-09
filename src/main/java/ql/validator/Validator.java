@@ -16,7 +16,6 @@ public class Validator {
     private final QuestionDuplicationChecker questionDuplicationChecker;
     private final ExpressionChecker expressionChecker;
     private final CyclicDependencyChecker cyclicDependencyChecker;
-    private final UndeclaredVariableChecker undeclaredVariableChecker;
     private final SymbolTable symbolTable;
 
 
@@ -25,7 +24,6 @@ public class Validator {
         questionDuplicationChecker = new QuestionDuplicationChecker(issueTracker);
         expressionChecker = new ExpressionChecker(issueTracker);
         cyclicDependencyChecker = new CyclicDependencyChecker(issueTracker);
-        undeclaredVariableChecker = new UndeclaredVariableChecker(issueTracker);
         symbolTable = new SymbolTable();
     }
 
@@ -36,12 +34,6 @@ public class Validator {
             issueTracker.getErrors().forEach(issue -> LOGGER.severe(issue.toString()));
             return false;
         }
-
-        //Check for references to variables which were never declared.
-        // if (!undeclaredVariableChecker.passesTests(form, symbolTable)) {
-        //     return false;
-        // }
-
 
         //Check for reference to undefined questions, non-boolean conditionals, and invalid operand types
         if (!expressionChecker.passesTests(form, symbolTable)) {
