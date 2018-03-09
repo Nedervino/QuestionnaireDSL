@@ -11,6 +11,26 @@ public class DependencyManager {
         this.dependencies = new HashSet<>();
     }
 
+    public DependencyManager(Set<DependencyPair> dependencies) {
+        this.dependencies = dependencies;
+    }
+
+    public void addDependency(DependencyPair pair) {
+        dependencies.add(pair);
+    }
+
+    public Set<DependencyPair> getCircularDependencies() {
+        Set<DependencyPair> circularPairs = new HashSet<>();
+        Set<DependencyPair> transitiveClosure = makeTransitiveClosure(dependencies);
+        for (DependencyPair pair : transitiveClosure) {
+            if (pair.isReflexive()) {
+                circularPairs.add(pair);
+            }
+        }
+
+        return circularPairs;
+    }
+
     private Set<DependencyPair> generateTransitiveEdges(Set<DependencyPair> input) {
         Set<DependencyPair> newEdges = new HashSet<>();
 
@@ -24,65 +44,19 @@ public class DependencyManager {
         return newEdges;
     }
 
-
-    public Set<DependencyPair> getCircularDependencies(Set<DependencyPair> input) {
-        Set<DependencyPair> closure = new HashSet<>();
-
-        for (DependencyPair pair : getTransitiveClosure(input)) {
-            if (pair.isReflexive())
-                closure.add(pair);
-        }
-
-        return closure;
-    }
-
-    public Set<DependencyPair> getTransitiveClosure(Set<DependencyPair> input) {
-        Set<DependencyPair> closure = new HashSet<>();
-        closure.addAll(input);
+    protected Set<DependencyPair> makeTransitiveClosure(Set<DependencyPair> input) {
+        Set<DependencyPair> transitiveClosure = new HashSet<>(input);
 
         while (true) {
-            Set<DependencyPair> newEdges = generateTransitiveEdges(closure);
-            newEdges.addAll(closure);
+            Set<DependencyPair> newEdges = generateTransitiveEdges(transitiveClosure);
+            newEdges.addAll(transitiveClosure);
 
-            if (newEdges.equals(closure))
+            if (newEdges.equals(transitiveClosure))
                 break;
-
-            closure = newEdges;
+            transitiveClosure = newEdges;
         }
 
-        return closure;
+        return transitiveClosure;
     }
-
-//
-//     public Set<DependencyPair> makeTransitiveClosure (Set<DependencyPair> input) {
-//         Set<DependencyPair> transitiveClosure = new HashSet<>(input);
-//
-// /*        while(!nextTransitiveAddition.equals(transitiveClosure)) {
-//             // nextTransitiveAddition = generateTransitiveEdges(input);
-//             transitiveClosure.addAll(nextTransitiveAddition);
-//             nextTransitiveAddition = generateTransitiveEdges(transitiveClosure);
-//
-//         }*/
-//         Set<DependencyPair> newTransitiveEdges;
-//         do {
-//             newTransitiveEdges = generateTransitiveEdges(transitiveClosure);
-//             newTransitiveEdges.addAll(transitiveClosure);
-//
-//         } while (newTransitiveEdges.equals(transitiveClosure));
-//
-//
-//         while (true) {
-//             Set<DependencyPair> newTransitiveEdges = generateTransitiveEdges(transitiveClosure);
-//             newTransitiveEdges.addAll(transitiveClosure);
-//
-//             if (newTransitiveEdges.equals(transitiveClosure))
-//                 break;
-//
-//             transitiveClosure = newTransitiveEdges;
-//         }
-//
-//
-//         return transitiveClosure;
-//     }
 
 }

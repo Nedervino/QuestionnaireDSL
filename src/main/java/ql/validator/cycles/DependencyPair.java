@@ -3,6 +3,7 @@ package ql.validator.cycles;
 import java.util.Objects;
 
 public class DependencyPair {
+
     private final String source;
     private final String destination;
 
@@ -35,14 +36,11 @@ public class DependencyPair {
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
+        if (object == null || this.getClass() != object.getClass()) return false;
+        DependencyPair otherPair = (DependencyPair) object;
 
-        DependencyPair pair = (DependencyPair) object;
-
-        if (source != null ? !source.equals(pair.source) : pair.source != null) return false;
-        return destination != null ? destination.equals(pair.destination) : pair.destination == null;
-
+        if (source != null ? !source.equals(otherPair.source) : otherPair.source != null) return false;
+        return destination != null ? destination.equals(otherPair.destination) : otherPair.destination == null;
     }
-
 
 }
