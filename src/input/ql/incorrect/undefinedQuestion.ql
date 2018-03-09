@@ -2,7 +2,7 @@
     Form referring to undefined questions
 */
 
-form undefinedQuestions {
+form undefinedQuestion {
     "Name?" q1: string
     "Money?" q2: integer
     if(q5) {
