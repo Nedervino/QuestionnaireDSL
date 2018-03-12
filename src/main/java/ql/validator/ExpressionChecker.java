@@ -168,7 +168,7 @@ public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Vo
 
     @Override
     public Type visit(Subtraction subtraction) {
-        return null;
+        return verifyType(checkTypeCompatibility(subtraction), "numeric");
     }
 
     @Override

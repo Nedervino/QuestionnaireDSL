@@ -16,11 +16,11 @@ public abstract class Type extends ASTNode {
         return toString().equals(type);
     }
 
-    public boolean isCompatibleWith(Type type) {
-        return true;
-        // return this.toString().equals(type.toString()) ||
-        //         (this.toString().equals("integer") && type.toString().equals("decimal")) ||
-        //         (this.toString().equals("decimal") && type.toString().equals("integer"));
+    public boolean isCompatibleWith(Type otherType) {
+        System.out.printf("%s %s", this.toString(), otherType.toString());
+        return this.toString().equals(otherType.toString()) ||
+                (this.toString().equals("integer") && otherType.toString().equals("decimal")) ||
+                (this.toString().equals("decimal") && otherType.toString().equals("integer"));
     }
 
     public abstract <T> T accept(TypeVisitor<T> visitor);
