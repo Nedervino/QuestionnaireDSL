@@ -54,8 +54,6 @@ public class CyclicDependencyChecker implements FormVisitor<Void>, StatementVisi
     }
 
     private void addDependencies(Question question, List<Variable> variables) {
-        System.out.println(question.getId());
-        System.out.println(variables);
         for (Variable variable : variables) {
             dependencyManager.addDependency(new DependencyPair(question.getId(), variable.toString()));
         }

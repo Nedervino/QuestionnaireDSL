@@ -14,7 +14,7 @@ public class DependencyManagerTest {
     }
 
     @Test
-    public void makeTransitiveClosure() {
+    public void shoudReturnCorrectCircularDependencies() {
         final int EXPECTED_REFLEXIVE_PAIRS = 3;
         final int EXPECTED_TRANSITIVE_PAIRS = 9;
 

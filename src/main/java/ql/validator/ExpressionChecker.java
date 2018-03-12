@@ -173,13 +173,13 @@ public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Vo
 
     @Override
     public Type visit(LogicalNegation logicalNegation) {
-        Type actualType = logicalNegation.accept(this);
+        Type actualType = logicalNegation.getExpression().accept(this);
         return verifyType(actualType, "boolean");
     }
 
     @Override
     public Type visit(ArithmeticNegation arithmeticNegation) {
-        Type actualType = arithmeticNegation.accept(this);
+        Type actualType = arithmeticNegation.getExpression().accept(this);
         return verifyType(actualType, "numeric");
     }
 

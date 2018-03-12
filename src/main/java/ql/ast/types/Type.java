@@ -17,7 +17,6 @@ public abstract class Type extends ASTNode {
     }
 
     public boolean isCompatibleWith(Type otherType) {
-        System.out.printf("%s %s", this.toString(), otherType.toString());
         return this.toString().equals(otherType.toString()) ||
                 (this.toString().equals("integer") && otherType.toString().equals("decimal")) ||
                 (this.toString().equals("decimal") && otherType.toString().equals("integer"));
