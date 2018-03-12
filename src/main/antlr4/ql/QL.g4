@@ -1,9 +1,9 @@
 grammar QL;
 
-/* Requirements
+/*
 
 TODO:
-- Refactor lexer/parser division
+- Refactor lexer/parser division (bracket lexer tokens?)
 - Remove MONEY / DECIMAL ambiguity (add money-specific symbols in front such as $ ?)
 - replace "INT" in the line valNum with INT | DECIMAL | MONEY_LITERAL to allow using numericals interchangeably (?)
 
