@@ -12,7 +12,7 @@ import ql.validator.Validator;
 public class Main {
 
     public static void main(String[] args) {
-        String fileName = "src/input/ql/incorrect/cyclical.ql";
+        String fileName = "src/input/ql/correct/logicalExpressions.ql";
 
         ASTBuilder astBuilder = new ASTBuilder();
         Form form = astBuilder.buildASTFromFile(fileName);

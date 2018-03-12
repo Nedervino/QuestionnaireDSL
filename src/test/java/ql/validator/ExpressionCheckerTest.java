@@ -60,7 +60,7 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueTypeErrorsForNonNumericMismatches() {
-        Form form = astBuilder.buildASTFromFile("src/input/ql/incorrect/typeMismatches.ql");
+        Form form = astBuilder.buildASTFromFile("src/input/ql/incorrect/incompatibleBinaryExpressionTypes.ql");
 
         //Initialize symbolTable;
         SymbolTable symbolTable = new SymbolTable();
@@ -71,14 +71,24 @@ public class ExpressionCheckerTest {
         assertFalse(passesTests);
 
         assertEquals(0, issueTracker.getWarnings().size());
-        assertEquals(18, issueTracker.getErrors().size());
+        assertEquals(15, issueTracker.getErrors().size());
         for (Error error : issueTracker.getErrors()) {
-            assertEquals("Type mismatch", error.getMessage().substring(0,13));
+            assertEquals("Incompatible", error.getMessage().substring(0,12));
         }
     }
 
     @Test
     public void shouldIssueErrorForNonNumericInArithmeticExpression() {
+        assertFalse(true);
+    }
+
+    @Test
+    public void shouldIssueNoErrorForStringConcatenation() {
+        assertFalse(true);
+    }
+
+    @Test
+    public void shouldIssueNoErrorForNumericExpressionsWithMoneyType() {
         assertFalse(true);
     }
 
