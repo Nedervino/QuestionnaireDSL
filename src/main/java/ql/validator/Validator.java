@@ -43,6 +43,7 @@ public class Validator {
 
         //Check cyclic dependencies between questions
         if (!cyclicDependencyChecker.passesTests(form)) {
+            issueTracker.getErrors().forEach(issue -> LOGGER.severe(issue.toString()));
             return false;
         }
 
