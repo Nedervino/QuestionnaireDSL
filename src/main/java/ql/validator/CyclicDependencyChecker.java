@@ -16,9 +16,10 @@ import ql.validator.cycles.DependencyManager;
 import ql.validator.cycles.DependencyPair;
 import ql.validator.issuetracker.IssueTracker;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Checks AST for cyclic dependencies between questions
@@ -42,8 +43,8 @@ public class CyclicDependencyChecker implements FormVisitor<Void>, StatementVisi
     }
 
     private void logCircularDependencies() {
-        for(DependencyPair circularDependency : dependencyManager.getCircularDependencies()) {
-            issueTracker.addError(new SourceLocation(0,0), String.format("Variable %s involved in circular dependency", circularDependency.getSource()));
+        for (DependencyPair circularDependency : dependencyManager.getCircularDependencies()) {
+            issueTracker.addError(new SourceLocation(0, 0), String.format("Variable %s involved in circular dependency", circularDependency.getSource()));
         }
     }
 
@@ -54,7 +55,7 @@ public class CyclicDependencyChecker implements FormVisitor<Void>, StatementVisi
     }
 
     private void addDependencies(Question question, List<Variable> variables) {
-        if(variables == null) return;
+        if (variables == null) return;
         for (Variable variable : variables) {
             dependencyManager.addDependency(new DependencyPair(question.getId(), variable.toString()));
         }

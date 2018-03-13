@@ -20,11 +20,11 @@ public class ReferenceMapper implements FormVisitor<Void>, ExpressionVisitor<Voi
 
     HashMap<String, List<Variable>> referenceMap;
 
-    public ReferenceMapper(){
+    public ReferenceMapper() {
         referenceMap = new HashMap<>();
     }
 
-    public HashMap<String, List<Variable>> getMap(Form form){
+    public HashMap<String, List<Variable>> getMap(Form form) {
         visit(form);
 
         return referenceMap;
@@ -32,18 +32,18 @@ public class ReferenceMapper implements FormVisitor<Void>, ExpressionVisitor<Voi
 
     @Override
     public Void visit(Form form) {
-        for(Statement statement : form.getStatements()){
+        for (Statement statement : form.getStatements()) {
             statement.accept(this);
         }
         return null;
     }
 
-    public void visitBinaryOperation(BinaryOperation binaryOperation){
+    public void visitBinaryOperation(BinaryOperation binaryOperation) {
         binaryOperation.getLeft().accept(this);
         binaryOperation.getRight().accept(this);
     }
 
-    public void visitUnaryOperation(UnaryOperation unaryOperation){
+    public void visitUnaryOperation(UnaryOperation unaryOperation) {
         unaryOperation.getExpression().accept(this);
     }
 
@@ -162,15 +162,14 @@ public class ReferenceMapper implements FormVisitor<Void>, ExpressionVisitor<Voi
     }
 
     @Override
-    public Void visit(Variable node){
+    public Void visit(Variable node) {
         String varName = node.toString();
 
         List<Variable> referenceList;
-        if(!referenceMap.containsKey(varName)) {
+        if (!referenceMap.containsKey(varName)) {
             referenceList = new LinkedList();
             referenceMap.put(varName, referenceList);
-        }
-        else{
+        } else {
             referenceList = referenceMap.get(varName);
         }
         referenceList.add(node);
@@ -180,7 +179,7 @@ public class ReferenceMapper implements FormVisitor<Void>, ExpressionVisitor<Voi
 
     @Override
     public Void visit(IfStatement ifStatement) {
-        for(Statement statement : ifStatement.getIfStatements()){
+        for (Statement statement : ifStatement.getIfStatements()) {
             statement.accept(this);
         }
         return null;
@@ -188,7 +187,7 @@ public class ReferenceMapper implements FormVisitor<Void>, ExpressionVisitor<Voi
 
     @Override
     public Void visit(IfElseStatement ifElseStatement) {
-        for(Statement statement : ifElseStatement.getIfStatements()){
+        for (Statement statement : ifElseStatement.getIfStatements()) {
             statement.accept(this);
         }
         return null;

@@ -11,19 +11,17 @@ import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormVisitor;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 
 //TODO implement code which traverses the AST to collect all nodes' parent child relationships.
 public class ParentMapper implements FormVisitor<Void>, ExpressionVisitor<Void> {
 
     HashMap<ASTNode, ASTNode> parentMap;
 
-    public ParentMapper(){
+    public ParentMapper() {
         parentMap = new HashMap<>();
     }
 
-    public HashMap<ASTNode, ASTNode> getMap(Form form){
+    public HashMap<ASTNode, ASTNode> getMap(Form form) {
         visit(form);
 
         return parentMap;
@@ -130,7 +128,7 @@ public class ParentMapper implements FormVisitor<Void>, ExpressionVisitor<Void> 
     }
 
     @Override
-    public Void visit(Variable node){
+    public Void visit(Variable node) {
         return null;
     }
 

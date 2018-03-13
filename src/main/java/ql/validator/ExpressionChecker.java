@@ -1,7 +1,6 @@
 package ql.validator;
 
 import ql.ast.Form;
-import ql.ast.expressions.Expression;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
@@ -21,7 +20,7 @@ import java.util.List;
  * Checks AST for references to undefined questions, conditions of non-boolean type,
  * and invalid operand/operator type combinations
  */
-public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Type>, TypeVisitor<Type>{
+public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Type>, TypeVisitor<Type> {
 // public class ExpressionChecker {
 
     private final IssueTracker issueTracker;
@@ -56,14 +55,14 @@ public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Vo
 
     private void visitCondition(IfStatement statement) {
         Type type = statement.getCondition().accept(this);
-        if(!type.isOfType("boolean") && !type.isOfType("error")) {
+        if (!type.isOfType("boolean") && !type.isOfType("error")) {
             issueTracker.addError(statement.getSourceLocation(), "Non-boolean conditional");
         }
     }
 
     private Type verifyType(Type actualType, String expectedType) {
         //If issue logged further down the tree, don't log new error
-        if(actualType.isOfType(expectedType) || (expectedType.equals("numeric") && (actualType.isOfType("integer") || actualType.isOfType("decimal"))) || actualType.isOfType("error")) {
+        if (actualType.isOfType(expectedType) || (expectedType.equals("numeric") && (actualType.isOfType("integer") || actualType.isOfType("decimal"))) || actualType.isOfType("error")) {
             return actualType;
         } else {
             issueTracker.addError(actualType.getSourceLocation(), String.format("Type mismatch. Actual: %s Expected: %s", actualType.toString(), expectedType));
@@ -100,7 +99,7 @@ public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Vo
     @Override
     public Void visit(ComputedQuestion computedQuestion) {
         Type computedType = computedQuestion.getExpression().accept(this);
-        if(!computedQuestion.getType().isCompatibleWith(computedType) && !computedType.isOfType("error")) {
+        if (!computedQuestion.getType().isCompatibleWith(computedType) && !computedType.isOfType("error")) {
             issueTracker.addError(computedQuestion.getSourceLocation(), "Computed question type doesn't match expression type");
         }
         return null;
@@ -250,7 +249,7 @@ public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Vo
 
     @Override
     public Type visit(Variable variable) {
-        if(!symbolTable.isDeclared(variable.toString())) {
+        if (!symbolTable.isDeclared(variable.toString())) {
             issueTracker.addError(variable.getSourceLocation(), "Reference to undefined question");
             return new ErrorType(variable.getSourceLocation());
         }

@@ -7,7 +7,7 @@ public abstract class GUIElement {
     int yLocation;
     int height;
 
-    public GUIElement(int pointer){
+    public GUIElement(int pointer) {
         this.yLocation = pointer;
         height = 30;
     }

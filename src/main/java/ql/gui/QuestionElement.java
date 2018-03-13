@@ -3,10 +3,7 @@ package ql.gui;
 import ql.ast.statements.Question;
 import ql.evaluator.Evaluator;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class QuestionElement extends GUIElement {
 

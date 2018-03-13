@@ -17,7 +17,10 @@ import ql.ast.visitors.FormVisitor;
 import ql.ast.visitors.StatementVisitor;
 import ql.gui.FormViewer;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 
 public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Void> {
@@ -28,7 +31,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     HashMap<ASTNode, ASTNode> parentMap;
     boolean repaintFlag;
 
-    public Evaluator(){
+    public Evaluator() {
         storedValues = new HashMap<>();
     }
 
@@ -53,7 +56,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         visit(node);
 
         //repaint the GUI
-        if(repaintFlag) {
+        if (repaintFlag) {
             formViewer.repaint();
         }
     }
@@ -80,11 +83,11 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         //When we encounter a computedQuestion parent, we will look up the referring nodes for that node, and evaluate those nodes and their parents,
         //until all necessary parents have been evaluated.
 
-        if(referringNodes == null){
+        if (referringNodes == null) {
             return;
         }
         Object value = storedValues.get(node);
-        for(Variable referringNode : referringNodes){
+        for (Variable referringNode : referringNodes) {
             storedValues.put(referringNode, value);
             visit(referringNode);
         }
@@ -93,8 +96,8 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     public boolean areCalculated(Collection<Expression> expressions) {
         boolean areCalculated = true;
-        for(Expression expression : expressions) {
-            if(!storedValues.containsKey(expression)){
+        for (Expression expression : expressions) {
+            if (!storedValues.containsKey(expression)) {
                 areCalculated = false;
             }
         }
@@ -103,9 +106,9 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         //Only when all terms in an expression are known, we will visit the parent
     }
 
-    public void visitParent(ASTNode node){
+    public void visitParent(ASTNode node) {
         ASTNode parent = parentMap.get(node);
-        if(parent!=null){
+        if (parent != null) {
             //TODO currently we can't call this visit line, since we don't have a generic visit method for ASTNodes.
             // visit(parent);
         }
@@ -127,7 +130,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         Expression left = addition.getLeft();
         Expression right = addition.getRight();
         List<Expression> terms = Arrays.asList(new Expression[]{left, right});
-        if(areCalculated(terms)){
+        if (areCalculated(terms)) {
             //TODO Evaluate the result. This is type specific for money, integer, and float.
             Object result = null;
             storedValues.put(addition, result);

@@ -8,12 +8,12 @@ import java.awt.*;
 import java.util.LinkedList;
 
 
-public class FormViewer extends JPanel{
+public class FormViewer extends JPanel {
 
     Evaluator evaluator;
     LinkedList<GUIElement> elements;
 
-    public FormViewer(Evaluator evaluator){
+    public FormViewer(Evaluator evaluator) {
         this.evaluator = evaluator;
         elements = new LinkedList<>();
     }
@@ -29,9 +29,9 @@ public class FormViewer extends JPanel{
     }
 
     @Override
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         super.paint(g);
-        for(GUIElement element : elements){
+        for (GUIElement element : elements) {
             element.render(g);
         }
     }
@@ -41,12 +41,12 @@ public class FormViewer extends JPanel{
         JPanel panel = this;
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600,900);
+        frame.setSize(600, 900);
         frame.setVisible(true);
         frame.add(panel);
     }
 
-    public void addElement(GUIElement element){
+    public void addElement(GUIElement element) {
         elements.add(element);
     }
 

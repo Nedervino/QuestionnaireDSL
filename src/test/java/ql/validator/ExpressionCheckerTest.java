@@ -7,10 +7,8 @@ import ql.parser.ASTBuilder;
 import ql.validator.issuetracker.Error;
 import ql.validator.issuetracker.IssueTracker;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class ExpressionCheckerTest {
 
@@ -73,7 +71,7 @@ public class ExpressionCheckerTest {
         assertEquals(0, issueTracker.getWarnings().size());
         assertEquals(15, issueTracker.getErrors().size());
         for (Error error : issueTracker.getErrors()) {
-            assertEquals("Incompatible", error.getMessage().substring(0,12));
+            assertEquals("Incompatible", error.getMessage().substring(0, 12));
         }
     }
 

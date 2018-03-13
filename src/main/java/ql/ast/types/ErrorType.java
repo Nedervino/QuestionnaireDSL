@@ -16,7 +16,7 @@ public class ErrorType extends Type {
 
     @Override
     public <T> T accept(TypeVisitor<T> visitor) {
-            return visitor.visit(this);
-        }
+        return visitor.visit(this);
+    }
 
 }
