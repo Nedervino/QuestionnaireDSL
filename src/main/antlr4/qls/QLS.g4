@@ -40,14 +40,14 @@ styleRule       : IDENTIFIER ':' value;
 
 value           : INTEGERLITERAL
                 | STRINGLITERAL
-                | HEXCOLOR
+//                | HEXCOLOR
                 ;
 
 
 
 
 //Literals
-COLOR           : '#' ('0'..'9' | 'a'..'f'){6};
+//HEXCOLOR           : '#' ('0'..'9' | 'a'..'f'){6};
 INTEGERLITERAL  : DIGIT+;
 STRINGLITERAL   : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
 

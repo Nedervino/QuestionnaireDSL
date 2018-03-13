@@ -21,7 +21,6 @@ import java.util.List;
  * and invalid operand/operator type combinations
  */
 public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Type>, TypeVisitor<Type> {
-// public class ExpressionChecker {
 
     private final IssueTracker issueTracker;
     private SymbolTable symbolTable;
