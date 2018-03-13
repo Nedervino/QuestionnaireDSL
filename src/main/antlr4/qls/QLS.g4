@@ -14,10 +14,9 @@ component       : section
 
 section         : 'section' IDENTIFIER block;
 
-defaultWidget   : 'default' type 'widget' widgetType
-                | 'default' type widgetStyle;
+defaultWidget   : 'default' type (widget | widgetStyle);
 
-
+widget          : 'widget' widgetType;
 
 type            : 'boolean'                                     #booleanType
                 | 'integer'                                     #integerType
@@ -37,7 +36,24 @@ widgetType      : 'slider'                                                    #s
 
 widgetStyle     : '{' styleRule+ widget? '}';
 
-styleRule       : ;
+styleRule       : IDENTIFIER ':' value;
+
+value           : INTEGERLITERAL
+                | STRINGLITERAL
+                | HEXCOLOR
+                ;
 
 
 
+
+//Literals
+COLOR           : '#' ('0'..'9' | 'a'..'f'){6};
+INTEGERLITERAL  : DIGIT+;
+STRINGLITERAL   : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
+
+IDENTIFIER      : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
+DIGIT           : [0-9];
+
+WHITESPACE      : (' ' | '\t' | '\n' | '\r')+ -> skip;
+MULTICOMMENT    : '/*' .*? '*/' -> skip;
+SINGLECOMMENT   : '//' ~[\r\n]* '\r'? '\n' -> skip;

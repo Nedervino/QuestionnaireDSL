@@ -78,9 +78,6 @@ LOGICAL         : ('&&'|'||');
 //Unary Operators
 UNARY           : ('!'|'-');
 
-
 WHITESPACE      : (' ' | '\t' | '\n' | '\r')+ -> skip;
-
 MULTICOMMENT    : '/*' .*? '*/' -> skip;
-
 SINGLECOMMENT   : '//' ~[\r\n]* '\r'? '\n' -> skip;
