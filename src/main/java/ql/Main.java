@@ -12,7 +12,7 @@ import ql.validator.Validator;
 public class Main {
 
     public static void main(String[] args) {
-        String fileName = "src/input/ql/correct/logicalExpressions.ql";
+        String fileName = "src/input/ql/correct/if.ql";
 
         ASTBuilder astBuilder = new ASTBuilder();
         Form form = astBuilder.buildASTFromFile(fileName);
@@ -29,7 +29,7 @@ public class Main {
         evaluator.start(form);
 
         FormViewer formViewer = new FormViewer(evaluator);
-        // formViewer.start(form);
+        formViewer.start(form);
     }
 
 }
