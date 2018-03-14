@@ -19,4 +19,13 @@ public class MoneyType extends NumberType {
         return visitor.visit(this);
     }
 
+    @Override
+    public boolean isOfType(String type) {
+        if(type == "numeric"){
+            return true;
+        }
+        else {
+            return toString().equals(type);
+        }
+    }
 }

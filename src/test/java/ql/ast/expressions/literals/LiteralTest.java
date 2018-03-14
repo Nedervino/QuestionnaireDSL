@@ -5,6 +5,8 @@ import org.junit.Test;
 import ql.QLParser;
 import ql.parser.ASTBuilder;
 
+import java.math.BigDecimal;
+
 import static org.junit.Assert.assertEquals;
 
 public class LiteralTest {
@@ -47,12 +49,12 @@ public class LiteralTest {
 
     @Test
     public void canParseMoneyLiteral() {
-        final double DELTA = 1e-15;
-        final double EXPECTED_RESULT = 123.45;
+        final BigDecimal DELTA = new BigDecimal(0.01);
+        final BigDecimal EXPECTED_RESULT = new BigDecimal(123.45);
         QLParser parser = astBuilder.createParser("123,45");
         MoneyLiteral moneyLiteral = (MoneyLiteral) astBuilder.getExpression(parser);
 
-        assertEquals(EXPECTED_RESULT, moneyLiteral.getValue(), DELTA);
+        assertEquals(EXPECTED_RESULT, moneyLiteral.getValue());
     }
 
     @Test
