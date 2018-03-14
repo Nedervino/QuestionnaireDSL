@@ -15,6 +15,7 @@ public class FormViewer extends JPanel {
 
     public FormViewer(Evaluator evaluator) {
         this.evaluator = evaluator;
+        evaluator.formViewer = this;
         elements = new LinkedList<>();
     }
 
