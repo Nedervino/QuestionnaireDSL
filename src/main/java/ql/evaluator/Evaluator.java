@@ -80,7 +80,6 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     @Override
     public Void visit(ComputedQuestion node) {
-        System.out.println("Visiting computedQuestion");
 
         String varName = node.getId();
         idLookup.put(varName, node);
@@ -89,8 +88,6 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         expression.accept(this);
         if(isCalculated(expression)) {
             Evaluatable value = storedValues.get(expression);
-            System.out.println("computed question value");
-            System.out.println(value.getValue());
             storedValues.put(node, value);
         }
         return null;
@@ -120,15 +117,12 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     @Override
     public Void visit(IfStatement node) {
-        System.out.println("visitng if");
-
         Expression expression = node.getCondition();
         expression.accept(this);
 
         if(isCalculated(expression)) {
             Evaluatable value = storedValues.get(expression);
             if (value.isTrue()) {
-                System.out.println("condition is true");
 
                 List<Statement> statements = node.getIfStatements();
                 visit(statements);
@@ -140,7 +134,6 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     void visit(List<Statement> statements){
         for(Statement statement : statements){
-            System.out.println("visiting statement");
             statement.accept(this);
         }
     }
@@ -386,12 +379,9 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     @Override
     public Void visit(Variable variable) {
         String varName = variable.toString();
-        System.out.println(varName);
         Question declarationNode = findDeclarationNode(varName);
-        System.out.println(declarationNode.getType());
         if(isCalculated(declarationNode)) {
             Evaluatable value = storedValues.get(declarationNode);
-            System.out.println(value.getValue());
             storedValues.put(variable, value);
         }
         return null;

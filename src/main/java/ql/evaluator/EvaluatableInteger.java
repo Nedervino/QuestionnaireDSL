@@ -1,6 +1,6 @@
 package ql.evaluator;
 
-public class EvaluatableInteger implements EvaluatableNumeric<Integer>{
+public class EvaluatableInteger extends EvaluatableNumeric<Integer>{
 
     Integer value;
 
@@ -19,77 +19,82 @@ public class EvaluatableInteger implements EvaluatableNumeric<Integer>{
     }
 
     @Override
-    public Evaluatable add(Evaluatable evaluatable) {
-        return null;
-    }
-
-    @Override
-    public boolean isTrue() {
-        return false;
-    }
-
-    @Override
-    public EvaluatableBoolean and(Evaluatable evaluatable) {
-        return null;
+    public Evaluatable add(EvaluatableInteger evaluatable) {
+        return new EvaluatableInteger(evaluatable.getValue() + getValue());
     }
 
     @Override
     public Evaluatable divide(Evaluatable evaluatable) {
-        return null;
+        return evaluatable.divide(this);
+    }
+
+    @Override
+    public Evaluatable divide(EvaluatableInteger evaluatable) {
+        return new EvaluatableInteger(evaluatable.getValue() / getValue());
     }
 
     @Override
     public EvaluatableBoolean isEqual(Evaluatable evaluatable) {
-        return null;
+        return evaluatable.isEqual(this);
     }
 
     @Override
-    public EvaluatableBoolean greaterThanEqual(Evaluatable evaluatable) {
-        return null;
+    public EvaluatableBoolean isEqual(EvaluatableInteger evaluatable) {
+        return new EvaluatableBoolean(evaluatable.getValue() == getValue());
     }
 
     @Override
-    public EvaluatableBoolean greaterThan(Evaluatable evaluatable) {
-        return null;
+    public EvaluatableBoolean greaterThanEqual(EvaluatableInteger evaluatable) {
+        return new EvaluatableBoolean(evaluatable.getValue() >= getValue());
     }
 
     @Override
-    public EvaluatableBoolean lessThanEqual(Evaluatable evaluatable) {
-        return null;
+    public EvaluatableBoolean greaterThan(EvaluatableInteger evaluatable) {
+        return new EvaluatableBoolean(evaluatable.getValue() > getValue());
     }
 
     @Override
-    public EvaluatableBoolean lessThan(Evaluatable evaluatable) {
-        return null;
+    public EvaluatableBoolean lessThanEqual(EvaluatableInteger evaluatable) {
+        return new EvaluatableBoolean(evaluatable.getValue() <= getValue());
+    }
+
+    @Override
+    public EvaluatableBoolean lessThan(EvaluatableInteger evaluatable) {
+        return new EvaluatableBoolean(evaluatable.getValue() < getValue());
     }
 
     @Override
     public Evaluatable multiply(Evaluatable evaluatable) {
-        return null;
+        return evaluatable.multiply(this);
+    }
+
+    @Override
+    public Evaluatable multiply(EvaluatableInteger evaluatable) {
+        return new EvaluatableInteger(evaluatable.getValue() * getValue());
     }
 
     @Override
     public EvaluatableBoolean notEqual(Evaluatable evaluatable) {
-        return null;
+        return evaluatable.notEqual(this);
     }
 
     @Override
-    public EvaluatableBoolean or(Evaluatable evaluatable) {
-        return null;
+    public EvaluatableBoolean notEqual(EvaluatableInteger evaluatable) {
+        return new EvaluatableBoolean(evaluatable.getValue() != getValue());
     }
 
     @Override
     public Evaluatable subtract(Evaluatable evaluatable) {
-        return null;
+        return evaluatable.subtract(this);
     }
 
     @Override
-    public EvaluatableBoolean logicalNegate() {
-        return null;
+    public Evaluatable subtract(EvaluatableInteger evaluatable) {
+        return new EvaluatableInteger(evaluatable.getValue() - getValue());
     }
 
     @Override
-    public Evaluatable arithmeticNegate() {
-        return null;
+    public EvaluatableNumeric arithmeticNegate() {
+        return new EvaluatableInteger(-getValue());
     }
 }
