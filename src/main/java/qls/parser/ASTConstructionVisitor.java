@@ -1,17 +1,9 @@
 package qls.parser;
 
-import org.antlr.v4.runtime.ParserRuleContext;
-import ql.QLParser;
-import ql.ast.Form;
-import ql.ast.SourceLocation;
-import ql.ast.expressions.Variable;
-import ql.ast.statements.Statement;
-import ql.ast.types.*;
 import qls.QLSBaseVisitor;
 import qls.QLSParser;
 import qls.ast.ASTNode;
 import qls.ast.Page;
-import qls.ast.Stylesheet;
 
 import java.util.ArrayList;
 import java.util.List;

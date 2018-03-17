@@ -1,8 +1,8 @@
 package ql.gui;
 
 import ql.ast.statements.ComputedQuestion;
-import ql.evaluator.values.Evaluatable;
 import ql.evaluator.Evaluator;
+import ql.evaluator.values.Evaluatable;
 
 import java.awt.*;
 
@@ -24,7 +24,7 @@ public class ComputedQuestionElement extends GUIElement {
         Object value = "";
 
         Evaluatable evaluatable = evaluator.get(node);
-        if(evaluatable!=null) {
+        if (evaluatable != null) {
             value = evaluatable.getValue();
         }
 

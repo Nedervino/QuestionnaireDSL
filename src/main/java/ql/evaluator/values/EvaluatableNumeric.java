@@ -1,6 +1,6 @@
 package ql.evaluator.values;
 
-public abstract class EvaluatableNumeric<T> implements Evaluatable<T>{
+public abstract class EvaluatableNumeric<T> implements Evaluatable<T> {
 
     @Override
     public boolean isTrue() {
@@ -257,4 +257,4 @@ public abstract class EvaluatableNumeric<T> implements Evaluatable<T>{
         return null;
     }
 
- }
+}

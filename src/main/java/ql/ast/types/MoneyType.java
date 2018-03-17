@@ -21,10 +21,9 @@ public class MoneyType extends NumberType {
 
     @Override
     public boolean isOfType(String type) {
-        if(type == "numeric"){
+        if (type == "numeric") {
             return true;
-        }
-        else {
+        } else {
             return toString().equals(type);
         }
     }

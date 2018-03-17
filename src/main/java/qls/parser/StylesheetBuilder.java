@@ -7,9 +7,6 @@ import qls.QLSLexer;
 import qls.QLSParser;
 import qls.ast.Stylesheet;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class StylesheetBuilder {

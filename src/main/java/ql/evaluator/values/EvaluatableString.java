@@ -1,6 +1,6 @@
 package ql.evaluator.values;
 
-public class EvaluatableString implements Evaluatable<String>{
+public class EvaluatableString implements Evaluatable<String> {
 
     String value;
 

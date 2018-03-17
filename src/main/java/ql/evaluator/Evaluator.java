@@ -58,7 +58,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     private Evaluatable createEvaluatable(Type type, String value) {
         //TODO write switch which creates the right evaluatable implementation (string, int etc)
-        if(type instanceof StringType){
+        if (type instanceof StringType) {
             return new EvaluatableString(value);
         } else if (type instanceof IntegerType) {
             return new EvaluatableInteger(Integer.parseInt(value));
@@ -87,7 +87,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
         Expression expression = node.getExpression();
         expression.accept(this);
-        if(isCalculated(expression)) {
+        if (isCalculated(expression)) {
             Evaluatable value = storedValues.get(expression);
             storedValues.put(node, value);
         }
@@ -121,7 +121,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         Expression expression = node.getCondition();
         expression.accept(this);
 
-        if(isCalculated(expression)) {
+        if (isCalculated(expression)) {
             Evaluatable value = storedValues.get(expression);
             if (value.isTrue()) {
 
@@ -133,8 +133,8 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         return null;
     }
 
-    void visit(List<Statement> statements){
-        for(Statement statement : statements){
+    void visit(List<Statement> statements) {
+        for (Statement statement : statements) {
             statement.accept(this);
         }
     }
@@ -145,7 +145,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         expression.accept(this);
         Evaluatable value = storedValues.get(expression);
         List<Statement> statements;
-        if(isCalculated(expression)) {
+        if (isCalculated(expression)) {
             if (value.isTrue()) {
                 statements = node.getIfStatements();
             } else {
@@ -381,7 +381,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     public Void visit(Variable variable) {
         String varName = variable.toString();
         Question declarationNode = findDeclarationNode(varName);
-        if(isCalculated(declarationNode)) {
+        if (isCalculated(declarationNode)) {
             Evaluatable value = storedValues.get(declarationNode);
             storedValues.put(variable, value);
         }

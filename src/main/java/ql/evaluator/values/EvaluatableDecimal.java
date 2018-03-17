@@ -1,6 +1,6 @@
 package ql.evaluator.values;
 
-public class EvaluatableDecimal extends EvaluatableNumeric<Double>{
+public class EvaluatableDecimal extends EvaluatableNumeric<Double> {
 
     double value;
 
@@ -69,7 +69,7 @@ public class EvaluatableDecimal extends EvaluatableNumeric<Double>{
     }
 
     @Override
-    public Evaluatable multiply(EvaluatableDecimal evaluatable){
+    public Evaluatable multiply(EvaluatableDecimal evaluatable) {
         return new EvaluatableDecimal(evaluatable.getValue() * getValue());
     }
 

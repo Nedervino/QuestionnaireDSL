@@ -1,6 +1,6 @@
 package ql.evaluator.values;
 
-public class EvaluatableInteger extends EvaluatableNumeric<Integer>{
+public class EvaluatableInteger extends EvaluatableNumeric<Integer> {
 
     Integer value;
 

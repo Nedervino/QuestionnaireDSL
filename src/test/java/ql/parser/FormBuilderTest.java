@@ -10,10 +10,9 @@ import ql.ast.Form;
 
 public class FormBuilderTest {
 
-    Helper helper;
-
     @Rule
     public final ExpectedException exception = ExpectedException.none();
+    Helper helper;
     private FormBuilder formBuilder;
 
     @Before

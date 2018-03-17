@@ -9,10 +9,6 @@ import ql.ast.Form;
 import ql.ast.expressions.Expression;
 import ql.ast.statements.Statement;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 /**
  * This parses a QL input file using ANTLR, and creates a custom AST
  */

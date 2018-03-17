@@ -12,10 +12,10 @@ public class FormViewer {
 
     // private Evaluator evaluator;
     Evaluator evaluator;
-    private LinkedList<GUIElement> elements;
-    private JFrame frame;
     // private JPanel panel;
     JPanel panel;
+    private LinkedList<GUIElement> elements;
+    private JFrame frame;
 
     public FormViewer(Evaluator evaluator) {
         this.evaluator = evaluator;

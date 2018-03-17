@@ -2,7 +2,7 @@ package ql.evaluator.values;
 
 import java.math.BigDecimal;
 
-public class EvaluatableMoney extends EvaluatableNumeric<BigDecimal>{
+public class EvaluatableMoney extends EvaluatableNumeric<BigDecimal> {
 
     BigDecimal value;
 

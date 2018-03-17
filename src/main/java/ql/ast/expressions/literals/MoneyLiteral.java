@@ -12,7 +12,7 @@ public class MoneyLiteral extends Expression {
 
     public MoneyLiteral(String value, SourceLocation sourceLocation) {
         super(sourceLocation);
-        String parsableFloatValue = value.replace(',','.');
+        String parsableFloatValue = value.replace(',', '.');
         this.value = new BigDecimal(parsableFloatValue);
     }
 

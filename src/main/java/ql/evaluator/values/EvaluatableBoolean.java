@@ -1,6 +1,6 @@
 package ql.evaluator.values;
 
-public class EvaluatableBoolean implements Evaluatable<Boolean>{
+public class EvaluatableBoolean implements Evaluatable<Boolean> {
 
     Boolean value;
 
@@ -53,7 +53,7 @@ public class EvaluatableBoolean implements Evaluatable<Boolean>{
         boolean right = evaluatable.getValue().booleanValue();
         EvaluatableBoolean result = new EvaluatableBoolean(left && right);
         return result;
-     }
+    }
 
     @Override
     public Evaluatable divide(Evaluatable evaluatable) {

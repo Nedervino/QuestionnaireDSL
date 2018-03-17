@@ -5,8 +5,6 @@ import ql.evaluator.Evaluator;
 import ql.gui.FormViewer;
 import ql.parser.FormBuilder;
 import ql.validator.Validator;
-import qls.ast.Stylesheet;
-import qls.parser.StylesheetBuilder;
 
 /**
  * This program parses an input file following QL DSL specification, for which it renders a graphical form
