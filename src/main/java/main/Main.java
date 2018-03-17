@@ -3,8 +3,10 @@ package main;
 import ql.ast.Form;
 import ql.evaluator.Evaluator;
 import ql.gui.FormViewer;
-import ql.parser.ASTBuilder;
+import ql.parser.FormBuilder;
 import ql.validator.Validator;
+import qls.ast.Stylesheet;
+import qls.parser.StylesheetBuilder;
 
 /**
  * This program parses an input file following QL DSL specification, for which it renders a graphical form
@@ -15,11 +17,14 @@ public class Main {
         String qlFileName = "src/input/ql/correct/if.ql";
         String qlFile = new FileScanner().loadFile(qlFileName);
 
-        ASTBuilder astBuilder = new ASTBuilder();
-        Form form = astBuilder.buildASTFromString(qlFile);
+        FormBuilder formBuilder = new FormBuilder();
+        Form form = formBuilder.buildASTFromString(qlFile);
 
         String qlsFileName = "src/input/qls/correct/form1.qls";
         String qlsFile = new FileScanner().loadFile(qlsFileName);
+
+        // StylesheetBuilder stylesheetBuilder = new StylesheetBuilder();
+        // Stylesheet stylesheet = stylesheetBuilder.buildASTFromString(qlFile);
 
         Validator validator = new Validator();
         if (!validator.passesTypeChecks(form)) {

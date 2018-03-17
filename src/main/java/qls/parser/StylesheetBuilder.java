@@ -12,7 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class ASTBuilder {
+public class StylesheetBuilder {
 
     public Stylesheet buildASTFromString(String formContent) {
         QLSParser parser = createParser(formContent);

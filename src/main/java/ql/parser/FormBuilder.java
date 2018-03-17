@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 /**
  * This parses a QL input file using ANTLR, and creates a custom AST
  */
-public class ASTBuilder {
+public class FormBuilder {
 
     public Form buildASTFromString(String formContent) {
         QLParser parser = createParser(formContent);
