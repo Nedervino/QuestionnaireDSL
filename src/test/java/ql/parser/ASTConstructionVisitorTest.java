@@ -2,6 +2,7 @@ package ql.parser;
 
 import org.junit.Before;
 import org.junit.Test;
+import ql.Helper;
 import ql.QLParser;
 import ql.ast.Form;
 import ql.ast.expressions.Variable;
@@ -11,13 +12,15 @@ import ql.ast.statements.Question;
 
 import static org.junit.Assert.assertEquals;
 
-public class ASTConstructionVisitorTest {
+public class ASTConstructionVisitorTest extends Helper {
 
     ASTBuilder astBuilder;
+    Helper helper;
 
     @Before
     public void setUp() throws Exception {
         astBuilder = new ASTBuilder();
+        helper = new Helper();
     }
 
     @Test
@@ -31,7 +34,7 @@ public class ASTConstructionVisitorTest {
 
     @Test
     public void visitForm() {
-        Form form = astBuilder.buildASTFromFile("src/input/ql/correct/simple.ql");
+        Form form = buildASTFromFile("src/input/ql/correct/simple.ql", astBuilder);
         assertEquals("taxOfficeExample", form.getFormId());
         assertEquals(3, form.getStatements().size());
     }
@@ -39,7 +42,7 @@ public class ASTConstructionVisitorTest {
     @Test
     public void visitQuestion() {
         // astBuilder.createParser("form testForm {}");
-        Form form = astBuilder.buildASTFromFile("src/input/ql/correct/simple.ql");
+        Form form = helper.buildASTFromFile("src/input/ql/correct/simple.ql", astBuilder);
         Question question = (Question) form.getStatements().get(0);
 
         assertEquals("boolean", question.getType().toString());
@@ -49,7 +52,7 @@ public class ASTConstructionVisitorTest {
 
     @Test
     public void visitComputedQuestion() {
-        Form form = astBuilder.buildASTFromFile("src/input/ql/correct/simple.ql");
+        Form form = helper.buildASTFromFile("src/input/ql/correct/simple.ql", astBuilder);
         Question question = (Question) form.getStatements().get(0);
 
         assertEquals("boolean", question.getType().toString());

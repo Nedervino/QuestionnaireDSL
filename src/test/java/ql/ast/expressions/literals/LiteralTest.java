@@ -50,10 +50,10 @@ public class LiteralTest {
 
     @Test
     public void canParseMoneyLiteral() {
-        final BigDecimal EXPECTED_RESULT = new BigDecimal(123.45).setScale(2, RoundingMode.HALF_EVEN);
+        final BigDecimal EXPECTED_RESULT = new BigDecimal(123.45).setScale(2, RoundingMode.HALF_UP);
         QLParser parser = astBuilder.createParser("123,45");
         MoneyLiteral moneyLiteral = (MoneyLiteral) astBuilder.getExpression(parser);
-        BigDecimal displayValue = moneyLiteral.getValue().setScale(2, RoundingMode.HALF_EVEN);
+        BigDecimal displayValue = moneyLiteral.getValue().setScale(2, RoundingMode.HALF_UP);
         assertEquals(EXPECTED_RESULT, displayValue);
     }
 

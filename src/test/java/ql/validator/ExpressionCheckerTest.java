@@ -2,6 +2,7 @@ package ql.validator;
 
 import org.junit.Before;
 import org.junit.Test;
+import ql.Helper;
 import ql.ast.Form;
 import ql.parser.ASTBuilder;
 import ql.validator.issuetracker.Error;
@@ -13,12 +14,14 @@ import static org.junit.Assert.assertFalse;
 public class ExpressionCheckerTest {
 
     ASTBuilder astBuilder;
+    Helper helper;
     ExpressionChecker expressionChecker;
     IssueTracker issueTracker;
 
     @Before
     public void setUp() throws Exception {
         astBuilder = new ASTBuilder();
+        helper = new Helper();
         issueTracker = new IssueTracker();
         expressionChecker = new ExpressionChecker(issueTracker);
     }
@@ -26,7 +29,7 @@ public class ExpressionCheckerTest {
     @Test
     public void shouldIssueErrorForUndefinedQuestionReference() {
         issueTracker.reset();
-        Form form = astBuilder.buildASTFromFile("src/input/ql/incorrect/undefinedQuestion.ql");
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/undefinedQuestion.ql", astBuilder);
 
         //Initialize symbolTable;
         SymbolTable symbolTable = new SymbolTable();
@@ -42,7 +45,7 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueErrorForNonBooleanCondition() {
-        Form form = astBuilder.buildASTFromFile("src/input/ql/incorrect/nonBooleanCondition.ql");
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/nonBooleanCondition.ql", astBuilder);
 
         //Initialize symbolTable;
         SymbolTable symbolTable = new SymbolTable();
@@ -58,7 +61,7 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueTypeErrorsForNonNumericMismatches() {
-        Form form = astBuilder.buildASTFromFile("src/input/ql/incorrect/incompatibleBinaryExpressionTypes.ql");
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/incompatibleBinaryExpressionTypes.ql", astBuilder);
 
         //Initialize symbolTable;
         SymbolTable symbolTable = new SymbolTable();

@@ -5,9 +5,12 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import ql.Helper;
 import ql.ast.Form;
 
 public class ASTBuilderTest {
+
+    Helper helper;
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
@@ -16,62 +19,63 @@ public class ASTBuilderTest {
     @Before
     public void setUp() throws Exception {
         astBuilder = new ASTBuilder();
+        helper = new Helper();
     }
 
     @Test(expected = ParseCancellationException.class)
     public void throwsParseCancellationExceptionForMissingQuote() {
-        astBuilder.buildASTFromFile("src/input/ql/incorrect/missingClosingQuote.ql");
+        helper.buildASTFromFile("src/input/ql/incorrect/missingClosingQuote.ql", astBuilder);
     }
 
     @Test(expected = ParseCancellationException.class)
     public void throwsParseCancellationExceptionForMissingCurlyBracket() {
-        astBuilder.buildASTFromFile("src/input/ql/incorrect/missingClosingCurlyBracket.ql");
+        helper.buildASTFromFile("src/input/ql/incorrect/missingClosingCurlyBracket.ql", astBuilder);
     }
 
     @Test
     public void canParseSimpleForm() {
-        Form form = astBuilder.buildASTFromFile("src/input/ql/correct/simple.ql");
+        Form form = helper.buildASTFromFile("src/input/ql/correct/simple.ql", astBuilder);
 
     }
 
     @Test
     public void canParseIfBlocks() {
-        astBuilder.buildASTFromFile("src/input/ql/correct/if.ql");
+        helper.buildASTFromFile("src/input/ql/correct/if.ql", astBuilder);
     }
 
     @Test
     public void canParseIfElseBlocks() {
-        astBuilder.buildASTFromFile("src/input/ql/correct/ifElse.ql");
+        helper.buildASTFromFile("src/input/ql/correct/ifElse.ql", astBuilder);
     }
 
     @Test
     public void canParseMultipleNests() {
-        astBuilder.buildASTFromFile("src/input/ql/correct/nestedExpressions.ql");
+        helper.buildASTFromFile("src/input/ql/correct/nestedExpressions.ql", astBuilder);
     }
 
     @Test
     public void canParseSingleLineComments() {
-        astBuilder.buildASTFromFile("src/input/ql/correct/singleLineComment.ql");
+        helper.buildASTFromFile("src/input/ql/correct/singleLineComment.ql", astBuilder);
     }
 
     @Test
     public void canParseMultiLineComments() {
-        astBuilder.buildASTFromFile("src/input/ql/correct/multiLineComment.ql");
+        helper.buildASTFromFile("src/input/ql/correct/multiLineComment.ql", astBuilder);
     }
 
     @Test
     public void canParseLogicalOperators() {
-        astBuilder.buildASTFromFile("src/input/ql/correct/logicalExpressions.ql");
+        helper.buildASTFromFile("src/input/ql/correct/logicalExpressions.ql", astBuilder);
     }
 
     @Test
     public void canParseArithmeticOperators() {
-        astBuilder.buildASTFromFile("src/input/ql/correct/arithmeticExpressions.ql");
+        helper.buildASTFromFile("src/input/ql/correct/arithmeticExpressions.ql", astBuilder);
     }
 
     @Test
     public void canParseComparisonOperators() {
-        astBuilder.buildASTFromFile("src/input/ql/correct/comparisonExpressions.ql");
+        helper.buildASTFromFile("src/input/ql/correct/comparisonExpressions.ql", astBuilder);
     }
 
 }

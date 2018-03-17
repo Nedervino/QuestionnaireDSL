@@ -2,6 +2,7 @@ package ql.validator;
 
 import org.junit.Before;
 import org.junit.Test;
+import ql.Helper;
 import ql.ast.Form;
 import ql.parser.ASTBuilder;
 import ql.validator.issuetracker.IssueTracker;
@@ -11,12 +12,14 @@ import static org.junit.Assert.*;
 public class QuestionDuplicationCheckerTest {
 
     ASTBuilder astBuilder;
+    Helper helper;
     QuestionDuplicationChecker questionDuplicationChecker;
     IssueTracker issueTracker;
 
     @Before
     public void setUp() throws Exception {
         astBuilder = new ASTBuilder();
+        helper = new Helper();
         issueTracker = new IssueTracker();
         questionDuplicationChecker = new QuestionDuplicationChecker(issueTracker);
     }
@@ -24,7 +27,7 @@ public class QuestionDuplicationCheckerTest {
     @Test
     public void shouldIssueWarningForDuplicateLabel() {
         issueTracker.reset();
-        Form form = astBuilder.buildASTFromFile("src/input/ql/incorrect/duplicateQuestionLabels.ql");
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/duplicateQuestionLabels.ql", astBuilder);
         boolean passesTests = questionDuplicationChecker.passesTests(form, new SymbolTable());
         assertTrue(passesTests);
         assertEquals(1, issueTracker.getWarnings().size());
@@ -35,7 +38,7 @@ public class QuestionDuplicationCheckerTest {
     @Test
     public void shouldIssueErrorForDuplicateIDWithDifferentType() {
         issueTracker.reset();
-        Form form = astBuilder.buildASTFromFile("src/input/ql/incorrect/duplicateQuestionIDsDifferentTypes.ql");
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/duplicateQuestionIDsDifferentTypes.ql", astBuilder);
         boolean passesTests = questionDuplicationChecker.passesTests(form, new SymbolTable());
         assertFalse(passesTests);
         assertEquals(0, issueTracker.getWarnings().size());
@@ -46,7 +49,7 @@ public class QuestionDuplicationCheckerTest {
     @Test
     public void shouldIssueNothingForDuplicateIDWithSameType() {
         issueTracker.reset();
-        Form form = astBuilder.buildASTFromFile("src/input/ql/incorrect/duplicateQuestionIDsSameTypes.ql");
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/duplicateQuestionIDsSameTypes.ql", astBuilder);
         boolean passesTests = questionDuplicationChecker.passesTests(form, new SymbolTable());
         assertTrue(passesTests);
         assertEquals(0, issueTracker.getWarnings().size());
@@ -56,7 +59,7 @@ public class QuestionDuplicationCheckerTest {
     @Test
     public void shouldIssueNothingForRegularForm() {
         issueTracker.reset();
-        Form form = astBuilder.buildASTFromFile("src/input/ql/correct/simple.ql");
+        Form form = helper.buildASTFromFile("src/input/ql/correct/simple.ql", astBuilder);
         boolean passesTests = questionDuplicationChecker.passesTests(form, new SymbolTable());
         assertTrue(passesTests);
         assertEquals(0, issueTracker.getWarnings().size());
