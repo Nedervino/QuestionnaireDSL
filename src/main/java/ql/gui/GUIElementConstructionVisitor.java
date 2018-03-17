@@ -70,7 +70,7 @@ public class GUIElementConstructionVisitor implements FormVisitor<Void>, Stateme
         JTextField textField = new JTextField();
         textField.setBounds(50, element.yLocation + 10, 150, 40);
         textField.setLayout(null);
-        formViewer.add(textField);
+        formViewer.panel.add(textField);
 
         ActionListener actionListener = e -> {
             String value = textField.getText();
@@ -83,7 +83,7 @@ public class GUIElementConstructionVisitor implements FormVisitor<Void>, Stateme
         JCheckBox checkBox = new JCheckBox();
         checkBox.setBounds(50, element.yLocation + 10, 40, 40);
         checkBox.setLayout(null);
-        formViewer.add(checkBox);
+        formViewer.panel.add(checkBox);
 
         ActionListener actionListener = e -> {
             boolean value = checkBox.isSelected();
