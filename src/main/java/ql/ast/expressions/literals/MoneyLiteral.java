@@ -12,8 +12,8 @@ public class MoneyLiteral extends Expression {
 
     public MoneyLiteral(String value, SourceLocation sourceLocation) {
         super(sourceLocation);
-        // this.value = Double.parseDouble(value.replace(',', '.'));
-        this.value = new BigDecimal(value);
+        String parsableFloatValue = value.replace(',','.');
+        this.value = new BigDecimal(parsableFloatValue);
     }
 
     public BigDecimal getValue() {

@@ -6,6 +6,7 @@ import ql.QLParser;
 import ql.parser.ASTBuilder;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static org.junit.Assert.assertEquals;
 
@@ -49,12 +50,11 @@ public class LiteralTest {
 
     @Test
     public void canParseMoneyLiteral() {
-        final BigDecimal DELTA = new BigDecimal(0.01);
-        final BigDecimal EXPECTED_RESULT = new BigDecimal(123.45);
+        final BigDecimal EXPECTED_RESULT = new BigDecimal(123.45).setScale(2, RoundingMode.HALF_EVEN);
         QLParser parser = astBuilder.createParser("123,45");
         MoneyLiteral moneyLiteral = (MoneyLiteral) astBuilder.getExpression(parser);
-
-        assertEquals(EXPECTED_RESULT, moneyLiteral.getValue());
+        BigDecimal displayValue = moneyLiteral.getValue().setScale(2, RoundingMode.HALF_EVEN);
+        assertEquals(EXPECTED_RESULT, displayValue);
     }
 
     @Test
