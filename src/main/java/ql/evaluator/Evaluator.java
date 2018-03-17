@@ -13,7 +13,6 @@ import ql.ast.types.*;
 import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormVisitor;
 import ql.ast.visitors.StatementVisitor;
-import ql.gui.FormViewer;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -21,7 +20,6 @@ import java.util.*;
 
 public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Void> {
 
-    public FormViewer formViewer;
     HashMap<ASTNode, Evaluatable> storedValues;
     HashMap<String, Question> idLookup;
     Form form;
@@ -47,9 +45,6 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         //Update what value is stored at this node in the current state
         storedValues.put(node, evaluatable);
         visit(form);
-
-        //repaint the GUI
-        formViewer.repaint();
     }
 
     public void update(Question node, boolean value) {
@@ -58,9 +53,6 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         EvaluatableBoolean evaluatable = new EvaluatableBoolean(value);
         storedValues.put(node, evaluatable);
         visit(form);
-
-        //repaint the GUI
-        formViewer.repaint();
     }
 
     private Evaluatable createEvaluatable(Type type, String value) {
