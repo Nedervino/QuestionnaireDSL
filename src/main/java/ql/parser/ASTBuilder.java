@@ -18,23 +18,6 @@ import java.nio.file.Paths;
  */
 public class ASTBuilder {
 
-    public Form buildASTFromFile(String filePath) {
-        String formContent = loadFile(filePath);
-        Form form = buildASTFromString(formContent);
-
-        return form;
-    }
-
-    private String loadFile(String filePath) {
-        String fileContent = "";
-        try {
-            fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
-        } catch (IOException e) {
-            System.err.println("Couldn't process input source: " + e.getMessage());
-        }
-        return fileContent;
-    }
-
     public Form buildASTFromString(String formContent) {
         QLParser parser = createParser(formContent);
 

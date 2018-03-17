@@ -3,9 +3,9 @@ package qls.ast.widget;
 import ql.ast.SourceLocation;
 import qls.ast.ASTNode;
 
-public class Text extends WidgetType {
+public class TextField extends WidgetType {
 
-    public Text(SourceLocation sourceLocation) {
+    public TextField(SourceLocation sourceLocation) {
         super(sourceLocation);
     }
 

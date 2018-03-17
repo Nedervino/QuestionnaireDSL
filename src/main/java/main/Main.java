@@ -1,4 +1,4 @@
-package ql;
+package main;
 
 import ql.ast.Form;
 import ql.evaluator.Evaluator;
@@ -12,10 +12,14 @@ import ql.validator.Validator;
 public class Main {
 
     public static void main(String[] args) {
-        String fileName = "src/input/ql/correct/if.ql";
+        String qlFileName = "src/input/ql/correct/if.ql";
+        String qlFile = new FileScanner().loadFile(qlFileName);
 
         ASTBuilder astBuilder = new ASTBuilder();
-        Form form = astBuilder.buildASTFromFile(fileName);
+        Form form = astBuilder.buildASTFromString(qlFile);
+
+        String qlsFileName = "src/input/qls/correct/form1.qls";
+        String qlsFile = new FileScanner().loadFile(qlsFileName);
 
         Validator validator = new Validator();
         if (!validator.passesTypeChecks(form)) {
