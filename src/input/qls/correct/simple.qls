@@ -1,0 +1,26 @@
+stylesheet simple {
+
+  page Selling {
+
+    section "Selling" {
+
+      section "You sold a house" {
+
+        question q1
+
+        question q2
+
+        default integer {
+          width: 400
+          font: "Arial"
+          fontsize: 14
+          color: #999999
+          widget spinbox
+        }
+      }
+    }
+
+    default boolean widget radio("Yes", "No")
+
+  }
+}

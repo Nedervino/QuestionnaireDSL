@@ -1,0 +1,11 @@
+stylesheet taxOfficeExample {
+    page Selling {
+        section "Selling" {
+            section "You sold a house" {
+
+                question q1
+
+            }
+        }
+    }
+}

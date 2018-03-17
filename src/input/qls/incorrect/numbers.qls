@@ -1,0 +1,19 @@
+stylesheet numbers {
+  page Selling {
+    section "Selling" {
+      section "You sold a house" {
+        question q1
+            widget dropdown
+
+        question q2
+            widget radio
+
+        question q3
+            widget dropdown
+
+        question q4
+            widget radio
+      }
+    }
+  }
+}

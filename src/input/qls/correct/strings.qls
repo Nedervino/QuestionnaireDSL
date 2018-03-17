@@ -1,0 +1,12 @@
+stylesheet strings {
+  page Selling {
+    section "Selling" {
+      section "You sold a house" {
+
+        question q1
+            widget textfield
+
+      }
+    }
+  }
+}

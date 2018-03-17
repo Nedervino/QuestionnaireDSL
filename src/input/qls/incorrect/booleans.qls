@@ -1,0 +1,20 @@
+stylesheet booleans
+{
+  page Selling
+  {
+    section "Selling"
+    {
+      section "You sold a house"
+      {
+        question q1
+            widget slider
+
+        question q3
+            widget textfield
+
+        question q2
+            widget spinbox
+      }
+    }
+  }
+}
