@@ -38,10 +38,6 @@ public class ASTBuilder {
     public Form buildASTFromString(String formContent) {
         QLParser parser = createParser(formContent);
 
-        // ParseTree parseTree = parser.form();
-        // TreeView treeViewer = new TreeView();
-        // treeViewer.start(parser, parseTree);
-
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
         QLParser.FormContext formContext = parser.form();
         Form form = (Form) astConstructionVisitor.visit(formContext);
