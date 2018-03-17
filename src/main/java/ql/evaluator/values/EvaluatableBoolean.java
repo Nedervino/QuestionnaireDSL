@@ -1,23 +1,26 @@
-package ql.evaluator;
+package ql.evaluator.values;
 
-import java.util.Date;
+public class EvaluatableBoolean implements Evaluatable<Boolean>{
 
-public class EvaluatableDate implements Evaluatable<Date> {
+    Boolean value;
 
-    Date value;
-
-    public EvaluatableDate(Date value) {
+    public EvaluatableBoolean(Boolean value) {
         this.value = value;
     }
 
     @Override
-    public Date getValue() {
-        return null;
+    public Boolean getValue() {
+        return value;
     }
 
     @Override
-    public void setValue(Date value) {
+    public void setValue(Boolean value) {
+        this.value = value;
+    }
 
+    @Override
+    public boolean isTrue() {
+        return value.booleanValue();
     }
 
     @Override
@@ -41,19 +44,16 @@ public class EvaluatableDate implements Evaluatable<Date> {
     }
 
     @Override
-    public boolean isTrue() {
-        return false;
-    }
-
-    @Override
     public EvaluatableBoolean and(Evaluatable evaluatable) {
         return null;
     }
 
-    @Override
     public EvaluatableBoolean and(EvaluatableBoolean evaluatable) {
-        return null;
-    }
+        boolean left = value.booleanValue();
+        boolean right = evaluatable.getValue().booleanValue();
+        EvaluatableBoolean result = new EvaluatableBoolean(left && right);
+        return result;
+     }
 
     @Override
     public Evaluatable divide(Evaluatable evaluatable) {
@@ -100,9 +100,8 @@ public class EvaluatableDate implements Evaluatable<Date> {
         return null;
     }
 
-    @Override
     public EvaluatableBoolean isEqual(EvaluatableBoolean evaluatable) {
-        return null;
+        return new EvaluatableBoolean(getValue().booleanValue() == evaluatable.getValue().booleanValue());
     }
 
     @Override
@@ -232,7 +231,7 @@ public class EvaluatableDate implements Evaluatable<Date> {
 
     @Override
     public EvaluatableBoolean notEqual(Evaluatable evaluatable) {
-        return null;
+        return evaluatable.notEqual(this);
     }
 
     @Override
@@ -260,19 +259,20 @@ public class EvaluatableDate implements Evaluatable<Date> {
         return null;
     }
 
-    @Override
     public EvaluatableBoolean notEqual(EvaluatableBoolean evaluatable) {
-        return null;
+        boolean left = value.booleanValue();
+        boolean right = evaluatable.getValue().booleanValue();
+        EvaluatableBoolean result = new EvaluatableBoolean(left != right);
+        return result;
     }
 
     @Override
     public EvaluatableBoolean or(Evaluatable evaluatable) {
-        return null;
+        return evaluatable.or(this);
     }
 
-    @Override
     public EvaluatableBoolean or(EvaluatableBoolean evaluatable) {
-        return null;
+        return new EvaluatableBoolean(getValue().booleanValue() || evaluatable.getValue().booleanValue());
     }
 
     @Override
@@ -297,7 +297,8 @@ public class EvaluatableDate implements Evaluatable<Date> {
 
     @Override
     public EvaluatableBoolean logicalNegate() {
-        return null;
+        EvaluatableBoolean result = new EvaluatableBoolean(!getValue().booleanValue());
+        return result;
     }
 
     @Override

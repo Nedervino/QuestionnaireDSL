@@ -1,4 +1,4 @@
-package ql.evaluator;
+package ql.evaluator.values;
 
 public interface Evaluatable<T> {
 

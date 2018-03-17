@@ -1,26 +1,26 @@
-package ql.evaluator;
+package ql.evaluator.values;
 
-public class EvaluatableDecimal extends EvaluatableNumeric<Double>{
+public class EvaluatableInteger extends EvaluatableNumeric<Integer>{
 
-    double value;
+    Integer value;
 
-    public EvaluatableDecimal(double value) {
+    public EvaluatableInteger(int value) {
         this.value = value;
     }
 
     @Override
-    public Double getValue() {
+    public Integer getValue() {
         return value;
     }
 
     @Override
-    public void setValue(Double value) {
+    public void setValue(Integer value) {
         this.value = value;
     }
 
     @Override
-    public Evaluatable add(EvaluatableDecimal evaluatable) {
-        return new EvaluatableDecimal(evaluatable.getValue() + getValue());
+    public Evaluatable add(EvaluatableInteger evaluatable) {
+        return new EvaluatableInteger(evaluatable.getValue() + getValue());
     }
 
     @Override
@@ -29,8 +29,8 @@ public class EvaluatableDecimal extends EvaluatableNumeric<Double>{
     }
 
     @Override
-    public Evaluatable divide(EvaluatableDecimal evaluatable) {
-        return new EvaluatableDecimal(evaluatable.getValue() / getValue());
+    public Evaluatable divide(EvaluatableInteger evaluatable) {
+        return new EvaluatableInteger(evaluatable.getValue() / getValue());
     }
 
     @Override
@@ -39,27 +39,27 @@ public class EvaluatableDecimal extends EvaluatableNumeric<Double>{
     }
 
     @Override
-    public EvaluatableBoolean isEqual(EvaluatableDecimal evaluatable) {
+    public EvaluatableBoolean isEqual(EvaluatableInteger evaluatable) {
         return new EvaluatableBoolean(evaluatable.getValue() == getValue());
     }
 
     @Override
-    public EvaluatableBoolean greaterThanEqual(EvaluatableDecimal evaluatable) {
+    public EvaluatableBoolean greaterThanEqual(EvaluatableInteger evaluatable) {
         return new EvaluatableBoolean(evaluatable.getValue() >= getValue());
     }
 
     @Override
-    public EvaluatableBoolean greaterThan(EvaluatableDecimal evaluatable) {
+    public EvaluatableBoolean greaterThan(EvaluatableInteger evaluatable) {
         return new EvaluatableBoolean(evaluatable.getValue() > getValue());
     }
 
     @Override
-    public EvaluatableBoolean lessThanEqual(EvaluatableDecimal evaluatable) {
+    public EvaluatableBoolean lessThanEqual(EvaluatableInteger evaluatable) {
         return new EvaluatableBoolean(evaluatable.getValue() <= getValue());
     }
 
     @Override
-    public EvaluatableBoolean lessThan(EvaluatableDecimal evaluatable) {
+    public EvaluatableBoolean lessThan(EvaluatableInteger evaluatable) {
         return new EvaluatableBoolean(evaluatable.getValue() < getValue());
     }
 
@@ -69,8 +69,8 @@ public class EvaluatableDecimal extends EvaluatableNumeric<Double>{
     }
 
     @Override
-    public Evaluatable multiply(EvaluatableDecimal evaluatable){
-        return new EvaluatableDecimal(evaluatable.getValue() * getValue());
+    public Evaluatable multiply(EvaluatableInteger evaluatable) {
+        return new EvaluatableInteger(evaluatable.getValue() * getValue());
     }
 
     @Override
@@ -79,7 +79,7 @@ public class EvaluatableDecimal extends EvaluatableNumeric<Double>{
     }
 
     @Override
-    public EvaluatableBoolean notEqual(EvaluatableDecimal evaluatable) {
+    public EvaluatableBoolean notEqual(EvaluatableInteger evaluatable) {
         return new EvaluatableBoolean(evaluatable.getValue() != getValue());
     }
 
@@ -89,12 +89,12 @@ public class EvaluatableDecimal extends EvaluatableNumeric<Double>{
     }
 
     @Override
-    public Evaluatable subtract(EvaluatableDecimal evaluatable) {
-        return new EvaluatableDecimal(evaluatable.getValue() - getValue());
+    public Evaluatable subtract(EvaluatableInteger evaluatable) {
+        return new EvaluatableInteger(evaluatable.getValue() - getValue());
     }
 
     @Override
     public EvaluatableNumeric arithmeticNegate() {
-        return new EvaluatableDecimal(-getValue());
+        return new EvaluatableInteger(-getValue());
     }
 }

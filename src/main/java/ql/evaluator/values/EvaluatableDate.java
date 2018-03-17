@@ -1,15 +1,28 @@
-package ql.evaluator;
+package ql.evaluator.values;
 
-public abstract class EvaluatableNumeric<T> implements Evaluatable<T>{
+import java.util.Date;
+
+public class EvaluatableDate implements Evaluatable<Date> {
+
+    Date value;
+
+    public EvaluatableDate(Date value) {
+        this.value = value;
+    }
 
     @Override
-    public boolean isTrue() {
-        return false;
+    public Date getValue() {
+        return null;
+    }
+
+    @Override
+    public void setValue(Date value) {
+
     }
 
     @Override
     public Evaluatable add(Evaluatable evaluatable) {
-        return evaluatable.add(this);
+        return null;
     }
 
     @Override
@@ -28,12 +41,22 @@ public abstract class EvaluatableNumeric<T> implements Evaluatable<T>{
     }
 
     @Override
+    public boolean isTrue() {
+        return false;
+    }
+
+    @Override
     public EvaluatableBoolean and(Evaluatable evaluatable) {
-        return evaluatable.and(this);
+        return null;
     }
 
     @Override
     public EvaluatableBoolean and(EvaluatableBoolean evaluatable) {
+        return null;
+    }
+
+    @Override
+    public Evaluatable divide(Evaluatable evaluatable) {
         return null;
     }
 
@@ -50,6 +73,11 @@ public abstract class EvaluatableNumeric<T> implements Evaluatable<T>{
     @Override
     public Evaluatable divide(EvaluatableDecimal evaluatable) {
         return null;
+    }
+
+    @Override
+    public EvaluatableBoolean isEqual(Evaluatable evaluatable) {
+        return evaluatable.isEqual(this);
     }
 
     @Override
@@ -84,7 +112,7 @@ public abstract class EvaluatableNumeric<T> implements Evaluatable<T>{
 
     @Override
     public EvaluatableBoolean greaterThanEqual(Evaluatable evaluatable) {
-        return evaluatable.greaterThanEqual(this);
+        return null;
     }
 
     @Override
@@ -109,7 +137,7 @@ public abstract class EvaluatableNumeric<T> implements Evaluatable<T>{
 
     @Override
     public EvaluatableBoolean greaterThan(Evaluatable evaluatable) {
-        return evaluatable.greaterThan(this);
+        return null;
     }
 
     @Override
@@ -134,7 +162,7 @@ public abstract class EvaluatableNumeric<T> implements Evaluatable<T>{
 
     @Override
     public EvaluatableBoolean lessThanEqual(Evaluatable evaluatable) {
-        return evaluatable.lessThanEqual(this);
+        return null;
     }
 
     @Override
@@ -159,7 +187,7 @@ public abstract class EvaluatableNumeric<T> implements Evaluatable<T>{
 
     @Override
     public EvaluatableBoolean lessThan(Evaluatable evaluatable) {
-        return evaluatable.lessThan(this);
+        return null;
     }
 
     @Override
@@ -183,6 +211,11 @@ public abstract class EvaluatableNumeric<T> implements Evaluatable<T>{
     }
 
     @Override
+    public Evaluatable multiply(Evaluatable evaluatable) {
+        return null;
+    }
+
+    @Override
     public Evaluatable multiply(EvaluatableMoney evaluatable) {
         return null;
     }
@@ -194,6 +227,11 @@ public abstract class EvaluatableNumeric<T> implements Evaluatable<T>{
 
     @Override
     public Evaluatable multiply(EvaluatableInteger evaluatable) {
+        return null;
+    }
+
+    @Override
+    public EvaluatableBoolean notEqual(Evaluatable evaluatable) {
         return null;
     }
 
@@ -238,6 +276,11 @@ public abstract class EvaluatableNumeric<T> implements Evaluatable<T>{
     }
 
     @Override
+    public Evaluatable subtract(Evaluatable evaluatable) {
+        return null;
+    }
+
+    @Override
     public Evaluatable subtract(EvaluatableMoney evaluatable) {
         return null;
     }
@@ -257,4 +300,8 @@ public abstract class EvaluatableNumeric<T> implements Evaluatable<T>{
         return null;
     }
 
- }
+    @Override
+    public EvaluatableNumeric arithmeticNegate() {
+        return null;
+    }
+}

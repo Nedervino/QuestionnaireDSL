@@ -1,26 +1,21 @@
-package ql.evaluator;
+package ql.evaluator.values;
 
-public class EvaluatableBoolean implements Evaluatable<Boolean>{
+public class EvaluatableString implements Evaluatable<String>{
 
-    Boolean value;
+    String value;
 
-    public EvaluatableBoolean(Boolean value) {
+    public EvaluatableString(String value) {
         this.value = value;
     }
 
     @Override
-    public Boolean getValue() {
+    public String getValue() {
         return value;
     }
 
     @Override
-    public void setValue(Boolean value) {
+    public void setValue(String value) {
         this.value = value;
-    }
-
-    @Override
-    public boolean isTrue() {
-        return value.booleanValue();
     }
 
     @Override
@@ -44,16 +39,19 @@ public class EvaluatableBoolean implements Evaluatable<Boolean>{
     }
 
     @Override
+    public boolean isTrue() {
+        return false;
+    }
+
+    @Override
     public EvaluatableBoolean and(Evaluatable evaluatable) {
         return null;
     }
 
+    @Override
     public EvaluatableBoolean and(EvaluatableBoolean evaluatable) {
-        boolean left = value.booleanValue();
-        boolean right = evaluatable.getValue().booleanValue();
-        EvaluatableBoolean result = new EvaluatableBoolean(left && right);
-        return result;
-     }
+        return null;
+    }
 
     @Override
     public Evaluatable divide(Evaluatable evaluatable) {
@@ -95,13 +93,13 @@ public class EvaluatableBoolean implements Evaluatable<Boolean>{
         return null;
     }
 
-    @Override
     public EvaluatableBoolean isEqual(EvaluatableString evaluatable) {
-        return null;
+        return new EvaluatableBoolean(evaluatable.getValue().equals(getValue()));
     }
 
+    @Override
     public EvaluatableBoolean isEqual(EvaluatableBoolean evaluatable) {
-        return new EvaluatableBoolean(getValue().booleanValue() == evaluatable.getValue().booleanValue());
+        return null;
     }
 
     @Override
@@ -254,25 +252,23 @@ public class EvaluatableBoolean implements Evaluatable<Boolean>{
         return null;
     }
 
-    @Override
     public EvaluatableBoolean notEqual(EvaluatableString evaluatable) {
-        return null;
+        return new EvaluatableBoolean(evaluatable.getValue().equals(getValue()));
     }
 
+    @Override
     public EvaluatableBoolean notEqual(EvaluatableBoolean evaluatable) {
-        boolean left = value.booleanValue();
-        boolean right = evaluatable.getValue().booleanValue();
-        EvaluatableBoolean result = new EvaluatableBoolean(left != right);
-        return result;
+        return null;
     }
 
     @Override
     public EvaluatableBoolean or(Evaluatable evaluatable) {
-        return evaluatable.or(this);
+        return null;
     }
 
+    @Override
     public EvaluatableBoolean or(EvaluatableBoolean evaluatable) {
-        return new EvaluatableBoolean(getValue().booleanValue() || evaluatable.getValue().booleanValue());
+        return null;
     }
 
     @Override
@@ -297,8 +293,7 @@ public class EvaluatableBoolean implements Evaluatable<Boolean>{
 
     @Override
     public EvaluatableBoolean logicalNegate() {
-        EvaluatableBoolean result = new EvaluatableBoolean(!getValue().booleanValue());
-        return result;
+        return null;
     }
 
     @Override

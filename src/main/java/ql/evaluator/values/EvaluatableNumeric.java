@@ -1,26 +1,15 @@
-package ql.evaluator;
+package ql.evaluator.values;
 
-public class EvaluatableString implements Evaluatable<String>{
-
-    String value;
-
-    public EvaluatableString(String value) {
-        this.value = value;
-    }
+public abstract class EvaluatableNumeric<T> implements Evaluatable<T>{
 
     @Override
-    public String getValue() {
-        return value;
-    }
-
-    @Override
-    public void setValue(String value) {
-        this.value = value;
+    public boolean isTrue() {
+        return false;
     }
 
     @Override
     public Evaluatable add(Evaluatable evaluatable) {
-        return null;
+        return evaluatable.add(this);
     }
 
     @Override
@@ -39,22 +28,12 @@ public class EvaluatableString implements Evaluatable<String>{
     }
 
     @Override
-    public boolean isTrue() {
-        return false;
-    }
-
-    @Override
     public EvaluatableBoolean and(Evaluatable evaluatable) {
-        return null;
+        return evaluatable.and(this);
     }
 
     @Override
     public EvaluatableBoolean and(EvaluatableBoolean evaluatable) {
-        return null;
-    }
-
-    @Override
-    public Evaluatable divide(Evaluatable evaluatable) {
         return null;
     }
 
@@ -74,11 +53,6 @@ public class EvaluatableString implements Evaluatable<String>{
     }
 
     @Override
-    public EvaluatableBoolean isEqual(Evaluatable evaluatable) {
-        return evaluatable.isEqual(this);
-    }
-
-    @Override
     public EvaluatableBoolean isEqual(EvaluatableMoney evaluatable) {
         return null;
     }
@@ -93,8 +67,9 @@ public class EvaluatableString implements Evaluatable<String>{
         return null;
     }
 
+    @Override
     public EvaluatableBoolean isEqual(EvaluatableString evaluatable) {
-        return new EvaluatableBoolean(evaluatable.getValue().equals(getValue()));
+        return null;
     }
 
     @Override
@@ -109,7 +84,7 @@ public class EvaluatableString implements Evaluatable<String>{
 
     @Override
     public EvaluatableBoolean greaterThanEqual(Evaluatable evaluatable) {
-        return null;
+        return evaluatable.greaterThanEqual(this);
     }
 
     @Override
@@ -134,7 +109,7 @@ public class EvaluatableString implements Evaluatable<String>{
 
     @Override
     public EvaluatableBoolean greaterThan(Evaluatable evaluatable) {
-        return null;
+        return evaluatable.greaterThan(this);
     }
 
     @Override
@@ -159,7 +134,7 @@ public class EvaluatableString implements Evaluatable<String>{
 
     @Override
     public EvaluatableBoolean lessThanEqual(Evaluatable evaluatable) {
-        return null;
+        return evaluatable.lessThanEqual(this);
     }
 
     @Override
@@ -184,7 +159,7 @@ public class EvaluatableString implements Evaluatable<String>{
 
     @Override
     public EvaluatableBoolean lessThan(Evaluatable evaluatable) {
-        return null;
+        return evaluatable.lessThan(this);
     }
 
     @Override
@@ -208,11 +183,6 @@ public class EvaluatableString implements Evaluatable<String>{
     }
 
     @Override
-    public Evaluatable multiply(Evaluatable evaluatable) {
-        return null;
-    }
-
-    @Override
     public Evaluatable multiply(EvaluatableMoney evaluatable) {
         return null;
     }
@@ -225,11 +195,6 @@ public class EvaluatableString implements Evaluatable<String>{
     @Override
     public Evaluatable multiply(EvaluatableInteger evaluatable) {
         return null;
-    }
-
-    @Override
-    public EvaluatableBoolean notEqual(Evaluatable evaluatable) {
-        return evaluatable.notEqual(this);
     }
 
     @Override
@@ -252,8 +217,9 @@ public class EvaluatableString implements Evaluatable<String>{
         return null;
     }
 
+    @Override
     public EvaluatableBoolean notEqual(EvaluatableString evaluatable) {
-        return new EvaluatableBoolean(evaluatable.getValue().equals(getValue()));
+        return null;
     }
 
     @Override
@@ -268,11 +234,6 @@ public class EvaluatableString implements Evaluatable<String>{
 
     @Override
     public EvaluatableBoolean or(EvaluatableBoolean evaluatable) {
-        return null;
-    }
-
-    @Override
-    public Evaluatable subtract(Evaluatable evaluatable) {
         return null;
     }
 
@@ -296,8 +257,4 @@ public class EvaluatableString implements Evaluatable<String>{
         return null;
     }
 
-    @Override
-    public EvaluatableNumeric arithmeticNegate() {
-        return null;
-    }
-}
+ }

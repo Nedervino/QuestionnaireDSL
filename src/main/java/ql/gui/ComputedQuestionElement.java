@@ -1,7 +1,7 @@
 package ql.gui;
 
 import ql.ast.statements.ComputedQuestion;
-import ql.evaluator.Evaluatable;
+import ql.evaluator.values.Evaluatable;
 import ql.evaluator.Evaluator;
 
 import java.awt.*;
