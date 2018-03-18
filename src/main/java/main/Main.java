@@ -2,7 +2,7 @@ package main;
 
 import ql.ast.Form;
 import ql.evaluator.Evaluator;
-import ql.gui.FormViewer;
+import gui.FormViewer;
 import ql.parser.FormBuilder;
 import ql.validator.Validator;
 

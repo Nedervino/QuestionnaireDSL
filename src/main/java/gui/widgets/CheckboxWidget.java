@@ -1,4 +1,4 @@
-package ql.gui.widgets;
+package gui.widgets;
 
 public class CheckboxWidget implements Widget {
 }

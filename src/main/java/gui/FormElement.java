@@ -1,4 +1,4 @@
-package ql.gui;
+package gui;
 
 import ql.ast.Form;
 
