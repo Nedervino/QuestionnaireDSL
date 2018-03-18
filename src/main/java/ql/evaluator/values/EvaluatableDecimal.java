@@ -26,18 +26,8 @@ public class EvaluatableDecimal extends EvaluatableNumeric<Double> {
     }
 
     @Override
-    public Evaluatable divide(Evaluatable evaluatable) {
-        return evaluatable.divide(this);
-    }
-
-    @Override
     public Evaluatable divide(EvaluatableDecimal evaluatable) {
         return new EvaluatableDecimal(evaluatable.getValue() / getValue());
-    }
-
-    @Override
-    public EvaluatableBoolean isEqual(Evaluatable evaluatable) {
-        return evaluatable.isEqual(this);
     }
 
     @Override
@@ -66,28 +56,13 @@ public class EvaluatableDecimal extends EvaluatableNumeric<Double> {
     }
 
     @Override
-    public Evaluatable multiply(Evaluatable evaluatable) {
-        return evaluatable.multiply(this);
-    }
-
-    @Override
     public Evaluatable multiply(EvaluatableDecimal evaluatable) {
         return new EvaluatableDecimal(evaluatable.getValue() * getValue());
     }
 
     @Override
-    public EvaluatableBoolean notEqual(Evaluatable evaluatable) {
-        return evaluatable.notEqual(this);
-    }
-
-    @Override
     public EvaluatableBoolean notEqual(EvaluatableDecimal evaluatable) {
         return new EvaluatableBoolean(!Objects.equals(evaluatable.getValue(), getValue()));
-    }
-
-    @Override
-    public Evaluatable subtract(Evaluatable evaluatable) {
-        return evaluatable.subtract(this);
     }
 
     @Override

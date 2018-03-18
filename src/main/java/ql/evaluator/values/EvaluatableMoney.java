@@ -28,21 +28,11 @@ public class EvaluatableMoney extends EvaluatableNumeric<BigDecimal> {
     }
 
     @Override
-    public Evaluatable divide(Evaluatable evaluatable) {
-        return evaluatable.divide(this);
-    }
-
-    @Override
     public Evaluatable divide(EvaluatableMoney evaluatable) {
         BigDecimal otherValue = evaluatable.getValue();
         //terms are flipped just like in the subtract implementation
         BigDecimal result = otherValue.divide(getValue());
         return new EvaluatableMoney(result);
-    }
-
-    @Override
-    public EvaluatableBoolean isEqual(Evaluatable evaluatable) {
-        return evaluatable.isEqual(this);
     }
 
     @Override
@@ -81,11 +71,6 @@ public class EvaluatableMoney extends EvaluatableNumeric<BigDecimal> {
     }
 
     @Override
-    public Evaluatable multiply(Evaluatable evaluatable) {
-        return evaluatable.multiply(this);
-    }
-
-    @Override
     public Evaluatable multiply(EvaluatableMoney evaluatable) {
         BigDecimal otherValue = evaluatable.getValue();
         BigDecimal result = getValue().multiply(otherValue);
@@ -93,20 +78,10 @@ public class EvaluatableMoney extends EvaluatableNumeric<BigDecimal> {
     }
 
     @Override
-    public EvaluatableBoolean notEqual(Evaluatable evaluatable) {
-        return evaluatable.notEqual(this);
-    }
-
-    @Override
     public EvaluatableBoolean notEqual(EvaluatableMoney evaluatable) {
         BigDecimal otherValue = evaluatable.getValue();
         Boolean result = !getValue().equals(otherValue);
         return new EvaluatableBoolean(result);
-    }
-
-    @Override
-    public Evaluatable subtract(Evaluatable evaluatable) {
-        return evaluatable.subtract(this);
     }
 
     @Override
