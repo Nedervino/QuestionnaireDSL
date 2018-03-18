@@ -1,9 +1,10 @@
 package qls.parser;
 
+import org.antlr.v4.runtime.ParserRuleContext;
 import qls.QLSBaseVisitor;
 import qls.QLSParser;
-import qls.ast.ASTNode;
-import qls.ast.Page;
+import qls.ast.*;
+import qls.ast.components.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +15,20 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     public ASTNode visitStylesheet(QLSParser.StylesheetContext ctx) {
         String formId = ctx.IDENTIFIER().getText();
         List<Page> pages = new ArrayList<>();
-        // return new Stylesheet(formId, pages, null);
-        return null;
+        return new Stylesheet(formId, pages, getSourceLocation(ctx));
+    }
+
+    @Override
+    public ASTNode visitPage(QLSParser.PageContext ctx) {
+        String pageId = ctx.IDENTIFIER().getText();
+        List<Component> components = new ArrayList<>();
+
+        return new Page(pageId, components, getSourceLocation(ctx));
+    }
+
+    @Override
+    public ASTNode visitSection(QLSParser.SectionContext ctx) {
+        return super.visitSection(ctx);
     }
 
     // @Override
@@ -48,8 +61,9 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     //     return new MoneyType(getSourceLocation(ctx));
     // }
     //
-    // public SourceLocation getSourceLocation(ParserRuleContext ctx) {
-    //     return new SourceLocation(ctx.start.getLine(), ctx.start.getCharPositionInLine());
-    // }
+
+    public SourceLocation getSourceLocation(ParserRuleContext ctx) {
+        return new SourceLocation(ctx.start.getLine(), ctx.start.getCharPositionInLine());
+    }
 }
 

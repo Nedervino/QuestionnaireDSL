@@ -2,6 +2,7 @@ package gui;
 
 import ql.ast.Form;
 import ql.evaluator.Evaluator;
+import qls.ast.Stylesheet;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +24,7 @@ public class FormViewer {
     }
 
 
-    public void start(Form node) {
+    public void start(Form node, Stylesheet stylesheet) {
         initialiseFrame();
 
         GUIElementConstructionVisitor visitor = new GUIElementConstructionVisitor(this);

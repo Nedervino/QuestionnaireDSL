@@ -5,6 +5,8 @@ import ql.evaluator.Evaluator;
 import gui.FormViewer;
 import ql.parser.FormBuilder;
 import ql.validator.Validator;
+import qls.ast.Stylesheet;
+import qls.parser.StylesheetBuilder;
 
 /**
  * This program parses an input file following QL DSL specification, for which it renders a graphical form
@@ -21,8 +23,9 @@ public class Main {
         String qlsFileName = "src/input/qls/correct/form1.qls";
         String qlsFile = new FileScanner().loadFile(qlsFileName);
 
-        // StylesheetBuilder stylesheetBuilder = new StylesheetBuilder();
+        StylesheetBuilder stylesheetBuilder = new StylesheetBuilder();
         // Stylesheet stylesheet = stylesheetBuilder.buildASTFromString(qlFile);
+        Stylesheet stylesheet = null;
 
         Validator validator = new Validator();
         if (!validator.passesTypeChecks(form)) {
@@ -36,7 +39,8 @@ public class Main {
         evaluator.start(form);
 
         FormViewer formViewer = new FormViewer(evaluator);
-        formViewer.start(form);
+
+        formViewer.start(form, stylesheet);
     }
 
 }

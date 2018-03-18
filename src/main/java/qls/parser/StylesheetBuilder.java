@@ -16,9 +16,9 @@ public class StylesheetBuilder {
 
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
         QLSParser.StylesheetContext stylesheetContext = parser.stylesheet();
-        // Stylesheet stylesheet = (Stylesheet) astConstructionVisitor.visit(stylesheetContext);
-        // return stylesheet;
-        return new Stylesheet("test", new ArrayList<>(), null);
+        Stylesheet stylesheet = (Stylesheet) astConstructionVisitor.visit(stylesheetContext);
+        return stylesheet;
+        // return new Stylesheet("test", new ArrayList<>(), null);
     }
 
     public QLSParser createParser(String input) {
