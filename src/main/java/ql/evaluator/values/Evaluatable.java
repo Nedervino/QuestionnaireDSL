@@ -6,7 +6,9 @@ public interface Evaluatable<T> {
 
     void setValue(T value);
 
-    boolean isTrue();
+    default boolean isTrue(){
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
     default Evaluatable add(Evaluatable evaluatable) {
         throw new UnsupportedOperationException(getValue().toString());
