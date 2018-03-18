@@ -8,115 +8,227 @@ public interface Evaluatable<T> {
 
     boolean isTrue();
 
-    Evaluatable add(Evaluatable evaluatable);
+    default Evaluatable add(Evaluatable evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    Evaluatable add(EvaluatableMoney evaluatable);
+    default Evaluatable add(EvaluatableMoney evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    Evaluatable add(EvaluatableInteger evaluatable);
+    default Evaluatable add(EvaluatableInteger evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    Evaluatable add(EvaluatableDecimal evaluatable);
+    default Evaluatable add(EvaluatableDecimal evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean and(Evaluatable evaluatable);
+    default EvaluatableBoolean and(Evaluatable evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean and(EvaluatableBoolean evaluatable);
+    default EvaluatableBoolean and(EvaluatableBoolean evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    Evaluatable divide(Evaluatable evaluatable);
+    default Evaluatable divide(Evaluatable evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    Evaluatable divide(EvaluatableMoney evaluatable);
+    default Evaluatable divide(EvaluatableMoney evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    Evaluatable divide(EvaluatableInteger evaluatable);
+    default Evaluatable divide(EvaluatableInteger evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    Evaluatable divide(EvaluatableDecimal evaluatable);
+    default Evaluatable divide(EvaluatableDecimal evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean isEqual(Evaluatable evaluatable);
+    default EvaluatableBoolean isEqual(Evaluatable evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean isEqual(EvaluatableMoney evaluatable);
+    default EvaluatableBoolean isEqual(EvaluatableMoney evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean isEqual(EvaluatableInteger evaluatable);
+    default EvaluatableBoolean isEqual(EvaluatableInteger evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean isEqual(EvaluatableDecimal evaluatable);
+    default EvaluatableBoolean isEqual(EvaluatableDecimal evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean isEqual(EvaluatableString evaluatable);
+    default EvaluatableBoolean isEqual(EvaluatableString evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean isEqual(EvaluatableBoolean evaluatable);
+    default EvaluatableBoolean isEqual(EvaluatableBoolean evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean isEqual(EvaluatableDate evaluatable);
+    default EvaluatableBoolean isEqual(EvaluatableDate evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean greaterThanEqual(Evaluatable evaluatable);
+    default EvaluatableBoolean greaterThanEqual(Evaluatable evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean greaterThanEqual(EvaluatableMoney evaluatable);
+    default EvaluatableBoolean greaterThanEqual(EvaluatableMoney evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean greaterThanEqual(EvaluatableDecimal evaluatable);
+    default EvaluatableBoolean greaterThanEqual(EvaluatableDecimal evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean greaterThanEqual(EvaluatableInteger evaluatable);
+    default EvaluatableBoolean greaterThanEqual(EvaluatableInteger evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean greaterThanEqual(EvaluatableDate evaluatable);
+    default EvaluatableBoolean greaterThanEqual(EvaluatableDate evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean greaterThan(Evaluatable evaluatable);
+    default EvaluatableBoolean greaterThan(Evaluatable evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean greaterThan(EvaluatableMoney evaluatable);
+    default EvaluatableBoolean greaterThan(EvaluatableMoney evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean greaterThan(EvaluatableDecimal evaluatable);
+    default EvaluatableBoolean greaterThan(EvaluatableDecimal evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean greaterThan(EvaluatableInteger evaluatable);
+    default EvaluatableBoolean greaterThan(EvaluatableInteger evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean greaterThan(EvaluatableDate evaluatable);
+    default EvaluatableBoolean greaterThan(EvaluatableDate evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean lessThanEqual(Evaluatable evaluatable);
+    default EvaluatableBoolean lessThanEqual(Evaluatable evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean lessThanEqual(EvaluatableMoney evaluatable);
+    default EvaluatableBoolean lessThanEqual(EvaluatableMoney evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean lessThanEqual(EvaluatableDecimal evaluatable);
+    default EvaluatableBoolean lessThanEqual(EvaluatableDecimal evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean lessThanEqual(EvaluatableInteger evaluatable);
+    default EvaluatableBoolean lessThanEqual(EvaluatableInteger evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean lessThanEqual(EvaluatableDate evaluatable);
+    default EvaluatableBoolean lessThanEqual(EvaluatableDate evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean lessThan(Evaluatable evaluatable);
+    default EvaluatableBoolean lessThan(Evaluatable evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean lessThan(EvaluatableMoney evaluatable);
+    default EvaluatableBoolean lessThan(EvaluatableMoney evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean lessThan(EvaluatableDecimal evaluatable);
+    default EvaluatableBoolean lessThan(EvaluatableDecimal evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean lessThan(EvaluatableInteger evaluatable);
+    default EvaluatableBoolean lessThan(EvaluatableInteger evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean lessThan(EvaluatableDate evaluatable);
+    default EvaluatableBoolean lessThan(EvaluatableDate evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    Evaluatable multiply(Evaluatable evaluatable);
+    default Evaluatable multiply(Evaluatable evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    Evaluatable multiply(EvaluatableMoney evaluatable);
+    default Evaluatable multiply(EvaluatableMoney evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    Evaluatable multiply(EvaluatableDecimal evaluatable);
+    default Evaluatable multiply(EvaluatableDecimal evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    Evaluatable multiply(EvaluatableInteger evaluatable);
+    default Evaluatable multiply(EvaluatableInteger evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean notEqual(Evaluatable evaluatable);
+    default EvaluatableBoolean notEqual(Evaluatable evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean notEqual(EvaluatableMoney evaluatable);
+    default EvaluatableBoolean notEqual(EvaluatableMoney evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean notEqual(EvaluatableDecimal evaluatable);
+    default EvaluatableBoolean notEqual(EvaluatableDecimal evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean notEqual(EvaluatableInteger evaluatable);
+    default EvaluatableBoolean notEqual(EvaluatableInteger evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean notEqual(EvaluatableDate evaluatable);
+    default EvaluatableBoolean notEqual(EvaluatableDate evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean notEqual(EvaluatableString evaluatable);
+    default EvaluatableBoolean notEqual(EvaluatableString evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean notEqual(EvaluatableBoolean evaluatable);
+    default EvaluatableBoolean notEqual(EvaluatableBoolean evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean or(Evaluatable evaluatable);
+    default EvaluatableBoolean or(Evaluatable evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean or(EvaluatableBoolean evaluatable);
+    default EvaluatableBoolean or(EvaluatableBoolean evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    Evaluatable subtract(Evaluatable evaluatable);
+    default Evaluatable subtract(Evaluatable evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    Evaluatable subtract(EvaluatableMoney evaluatable);
+    default Evaluatable subtract(EvaluatableMoney evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    Evaluatable subtract(EvaluatableDecimal evaluatable);
+    default Evaluatable subtract(EvaluatableDecimal evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    Evaluatable subtract(EvaluatableInteger evaluatable);
+    default Evaluatable subtract(EvaluatableInteger evaluatable) {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableBoolean logicalNegate();
+    default EvaluatableBoolean logicalNegate() {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 
-    EvaluatableNumeric arithmeticNegate();
+    default EvaluatableNumeric arithmeticNegate() {
+        throw new UnsupportedOperationException(getValue().toString());
+    }
 }
