@@ -39,38 +39,27 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         visit(form);
     }
 
-    // public void update(Question node, String value) {
-    //     //Recognize whether answers to question match the declared type
-    //
-    //     Evaluatable evaluatable = createEvaluatable(node.getType(), value);
-    //     //Update what value is stored at this node in the current state
-    //     storedValues.put(node, evaluatable);
-    //     visit(form);
-    // }
-    //
-    // public void update(Question node, boolean value) {
-    //     //TODO Recognize whether answers to question match the declared type
-    //
-    //     EvaluatableBoolean evaluatable = new EvaluatableBoolean(value);
-    //     storedValues.put(node, evaluatable);
-    //     visit(form);
-    // }
+    @Override
+    public void setEvaluatable(String questionId, Evaluatable value) {
+        ASTNode node = idLookup.get(questionId);
+        storedValues.put(node, value);
+    }
 
-    // private Evaluatable createEvaluatable(Type type, String value) {
-    //     //TODO write switch which creates the right evaluatable implementation (string, int etc)
-    //     if (type instanceof StringType) {
-    //         return new EvaluatableString(value);
-    //     } else if (type instanceof IntegerType) {
-    //         return new EvaluatableInteger(Integer.parseInt(value));
-    //     } else if (type instanceof DecimalType) {
-    //         return new EvaluatableDecimal(Double.parseDouble(value));
-    //     } else if (type instanceof MoneyType) {
-    //         return new EvaluatableMoney(new BigDecimal(value));
-    //     } else if (type instanceof DateType) {
-    //         return new EvaluatableDate(new Date(value));
-    //     }
-    //     return null;
-    // }
+    @Override
+    public void evaluate() {
+        visit(form);
+    }
+
+    @Override
+    public List<Question> getQuestions() {
+        return new LinkedList(idLookup.values());
+    }
+
+    @Override
+    public Evaluatable getQuestionValue(String questionId) {
+        Question node = idLookup.get(questionId);
+        return storedValues.get(node);
+    }
 
     @Override
     public Void visit(Question node) {
@@ -399,25 +388,4 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         return null;
     }
 
-    @Override
-    public void evaluate() {
-
-    }
-
-    @Override
-    public List<Question> getQuestions() {
-        return null;
-    }
-
-    @Override
-    public Evaluatable getQuestionValue(String questionId) {
-        return null;
-    }
-
-    @Override
-    public void setEvaluatable(String questionId, Evaluatable value) {
-        ASTNode node = idLookup.get(questionId);
-        storedValues.put(node, value);
-        visit(form);
-    }
 }
