@@ -5,6 +5,7 @@ import ql.ast.expressions.Expression;
 import ql.ast.visitors.ExpressionVisitor;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class MoneyLiteral extends Expression {
 
@@ -18,6 +19,10 @@ public class MoneyLiteral extends Expression {
 
     public BigDecimal getValue() {
         return value;
+    }
+
+    public BigDecimal getDisplayValue() {
+        return value.setScale(2, RoundingMode.HALF_UP);
     }
 
     @Override
