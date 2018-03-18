@@ -21,31 +21,6 @@ public class EvaluatableDate implements Evaluatable<Date> {
     }
 
     @Override
-    public Evaluatable add(Evaluatable evaluatable) {
-        return null;
-    }
-
-    @Override
-    public Evaluatable add(EvaluatableMoney evaluatable) {
-        return null;
-    }
-
-    @Override
-    public Evaluatable add(EvaluatableInteger evaluatable) {
-        return null;
-    }
-
-    @Override
-    public Evaluatable add(EvaluatableDecimal evaluatable) {
-        return null;
-    }
-
-    @Override
-    public boolean isTrue() {
-        return false;
-    }
-
-    @Override
     public EvaluatableBoolean and(Evaluatable evaluatable) {
         return null;
     }
