@@ -1,5 +1,7 @@
 package ql.evaluator.values;
 
+import java.util.Objects;
+
 public class EvaluatableDecimal extends EvaluatableNumeric<Double> {
 
     double value;
@@ -40,7 +42,7 @@ public class EvaluatableDecimal extends EvaluatableNumeric<Double> {
 
     @Override
     public EvaluatableBoolean isEqual(EvaluatableDecimal evaluatable) {
-        return new EvaluatableBoolean(evaluatable.getValue() == getValue());
+        return new EvaluatableBoolean(Objects.equals(evaluatable.getValue(), getValue()));
     }
 
     @Override
@@ -80,7 +82,7 @@ public class EvaluatableDecimal extends EvaluatableNumeric<Double> {
 
     @Override
     public EvaluatableBoolean notEqual(EvaluatableDecimal evaluatable) {
-        return new EvaluatableBoolean(evaluatable.getValue() != getValue());
+        return new EvaluatableBoolean(!Objects.equals(evaluatable.getValue(), getValue()));
     }
 
     @Override

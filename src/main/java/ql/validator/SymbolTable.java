@@ -14,7 +14,7 @@ public class SymbolTable {
     private final Map<String, Type> table;
 
     public SymbolTable() {
-        this.table = new HashMap<String, Type>();
+        this.table = new HashMap<>();
     }
 
     public void declare(String identifier, Type type) {

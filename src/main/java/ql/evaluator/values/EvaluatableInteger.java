@@ -1,5 +1,7 @@
 package ql.evaluator.values;
 
+import java.util.Objects;
+
 public class EvaluatableInteger extends EvaluatableNumeric<Integer> {
 
     Integer value;
@@ -40,7 +42,7 @@ public class EvaluatableInteger extends EvaluatableNumeric<Integer> {
 
     @Override
     public EvaluatableBoolean isEqual(EvaluatableInteger evaluatable) {
-        return new EvaluatableBoolean(evaluatable.getValue() == getValue());
+        return new EvaluatableBoolean(Objects.equals(evaluatable.getValue(), getValue()));
     }
 
     @Override
@@ -80,7 +82,7 @@ public class EvaluatableInteger extends EvaluatableNumeric<Integer> {
 
     @Override
     public EvaluatableBoolean notEqual(EvaluatableInteger evaluatable) {
-        return new EvaluatableBoolean(evaluatable.getValue() != getValue());
+        return new EvaluatableBoolean(!Objects.equals(evaluatable.getValue(), getValue()));
     }
 
     @Override

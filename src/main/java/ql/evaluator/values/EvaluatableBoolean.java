@@ -49,8 +49,8 @@ public class EvaluatableBoolean implements Evaluatable<Boolean> {
     }
 
     public EvaluatableBoolean and(EvaluatableBoolean evaluatable) {
-        boolean left = value.booleanValue();
-        boolean right = evaluatable.getValue().booleanValue();
+        boolean left = value;
+        boolean right = evaluatable.getValue();
         return new EvaluatableBoolean(left && right);
     }
 
@@ -259,8 +259,8 @@ public class EvaluatableBoolean implements Evaluatable<Boolean> {
     }
 
     public EvaluatableBoolean notEqual(EvaluatableBoolean evaluatable) {
-        boolean left = value.booleanValue();
-        boolean right = evaluatable.getValue().booleanValue();
+        boolean left = value;
+        boolean right = evaluatable.getValue();
         return new EvaluatableBoolean(left != right);
     }
 
@@ -270,7 +270,7 @@ public class EvaluatableBoolean implements Evaluatable<Boolean> {
     }
 
     public EvaluatableBoolean or(EvaluatableBoolean evaluatable) {
-        return new EvaluatableBoolean(getValue().booleanValue() || evaluatable.getValue().booleanValue());
+        return new EvaluatableBoolean(getValue() || evaluatable.getValue());
     }
 
     @Override

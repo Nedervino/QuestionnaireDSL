@@ -36,7 +36,7 @@ public class EvaluatableMoney extends EvaluatableNumeric<BigDecimal> {
     public Evaluatable divide(EvaluatableMoney evaluatable) {
         BigDecimal otherValue = evaluatable.getValue();
         //terms are flipped just like in the subtract implementation
-        BigDecimal result = otherValue.divide(getValue()).setScale(2, BigDecimal.ROUND_HALF_UP);
+        BigDecimal result = otherValue.divide(getValue());
         return new EvaluatableMoney(result);
     }
 

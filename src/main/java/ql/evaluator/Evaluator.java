@@ -95,7 +95,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     }
 
     private boolean isCalculated(ASTNode left, ASTNode right) {
-        List<ASTNode> terms = Arrays.asList(new ASTNode[]{left, right});
+        List<ASTNode> terms = Arrays.asList(left, right);
         return isCalculated(terms);
     }
 
