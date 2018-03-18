@@ -2,6 +2,7 @@ package gui;
 
 import ql.ast.statements.ComputedQuestion;
 import ql.evaluator.Evaluator;
+import ql.evaluator.FormEvaluator;
 import ql.evaluator.values.Evaluatable;
 
 import java.awt.*;
@@ -9,9 +10,9 @@ import java.awt.*;
 public class ComputedQuestionElement extends GUIElement {
 
     ComputedQuestion node;
-    Evaluator evaluator;
+    FormEvaluator evaluator;
 
-    public ComputedQuestionElement(ComputedQuestion node, int yLoc, Evaluator evaluator) {
+    public ComputedQuestionElement(ComputedQuestion node, int yLoc, FormEvaluator evaluator) {
         super(yLoc);
         this.node = node;
         this.evaluator = evaluator;
@@ -23,7 +24,7 @@ public class ComputedQuestionElement extends GUIElement {
         String varName = node.getId();
         Object value = "";
 
-        Evaluatable evaluatable = evaluator.get(node);
+        Evaluatable evaluatable = evaluator.getQuestionValue(varName);
         if (evaluatable != null) {
             value = evaluatable.getValue();
         }

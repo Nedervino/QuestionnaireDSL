@@ -3,6 +3,7 @@ package main;
 import gui.FormViewer;
 import ql.ast.Form;
 import ql.evaluator.Evaluator;
+import ql.evaluator.FormEvaluator;
 import ql.parser.FormBuilder;
 import ql.validator.Validator;
 import qls.ast.Stylesheet;
@@ -35,7 +36,7 @@ public class Main {
             System.out.println("Successfully passed all checks");
         }
 
-        Evaluator evaluator = new Evaluator();
+        FormEvaluator evaluator = new Evaluator();
         evaluator.start(form);
 
         FormViewer formViewer = new FormViewer(evaluator);

@@ -1,7 +1,7 @@
 package gui;
 
 import ql.ast.Form;
-import ql.evaluator.Evaluator;
+import ql.evaluator.FormEvaluator;
 import qls.ast.Stylesheet;
 
 import javax.swing.*;
@@ -12,13 +12,13 @@ import java.util.LinkedList;
 public class FormViewer {
 
     // private Evaluator evaluator;
-    Evaluator evaluator;
+    FormEvaluator evaluator;
     // private JPanel panel;
     JPanel panel;
     private LinkedList<GUIElement> elements;
     private JFrame frame;
 
-    public FormViewer(Evaluator evaluator) {
+    public FormViewer(FormEvaluator evaluator) {
         this.evaluator = evaluator;
         elements = new LinkedList<>();
     }
