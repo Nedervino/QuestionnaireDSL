@@ -99,7 +99,7 @@ public class CyclicDependencyChecker implements FormVisitor<Void>, StatementVisi
     }
 
     public List<Variable> visitBinaryOperation(BinaryOperation binaryOperation) {
-        List<Variable> result = new ArrayList<Variable>();
+        List<Variable> result = new ArrayList<>();
         Optional.ofNullable(binaryOperation.getLeft().accept(this)).ifPresent(result::addAll);
         Optional.ofNullable(binaryOperation.getRight().accept(this)).ifPresent(result::addAll);
         return result;

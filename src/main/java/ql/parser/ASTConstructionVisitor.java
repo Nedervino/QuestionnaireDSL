@@ -28,7 +28,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitForm(QLParser.FormContext ctx) {
         String formId = ctx.IDENTIFIER().getText();
-        List<Statement> statements = new ArrayList();
+        List<Statement> statements = new ArrayList<>();
         ctx.block().statement().forEach(statementContext -> statements.add((Statement) visit(statementContext)));
 
         return new Form(formId, statements, getSourceLocation(ctx));

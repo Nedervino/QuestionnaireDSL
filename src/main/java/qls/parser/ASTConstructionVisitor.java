@@ -13,7 +13,7 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitStylesheet(QLSParser.StylesheetContext ctx) {
         String formId = ctx.IDENTIFIER().getText();
-        List<Page> pages = new ArrayList();
+        List<Page> pages = new ArrayList<>();
         // return new Stylesheet(formId, pages, null);
         return null;
     }
