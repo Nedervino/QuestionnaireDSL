@@ -1,8 +1,5 @@
 package qls.ast;
 
-import qls.ast.ASTNode;
-import qls.ast.SourceLocation;
-
 import java.util.List;
 
 public class Stylesheet extends ASTNode {

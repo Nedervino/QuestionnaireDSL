@@ -1,6 +1,5 @@
 package qls.ast;
 
-import qls.ast.SourceLocation;
 import qls.ast.components.Component;
 
 import java.util.List;

@@ -7,8 +7,6 @@ import qls.QLSLexer;
 import qls.QLSParser;
 import qls.ast.Stylesheet;
 
-import java.util.ArrayList;
-
 public class StylesheetBuilder {
 
     public Stylesheet buildASTFromString(String formContent) {

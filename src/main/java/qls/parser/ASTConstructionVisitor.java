@@ -3,7 +3,10 @@ package qls.parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import qls.QLSBaseVisitor;
 import qls.QLSParser;
-import qls.ast.*;
+import qls.ast.ASTNode;
+import qls.ast.Page;
+import qls.ast.SourceLocation;
+import qls.ast.Stylesheet;
 import qls.ast.components.Component;
 
 import java.util.ArrayList;
