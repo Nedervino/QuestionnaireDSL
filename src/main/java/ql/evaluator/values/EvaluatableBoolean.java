@@ -51,8 +51,7 @@ public class EvaluatableBoolean implements Evaluatable<Boolean> {
     public EvaluatableBoolean and(EvaluatableBoolean evaluatable) {
         boolean left = value.booleanValue();
         boolean right = evaluatable.getValue().booleanValue();
-        EvaluatableBoolean result = new EvaluatableBoolean(left && right);
-        return result;
+        return new EvaluatableBoolean(left && right);
     }
 
     @Override
@@ -262,8 +261,7 @@ public class EvaluatableBoolean implements Evaluatable<Boolean> {
     public EvaluatableBoolean notEqual(EvaluatableBoolean evaluatable) {
         boolean left = value.booleanValue();
         boolean right = evaluatable.getValue().booleanValue();
-        EvaluatableBoolean result = new EvaluatableBoolean(left != right);
-        return result;
+        return new EvaluatableBoolean(left != right);
     }
 
     @Override
@@ -297,8 +295,7 @@ public class EvaluatableBoolean implements Evaluatable<Boolean> {
 
     @Override
     public EvaluatableBoolean logicalNegate() {
-        EvaluatableBoolean result = new EvaluatableBoolean(!getValue().booleanValue());
-        return result;
+        return new EvaluatableBoolean(!getValue().booleanValue());
     }
 
     @Override

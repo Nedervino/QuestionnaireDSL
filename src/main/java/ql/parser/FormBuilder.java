@@ -19,9 +19,8 @@ public class FormBuilder {
 
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
         QLParser.FormContext formContext = parser.form();
-        Form form = (Form) astConstructionVisitor.visit(formContext);
 
-        return form;
+        return (Form) astConstructionVisitor.visit(formContext);
     }
 
     public QLParser createParser(String input) {
@@ -40,15 +39,13 @@ public class FormBuilder {
     public Expression getExpression(QLParser parser) {
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
         QLParser.ExpressionContext expressionContext = parser.expression();
-        Expression expression = (Expression) astConstructionVisitor.visit(expressionContext);
-        return expression;
+        return (Expression) astConstructionVisitor.visit(expressionContext);
     }
 
     public Statement getStatement(QLParser parser) {
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
         QLParser.StatementContext statementContext = parser.statement();
-        Statement statement = (Statement) astConstructionVisitor.visit(statementContext);
-        return statement;
+        return (Statement) astConstructionVisitor.visit(statementContext);
     }
 
 }
