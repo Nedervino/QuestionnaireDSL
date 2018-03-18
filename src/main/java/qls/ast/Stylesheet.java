@@ -1,7 +1,7 @@
 package qls.ast;
 
-import ql.ast.ASTNode;
-import ql.ast.SourceLocation;
+import qls.ast.ASTNode;
+import qls.ast.SourceLocation;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ public class Stylesheet extends ASTNode {
     private String stylesheetId;
     private List<Page> pages;
 
-    public Stylesheet(String stylesheetId, List<Page> page, SourceLocation sourceLocation) {
+    public Stylesheet(String stylesheetId, List<Page> pages, SourceLocation sourceLocation) {
         super(sourceLocation);
-        this.stylesheetId = this.stylesheetId;
-        this.pages = this.pages;
+        this.stylesheetId = stylesheetId;
+        this.pages = pages;
     }
 
     public String getStylesheetId() {

@@ -1,6 +1,6 @@
 package qls.ast.widget;
 
-import ql.ast.SourceLocation;
+import qls.ast.SourceLocation;
 import qls.ast.ASTNode;
 
 public class WidgetType extends ASTNode {

@@ -1,6 +1,6 @@
 package qls.ast.widget;
 
-import ql.ast.SourceLocation;
+import qls.ast.SourceLocation;
 
 public class Dropdown extends WidgetType {
 

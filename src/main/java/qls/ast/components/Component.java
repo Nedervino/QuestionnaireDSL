@@ -1,6 +1,7 @@
-package qls.ast;
+package qls.ast.components;
 
-import ql.ast.SourceLocation;
+import qls.ast.SourceLocation;
+import qls.ast.ASTNode;
 
 public abstract class Component extends ASTNode {
 

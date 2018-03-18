@@ -1,7 +1,5 @@
 package qls.ast;
 
-import ql.ast.SourceLocation;
-
 public abstract class ASTNode {
 
     SourceLocation sourceLocation;

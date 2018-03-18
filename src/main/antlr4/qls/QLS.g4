@@ -2,7 +2,7 @@ grammar QLS;
 
 
 
-stylesheet      : 'stylesheet' IDENTIFIER page*;
+stylesheet      : 'stylesheet' IDENTIFIER '{' page* '}';
 
 page            : 'page' IDENTIFIER block;
 

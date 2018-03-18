@@ -53,7 +53,7 @@ public class LiteralTest {
         final BigDecimal EXPECTED_RESULT = new BigDecimal(123.45).setScale(2, RoundingMode.HALF_UP);
         QLParser parser = formBuilder.createParser("123,45");
         MoneyLiteral moneyLiteral = (MoneyLiteral) formBuilder.getExpression(parser);
-        BigDecimal displayValue = moneyLiteral.getValue().setScale(2, RoundingMode.HALF_UP);
+        BigDecimal displayValue = moneyLiteral.getDisplayValue();
         assertEquals(EXPECTED_RESULT, displayValue);
     }
 
