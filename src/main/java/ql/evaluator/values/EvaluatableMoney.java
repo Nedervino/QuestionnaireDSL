@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class EvaluatableMoney extends EvaluatableNumeric<BigDecimal> {
 
-    BigDecimal value;
+    private BigDecimal value;
 
     public EvaluatableMoney(BigDecimal value) {
         this.value = value;

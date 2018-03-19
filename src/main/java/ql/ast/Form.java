@@ -21,7 +21,7 @@ public class Form extends ASTNode {
     }
 
     public List<Statement> getStatements() {
-        return this.statements;
+        return statements;
     }
 
     public <T> T accept(FormVisitor<T> visitor) {

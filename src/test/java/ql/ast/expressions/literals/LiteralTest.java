@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 
 public class LiteralTest {
 
-    FormBuilder formBuilder;
+    private FormBuilder formBuilder;
 
     @Before
     public void setUp() throws Exception {

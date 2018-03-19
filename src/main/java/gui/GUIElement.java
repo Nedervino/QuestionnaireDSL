@@ -4,12 +4,28 @@ import java.awt.*;
 
 public abstract class GUIElement {
 
-    int yLocation;
-    int height;
+    private int yLocation;
+    private int height;
 
     public GUIElement(int pointer) {
         this.yLocation = pointer;
-        height = 30;
+        this.height = 30;
+    }
+
+    public int getYLocation() {
+        return yLocation;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setYLocation(int yLocation) {
+        this.yLocation = yLocation;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public abstract void render(Graphics g);

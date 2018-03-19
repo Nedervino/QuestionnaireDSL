@@ -11,10 +11,10 @@ import static org.junit.Assert.*;
 
 public class CyclicDependencyCheckerTest {
 
-    FormBuilder formBuilder;
-    Helper helper;
-    CyclicDependencyChecker cyclicDependencyChecker;
-    IssueTracker issueTracker;
+    private FormBuilder formBuilder;
+    private Helper helper;
+    private CyclicDependencyChecker cyclicDependencyChecker;
+    private IssueTracker issueTracker;
 
     @Before
     public void setUp() throws Exception {

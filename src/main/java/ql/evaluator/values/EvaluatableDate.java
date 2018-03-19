@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class EvaluatableDate implements Evaluatable<Date> {
 
-    Date value;
+    private Date value;
 
     public EvaluatableDate(Date value) {
         this.value = value;

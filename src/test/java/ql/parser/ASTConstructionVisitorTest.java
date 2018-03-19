@@ -14,8 +14,8 @@ import static org.junit.Assert.assertEquals;
 
 public class ASTConstructionVisitorTest extends Helper {
 
-    FormBuilder formBuilder;
-    Helper helper;
+    private FormBuilder formBuilder;
+    private Helper helper;
 
     @Before
     public void setUp() throws Exception {

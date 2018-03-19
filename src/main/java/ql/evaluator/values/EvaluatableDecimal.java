@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class EvaluatableDecimal extends EvaluatableNumeric<Double> {
 
-    double value;
+    private double value;
 
     public EvaluatableDecimal(double value) {
         this.value = value;

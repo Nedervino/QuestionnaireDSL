@@ -2,7 +2,7 @@ package ql.evaluator.values;
 
 public class EvaluatableBoolean implements Evaluatable<Boolean> {
 
-    Boolean value;
+    private Boolean value;
 
     public EvaluatableBoolean(Boolean value) {
         this.value = value;

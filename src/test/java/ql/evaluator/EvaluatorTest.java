@@ -17,10 +17,10 @@ import static org.junit.Assert.assertFalse;
 
 public class EvaluatorTest {
 
-    FormBuilder formBuilder;
-    Helper helper;
-    FormEvaluator evaluator;
-    IssueTracker issueTracker;
+    private FormBuilder formBuilder;
+    private Helper helper;
+    private FormEvaluator evaluator;
+    private IssueTracker issueTracker;
 
     @Before
     public void setUp() throws Exception {

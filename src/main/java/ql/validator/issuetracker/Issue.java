@@ -4,8 +4,8 @@ import ql.ast.SourceLocation;
 
 public abstract class Issue {
 
-    protected final SourceLocation sourceLocation;
-    protected final String message;
+    private final SourceLocation sourceLocation;
+    private final String message;
 
     public Issue(SourceLocation sourceLocation, String message) {
         this.sourceLocation = sourceLocation;

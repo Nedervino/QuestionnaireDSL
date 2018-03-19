@@ -14,10 +14,10 @@ import static org.junit.Assert.assertTrue;
 
 public class ExpressionCheckerTest {
 
-    FormBuilder formBuilder;
-    Helper helper;
-    ExpressionChecker expressionChecker;
-    IssueTracker issueTracker;
+    private FormBuilder formBuilder;
+    private Helper helper;
+    private ExpressionChecker expressionChecker;
+    private IssueTracker issueTracker;
 
     @Before
     public void setUp() throws Exception {

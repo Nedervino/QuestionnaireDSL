@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class EvaluatableInteger extends EvaluatableNumeric<Integer> {
 
-    Integer value;
+    private Integer value;
 
     public EvaluatableInteger(int value) {
         this.value = value;

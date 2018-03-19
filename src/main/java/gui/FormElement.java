@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class FormElement extends GUIElement {
 
-    Form node;
+    private Form node;
 
     public FormElement(Form node, int yLoc) {
         super(yLoc);
@@ -15,7 +15,7 @@ public class FormElement extends GUIElement {
 
     @Override
     public void render(Graphics g) {
-        g.drawString(node.getFormId(), 30, yLocation);
+        g.drawString(node.getFormId(), 30, getYLocation());
     }
 
 }

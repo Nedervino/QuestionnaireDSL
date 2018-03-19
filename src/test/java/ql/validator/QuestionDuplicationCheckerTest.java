@@ -11,10 +11,10 @@ import static org.junit.Assert.*;
 
 public class QuestionDuplicationCheckerTest {
 
-    FormBuilder formBuilder;
-    Helper helper;
-    QuestionDuplicationChecker questionDuplicationChecker;
-    IssueTracker issueTracker;
+    private FormBuilder formBuilder;
+    private Helper helper;
+    private QuestionDuplicationChecker questionDuplicationChecker;
+    private IssueTracker issueTracker;
 
     @Before
     public void setUp() throws Exception {

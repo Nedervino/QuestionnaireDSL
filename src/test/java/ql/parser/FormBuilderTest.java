@@ -12,7 +12,8 @@ public class FormBuilderTest {
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
-    Helper helper;
+
+    private Helper helper;
     private FormBuilder formBuilder;
 
     @Before
@@ -33,8 +34,7 @@ public class FormBuilderTest {
 
     @Test
     public void canParseSimpleForm() {
-        Form form = helper.buildASTFromFile("src/input/ql/correct/simple.ql", formBuilder);
-
+        helper.buildASTFromFile("src/input/ql/correct/simple.ql", formBuilder);
     }
 
     @Test

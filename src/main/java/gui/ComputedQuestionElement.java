@@ -9,8 +9,8 @@ import java.awt.*;
 
 public class ComputedQuestionElement extends GUIElement {
 
-    ComputedQuestion node;
-    FormEvaluator evaluator;
+    private ComputedQuestion node;
+    private FormEvaluator evaluator;
 
     public ComputedQuestionElement(ComputedQuestion node, int yLoc, FormEvaluator evaluator) {
         super(yLoc);
@@ -30,6 +30,6 @@ public class ComputedQuestionElement extends GUIElement {
         }
 
         g.setColor(Color.black);
-        g.drawString(varName + ": " + String.valueOf(value), 50, yLocation);
+        g.drawString(varName + ": " + String.valueOf(value), 50, this.getYLocation());
     }
 }

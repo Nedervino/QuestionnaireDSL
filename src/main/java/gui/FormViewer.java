@@ -23,6 +23,10 @@ public class FormViewer {
         elements = new LinkedList<>();
     }
 
+    public FormEvaluator getEvaluator() {
+        return evaluator;
+    }
+
 
     public void start(Form node, Stylesheet stylesheet) {
         initialiseFrame();

@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TypeTest {
 
-    FormBuilder formBuilder;
+    private FormBuilder formBuilder;
 
     @Before
     public void setUp() throws Exception {
