@@ -18,5 +18,4 @@ public interface FormEvaluator {
 
     public void setEvaluatable(String questionId, Evaluatable value);
 
-
 }

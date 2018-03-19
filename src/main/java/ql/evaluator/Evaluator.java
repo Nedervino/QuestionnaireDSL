@@ -19,19 +19,16 @@ import java.util.*;
 
 public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Void>, FormEvaluator {
 
-    HashMap<ASTNode, Evaluatable> storedValues;
-    HashMap<String, Question> idLookup;
-    Form form;
+    private HashMap<ASTNode, Evaluatable> storedValues;
+    private HashMap<String, Question> idLookup;
+    private Form form;
 
     public Evaluator() {
         storedValues = new HashMap<>();
         idLookup = new HashMap<>();
     }
 
-    public Evaluatable get(ASTNode varName) {
-        return storedValues.get(varName);
-    }
-
+    @Override
     public void start(Form form) {
         this.form = form;
         visit(form);
