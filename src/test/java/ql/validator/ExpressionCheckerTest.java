@@ -30,7 +30,7 @@ public class ExpressionCheckerTest {
     @Test
     public void shouldIssueErrorForUndefinedQuestionReference() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/undefinedQuestion.ql", formBuilder);
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/undefinedQuestion.ql", formBuilder);
 
         //Initialize symbolTable;
         SymbolTable symbolTable = new SymbolTable();
@@ -46,7 +46,7 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueErrorForNonBooleanCondition() {
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/nonBooleanCondition.ql", formBuilder);
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonBooleanCondition.ql", formBuilder);
 
         //Initialize symbolTable;
         SymbolTable symbolTable = new SymbolTable();
@@ -62,7 +62,7 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueTypeErrorsForNonNumericMismatches() {
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/incompatibleBinaryExpressionTypes.ql", formBuilder);
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/incompatibleBinaryExpressionTypes.ql", formBuilder);
 
         //Initialize symbolTable;
         SymbolTable symbolTable = new SymbolTable();
@@ -81,7 +81,7 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueErrorForNonNumericInArithmeticExpression() {
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/nonNumericInArithmeticExpression.ql", formBuilder);
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonNumericInArithmeticExpression.ql", formBuilder);
 
         //Initialize symbolTable;
         SymbolTable symbolTable = new SymbolTable();
@@ -105,7 +105,7 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueNoErrorForNumericExpressionsWithMoneyType() {
-        Form form = helper.buildASTFromFile("src/input/ql/correct/numericExpressionsWithMoneyType.ql", formBuilder);
+        Form form = helper.buildASTFromFile("src/input/ql/correct/validator/numericExpressionsWithMoneyType.ql", formBuilder);
 
         //Initialize symbolTable;
         SymbolTable symbolTable = new SymbolTable();
@@ -121,7 +121,7 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueNoErrorForDifferentNumericCombinations() {
-        Form form = helper.buildASTFromFile("src/input/ql/correct/numericCombinations.ql", formBuilder);
+        Form form = helper.buildASTFromFile("src/input/ql/correct/validator/numericCombinations.ql", formBuilder);
 
         //Initialize symbolTable;
         SymbolTable symbolTable = new SymbolTable();
@@ -137,7 +137,7 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueErrorForNonBooleanInBooleanExpression() {
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/nonBooleanInBoolean.ql", formBuilder);
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonBooleanInBoolean.ql", formBuilder);
 
         //Initialize symbolTable;
         SymbolTable symbolTable = new SymbolTable();
@@ -156,7 +156,7 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueErrorForNonNumericInComparisonExpression() {
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/nonNumericInComparison.ql", formBuilder);
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonNumericInComparison.ql", formBuilder);
 
         //Initialize symbolTable;
         SymbolTable symbolTable = new SymbolTable();

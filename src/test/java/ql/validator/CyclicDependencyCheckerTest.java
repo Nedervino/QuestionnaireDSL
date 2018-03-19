@@ -27,7 +27,7 @@ public class CyclicDependencyCheckerTest {
     @Test
     public void shouldIssueErrorForCycleWithinQuestion() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/cyclicalWithinQuestion.ql", formBuilder);
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/cyclicalWithinQuestion.ql", formBuilder);
         boolean passesTests = cyclicDependencyChecker.passesTests(form);
         assertFalse(passesTests);
         assertEquals(issueTracker.getWarnings().size(), 0);
@@ -38,7 +38,7 @@ public class CyclicDependencyCheckerTest {
     @Test
     public void shouldIssueErrorForCycleBetweenQuestions() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/cyclicalBetweenQuestions.ql", formBuilder);
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/cyclicalBetweenQuestions.ql", formBuilder);
         boolean passesTests = cyclicDependencyChecker.passesTests(form);
         assertFalse(passesTests);
         assertEquals(issueTracker.getWarnings().size(), 0);
