@@ -29,4 +29,5 @@ public class MoneyType extends NumberType {
             return toString().equals(type);
         }
     }
+
 }

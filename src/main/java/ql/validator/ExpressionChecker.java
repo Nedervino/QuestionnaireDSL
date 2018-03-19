@@ -35,6 +35,11 @@ public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Vo
         return !issueTracker.hasErrors();
     }
 
+    /**
+     * Checks if left and right child are compatible with each other
+     * @param binaryOperation
+     * @return ErrorType if incompatible, otherwise the dominating return type of the two children
+     */
     public Type checkTypeCompatibility(BinaryOperation binaryOperation) {
         Type leftType = binaryOperation.getLeft().accept(this);
         Type rightType = binaryOperation.getRight().accept(this);
@@ -59,6 +64,12 @@ public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Vo
         }
     }
 
+    /**
+     * Checks if operand type is allowed within parent expression
+     * @param actualType
+     * @param expectedType
+     * @return the actual type if allowed, otherwise ErrorType
+     */
     private Type verifyType(Type actualType, String expectedType) {
         //If issue logged further down the tree, don't log new error
         if (actualType.isOfType(expectedType) || (expectedType.equals("numeric") && (actualType.isOfType("integer") || actualType.isOfType("decimal"))) || actualType.isOfType("error")) {

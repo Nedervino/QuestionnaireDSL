@@ -10,6 +10,7 @@ import ql.validator.issuetracker.IssueTracker;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ExpressionCheckerTest {
 
@@ -72,7 +73,7 @@ public class ExpressionCheckerTest {
         assertFalse(passesTests);
 
         assertEquals(0, issueTracker.getWarnings().size());
-        assertEquals(15, issueTracker.getErrors().size());
+        assertEquals(13, issueTracker.getErrors().size());
         for (Error error : issueTracker.getErrors()) {
             assertEquals("Incompatible", error.getMessage().substring(0, 12));
         }
@@ -80,27 +81,96 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueErrorForNonNumericInArithmeticExpression() {
-        assertFalse(true);
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/nonNumericInArithmeticExpression.ql", formBuilder);
+
+        //Initialize symbolTable;
+        SymbolTable symbolTable = new SymbolTable();
+        new QuestionDuplicationChecker(issueTracker).passesTests(form, symbolTable);
+        issueTracker.reset();
+
+        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        assertFalse(passesTests);
+
+        assertEquals(0, issueTracker.getWarnings().size());
+        assertEquals(3, issueTracker.getErrors().size());
+        for (Error error : issueTracker.getErrors()) {
+            assertEquals("Type mismatch", error.getMessage().substring(0, 13));
+        }
     }
 
-    @Test
-    public void shouldIssueNoErrorForStringConcatenation() {
-        assertFalse(true);
-    }
+    // @Test
+    // public void shouldIssueNoErrorForStringConcatenation() {
+    //     assertFalse(true);
+    // }
 
     @Test
     public void shouldIssueNoErrorForNumericExpressionsWithMoneyType() {
-        assertFalse(true);
+        Form form = helper.buildASTFromFile("src/input/ql/correct/numericExpressionsWithMoneyType.ql", formBuilder);
+
+        //Initialize symbolTable;
+        SymbolTable symbolTable = new SymbolTable();
+        new QuestionDuplicationChecker(issueTracker).passesTests(form, symbolTable);
+        issueTracker.reset();
+
+        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        assertTrue(passesTests);
+
+        assertEquals(0, issueTracker.getWarnings().size());
+        assertEquals(0, issueTracker.getErrors().size());
+    }
+
+    @Test
+    public void shouldIssueNoErrorForDifferentNumericCombinations() {
+        Form form = helper.buildASTFromFile("src/input/ql/correct/numericCombinations.ql", formBuilder);
+
+        //Initialize symbolTable;
+        SymbolTable symbolTable = new SymbolTable();
+        new QuestionDuplicationChecker(issueTracker).passesTests(form, symbolTable);
+        issueTracker.reset();
+
+        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        assertTrue(passesTests);
+
+        assertEquals(0, issueTracker.getWarnings().size());
+        assertEquals(0, issueTracker.getErrors().size());
     }
 
     @Test
     public void shouldIssueErrorForNonBooleanInBooleanExpression() {
-        assertFalse(true);
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/nonBooleanInBoolean.ql", formBuilder);
+
+        //Initialize symbolTable;
+        SymbolTable symbolTable = new SymbolTable();
+        new QuestionDuplicationChecker(issueTracker).passesTests(form, symbolTable);
+        issueTracker.reset();
+
+        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        assertFalse(passesTests);
+
+        assertEquals(0, issueTracker.getWarnings().size());
+        assertEquals(2, issueTracker.getErrors().size());
+        for (Error error : issueTracker.getErrors()) {
+            assertEquals("Type mismatch", error.getMessage().substring(0, 13));
+        }
     }
 
     @Test
     public void shouldIssueErrorForNonNumericInComparisonExpression() {
-        assertFalse(true);
+        Form form = helper.buildASTFromFile("src/input/ql/incorrect/nonNumericInComparison.ql", formBuilder);
+
+        //Initialize symbolTable;
+        SymbolTable symbolTable = new SymbolTable();
+        new QuestionDuplicationChecker(issueTracker).passesTests(form, symbolTable);
+        issueTracker.reset();
+
+        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        assertFalse(passesTests);
+
+        assertEquals(0, issueTracker.getWarnings().size());
+        assertEquals(2, issueTracker.getErrors().size());
+        for (Error error : issueTracker.getErrors()) {
+            assertEquals("Type mismatch", error.getMessage().substring(0, 13));
+        }
     }
 
 }

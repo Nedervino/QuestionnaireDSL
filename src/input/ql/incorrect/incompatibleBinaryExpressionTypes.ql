@@ -10,13 +10,11 @@ form incompatibleTypes {
     "Test" q2: string = (1242 + 12-12-2012)
     "Test" q3: string = (21 + true)
     "Test" q4: string = (234 + true)
-    "Test" q5: string = (2 + 2,10)
 
     //Decimal combinations
     "Test" q6: string = (12.42 + "hi")
     "Test" q7: string = (12.42 + 12-12-2012)
     "Test" q8: string = (2.1 + true)
-    "Test" q9: string = (2.1 + 2,10)
 
     //String combinations
     "Test" q10: string = ("hi" + true)
@@ -38,6 +36,9 @@ form incompatibleTypes {
     //different numeric operand combinations are allowed
     "Test" q17: decimal = (2.1 + 12321)
     "Test" q18: decimal = (12321 + 2.1)
+    "Test" q19: money = (2 * 2,10)
+    "Test" q20: money = (2.1 * 2,10)
+
 
     //Integer, decimal, and boolean same-types
     "Test" q18: integer = (2 + 2)
