@@ -80,12 +80,12 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitUnaryExpression(QLParser.UnaryExpressionContext ctx) {
-        String operator = ctx.unaryOperation().UNARY().getText();
+        String operator = ctx.unaryOperator().getText();
         switch (operator) {
             case "-":
-                return new ArithmeticNegation((Expression) visit(ctx.unaryOperation().expression()), getSourceLocation(ctx));
+                return new ArithmeticNegation((Expression) visit(ctx.expression()), getSourceLocation(ctx));
             case "!":
-                return new LogicalNegation((Expression) visit(ctx.unaryOperation().expression()), getSourceLocation(ctx));
+                return new LogicalNegation((Expression) visit(ctx.expression()), getSourceLocation(ctx));
             default:
                 throw new IllegalArgumentException(String.format("Invalid unary operator: %s", operator));
         }
@@ -96,7 +96,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         Expression left = (Expression) visit(ctx.left);
         Expression right = (Expression) visit(ctx.right);
 
-        String operator = ctx.ARITHMETIC().getText();
+        String operator = ctx.arithmeticOperator().getText();
         switch (operator) {
             case "+":
                 return new Addition(left, right, getSourceLocation(ctx));
@@ -116,7 +116,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         Expression left = (Expression) visit(ctx.left);
         Expression right = (Expression) visit(ctx.right);
 
-        String operator = ctx.LOGICAL().getText();
+        String operator = ctx.logicalOperator().getText();
         switch (operator) {
             case "&&":
                 return new LogicalAnd(left, right, getSourceLocation(ctx));
@@ -132,7 +132,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         Expression left = (Expression) visit(ctx.left);
         Expression right = (Expression) visit(ctx.right);
 
-        String operator = ctx.RELATIONAL().getText();
+        String operator = ctx.relationalOperator().getText();
         switch (operator) {
             case "<":
                 return new LessThan(left, right, getSourceLocation(ctx));

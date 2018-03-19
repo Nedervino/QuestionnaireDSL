@@ -3,81 +3,122 @@ grammar QL;
 /*
 
 TODO:
-- Refactor lexer/parser division (bracket lexer tokens?)
-- Remove MONEY / DECIMAL ambiguity (add money-specific symbols in front such as $ ?)
-- replace "INT" in the line valNum with INT | DECIMAL | MONEY_LITERAL to allow using numericals interchangeably (?)
-
+- Optionally add money-specific currency symbols to lexer
 */
 
 
 
-form            : 'form' IDENTIFIER block;
+form                : 'form' IDENTIFIER block;
 
-block           : '{'(statement)*'}';
-statement       : question
-                | computedQuestion
-                | ifStatement
-                ;
-
-
-question        : STRINGLITERAL declaration;
-declaration     : IDENTIFIER ':' type;
-
-computedQuestion: STRINGLITERAL declaration '=' expression;
-
-ifStatement     : 'if' '(' expression ')' block elseBlock?;
-elseBlock       : 'else' block;
-
-expression      : '('expression')'                              #nestedExpression
-                | unaryOperation                                #unaryExpression
-                | left=expression ARITHMETIC right=expression   #arithMeticBinary
-                | left=expression RELATIONAL right=expression   #relationalBinary
-                | left=expression LOGICAL right=expression      #logicalBinary
-                | value                                         #expressionValue
-                ;
-
-unaryOperation  : UNARY expression
-                ;
-
-value           : BOOLEANLITERAL                                #booleanLiteral
-                | INTEGERLITERAL                                #integerLiteral
-                | STRINGLITERAL                                 #stringLiteral
-                | MONEYLITERAL                                  #moneyLiteral
-                | DECIMALLITERAL                                #decimalLiteral
-                | DATELITERAL                                   #dateLiteral
-                | IDENTIFIER                                    #variable
-                ;
+block               : LEFTBRACKET statement* RIGHTBRACKET;
+statement           : question
+                    | computedQuestion
+                    | ifStatement
+                    ;
 
 
-type            : 'boolean'                                     #booleanType
-                | 'integer'                                     #integerType
-                | 'string'                                      #stringType
-                | 'money'                                       #moneyType
-                | 'decimal'                                     #decimalType
-                | 'date'                                        #dateType
-                ;
+question            : STRINGLITERAL declaration;
+declaration         : IDENTIFIER COLON type;
+
+computedQuestion    : STRINGLITERAL declaration ASSIGNMENT expression;
+
+ifStatement         : 'if' LEFTPARENTHESES expression RIGHTPARENTHESES block elseBlock?;
+elseBlock           : 'else' block;
+
+expression          : LEFTPARENTHESES expression RIGHTPARENTHESES           #nestedExpression
+                    | unaryOperator expression                              #unaryExpression
+                    | left=expression arithmeticOperator right=expression   #arithMeticBinary
+                    | left=expression relationalOperator right=expression   #relationalBinary
+                    | left=expression logicalOperator right=expression      #logicalBinary
+                    | value                                                 #expressionValue
+                    ;
+
+unaryOperation      : (MINUS | NEGATION) expression;
+
+arithmeticOperator  : PLUS
+                    | MINUS
+                    | DIVISION
+                    | MULTIPLICAITON
+                    ;
+
+relationalOperator  : LESSTHAN
+                    | LESSTHANOREQUAL
+                    | GREATERTHAN
+                    | GREATERTHANOREQUAL
+                    | EQUAL
+                    | NOTEQUAL
+                    ;
+
+unaryOperator       : MINUS
+                    | NEGATION
+                    ;
+
+logicalOperator     : AND
+                    | OR
+                    ;
+
+value               : BOOLEANLITERAL                                #booleanLiteral
+                    | INTEGERLITERAL                                #integerLiteral
+                    | STRINGLITERAL                                 #stringLiteral
+                    | MONEYLITERAL                                  #moneyLiteral
+                    | DECIMALLITERAL                                #decimalLiteral
+                    | DATELITERAL                                   #dateLiteral
+                    | IDENTIFIER                                    #variable
+                    ;
+
+type                : 'boolean'                                     #booleanType
+                    | 'integer'                                     #integerType
+                    | 'string'                                      #stringType
+                    | 'money'                                       #moneyType
+                    | 'decimal'                                     #decimalType
+                    | 'date'                                        #dateType
+                    ;
 
 
 
 //Literals
-BOOLEANLITERAL  : ('true' | 'false');
-INTEGERLITERAL  : DIGIT+;
-STRINGLITERAL   : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
-MONEYLITERAL    : '-'? DIGIT+ ',' DIGIT DIGIT;
-DECIMALLITERAL  : '-'? DIGIT+ '.' DIGIT+;
-DATELITERAL     : DIGIT DIGIT '-' DIGIT DIGIT '-' DIGIT DIGIT DIGIT DIGIT;
+BOOLEANLITERAL      : ('true' | 'false');
+INTEGERLITERAL      : DIGIT+;
+STRINGLITERAL       : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
+MONEYLITERAL        : DIGIT+ ',' DIGIT DIGIT;
+DECIMALLITERAL      : DIGIT+ '.' DIGIT+;
+DATELITERAL         : DIGIT DIGIT '-' DIGIT DIGIT '-' DIGIT DIGIT DIGIT DIGIT;
 
-IDENTIFIER      : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
-DIGIT           : [0-9];
+IDENTIFIER          : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
+DIGIT               : [0-9];
 
-//Binary Operators
-ARITHMETIC      : ('+'|'-'|'/'|'*');
-RELATIONAL      : ('<'|'<='|'>'|'>='|'=='|'!=');
-LOGICAL         : ('&&'|'||');
 
-//Unary Operators
-UNARY           : ('!'|'-');
+//Operators
 
-WHITESPACE      : (' ' | '\t' | '\n' | '\r')+ -> skip;
-MULTICOMMENT    : '/*' .*? '*/' -> skip;
-SINGLECOMMENT   : '//' ~[\r\n]* '\r'? '\n' -> skip;
+//Relational
+LESSTHAN            : '<';
+LESSTHANOREQUAL     : '<=';
+GREATERTHAN         : '>';
+GREATERTHANOREQUAL  : '>=';
+EQUAL               : '==';
+NOTEQUAL            : '!=';
+
+//Arithmetic
+MINUS               : '-';
+PLUS                : '+';
+DIVISION            : '/';
+MULTIPLICAITON      : '*';
+
+//Logical
+AND                 : '&&';
+OR                  : '||';
+
+NEGATION            : '!';
+
+COLON               : ':';
+ASSIGNMENT          : '=';
+
+LEFTBRACKET         : '{';
+RIGHTBRACKET        : '}';
+
+LEFTPARENTHESES     : '(';
+RIGHTPARENTHESES    : ')';
+
+WHITESPACE          : (' ' | '\t' | '\n' | '\r')+ -> skip;
+MULTICOMMENT        : '/*' .*? '*/' -> skip;
+SINGLECOMMENT       : '//' ~[\r\n]* '\r'? '\n' -> skip;
