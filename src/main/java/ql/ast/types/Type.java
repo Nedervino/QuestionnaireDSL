@@ -16,10 +16,16 @@ public abstract class Type extends ASTNode {
         return toString().equals(type);
     }
 
+    public boolean isNumeric() {
+        return false;
+    }
+
     public boolean isCompatibleWith(Type otherType) {
-        return this.toString().equals(otherType.toString()) ||
-                (this.toString().equals("integer") && otherType.toString().equals("decimal")) ||
-                (this.toString().equals("decimal") && otherType.toString().equals("integer"));
+        if(otherType.isNumeric()) {
+            return this.isNumeric();
+        } else {
+            return this.toString().equals(otherType.toString());
+        }
     }
 
     public abstract <T> T accept(TypeVisitor<T> visitor);
