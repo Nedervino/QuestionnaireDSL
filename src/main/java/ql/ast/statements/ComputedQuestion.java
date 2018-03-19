@@ -9,8 +9,8 @@ public class ComputedQuestion extends Question {
 
     private Expression expression;
 
-    public ComputedQuestion(String id, String label, Type type, Expression expression, SourceLocation sourceLocation) {
-        super(id, label, type, sourceLocation);
+    public ComputedQuestion(String identifier, String label, Type type, Expression expression, SourceLocation sourceLocation) {
+        super(identifier, label, type, sourceLocation);
         this.expression = expression;
     }
 

@@ -36,26 +36,26 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitQuestion(QLParser.QuestionContext ctx) {
-        String id = ctx.declaration().IDENTIFIER().getText();
+        String identifier = ctx.declaration().IDENTIFIER().getText();
 
         //Strip quotation marks
         String label = ctx.STRINGLITERAL().getText().substring(1, ctx.STRINGLITERAL().getText().length() - 1);
         Type type = (Type) visit(ctx.declaration().type());
 
-        return new Question(id, label, type, getSourceLocation(ctx));
+        return new Question(identifier, label, type, getSourceLocation(ctx));
     }
 
 
     @Override
     public ASTNode visitComputedQuestion(QLParser.ComputedQuestionContext ctx) {
-        String id = ctx.declaration().IDENTIFIER().getText();
+        String identifier = ctx.declaration().IDENTIFIER().getText();
 
         //Strip quotation marks
         String label = ctx.STRINGLITERAL().getText().substring(1, ctx.STRINGLITERAL().getText().length() - 1);
         Type type = (Type) visit(ctx.declaration().type());
         Expression expression = (Expression) visit(ctx.expression());
 
-        return new ComputedQuestion(id, label, type, expression, getSourceLocation(ctx));
+        return new ComputedQuestion(identifier, label, type, expression, getSourceLocation(ctx));
     }
 
     @Override

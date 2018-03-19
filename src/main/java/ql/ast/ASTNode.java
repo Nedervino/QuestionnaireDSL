@@ -11,7 +11,5 @@ public abstract class ASTNode {
     public SourceLocation getSourceLocation() {
         return sourceLocation;
     }
-
-    // public abstract <T> T accept(ASTVisitor<? extends T> visitor);
-
+    
 }

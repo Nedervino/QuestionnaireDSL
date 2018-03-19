@@ -7,12 +7,12 @@ import ql.ast.visitors.StatementVisitor;
 public class Question extends Statement {
 
     private String label;
-    private String id;
+    private String identifier;
     private Type type;
 
-    public Question(String id, String label, Type type, SourceLocation sourceLocation) {
+    public Question(String identifier, String label, Type type, SourceLocation sourceLocation) {
         super(sourceLocation);
-        this.id = id;
+        this.identifier = identifier;
         this.label = label;
         this.type = type;
     }
@@ -22,7 +22,7 @@ public class Question extends Statement {
     }
 
     public String getId() {
-        return id;
+        return identifier;
     }
 
     public Type getType() {
