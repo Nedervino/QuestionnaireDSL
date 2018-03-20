@@ -8,14 +8,14 @@ import java.util.List;
 
 public interface FormEvaluator {
 
-    public void start(Form form);
+    void start(Form form);
 
-    public void evaluate();
+    void evaluate();
 
-    public List<Question> getQuestions();
+    List<Question> getQuestions();
 
-    public Evaluatable getQuestionValue(String questionId);
+    Evaluatable getQuestionValue(String questionId);
 
-    public void setEvaluatable(String questionId, Evaluatable value);
+    void setEvaluatable(String questionId, Evaluatable value);
 
 }
