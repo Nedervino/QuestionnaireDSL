@@ -37,6 +37,7 @@ public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Vo
 
     /**
      * Checks if left and right child are compatible with each other
+     *
      * @param binaryOperation
      * @return ErrorType if incompatible, otherwise the dominating return type of the two children
      */
@@ -66,6 +67,7 @@ public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Vo
 
     /**
      * Checks if operand type is allowed within parent expression
+     *
      * @param actualType
      * @param expectedType
      * @return the actual type if allowed, otherwise ErrorType

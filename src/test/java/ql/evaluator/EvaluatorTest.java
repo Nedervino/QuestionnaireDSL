@@ -6,14 +6,9 @@ import ql.Helper;
 import ql.ast.Form;
 import ql.evaluator.values.Evaluatable;
 import ql.parser.FormBuilder;
-import ql.validator.ExpressionChecker;
-import ql.validator.QuestionDuplicationChecker;
-import ql.validator.SymbolTable;
-import ql.validator.issuetracker.Error;
 import ql.validator.issuetracker.IssueTracker;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
 public class EvaluatorTest {
 

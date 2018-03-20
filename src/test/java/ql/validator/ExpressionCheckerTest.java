@@ -8,9 +8,7 @@ import ql.parser.FormBuilder;
 import ql.validator.issuetracker.Error;
 import ql.validator.issuetracker.IssueTracker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ExpressionCheckerTest {
 

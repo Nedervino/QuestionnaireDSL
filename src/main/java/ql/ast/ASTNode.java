@@ -11,5 +11,5 @@ public abstract class ASTNode {
     public SourceLocation getSourceLocation() {
         return sourceLocation;
     }
-    
+
 }

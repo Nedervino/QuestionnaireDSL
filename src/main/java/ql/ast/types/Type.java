@@ -21,7 +21,7 @@ public abstract class Type extends ASTNode {
     }
 
     public boolean isCompatibleWith(Type otherType) {
-        if(otherType.isNumeric()) {
+        if (otherType.isNumeric()) {
             return this.isNumeric();
         } else {
             return this.toString().equals(otherType.toString());

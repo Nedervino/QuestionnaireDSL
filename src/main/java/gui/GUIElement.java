@@ -16,12 +16,12 @@ public abstract class GUIElement {
         return yLocation;
     }
 
-    public int getHeight() {
-        return height;
-    }
-
     public void setYLocation(int yLocation) {
         this.yLocation = yLocation;
+    }
+
+    public int getHeight() {
+        return height;
     }
 
     public void setHeight(int height) {

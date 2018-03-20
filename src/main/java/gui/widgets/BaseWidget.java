@@ -1,6 +1,5 @@
 package gui.widgets;
 
-import ql.evaluator.Evaluator;
 import ql.evaluator.FormEvaluator;
 import ql.evaluator.values.Evaluatable;
 
