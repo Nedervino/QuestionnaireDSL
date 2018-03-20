@@ -1,4 +1,11 @@
 package gui.widgets;
 
-public class CheckboxWidget implements Widget {
+import ql.evaluator.FormEvaluator;
+import ql.evaluator.values.Evaluatable;
+
+public class CheckboxWidget extends BaseWidget {
+
+    public CheckboxWidget(FormEvaluator evaluator, Evaluatable value, String identifier) {
+        super(evaluator, value, identifier);
+    }
 }
