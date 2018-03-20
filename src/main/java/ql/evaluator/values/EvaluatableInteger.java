@@ -16,11 +16,6 @@ public class EvaluatableInteger extends EvaluatableNumeric<Integer> {
     }
 
     @Override
-    public void setValue(Integer value) {
-        this.value = value;
-    }
-
-    @Override
     public Evaluatable add(EvaluatableInteger evaluatable) {
         return new EvaluatableInteger(evaluatable.getValue() + getValue());
     }

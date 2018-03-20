@@ -16,11 +16,6 @@ public class EvaluatableDate implements Evaluatable<Date> {
     }
 
     @Override
-    public void setValue(Date value) {
-
-    }
-
-    @Override
     public EvaluatableBoolean and(Evaluatable evaluatable) {
         return null;
     }

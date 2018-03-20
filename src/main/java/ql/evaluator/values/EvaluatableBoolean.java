@@ -14,11 +14,6 @@ public class EvaluatableBoolean implements Evaluatable<Boolean> {
     }
 
     @Override
-    public void setValue(Boolean value) {
-        this.value = value;
-    }
-
-    @Override
     public boolean isTrue() {
         return value.booleanValue();
     }

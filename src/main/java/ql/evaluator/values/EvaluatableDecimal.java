@@ -16,11 +16,6 @@ public class EvaluatableDecimal extends EvaluatableNumeric<Double> {
     }
 
     @Override
-    public void setValue(Double value) {
-        this.value = value;
-    }
-
-    @Override
     public Evaluatable add(EvaluatableDecimal evaluatable) {
         return new EvaluatableDecimal(evaluatable.getValue() + getValue());
     }

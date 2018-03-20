@@ -14,11 +14,6 @@ public class EvaluatableString implements Evaluatable<String> {
     }
 
     @Override
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    @Override
     public EvaluatableBoolean isEqual(Evaluatable evaluatable) {
         return evaluatable.isEqual(this);
     }

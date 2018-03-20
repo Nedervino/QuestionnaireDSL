@@ -16,11 +16,6 @@ public class EvaluatableMoney extends EvaluatableNumeric<BigDecimal> {
     }
 
     @Override
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
-
-    @Override
     public Evaluatable add(EvaluatableMoney evaluatable) {
         BigDecimal otherValue = evaluatable.getValue();
         BigDecimal result = getValue().add(otherValue);
