@@ -14,7 +14,7 @@ import ql.ast.visitors.FormVisitor;
 import ql.ast.visitors.StatementVisitor;
 import ql.validator.cycles.DependencyManager;
 import ql.validator.cycles.DependencyPair;
-import ql.validator.issuetracker.IssueTracker;
+import issuetracker.IssueTracker;
 
 import java.util.ArrayList;
 import java.util.Collections;
