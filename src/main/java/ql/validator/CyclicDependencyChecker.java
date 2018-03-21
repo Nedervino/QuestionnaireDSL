@@ -24,7 +24,7 @@ import java.util.Optional;
 /**
  * Checks AST for cyclic dependencies between questions
  */
-public class CyclicDependencyChecker implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<List<Variable>> {
+public class CyclicDependencyChecker implements Checker, FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<List<Variable>> {
 
 
     private final IssueTracker issueTracker;
@@ -35,8 +35,8 @@ public class CyclicDependencyChecker implements FormVisitor<Void>, StatementVisi
         this.dependencyManager = new DependencyManager();
     }
 
-
-    public boolean passesTests(Form form) {
+    @Override
+    public boolean passesTests(Form form, SymbolTable symbolTable) {
         form.accept(this);
         logCircularDependencies();
         return !issueTracker.hasErrors();

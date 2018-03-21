@@ -32,11 +32,6 @@ public class IssueTracker {
         return issueTracker;
     }
 
-    // public IssueTracker() {
-    //     errors = new ArrayList<>();
-    //     warnings = new ArrayList<>();
-    // }
-
     public void addWarning(SourceLocation sourceLocation, String warningMessage) {
         Warning warning = new Warning(sourceLocation, warningMessage);
         warnings.add(warning);

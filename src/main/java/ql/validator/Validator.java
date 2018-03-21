@@ -11,10 +11,11 @@ import java.util.logging.Logger;
  */
 public class Validator {
 
+
     private final IssueTracker issueTracker;
-    private final QuestionDuplicationChecker questionDuplicationChecker;
-    private final ExpressionChecker expressionChecker;
-    private final CyclicDependencyChecker cyclicDependencyChecker;
+    private final Checker questionDuplicationChecker;
+    private final Checker expressionChecker;
+    private final Checker cyclicDependencyChecker;
     private final SymbolTable symbolTable;
 
 
@@ -41,7 +42,7 @@ public class Validator {
         }
 
         //Check cyclic dependencies between questions
-        if (!cyclicDependencyChecker.passesTests(form)) {
+        if (!cyclicDependencyChecker.passesTests(form, null)) {
             issueTracker.logErrors();
             return false;
         }

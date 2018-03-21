@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * Checks AST for question duplications, giving errors for duplicate identifiers and warnings for duplicate labels
  */
-public class QuestionDuplicationChecker implements FormVisitor<Void>, StatementVisitor<Void> {
+public class QuestionDuplicationChecker implements Checker, FormVisitor<Void>, StatementVisitor<Void> {
 
     private final Set<String> questionLabels;
     private final IssueTracker issueTracker;
@@ -24,6 +24,7 @@ public class QuestionDuplicationChecker implements FormVisitor<Void>, StatementV
         this.questionLabels = new HashSet<>();
     }
 
+    @Override
     public boolean passesTests(Form form, SymbolTable symbolTable) {
         this.symbolTable = symbolTable;
         form.accept(this);
