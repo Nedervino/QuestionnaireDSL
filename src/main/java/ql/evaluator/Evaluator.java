@@ -102,7 +102,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         Evaluatable value = expression.accept(this);
 
         if (isCalculated(value)) {
-            if (value.isTrue()) {
+            if (value.getBooleanValue()) {
                 visit(node.getIfStatements());
             }
         }
@@ -123,7 +123,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         Evaluatable value = storedValues.get(expression);
         List<Statement> statements;
         if (isCalculated(expression)) {
-            if (value.isTrue()) {
+            if (value.getBooleanValue()) {
                 statements = node.getIfStatements();
             } else {
                 statements = node.getElseStatements();

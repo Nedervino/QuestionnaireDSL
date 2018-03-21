@@ -4,7 +4,7 @@ public interface Evaluatable<T> {
 
     T getValue();
 
-    default boolean isTrue() {
+    default boolean getBooleanValue() {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
