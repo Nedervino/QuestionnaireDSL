@@ -20,14 +20,14 @@ import java.util.*;
 
 public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Evaluatable>, FormEvaluator {
 
-    private HashMap<ASTNode, Evaluatable> storedValues;
+    private HashMap<ASTNode, Evaluatable> questionValues;
     private HashMap<String, Question> idLookup;
     private Form form;
     private IssueTracker issueTracker;
 
     public Evaluator(IssueTracker issueTracker) {
         this.issueTracker = issueTracker;
-        storedValues = new HashMap<>();
+        questionValues = new HashMap<>();
         idLookup = new HashMap<>();
     }
 
@@ -40,7 +40,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     @Override
     public void setEvaluatable(String questionId, Evaluatable value) {
         ASTNode node = idLookup.get(questionId);
-        storedValues.put(node, value);
+        questionValues.put(node, value);
     }
 
     @Override
@@ -61,11 +61,11 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     @Override
     public Evaluatable getQuestionValue(String questionId) {
         Question node = idLookup.get(questionId);
-        return storedValues.get(node);
+        return questionValues.get(node);
     }
 
     public boolean isCalculated(ASTNode node) {
-        return storedValues.containsKey(node);
+        return questionValues.containsKey(node);
     }
 
     private boolean isCalculated(Evaluatable leftEvaluatable, Evaluatable rightEvaluatable) {
@@ -91,7 +91,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         Expression expression = node.getExpression();
         Evaluatable value = expression.accept(this);
         if (isCalculated(value)) {
-            storedValues.put(node, value);
+            questionValues.put(node, value);
         }
         return null;
     }
@@ -329,7 +329,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         Question declarationNode = findDeclarationNode(varName);
         Evaluatable value = null;
         if (isCalculated(declarationNode)) {
-            value = storedValues.get(declarationNode);
+            value = questionValues.get(declarationNode);
         }
         return value;
     }
