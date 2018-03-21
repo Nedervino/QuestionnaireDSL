@@ -29,33 +29,20 @@ public class EvaluatorTest {
     @Test
     public void shouldStoreIntegerValueDecimalAsInteger() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/integerValueDecimal.ql", formBuilder);
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/integerValueDecimal.ql", formBuilder);
 
         evaluator.start(form);
         issueTracker.reset();
 
-        Evaluatable evaluatable = evaluator.getQuestionValue("decimalValue");
+        Evaluatable evaluatable = evaluator.getQuestionValue("value");
 
-        assertEquals("4", evaluatable.getValue().toString());
-    }
-
-    @Test
-    public void shouldStoreIntegerValueDecimalAsDecimal() {
-        issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/integerValueDecimal2.ql", formBuilder);
-
-        evaluator.start(form);
-        issueTracker.reset();
-
-        Evaluatable evaluatable = evaluator.getQuestionValue("decimalValue");
-
-        assertEquals("4.0", evaluatable.getValue().toString());
+        assertEquals(4, evaluatable.getValue());
     }
 
     @Test
     public void shouldStoreDecimal() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/simpleDecimal.ql", formBuilder);
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/simpleDecimal.ql", formBuilder);
 
         evaluator.start(form);
         issueTracker.reset();
