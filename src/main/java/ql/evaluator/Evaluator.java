@@ -80,7 +80,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         Expression expression = node.getExpression();
         expression.accept(this);
         if (isCalculated(expression)) {
-            Evaluatable value = node.getType().createEvaluatable(storedValues.get(expression));
+            Evaluatable value = storedValues.get(expression);
             storedValues.put(node, value);
         }
         return null;
