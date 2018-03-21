@@ -32,4 +32,14 @@ public abstract class BaseWidget implements Widget {
     public void addWidgetListener(WidgetListener widgetListener) {
 
     }
+
+    @Override
+    public void setVisible(boolean visible) {
+
+    }
+
+    @Override
+    public void setEditable(boolean editable) {
+
+    }
 }
