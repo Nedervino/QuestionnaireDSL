@@ -1,5 +1,6 @@
 package ql.evaluator;
 
+import issuetracker.Error;
 import org.junit.Before;
 import org.junit.Test;
 import ql.Helper;
@@ -22,7 +23,7 @@ public class EvaluatorTest {
         formBuilder = new FormBuilder();
         helper = new Helper();
         issueTracker = new IssueTracker();
-        evaluator = new Evaluator();
+        evaluator = new Evaluator(issueTracker);
     }
 
     @Test
@@ -59,9 +60,37 @@ public class EvaluatorTest {
         evaluator.start(form);
         issueTracker.reset();
 
-        Evaluatable evaluatable = evaluator.getQuestionValue("decimalValue");
+        Evaluatable evaluatable = evaluator.getQuestionValue("value");
 
-        assertEquals("3.999", evaluatable.getValue().toString());
+        assertEquals(3.999, evaluatable.getValue());
+    }
+
+    @Test
+    public void shouldNotDivideByZero() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/divideByZero.ql", formBuilder);
+
+        evaluator.start(form);
+
+        assertEquals(0, issueTracker.getWarnings().size());
+        assertEquals(1, issueTracker.getErrors().size());
+        for (Error error : issueTracker.getErrors()) {
+            System.out.println(error.getMessage());
+            assertEquals("Attempted to divide by zero.", error.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldDownCastDecimalToInteger() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/downcastDecimalToInteger.ql", formBuilder);
+
+        evaluator.start(form);
+
+        Evaluatable evaluatable = evaluator.getQuestionValue("result");
+
+        assertEquals(3, evaluatable.getValue());
+        //TODO write constructors for the integer class that can take in decimals, check whether this is a bug in the typechecker
     }
 
 }
