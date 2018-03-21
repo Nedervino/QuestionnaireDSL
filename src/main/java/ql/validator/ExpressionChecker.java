@@ -12,7 +12,7 @@ import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormVisitor;
 import ql.ast.visitors.StatementVisitor;
 import ql.ast.visitors.TypeVisitor;
-import ql.validator.issuetracker.IssueTracker;
+import issuetracker.IssueTracker;
 
 import java.util.List;
 

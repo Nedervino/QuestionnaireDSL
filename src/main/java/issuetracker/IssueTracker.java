@@ -1,4 +1,4 @@
-package ql.validator.issuetracker;
+package issuetracker;
 
 
 import ql.ast.SourceLocation;

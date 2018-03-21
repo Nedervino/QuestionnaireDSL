@@ -1,7 +1,7 @@
 package ql.validator;
 
 import ql.ast.Form;
-import ql.validator.issuetracker.IssueTracker;
+import issuetracker.IssueTracker;
 
 import java.util.logging.Logger;
 

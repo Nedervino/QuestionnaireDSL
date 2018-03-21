@@ -4,7 +4,7 @@ import ql.ast.Form;
 import ql.ast.statements.*;
 import ql.ast.visitors.FormVisitor;
 import ql.ast.visitors.StatementVisitor;
-import ql.validator.issuetracker.IssueTracker;
+import issuetracker.IssueTracker;
 
 import java.util.HashSet;
 import java.util.Set;
