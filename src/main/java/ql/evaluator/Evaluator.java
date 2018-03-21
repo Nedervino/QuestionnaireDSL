@@ -133,10 +133,18 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         return null;
     }
 
+    private Evaluatable visitLeft(BinaryOperation node) {
+        return node.getLeft().accept(this);
+    }
+
+    private Evaluatable visitRight(BinaryOperation node) {
+        return node.getRight().accept(this);
+    }
+
     @Override
     public Evaluatable visit(Addition node) {
-        Evaluatable leftEvaluatable = node.getLeft().accept(this);
-        Evaluatable rightEvaluatable = node.getRight().accept(this);
+        Evaluatable leftEvaluatable = visitLeft(node);
+        Evaluatable rightEvaluatable = visitRight(node);
         Evaluatable result = null;
         if (isCalculated(leftEvaluatable, rightEvaluatable)) {
             result = leftEvaluatable.add(rightEvaluatable);
@@ -146,8 +154,8 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     @Override
     public Evaluatable visit(LogicalAnd node) {
-        Evaluatable leftEvaluatable = node.getLeft().accept(this);
-        Evaluatable rightEvaluatable = node.getRight().accept(this);
+        Evaluatable leftEvaluatable = visitLeft(node);
+        Evaluatable rightEvaluatable = visitRight(node);
         EvaluatableBoolean result = null;
         if (isCalculated(leftEvaluatable, rightEvaluatable)) {
             result = leftEvaluatable.and(rightEvaluatable);
@@ -157,8 +165,8 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     @Override
     public Evaluatable visit(Division node) {
-        Evaluatable leftEvaluatable = node.getLeft().accept(this);
-        Evaluatable rightEvaluatable = node.getRight().accept(this);
+        Evaluatable leftEvaluatable = visitLeft(node);
+        Evaluatable rightEvaluatable = visitRight(node);
         Evaluatable result = null;
         if (isCalculated(leftEvaluatable, rightEvaluatable)) {
             result = leftEvaluatable.divide(rightEvaluatable);
@@ -168,8 +176,8 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     @Override
     public Evaluatable visit(Equal node) {
-        Evaluatable leftEvaluatable = node.getLeft().accept(this);
-        Evaluatable rightEvaluatable = node.getRight().accept(this);
+        Evaluatable leftEvaluatable = visitLeft(node);
+        Evaluatable rightEvaluatable = visitRight(node);
         EvaluatableBoolean result = null;
         if (isCalculated(leftEvaluatable, rightEvaluatable)) {
             result = leftEvaluatable.equal(rightEvaluatable);
@@ -179,8 +187,8 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     @Override
     public Evaluatable visit(GreaterThanEqual node) {
-        Evaluatable leftEvaluatable = node.getLeft().accept(this);
-        Evaluatable rightEvaluatable = node.getRight().accept(this);
+        Evaluatable leftEvaluatable = visitLeft(node);
+        Evaluatable rightEvaluatable = visitRight(node);
         EvaluatableBoolean result = null;
         if (isCalculated(leftEvaluatable, rightEvaluatable)) {
             result = leftEvaluatable.greaterThanEqual(rightEvaluatable);
@@ -190,8 +198,8 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     @Override
     public Evaluatable visit(GreaterThan node) {
-        Evaluatable leftEvaluatable = node.getLeft().accept(this);
-        Evaluatable rightEvaluatable = node.getRight().accept(this);
+        Evaluatable leftEvaluatable = visitLeft(node);
+        Evaluatable rightEvaluatable = visitRight(node);
         EvaluatableBoolean result = null;
         if (isCalculated(leftEvaluatable, rightEvaluatable)) {
             result = leftEvaluatable.greaterThan(rightEvaluatable);
@@ -201,8 +209,8 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     @Override
     public Evaluatable visit(LessThanEqual node) {
-        Evaluatable leftEvaluatable = node.getLeft().accept(this);
-        Evaluatable rightEvaluatable = node.getRight().accept(this);
+        Evaluatable leftEvaluatable = visitLeft(node);
+        Evaluatable rightEvaluatable = visitRight(node);
         EvaluatableBoolean result = null;
         if (isCalculated(leftEvaluatable, rightEvaluatable)) {
             result = leftEvaluatable.lessThanEqual(rightEvaluatable);
@@ -212,8 +220,8 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     @Override
     public Evaluatable visit(LessThan node) {
-        Evaluatable leftEvaluatable = node.getLeft().accept(this);
-        Evaluatable rightEvaluatable = node.getRight().accept(this);
+        Evaluatable leftEvaluatable = visitLeft(node);
+        Evaluatable rightEvaluatable = visitRight(node);
         EvaluatableBoolean result = null;
         if (isCalculated(leftEvaluatable, rightEvaluatable)) {
             result = leftEvaluatable.lessThan(rightEvaluatable);
@@ -223,8 +231,8 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     @Override
     public Evaluatable visit(Multiplication node) {
-        Evaluatable leftEvaluatable = node.getLeft().accept(this);
-        Evaluatable rightEvaluatable = node.getRight().accept(this);
+        Evaluatable leftEvaluatable = visitLeft(node);
+        Evaluatable rightEvaluatable = visitRight(node);
         Evaluatable result = null;
         if (isCalculated(leftEvaluatable, rightEvaluatable)) {
             result = leftEvaluatable.multiply(rightEvaluatable);
@@ -234,8 +242,8 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     @Override
     public Evaluatable visit(NotEqual node) {
-        Evaluatable leftEvaluatable = node.getLeft().accept(this);
-        Evaluatable rightEvaluatable = node.getRight().accept(this);
+        Evaluatable leftEvaluatable = visitLeft(node);
+        Evaluatable rightEvaluatable = visitRight(node);
         EvaluatableBoolean result = null;
         if (isCalculated(leftEvaluatable, rightEvaluatable)) {
             result = leftEvaluatable.notEqual(rightEvaluatable);
@@ -245,8 +253,8 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     @Override
     public Evaluatable visit(LogicalOr node) {
-        Evaluatable leftEvaluatable = node.getLeft().accept(this);
-        Evaluatable rightEvaluatable = node.getRight().accept(this);
+        Evaluatable leftEvaluatable = visitLeft(node);
+        Evaluatable rightEvaluatable = visitRight(node);
         EvaluatableBoolean result = null;
         if (isCalculated(leftEvaluatable, rightEvaluatable)) {
             result = leftEvaluatable.or(rightEvaluatable);
@@ -256,8 +264,8 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     @Override
     public Evaluatable visit(Subtraction node) {
-        Evaluatable leftEvaluatable = node.getLeft().accept(this);
-        Evaluatable rightEvaluatable = node.getRight().accept(this);
+        Evaluatable leftEvaluatable = visitLeft(node);
+        Evaluatable rightEvaluatable = visitRight(node);
         Evaluatable result = null;
         if (isCalculated(leftEvaluatable, rightEvaluatable)) {
             result = leftEvaluatable.subtract(rightEvaluatable);
