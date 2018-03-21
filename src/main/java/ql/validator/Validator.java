@@ -2,8 +2,10 @@ package ql.validator;
 
 import ql.ast.Form;
 import issuetracker.IssueTracker;
-
-import java.util.logging.Logger;
+import ql.validator.checkers.Checker;
+import ql.validator.checkers.CyclicDependencyChecker;
+import ql.validator.checkers.ExpressionChecker;
+import ql.validator.checkers.QuestionDuplicationChecker;
 
 
 /**

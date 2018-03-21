@@ -7,6 +7,8 @@ import ql.ast.Form;
 import ql.parser.FormBuilder;
 import issuetracker.Error;
 import issuetracker.IssueTracker;
+import ql.validator.checkers.ExpressionChecker;
+import ql.validator.checkers.QuestionDuplicationChecker;
 
 import static org.junit.Assert.*;
 

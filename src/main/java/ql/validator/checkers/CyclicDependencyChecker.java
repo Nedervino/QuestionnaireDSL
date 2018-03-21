@@ -1,4 +1,4 @@
-package ql.validator;
+package ql.validator.checkers;
 
 import ql.ast.Form;
 import ql.ast.SourceLocation;
@@ -12,8 +12,9 @@ import ql.ast.statements.*;
 import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormVisitor;
 import ql.ast.visitors.StatementVisitor;
-import ql.validator.cycles.DependencyManager;
-import ql.validator.cycles.DependencyPair;
+import ql.validator.SymbolTable;
+import ql.validator.checkers.cycles.DependencyManager;
+import ql.validator.checkers.cycles.DependencyPair;
 import issuetracker.IssueTracker;
 
 import java.util.ArrayList;

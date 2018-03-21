@@ -6,6 +6,7 @@ import ql.Helper;
 import ql.ast.Form;
 import ql.parser.FormBuilder;
 import issuetracker.IssueTracker;
+import ql.validator.checkers.QuestionDuplicationChecker;
 
 import static org.junit.Assert.*;
 
