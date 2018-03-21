@@ -119,8 +119,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     @Override
     public Void visit(IfElseStatement node) {
         Expression expression = node.getCondition();
-        expression.accept(this);
-        Evaluatable value = storedValues.get(expression);
+        Evaluatable value = expression.accept(this);
         List<Statement> statements;
         if (isCalculated(expression)) {
             if (value.getBooleanValue()) {
