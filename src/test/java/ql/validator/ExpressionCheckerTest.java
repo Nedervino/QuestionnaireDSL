@@ -5,8 +5,8 @@ import org.junit.Test;
 import ql.Helper;
 import ql.ast.Form;
 import ql.parser.FormBuilder;
-import ql.validator.issuetracker.Error;
-import ql.validator.issuetracker.IssueTracker;
+import issuetracker.Error;
+import issuetracker.IssueTracker;
 
 import static org.junit.Assert.*;
 
