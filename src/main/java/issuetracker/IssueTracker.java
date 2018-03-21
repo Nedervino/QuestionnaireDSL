@@ -19,20 +19,23 @@ public class IssueTracker {
     private final List<Error> errors;
     private final List<Warning> warnings;
 
-    //
-    // private issuetracker() {}
-    //
-    // public static issuetracker getIssueTracker() {
-    //     if(issueTracker == null) {
-    //         issueTracker = new issuetracker();
-    //     }
-    //     return issueTracker;
-    // }
 
-    public IssueTracker() {
+    private IssueTracker() {
         errors = new ArrayList<>();
         warnings = new ArrayList<>();
     }
+
+    public static IssueTracker getIssueTracker() {
+        if(issueTracker == null) {
+            issueTracker = new IssueTracker();
+        }
+        return issueTracker;
+    }
+
+    // public IssueTracker() {
+    //     errors = new ArrayList<>();
+    //     warnings = new ArrayList<>();
+    // }
 
     public void addWarning(SourceLocation sourceLocation, String warningMessage) {
         Warning warning = new Warning(sourceLocation, warningMessage);

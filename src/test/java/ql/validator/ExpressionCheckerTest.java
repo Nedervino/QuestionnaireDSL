@@ -21,7 +21,7 @@ public class ExpressionCheckerTest {
     public void setUp() throws Exception {
         formBuilder = new FormBuilder();
         helper = new Helper();
-        issueTracker = new IssueTracker();
+        issueTracker = IssueTracker.getIssueTracker();
         expressionChecker = new ExpressionChecker(issueTracker);
     }
 

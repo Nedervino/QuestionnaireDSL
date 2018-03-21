@@ -21,7 +21,7 @@ public class EvaluatorTest {
     public void setUp() throws Exception {
         formBuilder = new FormBuilder();
         helper = new Helper();
-        issueTracker = new IssueTracker();
+        issueTracker = IssueTracker.getIssueTracker();
         evaluator = new Evaluator();
     }
 

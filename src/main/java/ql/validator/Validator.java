@@ -19,7 +19,7 @@ public class Validator {
 
 
     public Validator() {
-        issueTracker = new IssueTracker();
+        issueTracker = IssueTracker.getIssueTracker();
         questionDuplicationChecker = new QuestionDuplicationChecker(issueTracker);
         expressionChecker = new ExpressionChecker(issueTracker);
         cyclicDependencyChecker = new CyclicDependencyChecker(issueTracker);
