@@ -26,7 +26,7 @@ public class EvaluatableDecimal extends EvaluatableNumeric<Double> {
     }
 
     @Override
-    public EvaluatableBoolean isEqual(EvaluatableDecimal evaluatable) {
+    public EvaluatableBoolean equal(EvaluatableDecimal evaluatable) {
         return new EvaluatableBoolean(Objects.equals(evaluatable.getValue(), getValue()));
     }
 

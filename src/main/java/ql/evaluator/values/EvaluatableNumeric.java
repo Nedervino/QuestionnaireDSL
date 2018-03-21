@@ -28,8 +28,8 @@ public abstract class EvaluatableNumeric<T> implements Evaluatable<T> {
     }
 
     @Override
-    public EvaluatableBoolean isEqual(Evaluatable evaluatable) {
-        return evaluatable.isEqual(this);
+    public EvaluatableBoolean equal(Evaluatable evaluatable) {
+        return evaluatable.equal(this);
     }
 
     @Override

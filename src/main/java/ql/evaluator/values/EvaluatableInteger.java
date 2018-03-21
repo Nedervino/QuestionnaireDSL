@@ -26,7 +26,7 @@ public class EvaluatableInteger extends EvaluatableNumeric<Integer> {
     }
 
     @Override
-    public EvaluatableBoolean isEqual(EvaluatableInteger evaluatable) {
+    public EvaluatableBoolean equal(EvaluatableInteger evaluatable) {
         return new EvaluatableBoolean(Objects.equals(evaluatable.getValue(), getValue()));
     }
 

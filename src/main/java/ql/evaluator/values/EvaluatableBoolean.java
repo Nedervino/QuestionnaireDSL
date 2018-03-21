@@ -2,7 +2,7 @@ package ql.evaluator.values;
 
 public class EvaluatableBoolean implements Evaluatable<Boolean> {
 
-    private Boolean value;
+    private boolean value;
 
     public EvaluatableBoolean(Boolean value) {
         this.value = value;
@@ -15,7 +15,7 @@ public class EvaluatableBoolean implements Evaluatable<Boolean> {
 
     @Override
     public boolean isTrue() {
-        return value.booleanValue();
+        return value;
     }
 
     @Override
@@ -30,11 +30,11 @@ public class EvaluatableBoolean implements Evaluatable<Boolean> {
     }
 
     @Override
-    public EvaluatableBoolean isEqual(Evaluatable evaluatable) {
-        return evaluatable.isEqual(this);
+    public EvaluatableBoolean equal(Evaluatable evaluatable) {
+        return evaluatable.equal(this);
     }
 
-    public EvaluatableBoolean isEqual(EvaluatableBoolean evaluatable) {
+    public EvaluatableBoolean equal(EvaluatableBoolean evaluatable) {
         return new EvaluatableBoolean(getValue().booleanValue() == evaluatable.getValue().booleanValue());
     }
 

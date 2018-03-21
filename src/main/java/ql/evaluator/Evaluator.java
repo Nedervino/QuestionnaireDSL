@@ -187,7 +187,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         left.accept(this);
         right.accept(this);
         if (isCalculated(left, right)) {
-            EvaluatableBoolean result = storedValues.get(left).isEqual(storedValues.get(right));
+            EvaluatableBoolean result = storedValues.get(left).equal(storedValues.get(right));
             storedValues.put(node, result);
         }
         return null;

@@ -31,7 +31,7 @@ public class EvaluatableMoney extends EvaluatableNumeric<BigDecimal> {
     }
 
     @Override
-    public EvaluatableBoolean isEqual(EvaluatableMoney evaluatable) {
+    public EvaluatableBoolean equal(EvaluatableMoney evaluatable) {
         BigDecimal otherValue = evaluatable.getValue();
         Boolean result = getValue().equals(otherValue);
         return new EvaluatableBoolean(result);

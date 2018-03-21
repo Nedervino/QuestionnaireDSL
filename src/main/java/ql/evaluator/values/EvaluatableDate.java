@@ -46,37 +46,37 @@ public class EvaluatableDate implements Evaluatable<Date> {
     }
 
     @Override
-    public EvaluatableBoolean isEqual(Evaluatable evaluatable) {
-        return evaluatable.isEqual(this);
+    public EvaluatableBoolean equal(Evaluatable evaluatable) {
+        return evaluatable.equal(this);
     }
 
     @Override
-    public EvaluatableBoolean isEqual(EvaluatableMoney evaluatable) {
+    public EvaluatableBoolean equal(EvaluatableMoney evaluatable) {
         return null;
     }
 
     @Override
-    public EvaluatableBoolean isEqual(EvaluatableInteger evaluatable) {
+    public EvaluatableBoolean equal(EvaluatableInteger evaluatable) {
         return null;
     }
 
     @Override
-    public EvaluatableBoolean isEqual(EvaluatableDecimal evaluatable) {
+    public EvaluatableBoolean equal(EvaluatableDecimal evaluatable) {
         return null;
     }
 
     @Override
-    public EvaluatableBoolean isEqual(EvaluatableString evaluatable) {
+    public EvaluatableBoolean equal(EvaluatableString evaluatable) {
         return null;
     }
 
     @Override
-    public EvaluatableBoolean isEqual(EvaluatableBoolean evaluatable) {
+    public EvaluatableBoolean equal(EvaluatableBoolean evaluatable) {
         return null;
     }
 
     @Override
-    public EvaluatableBoolean isEqual(EvaluatableDate evaluatable) {
+    public EvaluatableBoolean equal(EvaluatableDate evaluatable) {
         return null;
     }
 

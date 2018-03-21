@@ -14,11 +14,11 @@ public class EvaluatableString implements Evaluatable<String> {
     }
 
     @Override
-    public EvaluatableBoolean isEqual(Evaluatable evaluatable) {
-        return evaluatable.isEqual(this);
+    public EvaluatableBoolean equal(Evaluatable evaluatable) {
+        return evaluatable.equal(this);
     }
 
-    public EvaluatableBoolean isEqual(EvaluatableString evaluatable) {
+    public EvaluatableBoolean equal(EvaluatableString evaluatable) {
         return new EvaluatableBoolean(evaluatable.getValue().equals(getValue()));
     }
 
