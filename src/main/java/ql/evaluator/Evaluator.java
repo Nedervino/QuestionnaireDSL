@@ -13,6 +13,7 @@ import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormVisitor;
 import ql.ast.visitors.StatementVisitor;
 import ql.evaluator.values.*;
+import issuetracker.IssueTracker;
 
 import java.util.*;
 
@@ -22,8 +23,10 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     private HashMap<ASTNode, Evaluatable> storedValues;
     private HashMap<String, Question> idLookup;
     private Form form;
+    private IssueTracker issueTracker;
 
-    public Evaluator() {
+    public Evaluator(IssueTracker issueTracker) {
+        this.issueTracker = issueTracker;
         storedValues = new HashMap<>();
         idLookup = new HashMap<>();
     }
@@ -31,7 +34,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     @Override
     public void start(Form form) {
         this.form = form;
-        visit(form);
+        evaluate();
     }
 
     @Override
@@ -42,7 +45,12 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     @Override
     public void evaluate() {
-        visit(form);
+        try {
+            visit(form);
+        }
+        catch(ArithmeticException e){
+            issueTracker.addError(null, "Attempted to divide by zero.");
+        }
     }
 
     @Override
@@ -72,7 +80,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         Expression expression = node.getExpression();
         expression.accept(this);
         if (isCalculated(expression)) {
-            Evaluatable value = storedValues.get(expression);
+            Evaluatable value = node.getType().createEvaluatable(storedValues.get(expression));
             storedValues.put(node, value);
         }
         return null;

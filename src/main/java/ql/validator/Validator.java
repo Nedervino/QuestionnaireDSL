@@ -19,8 +19,8 @@ public class Validator {
     private final SymbolTable symbolTable;
 
 
-    public Validator() {
-        issueTracker = new IssueTracker();
+    public Validator(IssueTracker issueTracker) {
+        this.issueTracker = issueTracker;
         questionDuplicationChecker = new QuestionDuplicationChecker(issueTracker);
         expressionChecker = new ExpressionChecker(issueTracker);
         cyclicDependencyChecker = new CyclicDependencyChecker(issueTracker);
