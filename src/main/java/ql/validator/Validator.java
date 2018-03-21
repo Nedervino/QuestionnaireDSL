@@ -11,7 +11,6 @@ import java.util.logging.Logger;
  */
 public class Validator {
 
-    private final static Logger LOGGER = Logger.getLogger(Validator.class.getName());
     private final IssueTracker issueTracker;
     private final QuestionDuplicationChecker questionDuplicationChecker;
     private final ExpressionChecker expressionChecker;
@@ -31,23 +30,23 @@ public class Validator {
 
         //Check for duplicate question identifiers and labels
         if (!questionDuplicationChecker.passesTests(form, symbolTable)) {
-            issueTracker.getErrors().forEach(issue -> LOGGER.severe(issue.toString()));
+            issueTracker.logErrors();
             return false;
         }
 
         //Check for reference to undefined questions, non-boolean conditionals, and invalid operand types
         if (!expressionChecker.passesTests(form, symbolTable)) {
-            issueTracker.getErrors().forEach(issue -> LOGGER.severe(issue.toString()));
+            issueTracker.logErrors();
             return false;
         }
 
         //Check cyclic dependencies between questions
         if (!cyclicDependencyChecker.passesTests(form)) {
-            issueTracker.getErrors().forEach(issue -> LOGGER.severe(issue.toString()));
+            issueTracker.logErrors();
             return false;
         }
 
-        issueTracker.getWarnings().forEach(issue -> LOGGER.warning(issue.toString()));
+        issueTracker.logWarnings();
 
         return true;
     }

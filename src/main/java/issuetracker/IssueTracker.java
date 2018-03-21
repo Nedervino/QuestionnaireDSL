@@ -2,9 +2,11 @@ package issuetracker;
 
 
 import ql.ast.SourceLocation;
+import ql.validator.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Stores validation errors and warnings
@@ -12,6 +14,7 @@ import java.util.List;
 public class IssueTracker {
 
     private static IssueTracker issueTracker;
+    private final static Logger LOGGER = Logger.getLogger(Validator.class.getName());
 
     private final List<Error> errors;
     private final List<Warning> warnings;
@@ -45,6 +48,14 @@ public class IssueTracker {
     public void reset() {
         errors.clear();
         warnings.clear();
+    }
+
+    public void logErrors() {
+        errors.forEach(error -> LOGGER.severe(error.toString()));
+    }
+
+    public void logWarnings() {
+        warnings.forEach(warning -> LOGGER.warning(warning.toString()));
     }
 
     public boolean hasErrors() {
