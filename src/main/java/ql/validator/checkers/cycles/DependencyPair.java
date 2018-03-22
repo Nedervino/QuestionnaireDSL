@@ -1,4 +1,4 @@
-package ql.validator.cycles;
+package ql.validator.checkers.cycles;
 
 import java.util.Objects;
 

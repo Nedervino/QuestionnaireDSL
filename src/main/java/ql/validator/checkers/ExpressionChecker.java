@@ -1,5 +1,6 @@
-package ql.validator;
+package ql.validator.checkers;
 
+import issuetracker.IssueTracker;
 import ql.ast.Form;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
@@ -12,7 +13,7 @@ import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormVisitor;
 import ql.ast.visitors.StatementVisitor;
 import ql.ast.visitors.TypeVisitor;
-import ql.validator.issuetracker.IssueTracker;
+import ql.validator.SymbolTable;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ import java.util.List;
  * Checks AST for references to undefined questions, conditions of non-boolean type,
  * and invalid operand/operator type combinations
  */
-public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Type>, TypeVisitor<Type> {
+public class ExpressionChecker implements Checker, FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Type>, TypeVisitor<Type> {
 
     private final IssueTracker issueTracker;
     private SymbolTable symbolTable;
@@ -29,8 +30,9 @@ public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Vo
         this.issueTracker = issueTracker;
     }
 
-    public boolean passesTests(Form form, SymbolTable symbolTable) {
-        this.symbolTable = symbolTable;
+    @Override
+    public boolean passesTests(Form form) {
+        symbolTable = new SymbolTable(form);
         form.accept(this);
         return !issueTracker.hasErrors();
     }
@@ -168,13 +170,13 @@ public class ExpressionChecker implements FormVisitor<Void>, StatementVisitor<Vo
     }
 
     @Override
-    public Type visit(LogicalOr logicalOr) {
-        return verifyType(checkTypeCompatibility(logicalOr), "boolean");
+    public Type visit(Or or) {
+        return verifyType(checkTypeCompatibility(or), "boolean");
     }
 
     @Override
-    public Type visit(LogicalAnd logicalAnd) {
-        return verifyType(checkTypeCompatibility(logicalAnd), "boolean");
+    public Type visit(And and) {
+        return verifyType(checkTypeCompatibility(and), "boolean");
     }
 
     @Override

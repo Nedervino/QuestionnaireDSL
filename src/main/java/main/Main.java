@@ -1,6 +1,7 @@
 package main;
 
 import gui.FormViewer;
+import issuetracker.IssueTracker;
 import ql.ast.Form;
 import ql.evaluator.Evaluator;
 import ql.evaluator.FormEvaluator;
@@ -15,6 +16,9 @@ import qls.parser.StylesheetBuilder;
 public class Main {
 
     public static void main(String[] args) {
+
+        IssueTracker issueTracker = IssueTracker.getIssueTracker();
+
         String qlFileName = "src/input/ql/correct/if.ql";
         String qlFile = new FileScanner().loadFile(qlFileName);
 
@@ -39,9 +43,10 @@ public class Main {
         FormEvaluator evaluator = new Evaluator();
         evaluator.start(form);
 
-        FormViewer formViewer = new FormViewer(evaluator);
-
-        formViewer.start(form, stylesheet);
+        if(!issueTracker.hasErrors()) {
+            FormViewer formViewer = new FormViewer(evaluator);
+            formViewer.start(form, stylesheet);
+        }
     }
 
 }

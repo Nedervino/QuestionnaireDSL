@@ -4,5 +4,5 @@
 
 form integerValueDecimal {
   "Should store as 4"
-    decimalValue: decimal = 4
+    value: decimal = 4
 }

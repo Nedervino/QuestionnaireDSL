@@ -1,34 +1,34 @@
-package ql.validator.issuetracker;
+package issuetracker;
 
 
 import ql.ast.SourceLocation;
+import ql.validator.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Stores validation errors and warnings
  */
 public class IssueTracker {
 
+    private final static Logger LOGGER = Logger.getLogger(Validator.class.getName());
     private static IssueTracker issueTracker;
-
     private final List<Error> errors;
     private final List<Warning> warnings;
 
-    //
-    // private issuetracker() {}
-    //
-    // public static issuetracker getIssueTracker() {
-    //     if(issueTracker == null) {
-    //         issueTracker = new issuetracker();
-    //     }
-    //     return issueTracker;
-    // }
 
-    public IssueTracker() {
+    private IssueTracker() {
         errors = new ArrayList<>();
         warnings = new ArrayList<>();
+    }
+
+    public static IssueTracker getIssueTracker() {
+        if (issueTracker == null) {
+            issueTracker = new IssueTracker();
+        }
+        return issueTracker;
     }
 
     public void addWarning(SourceLocation sourceLocation, String warningMessage) {
@@ -45,6 +45,14 @@ public class IssueTracker {
     public void reset() {
         errors.clear();
         warnings.clear();
+    }
+
+    public void logErrors() {
+        errors.forEach(error -> LOGGER.severe(error.toString()));
+    }
+
+    public void logWarnings() {
+        warnings.forEach(warning -> LOGGER.warning(warning.toString()));
     }
 
     public boolean hasErrors() {

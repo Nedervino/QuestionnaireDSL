@@ -4,9 +4,9 @@ import ql.ast.SourceLocation;
 import ql.ast.expressions.Expression;
 import ql.ast.visitors.ExpressionVisitor;
 
-public class LogicalOr extends BinaryOperation {
+public class Or extends BinaryOperation {
 
-    public LogicalOr(Expression left, Expression right, SourceLocation sourceLocation) {
+    public Or(Expression left, Expression right, SourceLocation sourceLocation) {
         super(left, right, sourceLocation);
     }
 

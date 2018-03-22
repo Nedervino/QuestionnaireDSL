@@ -1,11 +1,12 @@
 package ql.validator;
 
+import issuetracker.IssueTracker;
 import org.junit.Before;
 import org.junit.Test;
 import ql.Helper;
 import ql.ast.Form;
 import ql.parser.FormBuilder;
-import ql.validator.issuetracker.IssueTracker;
+import ql.validator.checkers.CyclicDependencyChecker;
 
 import static org.junit.Assert.*;
 
@@ -20,7 +21,7 @@ public class CyclicDependencyCheckerTest {
     public void setUp() throws Exception {
         formBuilder = new FormBuilder();
         helper = new Helper();
-        issueTracker = new IssueTracker();
+        issueTracker = IssueTracker.getIssueTracker();
         cyclicDependencyChecker = new CyclicDependencyChecker(issueTracker);
     }
 

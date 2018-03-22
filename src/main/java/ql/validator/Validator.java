@@ -1,9 +1,11 @@
 package ql.validator;
 
+import issuetracker.IssueTracker;
 import ql.ast.Form;
-import ql.validator.issuetracker.IssueTracker;
-
-import java.util.logging.Logger;
+import ql.validator.checkers.Checker;
+import ql.validator.checkers.CyclicDependencyChecker;
+import ql.validator.checkers.ExpressionChecker;
+import ql.validator.checkers.QuestionDuplicationChecker;
 
 
 /**
@@ -11,43 +13,40 @@ import java.util.logging.Logger;
  */
 public class Validator {
 
-    private final static Logger LOGGER = Logger.getLogger(Validator.class.getName());
-    private final IssueTracker issueTracker;
-    private final QuestionDuplicationChecker questionDuplicationChecker;
-    private final ExpressionChecker expressionChecker;
-    private final CyclicDependencyChecker cyclicDependencyChecker;
-    private final SymbolTable symbolTable;
 
+    private final IssueTracker issueTracker;
+    private final Checker questionDuplicationChecker;
+    private final Checker expressionChecker;
+    private final Checker cyclicDependencyChecker;
 
     public Validator() {
-        issueTracker = new IssueTracker();
+        issueTracker = IssueTracker.getIssueTracker();
         questionDuplicationChecker = new QuestionDuplicationChecker(issueTracker);
         expressionChecker = new ExpressionChecker(issueTracker);
         cyclicDependencyChecker = new CyclicDependencyChecker(issueTracker);
-        symbolTable = new SymbolTable();
     }
 
     public boolean passesTypeChecks(Form form) {
 
         //Check for duplicate question identifiers and labels
-        if (!questionDuplicationChecker.passesTests(form, symbolTable)) {
-            issueTracker.getErrors().forEach(issue -> LOGGER.severe(issue.toString()));
+        if (!questionDuplicationChecker.passesTests(form)) {
+            issueTracker.logErrors();
             return false;
         }
 
         //Check for reference to undefined questions, non-boolean conditionals, and invalid operand types
-        if (!expressionChecker.passesTests(form, symbolTable)) {
-            issueTracker.getErrors().forEach(issue -> LOGGER.severe(issue.toString()));
+        if (!expressionChecker.passesTests(form)) {
+            issueTracker.logErrors();
             return false;
         }
 
         //Check cyclic dependencies between questions
         if (!cyclicDependencyChecker.passesTests(form)) {
-            issueTracker.getErrors().forEach(issue -> LOGGER.severe(issue.toString()));
+            issueTracker.logErrors();
             return false;
         }
 
-        issueTracker.getWarnings().forEach(issue -> LOGGER.warning(issue.toString()));
+        issueTracker.logWarnings();
 
         return true;
     }

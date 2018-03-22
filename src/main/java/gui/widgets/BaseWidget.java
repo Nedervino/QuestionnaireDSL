@@ -1,5 +1,6 @@
 package gui.widgets;
 
+import gui.WidgetListener;
 import ql.evaluator.FormEvaluator;
 import ql.evaluator.values.Evaluatable;
 
@@ -23,7 +24,12 @@ public abstract class BaseWidget implements Widget {
     }
 
     @Override
-    public void setEditable(boolean editable) {
+    public JComponent getComponent() {
+        return null;
+    }
+
+    @Override
+    public void addWidgetListener(WidgetListener widgetListener) {
 
     }
 
@@ -32,8 +38,4 @@ public abstract class BaseWidget implements Widget {
 
     }
 
-    @Override
-    public JComponent getComponent() {
-        return null;
-    }
 }

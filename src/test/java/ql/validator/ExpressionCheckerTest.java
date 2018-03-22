@@ -1,12 +1,13 @@
 package ql.validator;
 
+import issuetracker.Error;
+import issuetracker.IssueTracker;
 import org.junit.Before;
 import org.junit.Test;
 import ql.Helper;
 import ql.ast.Form;
 import ql.parser.FormBuilder;
-import ql.validator.issuetracker.Error;
-import ql.validator.issuetracker.IssueTracker;
+import ql.validator.checkers.ExpressionChecker;
 
 import static org.junit.Assert.*;
 
@@ -21,7 +22,7 @@ public class ExpressionCheckerTest {
     public void setUp() throws Exception {
         formBuilder = new FormBuilder();
         helper = new Helper();
-        issueTracker = new IssueTracker();
+        issueTracker = IssueTracker.getIssueTracker();
         expressionChecker = new ExpressionChecker(issueTracker);
     }
 
@@ -30,12 +31,7 @@ public class ExpressionCheckerTest {
         issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/undefinedQuestion.ql", formBuilder);
 
-        //Initialize symbolTable;
-        SymbolTable symbolTable = new SymbolTable();
-        new QuestionDuplicationChecker(issueTracker).passesTests(form, symbolTable);
-        issueTracker.reset();
-
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
         assertEquals(0, issueTracker.getWarnings().size());
         assertEquals(1, issueTracker.getErrors().size());
@@ -44,14 +40,10 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueErrorForNonBooleanCondition() {
+        issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonBooleanCondition.ql", formBuilder);
 
-        //Initialize symbolTable;
-        SymbolTable symbolTable = new SymbolTable();
-        new QuestionDuplicationChecker(issueTracker).passesTests(form, symbolTable);
-        issueTracker.reset();
-
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
         assertEquals(0, issueTracker.getWarnings().size());
         assertEquals(1, issueTracker.getErrors().size());
@@ -60,14 +52,10 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueTypeErrorsForNonNumericMismatches() {
+        issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/incompatibleBinaryExpressionTypes.ql", formBuilder);
 
-        //Initialize symbolTable;
-        SymbolTable symbolTable = new SymbolTable();
-        new QuestionDuplicationChecker(issueTracker).passesTests(form, symbolTable);
-        issueTracker.reset();
-
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
 
         assertEquals(0, issueTracker.getWarnings().size());
@@ -79,14 +67,10 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueErrorForNonNumericInArithmeticExpression() {
+        issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonNumericInArithmeticExpression.ql", formBuilder);
 
-        //Initialize symbolTable;
-        SymbolTable symbolTable = new SymbolTable();
-        new QuestionDuplicationChecker(issueTracker).passesTests(form, symbolTable);
-        issueTracker.reset();
-
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
 
         assertEquals(0, issueTracker.getWarnings().size());
@@ -103,14 +87,11 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueNoErrorForNumericExpressionsWithMoneyType() {
+        issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/correct/validator/numericExpressionsWithMoneyType.ql", formBuilder);
 
-        //Initialize symbolTable;
-        SymbolTable symbolTable = new SymbolTable();
-        new QuestionDuplicationChecker(issueTracker).passesTests(form, symbolTable);
-        issueTracker.reset();
 
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertTrue(passesTests);
 
         assertEquals(0, issueTracker.getWarnings().size());
@@ -119,14 +100,11 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueNoErrorForDifferentNumericCombinations() {
+        issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/correct/validator/numericCombinations.ql", formBuilder);
 
-        //Initialize symbolTable;
-        SymbolTable symbolTable = new SymbolTable();
-        new QuestionDuplicationChecker(issueTracker).passesTests(form, symbolTable);
-        issueTracker.reset();
 
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertTrue(passesTests);
 
         assertEquals(0, issueTracker.getWarnings().size());
@@ -135,14 +113,11 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueErrorForNonBooleanInBooleanExpression() {
+        issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonBooleanInBoolean.ql", formBuilder);
 
-        //Initialize symbolTable;
-        SymbolTable symbolTable = new SymbolTable();
-        new QuestionDuplicationChecker(issueTracker).passesTests(form, symbolTable);
-        issueTracker.reset();
 
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
 
         assertEquals(0, issueTracker.getWarnings().size());
@@ -154,14 +129,11 @@ public class ExpressionCheckerTest {
 
     @Test
     public void shouldIssueErrorForNonNumericInComparisonExpression() {
+        issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonNumericInComparison.ql", formBuilder);
 
-        //Initialize symbolTable;
-        SymbolTable symbolTable = new SymbolTable();
-        new QuestionDuplicationChecker(issueTracker).passesTests(form, symbolTable);
-        issueTracker.reset();
 
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
 
         assertEquals(0, issueTracker.getWarnings().size());

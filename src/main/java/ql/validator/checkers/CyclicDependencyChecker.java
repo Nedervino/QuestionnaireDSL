@@ -1,5 +1,6 @@
-package ql.validator;
+package ql.validator.checkers;
 
+import issuetracker.IssueTracker;
 import ql.ast.Form;
 import ql.ast.SourceLocation;
 import ql.ast.expressions.Variable;
@@ -12,9 +13,8 @@ import ql.ast.statements.*;
 import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormVisitor;
 import ql.ast.visitors.StatementVisitor;
-import ql.validator.cycles.DependencyManager;
-import ql.validator.cycles.DependencyPair;
-import ql.validator.issuetracker.IssueTracker;
+import ql.validator.checkers.cycles.DependencyManager;
+import ql.validator.checkers.cycles.DependencyPair;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,7 +24,7 @@ import java.util.Optional;
 /**
  * Checks AST for cyclic dependencies between questions
  */
-public class CyclicDependencyChecker implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<List<Variable>> {
+public class CyclicDependencyChecker implements Checker, FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<List<Variable>> {
 
 
     private final IssueTracker issueTracker;
@@ -35,7 +35,7 @@ public class CyclicDependencyChecker implements FormVisitor<Void>, StatementVisi
         this.dependencyManager = new DependencyManager();
     }
 
-
+    @Override
     public boolean passesTests(Form form) {
         form.accept(this);
         logCircularDependencies();
@@ -111,8 +111,8 @@ public class CyclicDependencyChecker implements FormVisitor<Void>, StatementVisi
     }
 
     @Override
-    public List<Variable> visit(LogicalAnd logicalAnd) {
-        return visitBinaryOperation(logicalAnd);
+    public List<Variable> visit(And and) {
+        return visitBinaryOperation(and);
     }
 
     @Override
@@ -157,8 +157,8 @@ public class CyclicDependencyChecker implements FormVisitor<Void>, StatementVisi
     }
 
     @Override
-    public List<Variable> visit(LogicalOr logicalOr) {
-        return visitBinaryOperation(logicalOr);
+    public List<Variable> visit(Or or) {
+        return visitBinaryOperation(or);
     }
 
     @Override

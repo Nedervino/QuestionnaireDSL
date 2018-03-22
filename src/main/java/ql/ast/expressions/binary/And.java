@@ -4,9 +4,9 @@ import ql.ast.SourceLocation;
 import ql.ast.expressions.Expression;
 import ql.ast.visitors.ExpressionVisitor;
 
-public class LogicalAnd extends BinaryOperation {
+public class And extends BinaryOperation {
 
-    public LogicalAnd(Expression left, Expression right, SourceLocation sourceLocation) {
+    public And(Expression left, Expression right, SourceLocation sourceLocation) {
         super(left, right, sourceLocation);
     }
 
