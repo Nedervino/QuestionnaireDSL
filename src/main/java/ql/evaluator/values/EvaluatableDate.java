@@ -12,37 +12,7 @@ public class EvaluatableDate implements Evaluatable<Date> {
 
     @Override
     public Date getValue() {
-        return null;
-    }
-
-    @Override
-    public EvaluatableBoolean and(Evaluatable evaluatable) {
-        return null;
-    }
-
-    @Override
-    public EvaluatableBoolean and(EvaluatableBoolean evaluatable) {
-        return null;
-    }
-
-    @Override
-    public Evaluatable divide(Evaluatable evaluatable) {
-        return null;
-    }
-
-    @Override
-    public Evaluatable divide(EvaluatableMoney evaluatable) {
-        return null;
-    }
-
-    @Override
-    public Evaluatable divide(EvaluatableInteger evaluatable) {
-        return null;
-    }
-
-    @Override
-    public Evaluatable divide(EvaluatableDecimal evaluatable) {
-        return null;
+        return value;
     }
 
     @Override
@@ -51,52 +21,12 @@ public class EvaluatableDate implements Evaluatable<Date> {
     }
 
     @Override
-    public EvaluatableBoolean equal(EvaluatableMoney evaluatable) {
-        return null;
-    }
-
-    @Override
-    public EvaluatableBoolean equal(EvaluatableInteger evaluatable) {
-        return null;
-    }
-
-    @Override
-    public EvaluatableBoolean equal(EvaluatableDecimal evaluatable) {
-        return null;
-    }
-
-    @Override
-    public EvaluatableBoolean equal(EvaluatableString evaluatable) {
-        return null;
-    }
-
-    @Override
-    public EvaluatableBoolean equal(EvaluatableBoolean evaluatable) {
-        return null;
-    }
-
-    @Override
     public EvaluatableBoolean equal(EvaluatableDate evaluatable) {
-        return null;
+        return new EvaluatableBoolean(value.equals(evaluatable.getValue()));
     }
 
     @Override
     public EvaluatableBoolean greaterThanEqual(Evaluatable evaluatable) {
-        return null;
-    }
-
-    @Override
-    public EvaluatableBoolean greaterThanEqual(EvaluatableMoney evaluatable) {
-        return null;
-    }
-
-    @Override
-    public EvaluatableBoolean greaterThanEqual(EvaluatableDecimal evaluatable) {
-        return null;
-    }
-
-    @Override
-    public EvaluatableBoolean greaterThanEqual(EvaluatableInteger evaluatable) {
         return null;
     }
 
