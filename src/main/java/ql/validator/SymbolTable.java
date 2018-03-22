@@ -16,6 +16,10 @@ public class SymbolTable {
 
     private final Map<String, Type> table;
 
+    public SymbolTable() {
+        this.table = new HashMap<>();
+    }
+
     public SymbolTable(Form form) {
         table = new HashMap<>();
 
@@ -23,10 +27,6 @@ public class SymbolTable {
         for(Question question : questions) {
             table.put(question.getId(), question.getType());
         }
-    }
-
-    public SymbolTable() {
-        this.table = new HashMap<>();
     }
 
     public void declare(String identifier, Type type) {
