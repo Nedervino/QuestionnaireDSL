@@ -135,4 +135,54 @@ public class EvaluatorTest {
 
         assertEquals(expected, evaluatable.getValue());
     }
+
+    @Test
+    public void shouldCompareStrings() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/stringComparison.ql", formBuilder);
+
+        evaluator.start(form);
+
+        Evaluatable evaluatable = evaluator.getQuestionValue("result");
+
+        assertEquals(false, evaluatable.getValue());
+    }
+
+    @Test
+    public void shouldCompareDates() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/dateComparison.ql", formBuilder);
+
+        evaluator.start(form);
+
+        Evaluatable evaluatable = evaluator.getQuestionValue("result");
+
+        assertEquals(true, evaluatable.getValue());
+    }
+
+    @Test
+    public void shouldEvaluateBooleans() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/booleanExpression.ql", formBuilder);
+
+        evaluator.start(form);
+
+        Evaluatable evaluatable = evaluator.getQuestionValue("result");
+
+        assertEquals(true, evaluatable.getValue());
+    }
+
+    @Test
+    public void shouldCompareIntegers() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/integerComparisonAndOperation.ql", formBuilder);
+
+        evaluator.start(form);
+
+        Evaluatable evaluatable = evaluator.getQuestionValue("result");
+        Evaluatable evaluatable2 = evaluator.getQuestionValue("result2");
+
+        assertEquals(true, evaluatable.getValue());
+        assertEquals(true, evaluatable2.getValue());
+    }
 }
