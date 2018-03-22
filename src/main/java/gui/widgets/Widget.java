@@ -11,8 +11,6 @@ public interface Widget {
 
     JComponent getComponent();
 
-    void setEditable(boolean editable);
-
     void setVisible(boolean visible);
 
     void addWidgetListener(WidgetListener widgetListener);

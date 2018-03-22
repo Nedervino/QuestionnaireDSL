@@ -38,8 +38,4 @@ public abstract class BaseWidget implements Widget {
 
     }
 
-    @Override
-    public void setEditable(boolean editable) {
-
-    }
 }

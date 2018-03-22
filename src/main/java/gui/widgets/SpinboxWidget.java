@@ -14,11 +14,6 @@ public class SpinboxWidget extends BaseWidget {
     }
 
     @Override
-    public void setEditable(boolean editable) {
-
-    }
-
-    @Override
     public void setVisible(boolean visible) {
 
     }

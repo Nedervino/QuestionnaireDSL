@@ -17,11 +17,6 @@ public class CheckboxWidget extends BaseWidget {
     }
 
     @Override
-    public void setEditable(boolean editable) {
-
-    }
-
-    @Override
     public void setVisible(boolean visible) {
 
     }
