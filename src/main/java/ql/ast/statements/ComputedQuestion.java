@@ -3,7 +3,7 @@ package ql.ast.statements;
 import ql.ast.SourceLocation;
 import ql.ast.expressions.Expression;
 import ql.ast.types.Type;
-import ql.ast.visitors.StatementVisitor;
+import ql.ast.visitors.FormStatementVisitor;
 
 public class ComputedQuestion extends Question {
 
@@ -19,7 +19,7 @@ public class ComputedQuestion extends Question {
     }
 
     @Override
-    public <T> T accept(StatementVisitor<T> visitor) {
+    public <T> T accept(FormStatementVisitor<T> visitor) {
         return visitor.visit(this);
     }
 

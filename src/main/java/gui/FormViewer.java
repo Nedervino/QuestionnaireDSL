@@ -31,7 +31,7 @@ public class FormViewer {
     public void start(Form node, Stylesheet stylesheet) {
         initialiseFrame();
 
-        GUIElementConstructionVisitor visitor = new GUIElementConstructionVisitor(this);
+        GUIElementConstructionVisitorForm visitor = new GUIElementConstructionVisitorForm(this);
         visitor.visit(node);
 
         panel.repaint();

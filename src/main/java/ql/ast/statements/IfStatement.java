@@ -2,7 +2,7 @@ package ql.ast.statements;
 
 import ql.ast.SourceLocation;
 import ql.ast.expressions.Expression;
-import ql.ast.visitors.StatementVisitor;
+import ql.ast.visitors.FormStatementVisitor;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class IfStatement extends Statement {
     }
 
     @Override
-    public <T> T accept(StatementVisitor<T> visitor) {
+    public <T> T accept(FormStatementVisitor<T> visitor) {
         return visitor.visit(this);
     }
 

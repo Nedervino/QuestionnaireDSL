@@ -1,7 +1,7 @@
 package ql.ast;
 
 import ql.ast.statements.Statement;
-import ql.ast.visitors.FormVisitor;
+import ql.ast.visitors.FormStatementVisitor;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class Form extends ASTNode {
         return statements;
     }
 
-    public <T> T accept(FormVisitor<T> visitor) {
+    public <T> T accept(FormStatementVisitor<T> visitor) {
         return visitor.visit(this);
     }
 

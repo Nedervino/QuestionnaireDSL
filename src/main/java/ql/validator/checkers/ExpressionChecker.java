@@ -10,8 +10,7 @@ import ql.ast.expressions.unary.Negation;
 import ql.ast.statements.*;
 import ql.ast.types.*;
 import ql.ast.visitors.ExpressionVisitor;
-import ql.ast.visitors.FormVisitor;
-import ql.ast.visitors.StatementVisitor;
+import ql.ast.visitors.FormStatementVisitor;
 import ql.ast.visitors.TypeVisitor;
 import ql.validator.SymbolTable;
 
@@ -21,7 +20,7 @@ import java.util.List;
  * Checks AST for references to undefined questions, conditions of non-boolean type,
  * and invalid operand/operator type combinations
  */
-public class ExpressionChecker implements Checker, FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Type>, TypeVisitor<Type> {
+public class ExpressionChecker implements Checker, FormStatementVisitor<Void>, ExpressionVisitor<Type>, TypeVisitor<Type> {
 
     private final IssueTracker issueTracker;
     private SymbolTable symbolTable;

@@ -3,8 +3,7 @@ package ql.validator.checkers;
 import issuetracker.IssueTracker;
 import ql.ast.Form;
 import ql.ast.statements.*;
-import ql.ast.visitors.FormVisitor;
-import ql.ast.visitors.StatementVisitor;
+import ql.ast.visitors.FormStatementVisitor;
 import ql.validator.SymbolTable;
 
 import java.util.HashSet;
@@ -13,7 +12,7 @@ import java.util.Set;
 /**
  * Checks AST for question duplications, giving errors for duplicate identifiers and warnings for duplicate labels
  */
-public class QuestionDuplicationChecker implements Checker, FormVisitor<Void>, StatementVisitor<Void> {
+public class QuestionDuplicationChecker implements Checker, FormStatementVisitor<Void> {
 
     private final Set<String> questionLabels;
     private final IssueTracker issueTracker;

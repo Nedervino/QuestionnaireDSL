@@ -3,8 +3,7 @@ package gui;
 import ql.ast.Form;
 import ql.ast.statements.*;
 import ql.ast.types.*;
-import ql.ast.visitors.FormVisitor;
-import ql.ast.visitors.StatementVisitor;
+import ql.ast.visitors.FormStatementVisitor;
 import ql.ast.visitors.TypeVisitor;
 import ql.evaluator.values.ValueBoolean;
 import ql.evaluator.values.ValueString;
@@ -12,13 +11,13 @@ import ql.evaluator.values.ValueString;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
-public class GUIElementConstructionVisitor implements FormVisitor<Void>, StatementVisitor<Void>, TypeVisitor<Void> {
+public class GUIElementConstructionVisitorForm implements FormStatementVisitor<Void>, TypeVisitor<Void> {
 
     private FormViewer formViewer;
     private int pointer = 100;
     private QuestionElement newElement;
 
-    public GUIElementConstructionVisitor(FormViewer formViewer) {
+    public GUIElementConstructionVisitorForm(FormViewer formViewer) {
         this.formViewer = formViewer;
     }
 

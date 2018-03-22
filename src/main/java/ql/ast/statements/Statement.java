@@ -2,7 +2,7 @@ package ql.ast.statements;
 
 import ql.ast.ASTNode;
 import ql.ast.SourceLocation;
-import ql.ast.visitors.StatementVisitor;
+import ql.ast.visitors.FormStatementVisitor;
 
 public abstract class Statement extends ASTNode {
 
@@ -10,6 +10,6 @@ public abstract class Statement extends ASTNode {
         super(sourceLocation);
     }
 
-    public abstract <T> T accept(StatementVisitor<T> visitor);
+    public abstract <T> T accept(FormStatementVisitor<T> visitor);
 
 }

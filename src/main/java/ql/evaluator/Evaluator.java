@@ -10,15 +10,14 @@ import ql.ast.expressions.unary.Negative;
 import ql.ast.expressions.unary.Negation;
 import ql.ast.statements.*;
 import ql.ast.visitors.ExpressionVisitor;
-import ql.ast.visitors.FormVisitor;
-import ql.ast.visitors.StatementVisitor;
+import ql.ast.visitors.FormStatementVisitor;
 import ql.evaluator.values.*;
 import issuetracker.IssueTracker;
 
 import java.util.*;
 
 
-public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Value>, FormEvaluator {
+public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<Value>, FormEvaluator {
 
     //TODO: questionValues use String identifier, ASTNodes are not necessary anymore. Also allows removal of idLookup
     private Map<ASTNode, Value> questionValues;

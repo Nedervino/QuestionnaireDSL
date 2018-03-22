@@ -11,8 +11,7 @@ import ql.ast.expressions.unary.Negation;
 import ql.ast.expressions.unary.UnaryOperation;
 import ql.ast.statements.*;
 import ql.ast.visitors.ExpressionVisitor;
-import ql.ast.visitors.FormVisitor;
-import ql.ast.visitors.StatementVisitor;
+import ql.ast.visitors.FormStatementVisitor;
 import ql.validator.checkers.cycles.DependencyManager;
 import ql.validator.checkers.cycles.DependencyPair;
 
@@ -24,7 +23,7 @@ import java.util.Optional;
 /**
  * Checks AST for cyclic dependencies between questions
  */
-public class CyclicDependencyChecker implements Checker, FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<List<Variable>> {
+public class CyclicDependencyChecker implements Checker, FormStatementVisitor<Void>, ExpressionVisitor<List<Variable>> {
 
 
     private final IssueTracker issueTracker;
