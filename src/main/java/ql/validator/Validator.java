@@ -18,8 +18,6 @@ public class Validator {
     private final Checker questionDuplicationChecker;
     private final Checker expressionChecker;
     private final Checker cyclicDependencyChecker;
-    private SymbolTable symbolTable;
-
 
     public Validator() {
         issueTracker = IssueTracker.getIssueTracker();
@@ -30,23 +28,20 @@ public class Validator {
 
     public boolean passesTypeChecks(Form form) {
 
-        //Initialize SymbolTable
-        symbolTable = new SymbolTable(form);
-
         //Check for duplicate question identifiers and labels
-        if (!questionDuplicationChecker.passesTests(form, symbolTable)) {
+        if (!questionDuplicationChecker.passesTests(form)) {
             issueTracker.logErrors();
             return false;
         }
 
         //Check for reference to undefined questions, non-boolean conditionals, and invalid operand types
-        if (!expressionChecker.passesTests(form, symbolTable)) {
+        if (!expressionChecker.passesTests(form)) {
             issueTracker.logErrors();
             return false;
         }
 
         //Check cyclic dependencies between questions
-        if (!cyclicDependencyChecker.passesTests(form, null)) {
+        if (!cyclicDependencyChecker.passesTests(form)) {
             issueTracker.logErrors();
             return false;
         }

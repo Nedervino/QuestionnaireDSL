@@ -30,9 +30,8 @@ public class ExpressionCheckerTest {
     public void shouldIssueErrorForUndefinedQuestionReference() {
         issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/undefinedQuestion.ql", formBuilder);
-        SymbolTable symbolTable = new SymbolTable(form);
 
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
         assertEquals(0, issueTracker.getWarnings().size());
         assertEquals(1, issueTracker.getErrors().size());
@@ -43,9 +42,8 @@ public class ExpressionCheckerTest {
     public void shouldIssueErrorForNonBooleanCondition() {
         issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonBooleanCondition.ql", formBuilder);
-        SymbolTable symbolTable = new SymbolTable(form);
 
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
         assertEquals(0, issueTracker.getWarnings().size());
         assertEquals(1, issueTracker.getErrors().size());
@@ -56,9 +54,8 @@ public class ExpressionCheckerTest {
     public void shouldIssueTypeErrorsForNonNumericMismatches() {
         issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/incompatibleBinaryExpressionTypes.ql", formBuilder);
-        SymbolTable symbolTable = new SymbolTable(form);
 
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
 
         assertEquals(0, issueTracker.getWarnings().size());
@@ -72,9 +69,8 @@ public class ExpressionCheckerTest {
     public void shouldIssueErrorForNonNumericInArithmeticExpression() {
         issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonNumericInArithmeticExpression.ql", formBuilder);
-        SymbolTable symbolTable = new SymbolTable(form);
 
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
 
         assertEquals(0, issueTracker.getWarnings().size());
@@ -93,9 +89,9 @@ public class ExpressionCheckerTest {
     public void shouldIssueNoErrorForNumericExpressionsWithMoneyType() {
         issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/correct/validator/numericExpressionsWithMoneyType.ql", formBuilder);
-        SymbolTable symbolTable = new SymbolTable(form);
+        
 
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertTrue(passesTests);
 
         assertEquals(0, issueTracker.getWarnings().size());
@@ -106,9 +102,9 @@ public class ExpressionCheckerTest {
     public void shouldIssueNoErrorForDifferentNumericCombinations() {
         issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/correct/validator/numericCombinations.ql", formBuilder);
-        SymbolTable symbolTable = new SymbolTable(form);
+        
 
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertTrue(passesTests);
 
         assertEquals(0, issueTracker.getWarnings().size());
@@ -119,9 +115,9 @@ public class ExpressionCheckerTest {
     public void shouldIssueErrorForNonBooleanInBooleanExpression() {
         issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonBooleanInBoolean.ql", formBuilder);
-        SymbolTable symbolTable = new SymbolTable(form);
+        
 
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
 
         assertEquals(0, issueTracker.getWarnings().size());
@@ -135,9 +131,9 @@ public class ExpressionCheckerTest {
     public void shouldIssueErrorForNonNumericInComparisonExpression() {
         issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonNumericInComparison.ql", formBuilder);
-        SymbolTable symbolTable = new SymbolTable(form);
+        
 
-        boolean passesTests = expressionChecker.passesTests(form, symbolTable);
+        boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
 
         assertEquals(0, issueTracker.getWarnings().size());

@@ -23,11 +23,11 @@ public class QuestionDuplicationChecker implements Checker, FormVisitor<Void>, S
     public QuestionDuplicationChecker(IssueTracker issueTracker) {
         this.issueTracker = issueTracker;
         this.questionLabels = new HashSet<>();
+        this.symbolTable = new SymbolTable();
     }
 
     @Override
-    public boolean passesTests(Form form, SymbolTable symbolTable) {
-        this.symbolTable = symbolTable;
+    public boolean passesTests(Form form) {
         form.accept(this);
         return !issueTracker.hasErrors();
     }

@@ -37,7 +37,7 @@ public class CyclicDependencyChecker implements Checker, FormVisitor<Void>, Stat
     }
 
     @Override
-    public boolean passesTests(Form form, SymbolTable symbolTable) {
+    public boolean passesTests(Form form) {
         form.accept(this);
         logCircularDependencies();
         return !issueTracker.hasErrors();

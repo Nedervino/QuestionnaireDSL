@@ -31,8 +31,8 @@ public class ExpressionChecker implements Checker, FormVisitor<Void>, StatementV
     }
 
     @Override
-    public boolean passesTests(Form form, SymbolTable symbolTable) {
-        this.symbolTable = symbolTable;
+    public boolean passesTests(Form form) {
+        symbolTable = new SymbolTable(form);
         form.accept(this);
         return !issueTracker.hasErrors();
     }
