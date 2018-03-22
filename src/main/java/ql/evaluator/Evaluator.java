@@ -282,7 +282,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         Value value = node.getExpression().accept(this);
         ValueBoolean result = null;
         if (isCalculated(value)) {
-            result = value.logicalNegate();
+            result = value.negation();
         }
         return result;
     }
@@ -292,7 +292,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         Value value = node.getExpression().accept(this);
         Value result = null;
         if (isCalculated(value)) {
-            result = value.arithmeticNegate();
+            result = value.negative();
         }
         return result;
     }

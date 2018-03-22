@@ -60,7 +60,7 @@ public class ValueBoolean implements Value<Boolean> {
     }
 
     @Override
-    public ValueBoolean logicalNegate() {
+    public ValueBoolean negation() {
         return new ValueBoolean(!getValue().booleanValue());
     }
 

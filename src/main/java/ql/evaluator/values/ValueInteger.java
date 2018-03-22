@@ -86,7 +86,7 @@ public class ValueInteger extends ValueNumeric<Integer> {
     }
 
     @Override
-    public ValueNumeric arithmeticNegate() {
+    public ValueNumeric negative() {
         return new ValueInteger(-getValue());
     }
 

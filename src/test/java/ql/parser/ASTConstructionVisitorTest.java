@@ -81,7 +81,7 @@ public class ASTConstructionVisitorTest extends Helper {
     // @Test
     // public void visitUnaryExpression() {
     //     QLParser parser = formBuilder.createParser("!(true)");
-    //     Negation logicalNegation = (Negation) formBuilder.getExpression(parser);
+    //     Negation negation = (Negation) formBuilder.getExpression(parser);
     //     Negative arithmeticNegation = (Negative) formBuilder.getExpression(parser);
     // }
 

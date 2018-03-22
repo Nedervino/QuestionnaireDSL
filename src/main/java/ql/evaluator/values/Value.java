@@ -226,11 +226,11 @@ public interface Value<T> {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean logicalNegate() {
+    default ValueBoolean negation() {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueNumeric arithmeticNegate() {
+    default ValueNumeric negative() {
         throw new UnsupportedOperationException(getValue().toString());
     }
 }

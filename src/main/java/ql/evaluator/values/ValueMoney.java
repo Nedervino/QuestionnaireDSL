@@ -81,7 +81,7 @@ public class ValueMoney extends ValueNumeric<BigDecimal> {
     }
 
     @Override
-    public ValueNumeric arithmeticNegate() {
+    public ValueNumeric negative() {
         return new ValueMoney(getValue().negate());
     }
 

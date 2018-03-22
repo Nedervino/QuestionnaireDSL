@@ -196,12 +196,12 @@ public class ValueDate implements Value<Date> {
     }
 
     @Override
-    public ValueBoolean logicalNegate() {
+    public ValueBoolean negation() {
         return null;
     }
 
     @Override
-    public ValueNumeric arithmeticNegate() {
+    public ValueNumeric negative() {
         return null;
     }
 }

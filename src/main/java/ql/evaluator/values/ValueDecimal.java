@@ -86,7 +86,7 @@ public class ValueDecimal extends ValueNumeric<Double> {
     }
 
     @Override
-    public ValueNumeric arithmeticNegate() {
+    public ValueNumeric negative() {
         return new ValueDecimal(-getValue());
     }
 
