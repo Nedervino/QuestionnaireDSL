@@ -185,4 +185,16 @@ public class EvaluatorTest {
         assertEquals(true, evaluatable.getValue());
         assertEquals(true, evaluatable2.getValue());
     }
+
+    @Test
+    public void shouldFormatDateString() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/simpleDate.ql", formBuilder);
+
+        evaluator.start(form);
+
+        Evaluatable evaluatable = evaluator.getQuestionValue("value");
+
+        assertEquals("01-02-1999", evaluatable.toString());
+    }
 }

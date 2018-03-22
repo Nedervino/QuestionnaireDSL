@@ -1,5 +1,8 @@
 package ql.evaluator.values;
 
+import ql.ast.expressions.literals.DateLiteral;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class EvaluatableDate implements Evaluatable<Date> {
@@ -75,4 +78,9 @@ public class EvaluatableDate implements Evaluatable<Date> {
         return new EvaluatableBoolean(!evaluatable.getValue().equals(getValue()));
     }
 
+    @Override
+    public String toString(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DateLiteral.DATE_FORMAT);
+        return dateFormat.format(getValue());
+    }
 }
