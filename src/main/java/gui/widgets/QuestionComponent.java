@@ -16,7 +16,9 @@ public class QuestionComponent {
 
     public QuestionComponent(FormEvaluator formEvaluator, Question question) {
         label = new JLabel(question.getLabel());
-        // widget = new TextFieldWidget(formEvaluator, question);
+        widget = new TextFieldWidget(formEvaluator, question);
+        panel.add(label);
+        panel.add(widget.getComponent());
     }
 
     public JComponent getComponent() {

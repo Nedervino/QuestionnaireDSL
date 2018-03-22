@@ -10,7 +10,7 @@ import ql.ast.expressions.Expression;
 import ql.ast.statements.Statement;
 
 /**
- * This parses a QL input file using ANTLR, and creates a custom AST
+ * This parses a QL form specification using ANTLR, and converts the resulting CST to a Form AST
  */
 public class FormBuilder {
 

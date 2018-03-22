@@ -9,10 +9,12 @@ public interface Widget {
 
     Evaluatable getValue();
 
+    void setValue();
+
     JComponent getComponent();
 
     void setVisible(boolean visible);
 
-    void addWidgetListener(WidgetListener widgetListener);
+    void registerChangeListener(WidgetListener widgetListener);
 
 }
