@@ -3,6 +3,6 @@
 */
 
 form example {
-  "Should store as 3.999"
-    value: decimal = 3.999
+  "Should store as 1000,00"
+    value: money = 1000,0
 }

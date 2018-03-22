@@ -14,7 +14,7 @@ public class EvaluatableBoolean implements Evaluatable<Boolean> {
     }
 
     @Override
-    public boolean isTrue() {
+    public boolean getBooleanValue() {
         return value;
     }
 

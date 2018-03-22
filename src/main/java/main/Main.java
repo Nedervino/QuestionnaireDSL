@@ -1,6 +1,7 @@
 package main;
 
 import gui.FormViewer;
+import issuetracker.IssueTracker;
 import ql.ast.Form;
 import ql.evaluator.Evaluator;
 import ql.evaluator.FormEvaluator;
@@ -28,6 +29,7 @@ public class Main {
         // Stylesheet stylesheet = stylesheetBuilder.buildASTFromString(qlFile);
         Stylesheet stylesheet = null;
 
+        IssueTracker issueTracker = IssueTracker.getIssueTracker();
         Validator validator = new Validator();
         if (!validator.passesTypeChecks(form)) {
             System.err.println("Form not passing validation");
