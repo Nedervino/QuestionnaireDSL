@@ -157,7 +157,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     public Value visit(And node) {
         Value leftValue = visitLeft(node);
         Value rightValue = visitRight(node);
-        ValueBoolean result = null;
+        BooleanValue result = null;
         if (isCalculated(leftValue, rightValue)) {
             result = leftValue.and(rightValue);
         }
@@ -179,7 +179,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     public Value visit(Equal node) {
         Value leftValue = visitLeft(node);
         Value rightValue = visitRight(node);
-        ValueBoolean result = null;
+        BooleanValue result = null;
         if (isCalculated(leftValue, rightValue)) {
             result = leftValue.equal(rightValue);
         }
@@ -190,7 +190,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     public Value visit(GreaterThanEqual node) {
         Value leftValue = visitLeft(node);
         Value rightValue = visitRight(node);
-        ValueBoolean result = null;
+        BooleanValue result = null;
         if (isCalculated(leftValue, rightValue)) {
             result = leftValue.greaterThanEqual(rightValue);
         }
@@ -201,7 +201,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     public Value visit(GreaterThan node) {
         Value leftValue = visitLeft(node);
         Value rightValue = visitRight(node);
-        ValueBoolean result = null;
+        BooleanValue result = null;
         if (isCalculated(leftValue, rightValue)) {
             result = leftValue.greaterThan(rightValue);
         }
@@ -212,7 +212,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     public Value visit(LessThanEqual node) {
         Value leftValue = visitLeft(node);
         Value rightValue = visitRight(node);
-        ValueBoolean result = null;
+        BooleanValue result = null;
         if (isCalculated(leftValue, rightValue)) {
             result = leftValue.lessThanEqual(rightValue);
         }
@@ -223,7 +223,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     public Value visit(LessThan node) {
         Value leftValue = visitLeft(node);
         Value rightValue = visitRight(node);
-        ValueBoolean result = null;
+        BooleanValue result = null;
         if (isCalculated(leftValue, rightValue)) {
             result = leftValue.lessThan(rightValue);
         }
@@ -247,7 +247,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     public Value visit(NotEqual node) {
         Value leftValue = visitLeft(node);
         Value rightValue = visitRight(node);
-        ValueBoolean result = null;
+        BooleanValue result = null;
         if (isCalculated(leftValue, rightValue)) {
             result = leftValue.notEqual(rightValue);
         }
@@ -258,7 +258,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     public Value visit(Or node) {
         Value leftValue = visitLeft(node);
         Value rightValue = visitRight(node);
-        ValueBoolean result = null;
+        BooleanValue result = null;
         if (isCalculated(leftValue, rightValue)) {
             result = leftValue.or(rightValue);
         }
@@ -279,7 +279,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     @Override
     public Value visit(Negation node) {
         Value value = node.getExpression().accept(this);
-        ValueBoolean result = null;
+        BooleanValue result = null;
         if (isCalculated(value)) {
             result = value.negation();
         }
@@ -298,32 +298,32 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public Value visit(StringLiteral node) {
-        return new ValueString(node.getValue());
+        return new StringValue(node.getValue());
     }
 
     @Override
     public Value visit(IntegerLiteral node) {
-        return new ValueInteger(node.getValue());
+        return new IntegerValue(node.getValue());
     }
 
     @Override
     public Value visit(BooleanLiteral node) {
-        return new ValueBoolean(node.getValue());
+        return new BooleanValue(node.getValue());
     }
 
     @Override
     public Value visit(DateLiteral node) {
-        return new ValueDate(node.getValue());
+        return new DateValue(node.getValue());
     }
 
     @Override
     public Value visit(DecimalLiteral node) {
-        return new ValueDecimal(node.getValue());
+        return new DecimalValue(node.getValue());
     }
 
     @Override
     public Value visit(MoneyLiteral node) {
-        return new ValueMoney(node.getValue());
+        return new MoneyValue(node.getValue());
     }
 
     @Override

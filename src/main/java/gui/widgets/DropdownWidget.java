@@ -3,7 +3,7 @@ package gui.widgets;
 import gui.WidgetListener;
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;
-import ql.evaluator.values.ValueBoolean;
+import ql.evaluator.values.BooleanValue;
 
 import javax.swing.*;
 
@@ -34,7 +34,7 @@ public class DropdownWidget extends BaseWidget {
     @Override
     public void registerChangeListener(WidgetListener widgetListener) {
         boolean newValue = dropdown.getSelectedItem().equals(TRUE_LABEL) ? true : false;
-        widgetListener.updateEnvironment(question, new ValueBoolean(newValue));
+        widgetListener.updateEnvironment(question, new BooleanValue(newValue));
     }
 
     @Override

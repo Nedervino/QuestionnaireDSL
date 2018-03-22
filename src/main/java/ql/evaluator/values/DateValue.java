@@ -5,11 +5,11 @@ import ql.ast.expressions.literals.DateLiteral;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ValueDate implements Value<Date> {
+public class DateValue implements Value<Date> {
 
     private Date value;
 
-    public ValueDate(Date value) {
+    public DateValue(Date value) {
         this.value = value;
     }
 
@@ -25,97 +25,97 @@ public class ValueDate implements Value<Date> {
     }
 
     @Override
-    public ValueBoolean equal(Value value) {
+    public BooleanValue equal(Value value) {
         return value.equal(this);
     }
 
     @Override
-    public ValueBoolean equal(ValueDate value) {
-        return new ValueBoolean(value.equals(value.getValue()));
+    public BooleanValue equal(DateValue value) {
+        return new BooleanValue(value.equals(value.getValue()));
     }
 
     @Override
-    public ValueBoolean greaterThanEqual(Value value) {
+    public BooleanValue greaterThanEqual(Value value) {
         return null;
     }
 
     @Override
-    public ValueBoolean greaterThanEqual(ValueDate value) {
+    public BooleanValue greaterThanEqual(DateValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean greaterThan(Value value) {
+    public BooleanValue greaterThan(Value value) {
         return null;
     }
 
     @Override
-    public ValueBoolean greaterThan(ValueMoney value) {
+    public BooleanValue greaterThan(MoneyValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean greaterThan(ValueDecimal value) {
+    public BooleanValue greaterThan(DecimalValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean greaterThan(ValueInteger value) {
+    public BooleanValue greaterThan(IntegerValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean greaterThan(ValueDate value) {
+    public BooleanValue greaterThan(DateValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThanEqual(Value value) {
+    public BooleanValue lessThanEqual(Value value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThanEqual(ValueMoney value) {
+    public BooleanValue lessThanEqual(MoneyValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThanEqual(ValueDecimal value) {
+    public BooleanValue lessThanEqual(DecimalValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThanEqual(ValueInteger value) {
+    public BooleanValue lessThanEqual(IntegerValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThanEqual(ValueDate value) {
+    public BooleanValue lessThanEqual(DateValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThan(Value value) {
+    public BooleanValue lessThan(Value value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThan(ValueMoney value) {
+    public BooleanValue lessThan(MoneyValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThan(ValueDecimal value) {
+    public BooleanValue lessThan(DecimalValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThan(ValueInteger value) {
+    public BooleanValue lessThan(IntegerValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThan(ValueDate value) {
+    public BooleanValue lessThan(DateValue value) {
         return null;
     }
 
@@ -125,62 +125,62 @@ public class ValueDate implements Value<Date> {
     }
 
     @Override
-    public Value multiply(ValueMoney value) {
+    public Value multiply(MoneyValue value) {
         return null;
     }
 
     @Override
-    public Value multiply(ValueDecimal value) {
+    public Value multiply(DecimalValue value) {
         return null;
     }
 
     @Override
-    public Value multiply(ValueInteger value) {
+    public Value multiply(IntegerValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean notEqual(Value value) {
+    public BooleanValue notEqual(Value value) {
         return null;
     }
 
     @Override
-    public ValueBoolean notEqual(ValueMoney value) {
+    public BooleanValue notEqual(MoneyValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean notEqual(ValueDecimal value) {
+    public BooleanValue notEqual(DecimalValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean notEqual(ValueInteger value) {
+    public BooleanValue notEqual(IntegerValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean notEqual(ValueDate value) {
+    public BooleanValue notEqual(DateValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean notEqual(ValueString value) {
+    public BooleanValue notEqual(StringValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean notEqual(ValueBoolean value) {
+    public BooleanValue notEqual(BooleanValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean or(Value value) {
+    public BooleanValue or(Value value) {
         return null;
     }
 
     @Override
-    public ValueBoolean or(ValueBoolean value) {
+    public BooleanValue or(BooleanValue value) {
         return null;
     }
 
@@ -190,27 +190,27 @@ public class ValueDate implements Value<Date> {
     }
 
     @Override
-    public Value subtract(ValueMoney value) {
+    public Value subtract(MoneyValue value) {
         return null;
     }
 
     @Override
-    public Value subtract(ValueDecimal value) {
+    public Value subtract(DecimalValue value) {
         return null;
     }
 
     @Override
-    public Value subtract(ValueInteger value) {
+    public Value subtract(IntegerValue value) {
         return null;
     }
 
     @Override
-    public ValueBoolean negation() {
+    public BooleanValue negation() {
         return null;
     }
 
     @Override
-    public ValueNumeric negative() {
+    public NumericValue negative() {
         return null;
     }
 }

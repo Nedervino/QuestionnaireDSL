@@ -3,7 +3,7 @@ package gui.widgets;
 import gui.WidgetListener;
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;
-import ql.evaluator.values.ValueString;
+import ql.evaluator.values.StringValue;
 
 import javax.swing.*;
 
@@ -19,7 +19,7 @@ public class TextFieldWidget extends BaseWidget {
 
     @Override
     public void registerChangeListener(WidgetListener widgetListener) {
-        textField.addActionListener(e -> widgetListener.updateEnvironment(question, new ValueString(textField.getText())));
+        textField.addActionListener(e -> widgetListener.updateEnvironment(question, new StringValue(textField.getText())));
     }
 
     @Override

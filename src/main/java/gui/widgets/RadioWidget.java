@@ -3,7 +3,7 @@ package gui.widgets;
 import gui.WidgetListener;
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;
-import ql.evaluator.values.ValueBoolean;
+import ql.evaluator.values.BooleanValue;
 
 import javax.swing.*;
 import java.awt.*;
@@ -53,7 +53,7 @@ public class RadioWidget extends BaseWidget {
         for (JRadioButton button : choiceButtonMap.values()) {
             button.addActionListener(e -> {
                 if(button.isSelected()) {
-                    widgetListener.updateEnvironment(question, new ValueBoolean(Boolean.parseBoolean(button.getText())));
+                    widgetListener.updateEnvironment(question, new BooleanValue(Boolean.parseBoolean(button.getText())));
                 }
             });
 

@@ -14,15 +14,15 @@ public interface Value<T> {
     }
 
     //refactor: value
-    default Value add(ValueMoney value) {
+    default Value add(MoneyValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value add(ValueInteger value) {
+    default Value add(IntegerValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value add(ValueDecimal value) {
+    default Value add(DecimalValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
@@ -30,15 +30,15 @@ public interface Value<T> {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value subtract(ValueMoney value) {
+    default Value subtract(MoneyValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value subtract(ValueDecimal value) {
+    default Value subtract(DecimalValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value subtract(ValueInteger value) {
+    default Value subtract(IntegerValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
@@ -46,15 +46,15 @@ public interface Value<T> {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value divide(ValueMoney value) {
+    default Value divide(MoneyValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value divide(ValueInteger value) {
+    default Value divide(IntegerValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value divide(ValueDecimal value) {
+    default Value divide(DecimalValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
@@ -62,175 +62,175 @@ public interface Value<T> {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value multiply(ValueMoney value) {
+    default Value multiply(MoneyValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value multiply(ValueDecimal value) {
+    default Value multiply(DecimalValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value multiply(ValueInteger value) {
+    default Value multiply(IntegerValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean equal(Value value) {
+    default BooleanValue equal(Value value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean equal(ValueMoney value) {
+    default BooleanValue equal(MoneyValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean equal(ValueInteger value) {
+    default BooleanValue equal(IntegerValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean equal(ValueDecimal value) {
+    default BooleanValue equal(DecimalValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean equal(ValueString value) {
+    default BooleanValue equal(StringValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean equal(ValueBoolean value) {
+    default BooleanValue equal(BooleanValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean equal(ValueDate value) {
+    default BooleanValue equal(DateValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean notEqual(Value value) {
+    default BooleanValue notEqual(Value value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean notEqual(ValueMoney value) {
+    default BooleanValue notEqual(MoneyValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean notEqual(ValueDecimal value) {
+    default BooleanValue notEqual(DecimalValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean notEqual(ValueInteger value) {
+    default BooleanValue notEqual(IntegerValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean notEqual(ValueDate value) {
+    default BooleanValue notEqual(DateValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean notEqual(ValueString value) {
+    default BooleanValue notEqual(StringValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean notEqual(ValueBoolean value) {
+    default BooleanValue notEqual(BooleanValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThanEqual(Value value) {
+    default BooleanValue greaterThanEqual(Value value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThanEqual(ValueMoney value) {
+    default BooleanValue greaterThanEqual(MoneyValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThanEqual(ValueDecimal value) {
+    default BooleanValue greaterThanEqual(DecimalValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThanEqual(ValueInteger value) {
+    default BooleanValue greaterThanEqual(IntegerValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThanEqual(ValueDate value) {
+    default BooleanValue greaterThanEqual(DateValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThan(Value value) {
+    default BooleanValue greaterThan(Value value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThan(ValueMoney value) {
+    default BooleanValue greaterThan(MoneyValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThan(ValueDecimal value) {
+    default BooleanValue greaterThan(DecimalValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThan(ValueInteger value) {
+    default BooleanValue greaterThan(IntegerValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThan(ValueDate value) {
+    default BooleanValue greaterThan(DateValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThanEqual(Value value) {
+    default BooleanValue lessThanEqual(Value value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThanEqual(ValueMoney value) {
+    default BooleanValue lessThanEqual(MoneyValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThanEqual(ValueDecimal value) {
+    default BooleanValue lessThanEqual(DecimalValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThanEqual(ValueInteger value) {
+    default BooleanValue lessThanEqual(IntegerValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThanEqual(ValueDate value) {
+    default BooleanValue lessThanEqual(DateValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThan(Value value) {
+    default BooleanValue lessThan(Value value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThan(ValueMoney value) {
+    default BooleanValue lessThan(MoneyValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThan(ValueDecimal value) {
+    default BooleanValue lessThan(DecimalValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThan(ValueInteger value) {
+    default BooleanValue lessThan(IntegerValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThan(ValueDate value) {
+    default BooleanValue lessThan(DateValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean or(Value value) {
+    default BooleanValue or(Value value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean or(ValueBoolean value) {
+    default BooleanValue or(BooleanValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean and(Value value) {
+    default BooleanValue and(Value value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean and(ValueBoolean value) {
+    default BooleanValue and(BooleanValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean negation() {
+    default BooleanValue negation() {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueNumeric negative() {
+    default NumericValue negative() {
         throw new UnsupportedOperationException(getValue().toString());
     }
 }
