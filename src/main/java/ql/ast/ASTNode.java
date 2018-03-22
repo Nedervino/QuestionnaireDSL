@@ -2,7 +2,7 @@ package ql.ast;
 
 public abstract class ASTNode {
 
-    private SourceLocation sourceLocation;
+    private final SourceLocation sourceLocation;
 
     public ASTNode(SourceLocation sourceLocation) {
         this.sourceLocation = sourceLocation;

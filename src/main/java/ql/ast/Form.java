@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Form extends ASTNode {
 
-    private String formId;
-    private List<Statement> statements;
+    private final String formId;
+    private final List<Statement> statements;
 
     public Form(String formId, List<Statement> statements, SourceLocation sourceLocation) {
         super(sourceLocation);

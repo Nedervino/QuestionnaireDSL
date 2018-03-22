@@ -7,7 +7,7 @@ import ql.ast.visitors.StatementVisitor;
 
 public class ComputedQuestion extends Question {
 
-    private Expression expression;
+    private final Expression expression;
 
     public ComputedQuestion(String identifier, String label, Type type, Expression expression, SourceLocation sourceLocation) {
         super(identifier, label, type, sourceLocation);

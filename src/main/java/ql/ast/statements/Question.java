@@ -6,9 +6,9 @@ import ql.ast.visitors.StatementVisitor;
 
 public class Question extends Statement {
 
-    private String label;
-    private String identifier;
-    private Type type;
+    private final String label;
+    private final String identifier;
+    private final Type type;
 
     public Question(String identifier, String label, Type type, SourceLocation sourceLocation) {
         super(sourceLocation);
