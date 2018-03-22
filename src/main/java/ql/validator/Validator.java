@@ -18,7 +18,7 @@ public class Validator {
     private final Checker questionDuplicationChecker;
     private final Checker expressionChecker;
     private final Checker cyclicDependencyChecker;
-    private final SymbolTable symbolTable;
+    private SymbolTable symbolTable;
 
 
     public Validator() {
@@ -26,10 +26,12 @@ public class Validator {
         questionDuplicationChecker = new QuestionDuplicationChecker(issueTracker);
         expressionChecker = new ExpressionChecker(issueTracker);
         cyclicDependencyChecker = new CyclicDependencyChecker(issueTracker);
-        symbolTable = new SymbolTable();
     }
 
     public boolean passesTypeChecks(Form form) {
+
+        //Initialize SymbolTable
+        symbolTable = new SymbolTable(form);
 
         //Check for duplicate question identifiers and labels
         if (!questionDuplicationChecker.passesTests(form, symbolTable)) {
