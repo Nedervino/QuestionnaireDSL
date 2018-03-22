@@ -9,6 +9,8 @@ import ql.evaluator.values.Evaluatable;
 import ql.parser.FormBuilder;
 import issuetracker.IssueTracker;
 
+import java.math.BigDecimal;
+
 import static org.junit.Assert.assertEquals;
 
 public class EvaluatorTest {
@@ -53,6 +55,22 @@ public class EvaluatorTest {
     }
 
     @Test
+    public void shouldStoreMoney() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/simpleMoney.ql", formBuilder);
+
+        evaluator.start(form);
+        issueTracker.reset();
+
+        Evaluatable evaluatable = evaluator.getQuestionValue("value");
+
+        BigDecimal expected = new BigDecimal(3.99);
+        expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+
+        assertEquals(expected, evaluatable.getValue());
+    }
+
+    @Test
     public void shouldNotDivideByZero() {
         issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/divideByZero.ql", formBuilder);
@@ -77,7 +95,44 @@ public class EvaluatorTest {
         Evaluatable evaluatable = evaluator.getQuestionValue("result");
 
         assertEquals(3, evaluatable.getValue());
-        //TODO write constructors for the integer class that can take in decimals, check whether this is a bug in the typechecker
     }
 
+    @Test
+    public void shouldMultiplyDecimals() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/decimalMultiplication.ql", formBuilder);
+
+        evaluator.start(form);
+        issueTracker.reset();
+
+        Evaluatable evaluatable = evaluator.getQuestionValue("result");
+
+        assertEquals(13.0, evaluatable.getValue());
+    }
+
+    @Test
+    public void shouldDivideMoneyToDecimal() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/moneyDivisionToDecimal.ql", formBuilder);
+
+        evaluator.start(form);
+
+        Evaluatable evaluatable = evaluator.getQuestionValue("result");
+        assertEquals(0.8125, evaluatable.getValue());
+    }
+
+    @Test
+    public void shouldDivideMoneyToMoney() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/moneyDivisionToMoney.ql", formBuilder);
+
+        evaluator.start(form);
+
+        Evaluatable evaluatable = evaluator.getQuestionValue("result");
+
+        BigDecimal expected = new BigDecimal(3.33);
+        expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+
+        assertEquals(expected, evaluatable.getValue());
+    }
 }

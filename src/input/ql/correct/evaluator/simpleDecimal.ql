@@ -1,8 +1,8 @@
 /*
-    Form where we define a decimal with an integer value
+    Form where we define a money value
 */
 
-form integerValueDecimal {
+form example {
   "Should store as 3.999"
     value: decimal = 3.999
 }
