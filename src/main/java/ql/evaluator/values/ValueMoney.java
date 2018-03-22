@@ -25,59 +25,59 @@ public class ValueMoney extends ValueNumeric<BigDecimal> {
     }
 
     @Override
-    public Value add(ValueMoney evaluatable) {
-        return new ValueMoney(getValue().add(evaluatable.getValue()));
+    public Value add(ValueMoney value) {
+        return new ValueMoney(getValue().add(value.getValue()));
     }
 
     @Override
-    public Value divide(ValueMoney evaluatable) {
-        return new ValueDecimal(evaluatable.getValue().doubleValue() / getValue().doubleValue());
+    public Value divide(ValueMoney value) {
+        return new ValueDecimal(value.getValue().doubleValue() / getValue().doubleValue());
     }
 
     @Override
-    public Value multiply(ValueDecimal evaluatable) {
-        return new ValueMoney(getValue().doubleValue() * evaluatable.getValue());
+    public Value multiply(ValueDecimal value) {
+        return new ValueMoney(getValue().doubleValue() * value.getValue());
     }
 
     @Override
-    public Value multiply(ValueInteger evaluatable) {
-        return new ValueMoney(getValue().doubleValue() * (double) evaluatable.getValue());
+    public Value multiply(ValueInteger value) {
+        return new ValueMoney(getValue().doubleValue() * (double) value.getValue());
     }
 
     @Override
-    public ValueBoolean equal(ValueMoney evaluatable) {
-        return new ValueBoolean(getValue().equals(evaluatable.getValue()));
+    public ValueBoolean equal(ValueMoney value) {
+        return new ValueBoolean(getValue().equals(value.getValue()));
     }
 
     @Override
-    public ValueBoolean greaterThanEqual(ValueMoney evaluatable) {
-        return new ValueBoolean(getValue().compareTo(evaluatable.getValue()) >= 0);
+    public ValueBoolean greaterThanEqual(ValueMoney value) {
+        return new ValueBoolean(getValue().compareTo(value.getValue()) >= 0);
     }
 
     @Override
-    public ValueBoolean greaterThan(ValueMoney evaluatable) {
-        return new ValueBoolean(getValue().compareTo(evaluatable.getValue()) > 0);
+    public ValueBoolean greaterThan(ValueMoney value) {
+        return new ValueBoolean(getValue().compareTo(value.getValue()) > 0);
     }
 
     @Override
-    public ValueBoolean lessThanEqual(ValueMoney evaluatable) {
-        return new ValueBoolean(getValue().compareTo(evaluatable.getValue()) <= 0);
+    public ValueBoolean lessThanEqual(ValueMoney value) {
+        return new ValueBoolean(getValue().compareTo(value.getValue()) <= 0);
     }
 
     @Override
-    public ValueBoolean lessThan(ValueMoney evaluatable) {
-        return new ValueBoolean(getValue().compareTo(evaluatable.getValue()) < 0);
+    public ValueBoolean lessThan(ValueMoney value) {
+        return new ValueBoolean(getValue().compareTo(value.getValue()) < 0);
     }
 
     @Override
-    public ValueBoolean notEqual(ValueMoney evaluatable) {
-        return new ValueBoolean(!getValue().equals(evaluatable.getValue()));
+    public ValueBoolean notEqual(ValueMoney value) {
+        return new ValueBoolean(!getValue().equals(value.getValue()));
     }
 
     @Override
-    public Value subtract(ValueMoney evaluatable) {
-        //terms are flipped back since we flip the terms in the double dispacht in subtract(Value evaluatable)
-        return new ValueMoney(evaluatable.getValue().subtract(getValue()));
+    public Value subtract(ValueMoney value) {
+        //terms are flipped back since we flip the terms in the double dispacht in subtract(Value value)
+        return new ValueMoney(value.getValue().subtract(getValue()));
     }
 
     @Override

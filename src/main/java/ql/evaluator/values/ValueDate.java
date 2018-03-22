@@ -30,8 +30,8 @@ public class ValueDate implements Value<Date> {
     }
 
     @Override
-    public ValueBoolean equal(ValueDate evaluatable) {
-        return new ValueBoolean(value.equals(evaluatable.getValue()));
+    public ValueBoolean equal(ValueDate value) {
+        return new ValueBoolean(value.equals(value.getValue()));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ValueDate implements Value<Date> {
     }
 
     @Override
-    public ValueBoolean greaterThanEqual(ValueDate evaluatable) {
+    public ValueBoolean greaterThanEqual(ValueDate value) {
         return null;
     }
 
@@ -50,22 +50,22 @@ public class ValueDate implements Value<Date> {
     }
 
     @Override
-    public ValueBoolean greaterThan(ValueMoney evaluatable) {
+    public ValueBoolean greaterThan(ValueMoney value) {
         return null;
     }
 
     @Override
-    public ValueBoolean greaterThan(ValueDecimal evaluatable) {
+    public ValueBoolean greaterThan(ValueDecimal value) {
         return null;
     }
 
     @Override
-    public ValueBoolean greaterThan(ValueInteger evaluatable) {
+    public ValueBoolean greaterThan(ValueInteger value) {
         return null;
     }
 
     @Override
-    public ValueBoolean greaterThan(ValueDate evaluatable) {
+    public ValueBoolean greaterThan(ValueDate value) {
         return null;
     }
 
@@ -75,22 +75,22 @@ public class ValueDate implements Value<Date> {
     }
 
     @Override
-    public ValueBoolean lessThanEqual(ValueMoney evaluatable) {
+    public ValueBoolean lessThanEqual(ValueMoney value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThanEqual(ValueDecimal evaluatable) {
+    public ValueBoolean lessThanEqual(ValueDecimal value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThanEqual(ValueInteger evaluatable) {
+    public ValueBoolean lessThanEqual(ValueInteger value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThanEqual(ValueDate evaluatable) {
+    public ValueBoolean lessThanEqual(ValueDate value) {
         return null;
     }
 
@@ -100,22 +100,22 @@ public class ValueDate implements Value<Date> {
     }
 
     @Override
-    public ValueBoolean lessThan(ValueMoney evaluatable) {
+    public ValueBoolean lessThan(ValueMoney value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThan(ValueDecimal evaluatable) {
+    public ValueBoolean lessThan(ValueDecimal value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThan(ValueInteger evaluatable) {
+    public ValueBoolean lessThan(ValueInteger value) {
         return null;
     }
 
     @Override
-    public ValueBoolean lessThan(ValueDate evaluatable) {
+    public ValueBoolean lessThan(ValueDate value) {
         return null;
     }
 
@@ -125,17 +125,17 @@ public class ValueDate implements Value<Date> {
     }
 
     @Override
-    public Value multiply(ValueMoney evaluatable) {
+    public Value multiply(ValueMoney value) {
         return null;
     }
 
     @Override
-    public Value multiply(ValueDecimal evaluatable) {
+    public Value multiply(ValueDecimal value) {
         return null;
     }
 
     @Override
-    public Value multiply(ValueInteger evaluatable) {
+    public Value multiply(ValueInteger value) {
         return null;
     }
 
@@ -145,32 +145,32 @@ public class ValueDate implements Value<Date> {
     }
 
     @Override
-    public ValueBoolean notEqual(ValueMoney evaluatable) {
+    public ValueBoolean notEqual(ValueMoney value) {
         return null;
     }
 
     @Override
-    public ValueBoolean notEqual(ValueDecimal evaluatable) {
+    public ValueBoolean notEqual(ValueDecimal value) {
         return null;
     }
 
     @Override
-    public ValueBoolean notEqual(ValueInteger evaluatable) {
+    public ValueBoolean notEqual(ValueInteger value) {
         return null;
     }
 
     @Override
-    public ValueBoolean notEqual(ValueDate evaluatable) {
+    public ValueBoolean notEqual(ValueDate value) {
         return null;
     }
 
     @Override
-    public ValueBoolean notEqual(ValueString evaluatable) {
+    public ValueBoolean notEqual(ValueString value) {
         return null;
     }
 
     @Override
-    public ValueBoolean notEqual(ValueBoolean evaluatable) {
+    public ValueBoolean notEqual(ValueBoolean value) {
         return null;
     }
 
@@ -180,7 +180,7 @@ public class ValueDate implements Value<Date> {
     }
 
     @Override
-    public ValueBoolean or(ValueBoolean evaluatable) {
+    public ValueBoolean or(ValueBoolean value) {
         return null;
     }
 
@@ -190,17 +190,17 @@ public class ValueDate implements Value<Date> {
     }
 
     @Override
-    public Value subtract(ValueMoney evaluatable) {
+    public Value subtract(ValueMoney value) {
         return null;
     }
 
     @Override
-    public Value subtract(ValueDecimal evaluatable) {
+    public Value subtract(ValueDecimal value) {
         return null;
     }
 
     @Override
-    public Value subtract(ValueInteger evaluatable) {
+    public Value subtract(ValueInteger value) {
         return null;
     }
 

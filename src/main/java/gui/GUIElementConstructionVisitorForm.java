@@ -75,7 +75,7 @@ public class GUIElementConstructionVisitorForm implements FormStatementVisitor<V
 
         ActionListener actionListener = e -> {
             String value = textField.getText();
-            element.getEvaluator().setEvaluatable(element.getQuestion().getId(), new ValueString(value));
+            element.getEvaluator().setValue(element.getQuestion().getId(), new ValueString(value));
         };
         textField.addActionListener(actionListener);
     }
@@ -88,7 +88,7 @@ public class GUIElementConstructionVisitorForm implements FormStatementVisitor<V
 
         ActionListener actionListener = e -> {
             boolean value = checkBox.isSelected();
-            element.getEvaluator().setEvaluatable(element.getQuestion().getId(), new ValueBoolean(value));
+            element.getEvaluator().setValue(element.getQuestion().getId(), new ValueBoolean(value));
         };
         checkBox.addActionListener(actionListener);
     }

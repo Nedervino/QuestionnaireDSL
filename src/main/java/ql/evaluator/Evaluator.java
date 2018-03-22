@@ -38,7 +38,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     }
 
     @Override
-    public void setEvaluatable(String questionId, Value value) {
+    public void setValue(String questionId, Value value) {
         Question node = idLookup.get(questionId);
         questionValues.put(node, value);
     }

@@ -16,6 +16,6 @@ public interface FormEvaluator {
 
     Value getQuestionValue(String questionId);
 
-    void setEvaluatable(String questionId, Value value);
+    void setValue(String questionId, Value value);
 
 }

@@ -18,8 +18,8 @@ public class ValueString implements Value<String> {
         return value.equal(this);
     }
 
-    public ValueBoolean equal(ValueString evaluatable) {
-        return new ValueBoolean(evaluatable.getValue().equals(getValue()));
+    public ValueBoolean equal(ValueString value) {
+        return new ValueBoolean(value.getValue().equals(getValue()));
     }
 
     @Override
@@ -27,8 +27,8 @@ public class ValueString implements Value<String> {
         return value.notEqual(this);
     }
 
-    public ValueBoolean notEqual(ValueString evaluatable) {
-        return new ValueBoolean(evaluatable.getValue().equals(getValue()));
+    public ValueBoolean notEqual(ValueString value) {
+        return new ValueBoolean(value.getValue().equals(getValue()));
     }
 
 }

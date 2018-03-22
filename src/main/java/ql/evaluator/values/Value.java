@@ -14,15 +14,15 @@ public interface Value<T> {
     }
 
     //refactor: value
-    default Value add(ValueMoney evaluatable) {
+    default Value add(ValueMoney value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value add(ValueInteger evaluatable) {
+    default Value add(ValueInteger value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value add(ValueDecimal evaluatable) {
+    default Value add(ValueDecimal value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
@@ -30,15 +30,15 @@ public interface Value<T> {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value subtract(ValueMoney evaluatable) {
+    default Value subtract(ValueMoney value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value subtract(ValueDecimal evaluatable) {
+    default Value subtract(ValueDecimal value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value subtract(ValueInteger evaluatable) {
+    default Value subtract(ValueInteger value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
@@ -46,15 +46,15 @@ public interface Value<T> {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value divide(ValueMoney evaluatable) {
+    default Value divide(ValueMoney value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value divide(ValueInteger evaluatable) {
+    default Value divide(ValueInteger value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value divide(ValueDecimal evaluatable) {
+    default Value divide(ValueDecimal value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
@@ -62,15 +62,15 @@ public interface Value<T> {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value multiply(ValueMoney evaluatable) {
+    default Value multiply(ValueMoney value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value multiply(ValueDecimal evaluatable) {
+    default Value multiply(ValueDecimal value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default Value multiply(ValueInteger evaluatable) {
+    default Value multiply(ValueInteger value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
@@ -78,27 +78,27 @@ public interface Value<T> {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean equal(ValueMoney evaluatable) {
+    default ValueBoolean equal(ValueMoney value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean equal(ValueInteger evaluatable) {
+    default ValueBoolean equal(ValueInteger value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean equal(ValueDecimal evaluatable) {
+    default ValueBoolean equal(ValueDecimal value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean equal(ValueString evaluatable) {
+    default ValueBoolean equal(ValueString value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean equal(ValueBoolean evaluatable) {
+    default ValueBoolean equal(ValueBoolean value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean equal(ValueDate evaluatable) {
+    default ValueBoolean equal(ValueDate value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
@@ -106,27 +106,27 @@ public interface Value<T> {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean notEqual(ValueMoney evaluatable) {
+    default ValueBoolean notEqual(ValueMoney value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean notEqual(ValueDecimal evaluatable) {
+    default ValueBoolean notEqual(ValueDecimal value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean notEqual(ValueInteger evaluatable) {
+    default ValueBoolean notEqual(ValueInteger value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean notEqual(ValueDate evaluatable) {
+    default ValueBoolean notEqual(ValueDate value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean notEqual(ValueString evaluatable) {
+    default ValueBoolean notEqual(ValueString value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean notEqual(ValueBoolean evaluatable) {
+    default ValueBoolean notEqual(ValueBoolean value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
@@ -134,19 +134,19 @@ public interface Value<T> {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThanEqual(ValueMoney evaluatable) {
+    default ValueBoolean greaterThanEqual(ValueMoney value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThanEqual(ValueDecimal evaluatable) {
+    default ValueBoolean greaterThanEqual(ValueDecimal value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThanEqual(ValueInteger evaluatable) {
+    default ValueBoolean greaterThanEqual(ValueInteger value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThanEqual(ValueDate evaluatable) {
+    default ValueBoolean greaterThanEqual(ValueDate value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
@@ -154,19 +154,19 @@ public interface Value<T> {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThan(ValueMoney evaluatable) {
+    default ValueBoolean greaterThan(ValueMoney value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThan(ValueDecimal evaluatable) {
+    default ValueBoolean greaterThan(ValueDecimal value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThan(ValueInteger evaluatable) {
+    default ValueBoolean greaterThan(ValueInteger value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean greaterThan(ValueDate evaluatable) {
+    default ValueBoolean greaterThan(ValueDate value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
@@ -174,19 +174,19 @@ public interface Value<T> {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThanEqual(ValueMoney evaluatable) {
+    default ValueBoolean lessThanEqual(ValueMoney value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThanEqual(ValueDecimal evaluatable) {
+    default ValueBoolean lessThanEqual(ValueDecimal value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThanEqual(ValueInteger evaluatable) {
+    default ValueBoolean lessThanEqual(ValueInteger value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThanEqual(ValueDate evaluatable) {
+    default ValueBoolean lessThanEqual(ValueDate value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
@@ -194,19 +194,19 @@ public interface Value<T> {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThan(ValueMoney evaluatable) {
+    default ValueBoolean lessThan(ValueMoney value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThan(ValueDecimal evaluatable) {
+    default ValueBoolean lessThan(ValueDecimal value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThan(ValueInteger evaluatable) {
+    default ValueBoolean lessThan(ValueInteger value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean lessThan(ValueDate evaluatable) {
+    default ValueBoolean lessThan(ValueDate value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
@@ -214,7 +214,7 @@ public interface Value<T> {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean or(ValueBoolean evaluatable) {
+    default ValueBoolean or(ValueBoolean value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
@@ -222,7 +222,7 @@ public interface Value<T> {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    default ValueBoolean and(ValueBoolean evaluatable) {
+    default ValueBoolean and(ValueBoolean value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 

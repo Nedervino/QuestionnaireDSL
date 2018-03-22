@@ -24,9 +24,9 @@ public class ValueBoolean implements Value<Boolean> {
         return value.and(this);
     }
 
-    public ValueBoolean and(ValueBoolean evaluatable) {
-        boolean left = value;
-        boolean right = evaluatable.getValue();
+    public ValueBoolean and(ValueBoolean value) {
+        Boolean left = value.getValue();
+        Boolean right = value.getValue();
         return new ValueBoolean(left && right);
     }
 
@@ -35,8 +35,8 @@ public class ValueBoolean implements Value<Boolean> {
         return value.equal(this);
     }
 
-    public ValueBoolean equal(ValueBoolean evaluatable) {
-        return new ValueBoolean(getValue().booleanValue() == evaluatable.getValue().booleanValue());
+    public ValueBoolean equal(ValueBoolean value) {
+        return new ValueBoolean(getValue().booleanValue() == value.getValue().booleanValue());
     }
 
     @Override
@@ -44,9 +44,9 @@ public class ValueBoolean implements Value<Boolean> {
         return value.notEqual(this);
     }
 
-    public ValueBoolean notEqual(ValueBoolean evaluatable) {
-        boolean left = value;
-        boolean right = evaluatable.getValue();
+    public ValueBoolean notEqual(ValueBoolean value) {
+        Boolean left = value.getValue();
+        Boolean right = value.getValue();
         return new ValueBoolean(left != right);
     }
 
@@ -55,8 +55,8 @@ public class ValueBoolean implements Value<Boolean> {
         return value.or(this);
     }
 
-    public ValueBoolean or(ValueBoolean evaluatable) {
-        return new ValueBoolean(getValue() || evaluatable.getValue());
+    public ValueBoolean or(ValueBoolean value) {
+        return new ValueBoolean(getValue() || value.getValue());
     }
 
     @Override

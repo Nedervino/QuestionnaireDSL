@@ -21,14 +21,14 @@ public class ComputedQuestionElement extends GUIElement {
     public void render(Graphics g) {
         System.out.println("Rendering computedQuestion");
         String varName = node.getId();
-        Object value = "";
+        Object renderValue = "";
 
-        Value evaluatable = evaluator.getQuestionValue(varName);
-        if (evaluatable != null) {
-            value = evaluatable.getValue();
+        Value value = evaluator.getQuestionValue(varName);
+        if (value != null) {
+            renderValue = value.getValue();
         }
 
         g.setColor(Color.black);
-        g.drawString(varName + ": " + String.valueOf(value), 50, this.getYLocation());
+        g.drawString(varName + ": " + String.valueOf(renderValue), 50, this.getYLocation());
     }
 }

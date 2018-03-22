@@ -143,9 +143,9 @@ public class EvaluatorTest {
 
         evaluator.start(form);
 
-        Value evaluatable = evaluator.getQuestionValue("result");
+        Value value = evaluator.getQuestionValue("result");
 
-        assertEquals(false, evaluatable.getValue());
+        assertEquals(false, value.getValue());
     }
 
     @Test
@@ -155,9 +155,9 @@ public class EvaluatorTest {
 
         evaluator.start(form);
 
-        Value evaluatable = evaluator.getQuestionValue("result");
+        Value value = evaluator.getQuestionValue("result");
 
-        assertEquals(true, evaluatable.getValue());
+        assertEquals(true, value.getValue());
     }
 
     @Test
@@ -167,9 +167,9 @@ public class EvaluatorTest {
 
         evaluator.start(form);
 
-        Value evaluatable = evaluator.getQuestionValue("result");
+        Value value = evaluator.getQuestionValue("result");
 
-        assertEquals(true, evaluatable.getValue());
+        assertEquals(true, value.getValue());
     }
 
     @Test
@@ -179,11 +179,11 @@ public class EvaluatorTest {
 
         evaluator.start(form);
 
-        Value evaluatable = evaluator.getQuestionValue("result");
-        Value evaluatable2 = evaluator.getQuestionValue("result2");
+        Value value = evaluator.getQuestionValue("result");
+        Value value2 = evaluator.getQuestionValue("result2");
 
-        assertEquals(true, evaluatable.getValue());
-        assertEquals(true, evaluatable2.getValue());
+        assertEquals(true, value.getValue());
+        assertEquals(true, value2.getValue());
     }
 
     @Test
@@ -193,9 +193,9 @@ public class EvaluatorTest {
 
         evaluator.start(form);
 
-        Value evaluatable = evaluator.getQuestionValue("value");
+        Value value = evaluator.getQuestionValue("value");
 
-        assertEquals("01-02-1999", evaluatable.toString());
+        assertEquals("01-02-1999", value.toString());
     }
 
     @Test
@@ -205,8 +205,8 @@ public class EvaluatorTest {
 
         evaluator.start(form);
 
-        Value evaluatable = evaluator.getQuestionValue("flag");
+        Value value = evaluator.getQuestionValue("flag");
 
-        assertEquals(true, evaluatable);
+        assertEquals(true, value);
     }
 }

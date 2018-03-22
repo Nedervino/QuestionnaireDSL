@@ -16,73 +16,73 @@ public class ValueInteger extends ValueNumeric<Integer> {
     }
 
     @Override
-    public Value add(ValueInteger evaluatable) {
-        return new ValueInteger(evaluatable.getValue() + getValue());
+    public Value add(ValueInteger value) {
+        return new ValueInteger(value.getValue() + getValue());
     }
 
     @Override
-    public Value divide(ValueInteger evaluatable) {
-        return new ValueInteger(evaluatable.getValue() / getValue());
+    public Value divide(ValueInteger value) {
+        return new ValueInteger(value.getValue() / getValue());
     }
 
     @Override
-    public Value divide(ValueDecimal evaluatable) {
-        return new ValueDecimal(evaluatable.getValue() / getValue());
+    public Value divide(ValueDecimal value) {
+        return new ValueDecimal(value.getValue() / getValue());
     }
 
     @Override
-    public Value divide(ValueMoney evaluatable) {
-        return new ValueMoney(evaluatable.getValue().doubleValue() / getValue());
+    public Value divide(ValueMoney value) {
+        return new ValueMoney(value.getValue().doubleValue() / getValue());
     }
 
     @Override
-    public ValueBoolean equal(ValueInteger evaluatable) {
-        return new ValueBoolean(Objects.equals(evaluatable.getValue(), getValue()));
+    public ValueBoolean equal(ValueInteger value) {
+        return new ValueBoolean(Objects.equals(value.getValue(), getValue()));
     }
 
     @Override
-    public ValueBoolean greaterThanEqual(ValueInteger evaluatable) {
-        return new ValueBoolean(evaluatable.getValue() >= getValue());
+    public ValueBoolean greaterThanEqual(ValueInteger value) {
+        return new ValueBoolean(value.getValue() >= getValue());
     }
 
     @Override
-    public ValueBoolean greaterThan(ValueInteger evaluatable) {
-        return new ValueBoolean(evaluatable.getValue() > getValue());
+    public ValueBoolean greaterThan(ValueInteger value) {
+        return new ValueBoolean(value.getValue() > getValue());
     }
 
     @Override
-    public ValueBoolean lessThanEqual(ValueInteger evaluatable) {
-        return new ValueBoolean(evaluatable.getValue() <= getValue());
+    public ValueBoolean lessThanEqual(ValueInteger value) {
+        return new ValueBoolean(value.getValue() <= getValue());
     }
 
     @Override
-    public ValueBoolean lessThan(ValueInteger evaluatable) {
-        return new ValueBoolean(evaluatable.getValue() < getValue());
+    public ValueBoolean lessThan(ValueInteger value) {
+        return new ValueBoolean(value.getValue() < getValue());
     }
 
     @Override
-    public Value multiply(ValueInteger evaluatable) {
-        return new ValueInteger(evaluatable.getValue() * getValue());
+    public Value multiply(ValueInteger value) {
+        return new ValueInteger(value.getValue() * getValue());
     }
 
     @Override
-    public Value multiply(ValueDecimal evaluatable) {
-        return new ValueDecimal(evaluatable.getValue() * getValue());
+    public Value multiply(ValueDecimal value) {
+        return new ValueDecimal(value.getValue() * getValue());
     }
 
     @Override
-    public Value multiply(ValueMoney evaluatable) {
-        return evaluatable.multiply(new ValueMoney(getValue()));
+    public Value multiply(ValueMoney value) {
+        return value.multiply(new ValueMoney(getValue()));
     }
 
     @Override
-    public ValueBoolean notEqual(ValueInteger evaluatable) {
-        return new ValueBoolean(!Objects.equals(evaluatable.getValue(), getValue()));
+    public ValueBoolean notEqual(ValueInteger value) {
+        return new ValueBoolean(!Objects.equals(value.getValue(), getValue()));
     }
 
     @Override
-    public Value subtract(ValueInteger evaluatable) {
-        return new ValueInteger(evaluatable.getValue() - getValue());
+    public Value subtract(ValueInteger value) {
+        return new ValueInteger(value.getValue() - getValue());
     }
 
     @Override
