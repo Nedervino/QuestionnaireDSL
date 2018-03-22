@@ -1,5 +1,6 @@
 package ql.evaluator;
 
+import issuetracker.IssueTracker;
 import ql.ast.ASTNode;
 import ql.ast.Form;
 import ql.ast.expressions.Expression;
@@ -13,9 +14,10 @@ import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormVisitor;
 import ql.ast.visitors.StatementVisitor;
 import ql.evaluator.values.*;
-import issuetracker.IssueTracker;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Evaluatable>, FormEvaluator {
@@ -47,8 +49,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     public void evaluate() {
         try {
             visit(form);
-        }
-        catch(ArithmeticException e){
+        } catch (ArithmeticException e) {
             issueTracker.addError(null, "Attempted to divide by zero.");
         }
     }

@@ -1,12 +1,12 @@
 package ql.validator;
 
+import issuetracker.Error;
+import issuetracker.IssueTracker;
 import org.junit.Before;
 import org.junit.Test;
 import ql.Helper;
 import ql.ast.Form;
 import ql.parser.FormBuilder;
-import issuetracker.Error;
-import issuetracker.IssueTracker;
 import ql.validator.checkers.ExpressionChecker;
 
 import static org.junit.Assert.*;
@@ -89,7 +89,7 @@ public class ExpressionCheckerTest {
     public void shouldIssueNoErrorForNumericExpressionsWithMoneyType() {
         issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/correct/validator/numericExpressionsWithMoneyType.ql", formBuilder);
-        
+
 
         boolean passesTests = expressionChecker.passesTests(form);
         assertTrue(passesTests);
@@ -102,7 +102,7 @@ public class ExpressionCheckerTest {
     public void shouldIssueNoErrorForDifferentNumericCombinations() {
         issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/correct/validator/numericCombinations.ql", formBuilder);
-        
+
 
         boolean passesTests = expressionChecker.passesTests(form);
         assertTrue(passesTests);
@@ -115,7 +115,7 @@ public class ExpressionCheckerTest {
     public void shouldIssueErrorForNonBooleanInBooleanExpression() {
         issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonBooleanInBoolean.ql", formBuilder);
-        
+
 
         boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
@@ -131,7 +131,7 @@ public class ExpressionCheckerTest {
     public void shouldIssueErrorForNonNumericInComparisonExpression() {
         issueTracker.reset();
         Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonNumericInComparison.ql", formBuilder);
-        
+
 
         boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);

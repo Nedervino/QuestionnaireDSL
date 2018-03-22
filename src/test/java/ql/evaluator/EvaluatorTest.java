@@ -1,13 +1,13 @@
 package ql.evaluator;
 
 import issuetracker.Error;
+import issuetracker.IssueTracker;
 import org.junit.Before;
 import org.junit.Test;
 import ql.Helper;
 import ql.ast.Form;
 import ql.evaluator.values.Evaluatable;
 import ql.parser.FormBuilder;
-import issuetracker.IssueTracker;
 
 import java.math.BigDecimal;
 

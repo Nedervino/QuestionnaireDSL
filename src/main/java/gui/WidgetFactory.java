@@ -1,15 +1,12 @@
 package gui;
 
-import gui.widgets.CheckboxWidget;
-import gui.widgets.RadioWidget;
-import gui.widgets.TextFieldWidget;
 import gui.widgets.Widget;
 import ql.ast.statements.Question;
 import ql.ast.types.*;
 import ql.ast.visitors.TypeVisitor;
 import ql.evaluator.FormEvaluator;
 
-public class WidgetFactory implements TypeVisitor<Widget>{
+public class WidgetFactory implements TypeVisitor<Widget> {
 
     private FormEvaluator evaluator;
     private Question question;

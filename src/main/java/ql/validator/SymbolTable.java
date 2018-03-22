@@ -24,7 +24,7 @@ public class SymbolTable {
         table = new HashMap<>();
 
         List<Question> questions = new QuestionCollector(form).getQuestions();
-        for(Question question : questions) {
+        for (Question question : questions) {
             table.put(question.getId(), question.getType());
         }
     }

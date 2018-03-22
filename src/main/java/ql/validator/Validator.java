@@ -1,7 +1,7 @@
 package ql.validator;
 
-import ql.ast.Form;
 import issuetracker.IssueTracker;
+import ql.ast.Form;
 import ql.validator.checkers.Checker;
 import ql.validator.checkers.CyclicDependencyChecker;
 import ql.validator.checkers.ExpressionChecker;

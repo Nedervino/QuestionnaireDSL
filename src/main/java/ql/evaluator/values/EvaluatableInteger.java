@@ -1,6 +1,5 @@
 package ql.evaluator.values;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 public class EvaluatableInteger extends EvaluatableNumeric<Integer> {

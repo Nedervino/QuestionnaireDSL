@@ -1,5 +1,6 @@
 package ql.validator.checkers;
 
+import issuetracker.IssueTracker;
 import ql.ast.Form;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
@@ -12,7 +13,6 @@ import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormVisitor;
 import ql.ast.visitors.StatementVisitor;
 import ql.ast.visitors.TypeVisitor;
-import issuetracker.IssueTracker;
 import ql.validator.SymbolTable;
 
 import java.util.List;

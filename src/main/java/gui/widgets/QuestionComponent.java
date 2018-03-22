@@ -1,9 +1,7 @@
 package gui.widgets;
 
-import gui.WidgetListener;
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;
-import ql.evaluator.values.Evaluatable;
 
 import javax.swing.*;
 

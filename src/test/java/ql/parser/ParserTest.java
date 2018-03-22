@@ -1,18 +1,8 @@
 package ql.parser;
 
-import issuetracker.Error;
 import issuetracker.IssueTracker;
 import org.junit.Before;
-import org.junit.Test;
 import ql.Helper;
-import ql.ast.Form;
-import ql.evaluator.Evaluator;
-import ql.evaluator.FormEvaluator;
-import ql.evaluator.values.Evaluatable;
-
-import java.math.BigDecimal;
-
-import static org.junit.Assert.assertEquals;
 
 public class ParserTest {
 

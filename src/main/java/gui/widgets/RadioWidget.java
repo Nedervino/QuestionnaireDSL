@@ -18,14 +18,14 @@ public class RadioWidget extends BaseWidget {
         super(evaluator, value, identifier);
 
         panel = new JPanel();
-        panel.setPreferredSize(new Dimension(200,50));
+        panel.setPreferredSize(new Dimension(200, 50));
 
         this.choiceButtonMap = new HashMap<>();
 
         ButtonGroup buttonGroup = new ButtonGroup();
 
         String[] test = {"one", "two", "three"};
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             String name = test[i];
             JRadioButton button = new JRadioButton(name);
             button.setActionCommand(name);

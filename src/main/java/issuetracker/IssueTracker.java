@@ -13,9 +13,8 @@ import java.util.logging.Logger;
  */
 public class IssueTracker {
 
-    private static IssueTracker issueTracker;
     private final static Logger LOGGER = Logger.getLogger(Validator.class.getName());
-
+    private static IssueTracker issueTracker;
     private final List<Error> errors;
     private final List<Warning> warnings;
 
@@ -26,7 +25,7 @@ public class IssueTracker {
     }
 
     public static IssueTracker getIssueTracker() {
-        if(issueTracker == null) {
+        if (issueTracker == null) {
             issueTracker = new IssueTracker();
         }
         return issueTracker;

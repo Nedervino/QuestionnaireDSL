@@ -15,7 +15,7 @@ public class EvaluatableMoney extends EvaluatableNumeric<BigDecimal> {
         this(new BigDecimal(value));
     }
 
-    public void round(){
+    public void round() {
         value = value.setScale(2, BigDecimal.ROUND_HALF_EVEN);
     }
 
