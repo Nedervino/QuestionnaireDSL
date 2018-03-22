@@ -5,8 +5,8 @@ import ql.ast.Form;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
-import ql.ast.expressions.unary.ArithmeticNegation;
-import ql.ast.expressions.unary.LogicalNegation;
+import ql.ast.expressions.unary.Negative;
+import ql.ast.expressions.unary.Negation;
 import ql.ast.statements.*;
 import ql.ast.types.*;
 import ql.ast.visitors.ExpressionVisitor;
@@ -185,14 +185,14 @@ public class ExpressionChecker implements Checker, FormVisitor<Void>, StatementV
     }
 
     @Override
-    public Type visit(LogicalNegation logicalNegation) {
-        Type actualType = logicalNegation.getExpression().accept(this);
+    public Type visit(Negation negation) {
+        Type actualType = negation.getExpression().accept(this);
         return verifyType(actualType, "boolean");
     }
 
     @Override
-    public Type visit(ArithmeticNegation arithmeticNegation) {
-        Type actualType = arithmeticNegation.getExpression().accept(this);
+    public Type visit(Negative negative) {
+        Type actualType = negative.getExpression().accept(this);
         return verifyType(actualType, "numeric");
     }
 

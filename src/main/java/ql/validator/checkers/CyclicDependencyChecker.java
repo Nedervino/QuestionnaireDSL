@@ -6,8 +6,8 @@ import ql.ast.SourceLocation;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
-import ql.ast.expressions.unary.ArithmeticNegation;
-import ql.ast.expressions.unary.LogicalNegation;
+import ql.ast.expressions.unary.Negative;
+import ql.ast.expressions.unary.Negation;
 import ql.ast.expressions.unary.UnaryOperation;
 import ql.ast.statements.*;
 import ql.ast.visitors.ExpressionVisitor;
@@ -167,13 +167,13 @@ public class CyclicDependencyChecker implements Checker, FormVisitor<Void>, Stat
     }
 
     @Override
-    public List<Variable> visit(LogicalNegation logicalNegation) {
-        return visitUnaryOperation(logicalNegation);
+    public List<Variable> visit(Negation negation) {
+        return visitUnaryOperation(negation);
     }
 
     @Override
-    public List<Variable> visit(ArithmeticNegation arithmeticNegation) {
-        return visitUnaryOperation(arithmeticNegation);
+    public List<Variable> visit(Negative negative) {
+        return visitUnaryOperation(negative);
     }
 
     @Override

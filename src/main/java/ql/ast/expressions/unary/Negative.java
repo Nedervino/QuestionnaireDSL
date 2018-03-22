@@ -4,9 +4,9 @@ import ql.ast.SourceLocation;
 import ql.ast.expressions.Expression;
 import ql.ast.visitors.ExpressionVisitor;
 
-public class ArithmeticNegation extends UnaryOperation {
+public class Negative extends UnaryOperation {
 
-    public ArithmeticNegation(Expression expression, SourceLocation sourceLocation) {
+    public Negative(Expression expression, SourceLocation sourceLocation) {
         super(expression, sourceLocation);
     }
 

@@ -6,8 +6,8 @@ import ql.ast.expressions.Expression;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
-import ql.ast.expressions.unary.ArithmeticNegation;
-import ql.ast.expressions.unary.LogicalNegation;
+import ql.ast.expressions.unary.Negative;
+import ql.ast.expressions.unary.Negation;
 import ql.ast.statements.*;
 import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormVisitor;
@@ -278,7 +278,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     }
 
     @Override
-    public Value visit(LogicalNegation node) {
+    public Value visit(Negation node) {
         Value value = node.getExpression().accept(this);
         ValueBoolean result = null;
         if (isCalculated(value)) {
@@ -288,7 +288,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     }
 
     @Override
-    public Value visit(ArithmeticNegation node) {
+    public Value visit(Negative node) {
         Value value = node.getExpression().accept(this);
         Value result = null;
         if (isCalculated(value)) {

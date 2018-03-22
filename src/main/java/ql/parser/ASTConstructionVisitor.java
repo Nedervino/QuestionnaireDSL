@@ -10,8 +10,8 @@ import ql.ast.expressions.Expression;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
-import ql.ast.expressions.unary.ArithmeticNegation;
-import ql.ast.expressions.unary.LogicalNegation;
+import ql.ast.expressions.unary.Negative;
+import ql.ast.expressions.unary.Negation;
 import ql.ast.statements.*;
 import ql.ast.types.*;
 
@@ -83,9 +83,9 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String operator = ctx.unaryOperator().getText();
         switch (operator) {
             case "-":
-                return new ArithmeticNegation((Expression) visit(ctx.expression()), getSourceLocation(ctx));
+                return new Negative((Expression) visit(ctx.expression()), getSourceLocation(ctx));
             case "!":
-                return new LogicalNegation((Expression) visit(ctx.expression()), getSourceLocation(ctx));
+                return new Negation((Expression) visit(ctx.expression()), getSourceLocation(ctx));
             default:
                 throw new IllegalArgumentException(String.format("Invalid unary operator: %s", operator));
         }

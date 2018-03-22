@@ -3,8 +3,8 @@ package ql.ast.visitors;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
-import ql.ast.expressions.unary.ArithmeticNegation;
-import ql.ast.expressions.unary.LogicalNegation;
+import ql.ast.expressions.unary.Negative;
+import ql.ast.expressions.unary.Negation;
 
 public interface ExpressionVisitor<T> {
 
@@ -34,9 +34,9 @@ public interface ExpressionVisitor<T> {
     T visit(Subtraction subtraction);
 
     // Unary expressions
-    T visit(LogicalNegation logicalNegation);
+    T visit(Negation negation);
 
-    T visit(ArithmeticNegation arithmeticNegation);
+    T visit(Negative negative);
 
     //Literals
     T visit(StringLiteral stringLiteral);
