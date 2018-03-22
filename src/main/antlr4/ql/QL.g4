@@ -27,7 +27,7 @@ elseBlock           : 'else' block;
 
 expression          : LEFTPARENTHESES expression RIGHTPARENTHESES           #nestedExpression
                     | unaryOperator expression                              #unaryExpression
-                    | left=expression arithmeticOperator right=expression   #arithMeticBinary
+                    | left=expression arithmeticOperator right=expression   #arithmeticBinary
                     | left=expression relationalOperator right=expression   #relationalBinary
                     | left=expression logicalOperator right=expression      #logicalBinary
                     | value                                                 #expressionValue

@@ -92,7 +92,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
     }
 
     @Override
-    public ASTNode visitArithMeticBinary(QLParser.ArithMeticBinaryContext ctx) {
+    public ASTNode visitArithmeticBinary(QLParser.ArithmeticBinaryContext ctx) {
         Expression left = (Expression) visit(ctx.left);
         Expression right = (Expression) visit(ctx.right);
 
