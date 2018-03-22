@@ -170,13 +170,13 @@ public class ExpressionChecker implements Checker, FormVisitor<Void>, StatementV
     }
 
     @Override
-    public Type visit(LogicalOr logicalOr) {
-        return verifyType(checkTypeCompatibility(logicalOr), "boolean");
+    public Type visit(Or or) {
+        return verifyType(checkTypeCompatibility(or), "boolean");
     }
 
     @Override
-    public Type visit(LogicalAnd logicalAnd) {
-        return verifyType(checkTypeCompatibility(logicalAnd), "boolean");
+    public Type visit(And and) {
+        return verifyType(checkTypeCompatibility(and), "boolean");
     }
 
     @Override

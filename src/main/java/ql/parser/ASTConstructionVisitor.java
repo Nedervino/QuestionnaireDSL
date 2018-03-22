@@ -119,9 +119,9 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         String operator = ctx.logicalOperator().getText();
         switch (operator) {
             case "&&":
-                return new LogicalAnd(left, right, getSourceLocation(ctx));
+                return new And(left, right, getSourceLocation(ctx));
             case "||":
-                return new LogicalOr(left, right, getSourceLocation(ctx));
+                return new Or(left, right, getSourceLocation(ctx));
             default:
                 throw new IllegalArgumentException(String.format("Invalid logical operator: %s", operator));
         }

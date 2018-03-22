@@ -11,7 +11,7 @@ public interface ExpressionVisitor<T> {
     // Binary expressions
     T visit(Addition addition);
 
-    T visit(LogicalAnd logicalAnd);
+    T visit(And and);
 
     T visit(Division division);
 
@@ -29,7 +29,7 @@ public interface ExpressionVisitor<T> {
 
     T visit(NotEqual notEqual);
 
-    T visit(LogicalOr logicalOr);
+    T visit(Or or);
 
     T visit(Subtraction subtraction);
 

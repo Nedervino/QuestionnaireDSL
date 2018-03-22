@@ -11,7 +11,7 @@ import java.util.LinkedList;
 
 public class FormViewer {
 
-    // private Evaluator evaluator;
+    // private FormEvaluator evaluator;
     FormEvaluator evaluator;
     // private JPanel panel;
     JPanel panel;

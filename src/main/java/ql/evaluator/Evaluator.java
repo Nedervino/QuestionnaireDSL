@@ -1,6 +1,5 @@
 package ql.evaluator;
 
-import issuetracker.IssueTracker;
 import ql.ast.ASTNode;
 import ql.ast.Form;
 import ql.ast.expressions.Expression;
@@ -14,10 +13,9 @@ import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormVisitor;
 import ql.ast.visitors.StatementVisitor;
 import ql.evaluator.values.*;
+import issuetracker.IssueTracker;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Evaluatable>, FormEvaluator {
@@ -154,7 +152,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     }
 
     @Override
-    public Evaluatable visit(LogicalAnd node) {
+    public Evaluatable visit(And node) {
         Evaluatable leftEvaluatable = visitLeft(node);
         Evaluatable rightEvaluatable = visitRight(node);
         EvaluatableBoolean result = null;
@@ -253,7 +251,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     }
 
     @Override
-    public Evaluatable visit(LogicalOr node) {
+    public Evaluatable visit(Or node) {
         Evaluatable leftEvaluatable = visitLeft(node);
         Evaluatable rightEvaluatable = visitRight(node);
         EvaluatableBoolean result = null;

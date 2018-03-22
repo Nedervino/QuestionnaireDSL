@@ -111,8 +111,8 @@ public class CyclicDependencyChecker implements Checker, FormVisitor<Void>, Stat
     }
 
     @Override
-    public List<Variable> visit(LogicalAnd logicalAnd) {
-        return visitBinaryOperation(logicalAnd);
+    public List<Variable> visit(And and) {
+        return visitBinaryOperation(and);
     }
 
     @Override
@@ -157,8 +157,8 @@ public class CyclicDependencyChecker implements Checker, FormVisitor<Void>, Stat
     }
 
     @Override
-    public List<Variable> visit(LogicalOr logicalOr) {
-        return visitBinaryOperation(logicalOr);
+    public List<Variable> visit(Or or) {
+        return visitBinaryOperation(or);
     }
 
     @Override
