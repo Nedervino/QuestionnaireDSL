@@ -197,4 +197,16 @@ public class EvaluatorTest {
 
         assertEquals("01-02-1999", evaluatable.toString());
     }
+
+    @Test
+    public void shouldEvaluateElse() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/ifElseEvaluation.ql", formBuilder);
+
+        evaluator.start(form);
+
+        Evaluatable evaluatable = evaluator.getQuestionValue("flag");
+
+        assertEquals(true, evaluatable);
+    }
 }
