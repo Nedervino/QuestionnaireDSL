@@ -19,17 +19,19 @@ public class Main {
 
         IssueTracker issueTracker = IssueTracker.getIssueTracker();
 
+        //TODO: pass file (non-string) instead of filecontents to formbuilder
+
         String qlFileName = "src/input/ql/correct/if.ql";
         String qlFile = new FileScanner().loadFile(qlFileName);
 
         FormBuilder formBuilder = new FormBuilder();
-        Form form = formBuilder.buildASTFromString(qlFile);
+        Form form = formBuilder.createForm(qlFile);
 
         String qlsFileName = "src/input/qls/correct/form1.qls";
         String qlsFile = new FileScanner().loadFile(qlsFileName);
 
         StylesheetBuilder stylesheetBuilder = new StylesheetBuilder();
-        // Stylesheet stylesheet = stylesheetBuilder.buildASTFromString(qlFile);
+        // Stylesheet stylesheet = stylesheetBuilder.createForm(qlFile);
         Stylesheet stylesheet = null;
 
         Validator validator = new Validator();

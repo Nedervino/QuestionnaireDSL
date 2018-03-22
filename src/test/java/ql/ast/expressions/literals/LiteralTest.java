@@ -2,7 +2,6 @@ package ql.ast.expressions.literals;
 
 import org.junit.Before;
 import org.junit.Test;
-import ql.QLParser;
 import ql.parser.FormBuilder;
 
 import java.math.BigDecimal;
@@ -22,8 +21,7 @@ public class LiteralTest {
     @Test
     public void canParseBooleanLiteral() {
         final Boolean EXPECTED_RESULT = true;
-        QLParser parser = formBuilder.createParser("true");
-        BooleanLiteral booleanLiteral = (BooleanLiteral) formBuilder.getExpression(parser);
+        BooleanLiteral booleanLiteral = (BooleanLiteral) formBuilder.createExpression("true");
 
         assertEquals(EXPECTED_RESULT, booleanLiteral.getValue());
     }
@@ -32,8 +30,7 @@ public class LiteralTest {
     @Test
     public void canParseIntegerLiteral() {
         final int EXPECTED_RESULT = 123;
-        QLParser parser = formBuilder.createParser(Integer.toString(EXPECTED_RESULT));
-        IntegerLiteral integerLiteral = (IntegerLiteral) formBuilder.getExpression(parser);
+        IntegerLiteral integerLiteral = (IntegerLiteral) formBuilder.createExpression(Integer.toString(EXPECTED_RESULT));
 
         assertEquals(EXPECTED_RESULT, integerLiteral.getValue());
     }
@@ -42,8 +39,7 @@ public class LiteralTest {
     public void canParseDecimalLiteral() {
         final double DELTA = 1e-15;
         final double EXPECTED_RESULT = 123.45;
-        QLParser parser = formBuilder.createParser(Double.toString(EXPECTED_RESULT));
-        DecimalLiteral decimalLiteral = (DecimalLiteral) formBuilder.getExpression(parser);
+        DecimalLiteral decimalLiteral = (DecimalLiteral) formBuilder.createExpression(Double.toString(EXPECTED_RESULT));
 
         assertEquals(EXPECTED_RESULT, decimalLiteral.getValue(), DELTA);
     }
@@ -51,8 +47,7 @@ public class LiteralTest {
     @Test
     public void canParseMoneyLiteral() {
         final BigDecimal EXPECTED_RESULT = new BigDecimal(123.45).setScale(2, RoundingMode.HALF_UP);
-        QLParser parser = formBuilder.createParser("123,45");
-        MoneyLiteral moneyLiteral = (MoneyLiteral) formBuilder.getExpression(parser);
+        MoneyLiteral moneyLiteral = (MoneyLiteral) formBuilder.createExpression("123,45");
         BigDecimal displayValue = moneyLiteral.getDisplayValue();
         assertEquals(EXPECTED_RESULT, displayValue);
     }
@@ -60,8 +55,7 @@ public class LiteralTest {
     @Test
     public void canParseStringLiteral() {
         final String EXPECTED_RESULT = "\"testString\"";
-        QLParser parser = formBuilder.createParser(EXPECTED_RESULT);
-        StringLiteral stringLiteral = (StringLiteral) formBuilder.getExpression(parser);
+        StringLiteral stringLiteral = (StringLiteral) formBuilder.createExpression(EXPECTED_RESULT);
 
         assertEquals(EXPECTED_RESULT, stringLiteral.getValue());
     }

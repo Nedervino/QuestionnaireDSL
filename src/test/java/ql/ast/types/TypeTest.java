@@ -2,7 +2,6 @@ package ql.ast.types;
 
 import org.junit.Before;
 import org.junit.Test;
-import ql.QLParser;
 import ql.ast.statements.Question;
 import ql.parser.FormBuilder;
 
@@ -20,8 +19,7 @@ public class TypeTest {
     @Test
     public void canParseBooleanType() {
         final String EXPECTED_RESULT = "boolean";
-        QLParser parser = formBuilder.createParser("\"test\" testQuestion: boolean");
-        Question question = (Question) formBuilder.getStatement(parser);
+        Question question = (Question) formBuilder.createStatement("\"test\" testQuestion: boolean");
 
         assertEquals(EXPECTED_RESULT, question.getType().toString());
     }
@@ -29,8 +27,7 @@ public class TypeTest {
     @Test
     public void canParseDecimalType() {
         final String EXPECTED_RESULT = "decimal";
-        QLParser parser = formBuilder.createParser("\"test\" testQuestion: decimal");
-        Question question = (Question) formBuilder.getStatement(parser);
+        Question question = (Question) formBuilder.createStatement("\"test\" testQuestion: decimal");
 
         assertEquals(EXPECTED_RESULT, question.getType().toString());
     }
@@ -38,8 +35,7 @@ public class TypeTest {
     @Test
     public void canParseIntegerType() {
         final String EXPECTED_RESULT = "integer";
-        QLParser parser = formBuilder.createParser("\"test\" testQuestion: integer");
-        Question question = (Question) formBuilder.getStatement(parser);
+        Question question = (Question) formBuilder.createStatement("\"test\" testQuestion: integer");
 
         assertEquals(EXPECTED_RESULT, question.getType().toString());
     }
@@ -47,8 +43,7 @@ public class TypeTest {
     @Test
     public void canParseMoneyType() {
         final String EXPECTED_RESULT = "money";
-        QLParser parser = formBuilder.createParser("\"test\" testQuestion: money");
-        Question question = (Question) formBuilder.getStatement(parser);
+        Question question = (Question) formBuilder.createStatement("\"test\" testQuestion: money");
 
         assertEquals(EXPECTED_RESULT, question.getType().toString());
     }
@@ -56,8 +51,7 @@ public class TypeTest {
     @Test
     public void canParseStringType() {
         final String EXPECTED_RESULT = "string";
-        QLParser parser = formBuilder.createParser("\"test\" testQuestion: string");
-        Question question = (Question) formBuilder.getStatement(parser);
+        Question question = (Question) formBuilder.createStatement("\"test\" testQuestion: string");
 
         assertEquals(EXPECTED_RESULT, question.getType().toString());
     }

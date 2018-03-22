@@ -6,9 +6,11 @@ import ql.parser.FormBuilder;
 
 public class Helper {
 
+    //TODO: replace with base class
+
     public Form buildASTFromFile(String fileName, FormBuilder formBuilder) {
         String fileContent = new FileScanner().loadFile(fileName);
-        return formBuilder.buildASTFromString(fileContent);
+        return formBuilder.createForm(fileContent);
     }
 
 }
