@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ql.Helper;
 import ql.ast.Form;
-import ql.evaluator.values.Evaluatable;
+import ql.evaluator.values.Value;
 import ql.parser.FormBuilder;
 
 import java.math.BigDecimal;
@@ -36,9 +36,9 @@ public class EvaluatorTest {
         evaluator.start(form);
         issueTracker.reset();
 
-        Evaluatable evaluatable = evaluator.getQuestionValue("value");
+        Value value = evaluator.getQuestionValue("value");
 
-        assertEquals(4, evaluatable.getValue());
+        assertEquals(4, value.getValue());
     }
 
     @Test
@@ -49,9 +49,9 @@ public class EvaluatorTest {
         evaluator.start(form);
         issueTracker.reset();
 
-        Evaluatable evaluatable = evaluator.getQuestionValue("value");
+        Value value = evaluator.getQuestionValue("value");
 
-        assertEquals(3.999, evaluatable.getValue());
+        assertEquals(3.999, value.getValue());
     }
 
     @Test
@@ -62,12 +62,12 @@ public class EvaluatorTest {
         evaluator.start(form);
         issueTracker.reset();
 
-        Evaluatable evaluatable = evaluator.getQuestionValue("value");
+        Value value = evaluator.getQuestionValue("value");
 
         BigDecimal expected = new BigDecimal(3.99);
         expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
 
-        assertEquals(expected, evaluatable.getValue());
+        assertEquals(expected, value.getValue());
     }
 
     @Test
@@ -92,9 +92,9 @@ public class EvaluatorTest {
 
         evaluator.start(form);
 
-        Evaluatable evaluatable = evaluator.getQuestionValue("result");
+        Value value = evaluator.getQuestionValue("result");
 
-        assertEquals(3, evaluatable.getValue());
+        assertEquals(3, value.getValue());
     }
 
     @Test
@@ -105,9 +105,9 @@ public class EvaluatorTest {
         evaluator.start(form);
         issueTracker.reset();
 
-        Evaluatable evaluatable = evaluator.getQuestionValue("result");
+        Value value = evaluator.getQuestionValue("result");
 
-        assertEquals(13.0, evaluatable.getValue());
+        assertEquals(13.0, value.getValue());
     }
 
     @Test
@@ -117,8 +117,8 @@ public class EvaluatorTest {
 
         evaluator.start(form);
 
-        Evaluatable evaluatable = evaluator.getQuestionValue("result");
-        assertEquals(0.8125, evaluatable.getValue());
+        Value value = evaluator.getQuestionValue("result");
+        assertEquals(0.8125, value.getValue());
     }
 
     @Test
@@ -128,11 +128,11 @@ public class EvaluatorTest {
 
         evaluator.start(form);
 
-        Evaluatable evaluatable = evaluator.getQuestionValue("result");
+        Value value = evaluator.getQuestionValue("result");
 
         BigDecimal expected = new BigDecimal(3.33);
         expected = expected.setScale(2, BigDecimal.ROUND_HALF_EVEN);
 
-        assertEquals(expected, evaluatable.getValue());
+        assertEquals(expected, value.getValue());
     }
 }

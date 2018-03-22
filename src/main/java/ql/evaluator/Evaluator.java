@@ -18,10 +18,11 @@ import issuetracker.IssueTracker;
 import java.util.*;
 
 
-public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Evaluatable>, FormEvaluator {
+public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, ExpressionVisitor<Value>, FormEvaluator {
 
-    private HashMap<ASTNode, Evaluatable> questionValues;
-    private HashMap<String, Question> idLookup;
+    //TODO: questionValues use String identifier, ASTNodes are not necessary anymore. Also allows removal of idLookup
+    private Map<ASTNode, Value> questionValues;
+    private Map<String, Question> idLookup;
     private Form form;
     private IssueTracker issueTracker;
 
@@ -38,7 +39,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     }
 
     @Override
-    public void setEvaluatable(String questionId, Evaluatable value) {
+    public void setEvaluatable(String questionId, Value value) {
         Question node = idLookup.get(questionId);
         questionValues.put(node, value);
     }
@@ -54,25 +55,26 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
 
     @Override
     public List<Question> getQuestions() {
-        return new LinkedList(idLookup.values());
+        return new ArrayList(idLookup.values());
     }
 
     @Override
-    public Evaluatable getQuestionValue(String questionId) {
+    public Value getQuestionValue(String questionId) {
         Question node = idLookup.get(questionId);
         return questionValues.get(node);
     }
 
+    //TODO: remove all isCalculated methods and add UndefinedValue type
     public boolean isCalculated(ASTNode node) {
         return questionValues.containsKey(node);
     }
 
-    private boolean isCalculated(Evaluatable leftEvaluatable, Evaluatable rightEvaluatable) {
-        return isCalculated(leftEvaluatable) && isCalculated(rightEvaluatable);
+    private boolean isCalculated(Value leftValue, Value rightValue) {
+        return isCalculated(leftValue) && isCalculated(rightValue);
     }
 
-    private boolean isCalculated(Evaluatable evaluatable) {
-        return evaluatable != null;
+    private boolean isCalculated(Value value) {
+        return value != null;
     }
 
     @Override
@@ -88,7 +90,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         idLookup.put(varName, node);
 
         Expression expression = node.getExpression();
-        Evaluatable value = expression.accept(this);
+        Value value = expression.accept(this);
         if (isCalculated(value)) {
             questionValues.put(node, value);
         }
@@ -98,7 +100,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     @Override
     public Void visit(IfStatement node) {
         Expression expression = node.getCondition();
-        Evaluatable value = expression.accept(this);
+        Value value = expression.accept(this);
 
         if (isCalculated(value)) {
             if (value.getBooleanValue()) {
@@ -118,7 +120,7 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
     @Override
     public Void visit(IfElseStatement node) {
         Expression expression = node.getCondition();
-        Evaluatable value = expression.accept(this);
+        Value value = expression.accept(this);
         List<Statement> statements;
         if (isCalculated(expression)) {
             if (value.getBooleanValue()) {
@@ -132,201 +134,204 @@ public class Evaluator implements FormVisitor<Void>, StatementVisitor<Void>, Exp
         return null;
     }
 
-    private Evaluatable visitLeft(BinaryOperation node) {
+    //TODO: remove, place accept directly in visits
+    private Value visitLeft(BinaryOperation node) {
         return node.getLeft().accept(this);
     }
 
-    private Evaluatable visitRight(BinaryOperation node) {
+    private Value visitRight(BinaryOperation node) {
         return node.getRight().accept(this);
     }
 
     @Override
-    public Evaluatable visit(Addition node) {
-        Evaluatable leftEvaluatable = visitLeft(node);
-        Evaluatable rightEvaluatable = visitRight(node);
-        Evaluatable result = null;
-        if (isCalculated(leftEvaluatable, rightEvaluatable)) {
-            result = leftEvaluatable.add(rightEvaluatable);
+    public Value visit(Addition node) {
+        Value leftValue = visitLeft(node);
+        Value rightValue = visitRight(node);
+        Value result = null;
+        if (isCalculated(leftValue, rightValue)) {
+            result = leftValue.add(rightValue);
         }
         return result;
     }
 
     @Override
-    public Evaluatable visit(And node) {
-        Evaluatable leftEvaluatable = visitLeft(node);
-        Evaluatable rightEvaluatable = visitRight(node);
-        EvaluatableBoolean result = null;
-        if (isCalculated(leftEvaluatable, rightEvaluatable)) {
-            result = leftEvaluatable.and(rightEvaluatable);
+    public Value visit(And node) {
+        Value leftValue = visitLeft(node);
+        Value rightValue = visitRight(node);
+        ValueBoolean result = null;
+        if (isCalculated(leftValue, rightValue)) {
+            result = leftValue.and(rightValue);
         }
         return result;
     }
 
     @Override
-    public Evaluatable visit(Division node) {
-        Evaluatable leftEvaluatable = visitLeft(node);
-        Evaluatable rightEvaluatable = visitRight(node);
-        Evaluatable result = null;
-        if (isCalculated(leftEvaluatable, rightEvaluatable)) {
-            result = leftEvaluatable.divide(rightEvaluatable);
+    public Value visit(Division node) {
+        Value leftValue = visitLeft(node);
+        Value rightValue = visitRight(node);
+        Value result = null;
+        if (isCalculated(leftValue, rightValue)) {
+            result = leftValue.divide(rightValue);
         }
         return result;
     }
 
     @Override
-    public Evaluatable visit(Equal node) {
-        Evaluatable leftEvaluatable = visitLeft(node);
-        Evaluatable rightEvaluatable = visitRight(node);
-        EvaluatableBoolean result = null;
-        if (isCalculated(leftEvaluatable, rightEvaluatable)) {
-            result = leftEvaluatable.equal(rightEvaluatable);
+    public Value visit(Equal node) {
+        Value leftValue = visitLeft(node);
+        Value rightValue = visitRight(node);
+        ValueBoolean result = null;
+        if (isCalculated(leftValue, rightValue)) {
+            result = leftValue.equal(rightValue);
         }
         return result;
     }
 
     @Override
-    public Evaluatable visit(GreaterThanEqual node) {
-        Evaluatable leftEvaluatable = visitLeft(node);
-        Evaluatable rightEvaluatable = visitRight(node);
-        EvaluatableBoolean result = null;
-        if (isCalculated(leftEvaluatable, rightEvaluatable)) {
-            result = leftEvaluatable.greaterThanEqual(rightEvaluatable);
+    public Value visit(GreaterThanEqual node) {
+        Value leftValue = visitLeft(node);
+        Value rightValue = visitRight(node);
+        ValueBoolean result = null;
+        if (isCalculated(leftValue, rightValue)) {
+            result = leftValue.greaterThanEqual(rightValue);
         }
         return result;
     }
 
     @Override
-    public Evaluatable visit(GreaterThan node) {
-        Evaluatable leftEvaluatable = visitLeft(node);
-        Evaluatable rightEvaluatable = visitRight(node);
-        EvaluatableBoolean result = null;
-        if (isCalculated(leftEvaluatable, rightEvaluatable)) {
-            result = leftEvaluatable.greaterThan(rightEvaluatable);
+    public Value visit(GreaterThan node) {
+        Value leftValue = visitLeft(node);
+        Value rightValue = visitRight(node);
+        ValueBoolean result = null;
+        if (isCalculated(leftValue, rightValue)) {
+            result = leftValue.greaterThan(rightValue);
         }
         return result;
     }
 
     @Override
-    public Evaluatable visit(LessThanEqual node) {
-        Evaluatable leftEvaluatable = visitLeft(node);
-        Evaluatable rightEvaluatable = visitRight(node);
-        EvaluatableBoolean result = null;
-        if (isCalculated(leftEvaluatable, rightEvaluatable)) {
-            result = leftEvaluatable.lessThanEqual(rightEvaluatable);
+    public Value visit(LessThanEqual node) {
+        Value leftValue = visitLeft(node);
+        Value rightValue = visitRight(node);
+        ValueBoolean result = null;
+        if (isCalculated(leftValue, rightValue)) {
+            result = leftValue.lessThanEqual(rightValue);
         }
         return result;
     }
 
     @Override
-    public Evaluatable visit(LessThan node) {
-        Evaluatable leftEvaluatable = visitLeft(node);
-        Evaluatable rightEvaluatable = visitRight(node);
-        EvaluatableBoolean result = null;
-        if (isCalculated(leftEvaluatable, rightEvaluatable)) {
-            result = leftEvaluatable.lessThan(rightEvaluatable);
+    public Value visit(LessThan node) {
+        Value leftValue = visitLeft(node);
+        Value rightValue = visitRight(node);
+        ValueBoolean result = null;
+        if (isCalculated(leftValue, rightValue)) {
+            result = leftValue.lessThan(rightValue);
         }
         return result;
     }
 
     @Override
-    public Evaluatable visit(Multiplication node) {
-        Evaluatable leftEvaluatable = visitLeft(node);
-        Evaluatable rightEvaluatable = visitRight(node);
-        Evaluatable result = null;
-        if (isCalculated(leftEvaluatable, rightEvaluatable)) {
-            result = leftEvaluatable.multiply(rightEvaluatable);
+    public Value visit(Multiplication node) {
+        //TODO: for each visit method directly return with a one-liner such as the following:
+        // node.getLeft().accept(this).multiply(node.getRight().accept(this));
+        Value leftValue = visitLeft(node);
+        Value rightValue = visitRight(node);
+        Value result = null;
+        if (isCalculated(leftValue, rightValue)) {
+            result = leftValue.multiply(rightValue);
         }
         return result;
     }
 
     @Override
-    public Evaluatable visit(NotEqual node) {
-        Evaluatable leftEvaluatable = visitLeft(node);
-        Evaluatable rightEvaluatable = visitRight(node);
-        EvaluatableBoolean result = null;
-        if (isCalculated(leftEvaluatable, rightEvaluatable)) {
-            result = leftEvaluatable.notEqual(rightEvaluatable);
+    public Value visit(NotEqual node) {
+        Value leftValue = visitLeft(node);
+        Value rightValue = visitRight(node);
+        ValueBoolean result = null;
+        if (isCalculated(leftValue, rightValue)) {
+            result = leftValue.notEqual(rightValue);
         }
         return result;
     }
 
     @Override
-    public Evaluatable visit(Or node) {
-        Evaluatable leftEvaluatable = visitLeft(node);
-        Evaluatable rightEvaluatable = visitRight(node);
-        EvaluatableBoolean result = null;
-        if (isCalculated(leftEvaluatable, rightEvaluatable)) {
-            result = leftEvaluatable.or(rightEvaluatable);
+    public Value visit(Or node) {
+        Value leftValue = visitLeft(node);
+        Value rightValue = visitRight(node);
+        ValueBoolean result = null;
+        if (isCalculated(leftValue, rightValue)) {
+            result = leftValue.or(rightValue);
         }
         return result;
     }
 
     @Override
-    public Evaluatable visit(Subtraction node) {
-        Evaluatable leftEvaluatable = visitLeft(node);
-        Evaluatable rightEvaluatable = visitRight(node);
-        Evaluatable result = null;
-        if (isCalculated(leftEvaluatable, rightEvaluatable)) {
-            result = leftEvaluatable.subtract(rightEvaluatable);
+    public Value visit(Subtraction node) {
+        Value leftValue = visitLeft(node);
+        Value rightValue = visitRight(node);
+        Value result = null;
+        if (isCalculated(leftValue, rightValue)) {
+            result = leftValue.subtract(rightValue);
         }
         return result;
     }
 
     @Override
-    public Evaluatable visit(LogicalNegation node) {
-        Evaluatable evaluatable = node.getExpression().accept(this);
-        EvaluatableBoolean result = null;
-        if (isCalculated(evaluatable)) {
-            result = evaluatable.logicalNegate();
+    public Value visit(LogicalNegation node) {
+        Value value = node.getExpression().accept(this);
+        ValueBoolean result = null;
+        if (isCalculated(value)) {
+            result = value.logicalNegate();
         }
         return result;
     }
 
     @Override
-    public Evaluatable visit(ArithmeticNegation node) {
-        Evaluatable evaluatable = node.getExpression().accept(this);
-        Evaluatable result = null;
-        if (isCalculated(evaluatable)) {
-            result = evaluatable.arithmeticNegate();
+    public Value visit(ArithmeticNegation node) {
+        Value value = node.getExpression().accept(this);
+        Value result = null;
+        if (isCalculated(value)) {
+            result = value.arithmeticNegate();
         }
         return result;
     }
 
     @Override
-    public Evaluatable visit(StringLiteral node) {
-        return new EvaluatableString(node.getValue());
+    public Value visit(StringLiteral node) {
+        return new ValueString(node.getValue());
     }
 
     @Override
-    public Evaluatable visit(IntegerLiteral node) {
-        return new EvaluatableInteger(node.getValue());
+    public Value visit(IntegerLiteral node) {
+        return new ValueInteger(node.getValue());
     }
 
     @Override
-    public Evaluatable visit(BooleanLiteral node) {
-        return new EvaluatableBoolean(node.getValue());
+    public Value visit(BooleanLiteral node) {
+        return new ValueBoolean(node.getValue());
     }
 
     @Override
-    public Evaluatable visit(DateLiteral node) {
-        return new EvaluatableDate(node.getValue());
+    public Value visit(DateLiteral node) {
+        return new ValueDate(node.getValue());
     }
 
     @Override
-    public Evaluatable visit(DecimalLiteral node) {
-        return new EvaluatableDecimal(node.getValue());
+    public Value visit(DecimalLiteral node) {
+        return new ValueDecimal(node.getValue());
     }
 
     @Override
-    public Evaluatable visit(MoneyLiteral node) {
-        return new EvaluatableMoney(node.getValue());
+    public Value visit(MoneyLiteral node) {
+        return new ValueMoney(node.getValue());
     }
 
     @Override
-    public Evaluatable visit(Variable variable) {
+    public Value visit(Variable variable) {
         String varName = variable.toString();
         Question declarationNode = findDeclarationNode(varName);
-        Evaluatable value = null;
+        Value value = null;
         if (isCalculated(declarationNode)) {
             value = questionValues.get(declarationNode);
         }

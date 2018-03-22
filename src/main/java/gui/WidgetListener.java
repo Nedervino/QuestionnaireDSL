@@ -1,11 +1,11 @@
 package gui;
 
 import ql.ast.statements.Question;
-import ql.evaluator.values.Evaluatable;
+import ql.evaluator.values.Value;
 
 public class WidgetListener {
 
-    public void updateEnvironment(Question question, Evaluatable value) {
+    public void updateEnvironment(Question question, Value value) {
 
     }
 

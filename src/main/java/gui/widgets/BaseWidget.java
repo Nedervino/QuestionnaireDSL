@@ -1,9 +1,8 @@
 package gui.widgets;
 
-import gui.WidgetListener;
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;
-import ql.evaluator.values.Evaluatable;
+import ql.evaluator.values.Value;
 
 import javax.swing.*;
 
@@ -11,7 +10,7 @@ public abstract class BaseWidget implements Widget {
 
     protected final FormEvaluator evaluator;
     protected final Question question;
-    // private final Evaluatable value;
+    // private final Value value;
     // private final String identifier;
 
     public BaseWidget(FormEvaluator evaluator, Question question) {
@@ -22,7 +21,7 @@ public abstract class BaseWidget implements Widget {
     }
 
     @Override
-    public Evaluatable getValue() {
+    public Value getValue() {
         return null;
     }
 

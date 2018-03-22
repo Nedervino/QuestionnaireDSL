@@ -6,8 +6,8 @@ import ql.ast.types.*;
 import ql.ast.visitors.FormVisitor;
 import ql.ast.visitors.StatementVisitor;
 import ql.ast.visitors.TypeVisitor;
-import ql.evaluator.values.EvaluatableBoolean;
-import ql.evaluator.values.EvaluatableString;
+import ql.evaluator.values.ValueBoolean;
+import ql.evaluator.values.ValueString;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -76,7 +76,7 @@ public class GUIElementConstructionVisitor implements FormVisitor<Void>, Stateme
 
         ActionListener actionListener = e -> {
             String value = textField.getText();
-            element.getEvaluator().setEvaluatable(element.getQuestion().getId(), new EvaluatableString(value));
+            element.getEvaluator().setEvaluatable(element.getQuestion().getId(), new ValueString(value));
         };
         textField.addActionListener(actionListener);
     }
@@ -89,7 +89,7 @@ public class GUIElementConstructionVisitor implements FormVisitor<Void>, Stateme
 
         ActionListener actionListener = e -> {
             boolean value = checkBox.isSelected();
-            element.getEvaluator().setEvaluatable(element.getQuestion().getId(), new EvaluatableBoolean(value));
+            element.getEvaluator().setEvaluatable(element.getQuestion().getId(), new ValueBoolean(value));
         };
         checkBox.addActionListener(actionListener);
     }

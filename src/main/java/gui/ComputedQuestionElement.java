@@ -2,7 +2,7 @@ package gui;
 
 import ql.ast.statements.ComputedQuestion;
 import ql.evaluator.FormEvaluator;
-import ql.evaluator.values.Evaluatable;
+import ql.evaluator.values.Value;
 
 import java.awt.*;
 
@@ -23,7 +23,7 @@ public class ComputedQuestionElement extends GUIElement {
         String varName = node.getId();
         Object value = "";
 
-        Evaluatable evaluatable = evaluator.getQuestionValue(varName);
+        Value evaluatable = evaluator.getQuestionValue(varName);
         if (evaluatable != null) {
             value = evaluatable.getValue();
         }

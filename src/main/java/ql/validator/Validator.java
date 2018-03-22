@@ -28,6 +28,8 @@ public class Validator {
 
     public boolean passesTypeChecks(Form form) {
 
+        //TODO: passesTests return issuetracker. No global tracker, no singleton
+
         //Check for duplicate question identifiers and labels
         if (!questionDuplicationChecker.passesTests(form)) {
             issueTracker.logErrors();

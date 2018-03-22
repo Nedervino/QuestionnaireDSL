@@ -1,13 +1,13 @@
 package gui.widgets;
 
 import gui.WidgetListener;
-import ql.evaluator.values.Evaluatable;
+import ql.evaluator.values.Value;
 
 import javax.swing.*;
 
 public interface Widget {
 
-    Evaluatable getValue();
+    Value getValue();
 
     void setValue();
 

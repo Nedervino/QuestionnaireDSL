@@ -2,7 +2,7 @@ package ql.evaluator;
 
 import ql.ast.Form;
 import ql.ast.statements.Question;
-import ql.evaluator.values.Evaluatable;
+import ql.evaluator.values.Value;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ public interface FormEvaluator {
 
     List<Question> getQuestions();
 
-    Evaluatable getQuestionValue(String questionId);
+    Value getQuestionValue(String questionId);
 
-    void setEvaluatable(String questionId, Evaluatable value);
+    void setEvaluatable(String questionId, Value value);
 
 }
