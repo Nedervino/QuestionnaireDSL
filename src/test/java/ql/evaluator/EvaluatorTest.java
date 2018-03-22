@@ -4,7 +4,7 @@ import issuetracker.Error;
 import issuetracker.IssueTracker;
 import org.junit.Before;
 import org.junit.Test;
-import ql.Helper;
+import ql.BaseQlTest;
 import ql.ast.Form;
 import ql.evaluator.values.Value;
 import ql.parser.FormBuilder;
@@ -13,17 +13,15 @@ import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
 
-public class EvaluatorTest {
+public class EvaluatorTest extends BaseQlTest {
 
     private FormBuilder formBuilder;
-    private Helper helper;
     private FormEvaluator evaluator;
     private IssueTracker issueTracker;
 
     @Before
     public void setUp() throws Exception {
         formBuilder = new FormBuilder();
-        helper = new Helper();
         issueTracker = IssueTracker.getIssueTracker();
         evaluator = new Evaluator();
     }
@@ -31,7 +29,7 @@ public class EvaluatorTest {
     @Test
     public void shouldStoreIntegerValueDecimalAsInteger() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/integerValueDecimal.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/evaluator/integerValueDecimal.ql");
 
         evaluator.start(form);
         issueTracker.reset();
@@ -44,7 +42,7 @@ public class EvaluatorTest {
     @Test
     public void shouldStoreDecimal() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/simpleDecimal.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/evaluator/simpleDecimal.ql");
 
         evaluator.start(form);
         issueTracker.reset();
@@ -57,7 +55,7 @@ public class EvaluatorTest {
     @Test
     public void shouldStoreMoney() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/simpleMoney.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/evaluator/simpleMoney.ql");
 
         evaluator.start(form);
         issueTracker.reset();
@@ -73,7 +71,7 @@ public class EvaluatorTest {
     @Test
     public void shouldNotDivideByZero() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/divideByZero.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/evaluator/divideByZero.ql");
 
         evaluator.start(form);
 
@@ -88,7 +86,7 @@ public class EvaluatorTest {
     @Test
     public void shouldDownCastDecimalToInteger() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/downcastDecimalToInteger.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/evaluator/downcastDecimalToInteger.ql");
 
         evaluator.start(form);
 
@@ -100,7 +98,7 @@ public class EvaluatorTest {
     @Test
     public void shouldMultiplyDecimals() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/decimalMultiplication.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/evaluator/decimalMultiplication.ql");
 
         evaluator.start(form);
         issueTracker.reset();
@@ -113,7 +111,7 @@ public class EvaluatorTest {
     @Test
     public void shouldDivideMoneyToDecimal() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/moneyDivisionToDecimal.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/evaluator/moneyDivisionToDecimal.ql");
 
         evaluator.start(form);
 
@@ -124,7 +122,7 @@ public class EvaluatorTest {
     @Test
     public void shouldDivideMoneyToMoney() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/moneyDivisionToMoney.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/evaluator/moneyDivisionToMoney.ql");
 
         evaluator.start(form);
 
@@ -139,7 +137,7 @@ public class EvaluatorTest {
     @Test
     public void shouldCompareStrings() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/stringComparison.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/evaluator/stringComparison.ql");
 
         evaluator.start(form);
 
@@ -151,7 +149,7 @@ public class EvaluatorTest {
     @Test
     public void shouldCompareDates() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/dateComparison.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/evaluator/dateComparison.ql");
 
         evaluator.start(form);
 
@@ -163,7 +161,7 @@ public class EvaluatorTest {
     @Test
     public void shouldEvaluateBooleans() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/booleanExpression.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/evaluator/booleanExpression.ql");
 
         evaluator.start(form);
 
@@ -175,7 +173,7 @@ public class EvaluatorTest {
     @Test
     public void shouldCompareIntegers() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/integerComparisonAndOperation.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/evaluator/integerComparisonAndOperation.ql");
 
         evaluator.start(form);
 
@@ -189,7 +187,7 @@ public class EvaluatorTest {
     @Test
     public void shouldFormatDateString() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/simpleDate.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/evaluator/simpleDate.ql");
 
         evaluator.start(form);
 
@@ -201,7 +199,7 @@ public class EvaluatorTest {
     @Test
     public void shouldEvaluateElse() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/ifElseEvaluation.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/evaluator/ifElseEvaluation.ql");
 
         evaluator.start(form);
 

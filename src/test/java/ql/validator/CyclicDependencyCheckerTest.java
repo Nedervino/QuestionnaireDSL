@@ -3,24 +3,22 @@ package ql.validator;
 import issuetracker.IssueTracker;
 import org.junit.Before;
 import org.junit.Test;
-import ql.Helper;
+import ql.BaseQlTest;
 import ql.ast.Form;
 import ql.parser.FormBuilder;
 import ql.validator.checkers.CyclicDependencyChecker;
 
 import static org.junit.Assert.*;
 
-public class CyclicDependencyCheckerTest {
+public class CyclicDependencyCheckerTest extends BaseQlTest {
 
     private FormBuilder formBuilder;
-    private Helper helper;
     private CyclicDependencyChecker cyclicDependencyChecker;
     private IssueTracker issueTracker;
 
     @Before
     public void setUp() throws Exception {
         formBuilder = new FormBuilder();
-        helper = new Helper();
         issueTracker = IssueTracker.getIssueTracker();
         cyclicDependencyChecker = new CyclicDependencyChecker(issueTracker);
     }
@@ -28,7 +26,7 @@ public class CyclicDependencyCheckerTest {
     @Test
     public void shouldIssueErrorForCycleWithinQuestion() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/cyclicalWithinQuestion.ql", formBuilder);
+        Form form = createForm("src/input/ql/incorrect/validator/cyclicalWithinQuestion.ql");
         boolean passesTests = cyclicDependencyChecker.passesTests(form);
         assertFalse(passesTests);
         assertEquals(issueTracker.getWarnings().size(), 0);
@@ -39,7 +37,7 @@ public class CyclicDependencyCheckerTest {
     @Test
     public void shouldIssueErrorForCycleBetweenQuestions() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/cyclicalBetweenQuestions.ql", formBuilder);
+        Form form = createForm("src/input/ql/incorrect/validator/cyclicalBetweenQuestions.ql");
         boolean passesTests = cyclicDependencyChecker.passesTests(form);
         assertFalse(passesTests);
         assertEquals(issueTracker.getWarnings().size(), 0);
@@ -51,7 +49,7 @@ public class CyclicDependencyCheckerTest {
     @Test
     public void shouldIssueNothingForRegularForm() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/simple.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/simple.ql");
         boolean passesTests = cyclicDependencyChecker.passesTests(form);
         assertTrue(passesTests);
     }

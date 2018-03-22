@@ -4,24 +4,22 @@ import issuetracker.Error;
 import issuetracker.IssueTracker;
 import org.junit.Before;
 import org.junit.Test;
-import ql.Helper;
+import ql.BaseQlTest;
 import ql.ast.Form;
 import ql.parser.FormBuilder;
 import ql.validator.checkers.ExpressionChecker;
 
 import static org.junit.Assert.*;
 
-public class ExpressionCheckerTest {
+public class ExpressionCheckerTest extends BaseQlTest {
 
     private FormBuilder formBuilder;
-    private Helper helper;
     private ExpressionChecker expressionChecker;
     private IssueTracker issueTracker;
 
     @Before
     public void setUp() throws Exception {
         formBuilder = new FormBuilder();
-        helper = new Helper();
         issueTracker = IssueTracker.getIssueTracker();
         expressionChecker = new ExpressionChecker(issueTracker);
     }
@@ -29,7 +27,7 @@ public class ExpressionCheckerTest {
     @Test
     public void shouldIssueErrorForUndefinedQuestionReference() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/undefinedQuestion.ql", formBuilder);
+        Form form = createForm("src/input/ql/incorrect/validator/undefinedQuestion.ql");
 
         boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
@@ -41,7 +39,7 @@ public class ExpressionCheckerTest {
     @Test
     public void shouldIssueErrorForNonBooleanCondition() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonBooleanCondition.ql", formBuilder);
+        Form form = createForm("src/input/ql/incorrect/validator/nonBooleanCondition.ql");
 
         boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
@@ -53,7 +51,7 @@ public class ExpressionCheckerTest {
     @Test
     public void shouldIssueTypeErrorsForNonNumericMismatches() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/incompatibleBinaryExpressionTypes.ql", formBuilder);
+        Form form = createForm("src/input/ql/incorrect/validator/incompatibleBinaryExpressionTypes.ql");
 
         boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
@@ -68,7 +66,7 @@ public class ExpressionCheckerTest {
     @Test
     public void shouldIssueErrorForNonNumericInArithmeticExpression() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonNumericInArithmeticExpression.ql", formBuilder);
+        Form form = createForm("src/input/ql/incorrect/validator/nonNumericInArithmeticExpression.ql");
 
         boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
@@ -88,7 +86,7 @@ public class ExpressionCheckerTest {
     @Test
     public void shouldIssueNoErrorForNumericExpressionsWithMoneyType() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/validator/numericExpressionsWithMoneyType.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/validator/numericExpressionsWithMoneyType.ql");
 
 
         boolean passesTests = expressionChecker.passesTests(form);
@@ -101,7 +99,7 @@ public class ExpressionCheckerTest {
     @Test
     public void shouldIssueNoErrorForDifferentNumericCombinations() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/correct/validator/numericCombinations.ql", formBuilder);
+        Form form = createForm("src/input/ql/correct/validator/numericCombinations.ql");
 
 
         boolean passesTests = expressionChecker.passesTests(form);
@@ -114,7 +112,7 @@ public class ExpressionCheckerTest {
     @Test
     public void shouldIssueErrorForNonBooleanInBooleanExpression() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonBooleanInBoolean.ql", formBuilder);
+        Form form = createForm("src/input/ql/incorrect/validator/nonBooleanInBoolean.ql");
 
 
         boolean passesTests = expressionChecker.passesTests(form);
@@ -130,7 +128,7 @@ public class ExpressionCheckerTest {
     @Test
     public void shouldIssueErrorForNonNumericInComparisonExpression() {
         issueTracker.reset();
-        Form form = helper.buildASTFromFile("src/input/ql/incorrect/validator/nonNumericInComparison.ql", formBuilder);
+        Form form = createForm("src/input/ql/incorrect/validator/nonNumericInComparison.ql");
 
 
         boolean passesTests = expressionChecker.passesTests(form);
