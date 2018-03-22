@@ -1,5 +1,6 @@
 package ql.evaluator.values;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class EvaluatableInteger extends EvaluatableNumeric<Integer> {
@@ -23,6 +24,16 @@ public class EvaluatableInteger extends EvaluatableNumeric<Integer> {
     @Override
     public Evaluatable divide(EvaluatableInteger evaluatable) {
         return new EvaluatableInteger(evaluatable.getValue() / getValue());
+    }
+
+    @Override
+    public Evaluatable divide(EvaluatableDecimal evaluatable) {
+        return new EvaluatableDecimal(evaluatable.getValue() / getValue());
+    }
+
+    @Override
+    public Evaluatable divide(EvaluatableMoney evaluatable) {
+        return new EvaluatableMoney(evaluatable.getValue().doubleValue() / getValue());
     }
 
     @Override
@@ -53,6 +64,16 @@ public class EvaluatableInteger extends EvaluatableNumeric<Integer> {
     @Override
     public Evaluatable multiply(EvaluatableInteger evaluatable) {
         return new EvaluatableInteger(evaluatable.getValue() * getValue());
+    }
+
+    @Override
+    public Evaluatable multiply(EvaluatableDecimal evaluatable) {
+        return new EvaluatableDecimal(evaluatable.getValue() * getValue());
+    }
+
+    @Override
+    public Evaluatable multiply(EvaluatableMoney evaluatable) {
+        return evaluatable.multiply(new EvaluatableMoney(getValue()));
     }
 
     @Override

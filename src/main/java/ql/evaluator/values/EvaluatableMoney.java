@@ -8,6 +8,15 @@ public class EvaluatableMoney extends EvaluatableNumeric<BigDecimal> {
 
     public EvaluatableMoney(BigDecimal value) {
         this.value = value;
+        round();
+    }
+
+    public EvaluatableMoney(double value) {
+        this(new BigDecimal(value));
+    }
+
+    public void round(){
+        value = value.setScale(2, BigDecimal.ROUND_HALF_EVEN);
     }
 
     @Override
@@ -17,81 +26,63 @@ public class EvaluatableMoney extends EvaluatableNumeric<BigDecimal> {
 
     @Override
     public Evaluatable add(EvaluatableMoney evaluatable) {
-        BigDecimal otherValue = evaluatable.getValue();
-        BigDecimal result = getValue().add(otherValue);
-        return new EvaluatableMoney(result);
+        return new EvaluatableMoney(getValue().add(evaluatable.getValue()));
     }
 
     @Override
     public Evaluatable divide(EvaluatableMoney evaluatable) {
-        BigDecimal otherValue = evaluatable.getValue();
-        //terms are flipped just like in the subtract implementation
-        BigDecimal result = otherValue.divide(getValue());
-        return new EvaluatableMoney(result);
+        return new EvaluatableDecimal(evaluatable.getValue().doubleValue() / getValue().doubleValue());
+    }
+
+    @Override
+    public Evaluatable multiply(EvaluatableDecimal evaluatable) {
+        return new EvaluatableMoney(getValue().doubleValue() * evaluatable.getValue());
+    }
+
+    @Override
+    public Evaluatable multiply(EvaluatableInteger evaluatable) {
+        return new EvaluatableMoney(getValue().doubleValue() * (double) evaluatable.getValue());
     }
 
     @Override
     public EvaluatableBoolean equal(EvaluatableMoney evaluatable) {
-        BigDecimal otherValue = evaluatable.getValue();
-        Boolean result = getValue().equals(otherValue);
-        return new EvaluatableBoolean(result);
+        return new EvaluatableBoolean(getValue().equals(evaluatable.getValue()));
     }
 
     @Override
     public EvaluatableBoolean greaterThanEqual(EvaluatableMoney evaluatable) {
-        BigDecimal otherValue = evaluatable.getValue();
-        boolean result = getValue().compareTo(otherValue) >= 0;
-        return new EvaluatableBoolean(result);
+        return new EvaluatableBoolean(getValue().compareTo(evaluatable.getValue()) >= 0);
     }
 
     @Override
     public EvaluatableBoolean greaterThan(EvaluatableMoney evaluatable) {
-        BigDecimal otherValue = evaluatable.getValue();
-        boolean result = getValue().compareTo(otherValue) > 0;
-        return new EvaluatableBoolean(result);
+        return new EvaluatableBoolean(getValue().compareTo(evaluatable.getValue()) > 0);
     }
 
     @Override
     public EvaluatableBoolean lessThanEqual(EvaluatableMoney evaluatable) {
-        BigDecimal otherValue = evaluatable.getValue();
-        boolean result = getValue().compareTo(otherValue) <= 0;
-        return new EvaluatableBoolean(result);
+        return new EvaluatableBoolean(getValue().compareTo(evaluatable.getValue()) <= 0);
     }
 
     @Override
     public EvaluatableBoolean lessThan(EvaluatableMoney evaluatable) {
-        BigDecimal otherValue = evaluatable.getValue();
-        boolean result = getValue().compareTo(otherValue) < 0;
-        return new EvaluatableBoolean(result);
-    }
-
-    @Override
-    public Evaluatable multiply(EvaluatableMoney evaluatable) {
-        BigDecimal otherValue = evaluatable.getValue();
-        BigDecimal result = getValue().multiply(otherValue);
-        return new EvaluatableMoney(result);
+        return new EvaluatableBoolean(getValue().compareTo(evaluatable.getValue()) < 0);
     }
 
     @Override
     public EvaluatableBoolean notEqual(EvaluatableMoney evaluatable) {
-        BigDecimal otherValue = evaluatable.getValue();
-        Boolean result = !getValue().equals(otherValue);
-        return new EvaluatableBoolean(result);
+        return new EvaluatableBoolean(!getValue().equals(evaluatable.getValue()));
     }
 
     @Override
     public Evaluatable subtract(EvaluatableMoney evaluatable) {
-        System.out.println("subtracting money");
-        BigDecimal otherValue = evaluatable.getValue();
         //terms are flipped back since we flip the terms in the double dispacht in subtract(Evaluatable evaluatable)
-        BigDecimal result = otherValue.subtract(getValue());
-        return new EvaluatableMoney(result);
+        return new EvaluatableMoney(evaluatable.getValue().subtract(getValue()));
     }
 
     @Override
     public EvaluatableNumeric arithmeticNegate() {
-        BigDecimal result = getValue().negate();
-        return new EvaluatableMoney(result);
+        return new EvaluatableMoney(getValue().negate());
     }
 
     @Override
