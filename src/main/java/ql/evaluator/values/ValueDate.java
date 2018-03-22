@@ -1,5 +1,8 @@
 package ql.evaluator.values;
 
+import ql.ast.expressions.literals.DateLiteral;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ValueDate implements Value<Date> {
@@ -8,6 +11,12 @@ public class ValueDate implements Value<Date> {
 
     public ValueDate(Date value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DateLiteral.DATE_FORMAT);
+        return dateFormat.format(getValue());
     }
 
     @Override

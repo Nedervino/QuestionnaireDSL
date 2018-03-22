@@ -135,4 +135,78 @@ public class EvaluatorTest {
 
         assertEquals(expected, value.getValue());
     }
+
+    @Test
+    public void shouldCompareStrings() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/stringComparison.ql", formBuilder);
+
+        evaluator.start(form);
+
+        Value evaluatable = evaluator.getQuestionValue("result");
+
+        assertEquals(false, evaluatable.getValue());
+    }
+
+    @Test
+    public void shouldCompareDates() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/dateComparison.ql", formBuilder);
+
+        evaluator.start(form);
+
+        Value evaluatable = evaluator.getQuestionValue("result");
+
+        assertEquals(true, evaluatable.getValue());
+    }
+
+    @Test
+    public void shouldEvaluateBooleans() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/booleanExpression.ql", formBuilder);
+
+        evaluator.start(form);
+
+        Value evaluatable = evaluator.getQuestionValue("result");
+
+        assertEquals(true, evaluatable.getValue());
+    }
+
+    @Test
+    public void shouldCompareIntegers() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/integerComparisonAndOperation.ql", formBuilder);
+
+        evaluator.start(form);
+
+        Value evaluatable = evaluator.getQuestionValue("result");
+        Value evaluatable2 = evaluator.getQuestionValue("result2");
+
+        assertEquals(true, evaluatable.getValue());
+        assertEquals(true, evaluatable2.getValue());
+    }
+
+    @Test
+    public void shouldFormatDateString() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/simpleDate.ql", formBuilder);
+
+        evaluator.start(form);
+
+        Value evaluatable = evaluator.getQuestionValue("value");
+
+        assertEquals("01-02-1999", evaluatable.toString());
+    }
+
+    @Test
+    public void shouldEvaluateElse() {
+        issueTracker.reset();
+        Form form = helper.buildASTFromFile("src/input/ql/correct/evaluator/ifElseEvaluation.ql", formBuilder);
+
+        evaluator.start(form);
+
+        Value evaluatable = evaluator.getQuestionValue("flag");
+
+        assertEquals(true, evaluatable);
+    }
 }
