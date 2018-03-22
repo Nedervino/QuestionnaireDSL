@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import ql.BaseQlTest;
 import ql.ast.Form;
-import ql.parser.FormBuilder;
 import ql.validator.checkers.ExpressionChecker;
 
 import static org.junit.Assert.*;

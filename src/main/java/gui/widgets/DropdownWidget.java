@@ -9,9 +9,9 @@ import javax.swing.*;
 
 public class DropdownWidget extends BaseWidget {
 
-    private JComboBox<String> dropdown;
     private final String TRUE_LABEL = "YES";
     private final String FALSE_LABEL = "NO";
+    private JComboBox<String> dropdown;
 
     public DropdownWidget(FormEvaluator evaluator, Question question) {
         super(evaluator, question);
@@ -24,7 +24,7 @@ public class DropdownWidget extends BaseWidget {
 
     @Override
     public void setValue() {
-        if(evaluator.getQuestionValue(question.getId()).getBooleanValue()) {
+        if (evaluator.getQuestionValue(question.getId()).getBooleanValue()) {
             dropdown.setSelectedItem(TRUE_LABEL);
         } else {
             dropdown.setSelectedItem(FALSE_LABEL);

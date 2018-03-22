@@ -1,13 +1,12 @@
 package ql.parser;
 
 import org.antlr.v4.runtime.misc.ParseCancellationException;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import ql.BaseQlTest;
 
-public class FormBuilderTest extends BaseQlTest{
+public class FormBuilderTest extends BaseQlTest {
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();

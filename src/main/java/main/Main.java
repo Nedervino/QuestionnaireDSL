@@ -45,7 +45,7 @@ public class Main {
         FormEvaluator evaluator = new Evaluator();
         evaluator.start(form);
 
-        if(!issueTracker.hasErrors()) {
+        if (!issueTracker.hasErrors()) {
             FormViewer formViewer = new FormViewer(evaluator);
             formViewer.start(form, stylesheet);
         }
