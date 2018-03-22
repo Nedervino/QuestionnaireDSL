@@ -12,13 +12,11 @@ import static org.junit.Assert.*;
 
 public class CyclicDependencyCheckerTest extends BaseQlTest {
 
-    private FormBuilder formBuilder;
     private CyclicDependencyChecker cyclicDependencyChecker;
     private IssueTracker issueTracker;
 
     @Before
     public void setUp() throws Exception {
-        formBuilder = new FormBuilder();
         issueTracker = IssueTracker.getIssueTracker();
         cyclicDependencyChecker = new CyclicDependencyChecker(issueTracker);
     }

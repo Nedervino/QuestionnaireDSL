@@ -12,15 +12,6 @@ public class FormBuilderTest extends BaseQlTest{
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
-    private BaseQlTest baseQlTest;
-    private FormBuilder formBuilder;
-
-    @Before
-    public void setUp() throws Exception {
-        formBuilder = new FormBuilder();
-        baseQlTest = new BaseQlTest();
-    }
-
     @Test(expected = ParseCancellationException.class)
     public void throwsParseCancellationExceptionForMissingQuote() {
         createForm("src/input/ql/incorrect/missingClosingQuote.ql");

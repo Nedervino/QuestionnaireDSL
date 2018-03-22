@@ -12,13 +12,11 @@ import static org.junit.Assert.*;
 
 public class QuestionDuplicationCheckerTest extends BaseQlTest {
 
-    private FormBuilder formBuilder;
     private QuestionDuplicationChecker questionDuplicationChecker;
     private IssueTracker issueTracker;
 
     @Before
     public void setUp() throws Exception {
-        formBuilder = new FormBuilder();
         issueTracker = IssueTracker.getIssueTracker();
         questionDuplicationChecker = new QuestionDuplicationChecker(issueTracker);
     }

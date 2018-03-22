@@ -13,13 +13,11 @@ import static org.junit.Assert.*;
 
 public class ExpressionCheckerTest extends BaseQlTest {
 
-    private FormBuilder formBuilder;
     private ExpressionChecker expressionChecker;
     private IssueTracker issueTracker;
 
     @Before
     public void setUp() throws Exception {
-        formBuilder = new FormBuilder();
         issueTracker = IssueTracker.getIssueTracker();
         expressionChecker = new ExpressionChecker(issueTracker);
     }

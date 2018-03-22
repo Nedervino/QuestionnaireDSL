@@ -15,13 +15,11 @@ import static org.junit.Assert.assertEquals;
 
 public class EvaluatorTest extends BaseQlTest {
 
-    private FormBuilder formBuilder;
     private FormEvaluator evaluator;
     private IssueTracker issueTracker;
 
     @Before
     public void setUp() throws Exception {
-        formBuilder = new FormBuilder();
         issueTracker = IssueTracker.getIssueTracker();
         evaluator = new Evaluator();
     }
