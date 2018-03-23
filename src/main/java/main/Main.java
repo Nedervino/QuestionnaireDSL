@@ -29,7 +29,7 @@ public class Main {
         FormBuilder formBuilder = new FormBuilder();
         Form form = formBuilder.createForm(qlFile);
 
-        String qlsFileName = "src/input/qls/correct/form1.qls";
+        String qlsFileName = "src/input/ql/correct/if.ql";
         String qlsFile = new FileScanner().loadFile(qlsFileName);
 
         StylesheetBuilder stylesheetBuilder = new StylesheetBuilder();
@@ -44,13 +44,13 @@ public class Main {
             System.out.println("Successfully passed all checks");
         }
 
-        FormEvaluator evaluator = new Evaluator();
-        evaluator.start(form);
 
-        FormUI formUI = new FormUIFactory().getFormUI(form, evaluator);
+        FormUI formUI = new FormUIFactory().getFormUI(form);
         formUI.display();
 
         // if (!issueTracker.hasErrors()) {
+        //     FormEvaluator evaluator = new Evaluator();
+        //     evaluator.start(form);
         //     FormViewer formViewer = new FormViewer(evaluator);
         //     formViewer.start(form, stylesheet);
         // }

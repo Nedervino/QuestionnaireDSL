@@ -10,7 +10,11 @@ import java.util.List;
 
 public class FormUIFactory {
 
-    public FormUI getFormUI(Form form, FormEvaluator evaluator) {
+    public FormUI getFormUI(Form form) {
+        //TODO: optionally move form to evaluator constructor
+        FormEvaluator evaluator = new Evaluator();
+        evaluator.start(form);
+
         List<QuestionUI> questions = new ArrayList<>();
         for(Question question : evaluator.getQuestions()) {
             questions.add(new QuestionUI(evaluator, question));

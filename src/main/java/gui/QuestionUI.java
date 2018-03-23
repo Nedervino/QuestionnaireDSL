@@ -20,6 +20,7 @@ public class QuestionUI {
     public QuestionUI(FormEvaluator formEvaluator, Question question) {
         label = new JLabel(question.getLabel());
         widget = new TextFieldWidget(formEvaluator, question);
+        widget.setVisible(true);
 
         panel = new JPanel(new BorderLayout());
         panel.add(label, BorderLayout.CENTER);
