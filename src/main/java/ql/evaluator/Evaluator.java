@@ -1,6 +1,5 @@
 package ql.evaluator;
 
-import issuetracker.Error;
 import issuetracker.IssueTracker;
 import ql.ast.ASTNode;
 import ql.ast.Form;
@@ -26,8 +25,8 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     //TODO: questionValues use String identifier, ASTNodes are not necessary anymore. Also allows removal of idLookup
     private final Map<ASTNode, Value> questionValues;
     private final Map<String, Question> idLookup;
-    private Form form;
     private final IssueTracker issueTracker;
+    private Form form;
 
     public Evaluator() {
         issueTracker = IssueTracker.getIssueTracker();

@@ -13,9 +13,9 @@ public class FormViewer {
 
     // private FormEvaluator evaluator;
     final FormEvaluator evaluator;
+    private final LinkedList<GUIElement> elements;
     // private JPanel panel;
     JPanel panel;
-    private final LinkedList<GUIElement> elements;
     private JFrame frame;
 
     public FormViewer(FormEvaluator evaluator) {

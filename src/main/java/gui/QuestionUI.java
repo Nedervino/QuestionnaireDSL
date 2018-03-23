@@ -8,17 +8,16 @@ import ql.evaluator.FormEvaluator;
 import javax.swing.*;
 import java.awt.*;
 
-public class QuestionComponent {
+public class QuestionUI {
 
     //TODO: Inconsistent with input widgets
-    //TODO: Move Question field from widget to QuestionComponent
-
-    private JPanel panel;
+    //TODO: Move Question field from widget to QuestionUI
 
     private final JLabel label;
     private final Widget widget;
+    private JPanel panel;
 
-    public QuestionComponent(FormEvaluator formEvaluator, Question question) {
+    public QuestionUI(FormEvaluator formEvaluator, Question question) {
         label = new JLabel(question.getLabel());
         widget = new TextFieldWidget(formEvaluator, question);
 

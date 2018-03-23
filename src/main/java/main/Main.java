@@ -1,5 +1,7 @@
 package main;
 
+import gui.FormUI;
+import gui.FormUIFactory;
 import gui.v1.FormViewer;
 import issuetracker.IssueTracker;
 import ql.ast.Form;
@@ -45,10 +47,13 @@ public class Main {
         FormEvaluator evaluator = new Evaluator();
         evaluator.start(form);
 
-        if (!issueTracker.hasErrors()) {
-            FormViewer formViewer = new FormViewer(evaluator);
-            formViewer.start(form, stylesheet);
-        }
+        FormUI formUI = new FormUIFactory().getFormUI(form, evaluator);
+        formUI.display();
+
+        // if (!issueTracker.hasErrors()) {
+        //     FormViewer formViewer = new FormViewer(evaluator);
+        //     formViewer.start(form, stylesheet);
+        // }
     }
 
 }
