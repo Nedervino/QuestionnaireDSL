@@ -4,7 +4,7 @@ import issuetracker.IssueTracker;
 import ql.ast.Form;
 import ql.ast.statements.*;
 import ql.ast.visitors.FormStatementVisitor;
-import ql.validator.SymbolTable;
+import ql.validator.symboltable.SymbolTable;
 
 import java.util.HashSet;
 import java.util.Set;

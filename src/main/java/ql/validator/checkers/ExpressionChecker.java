@@ -12,7 +12,7 @@ import ql.ast.types.*;
 import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormStatementVisitor;
 import ql.ast.visitors.TypeVisitor;
-import ql.validator.SymbolTable;
+import ql.validator.symboltable.SymbolTable;
 
 import java.util.List;
 
