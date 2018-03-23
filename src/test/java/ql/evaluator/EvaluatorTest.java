@@ -20,17 +20,15 @@ public class EvaluatorTest extends BaseQlTest {
 
     @Before
     public void setUp() throws Exception {
-        issueTracker = IssueTracker.getIssueTracker();
         evaluator = new Evaluator();
+        issueTracker = IssueTracker.getIssueTracker();
     }
 
     @Test
     public void shouldStoreIntegerValueDecimalAsInteger() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/evaluator/integerValueDecimal.ql");
 
         evaluator.start(form);
-        issueTracker.reset();
 
         Value value = evaluator.getQuestionValue("value");
 
@@ -38,12 +36,29 @@ public class EvaluatorTest extends BaseQlTest {
     }
 
     @Test
+    public void shouldKeepSameStateAfterReevaluation() {
+        Form form = createForm("src/input/ql/correct/evaluator/booleanExpression.ql");
+        evaluator.start(form);
+
+        assertEquals(4, evaluator.getQuestions().size());
+
+        evaluator.evaluate();
+        assertEquals(4, evaluator.getQuestions().size());
+    }
+
+    @Test
+    public void shouldReturnAllQuestionsInIfElseForm() {
+        Form form = createForm("src/input/ql/correct/evaluator/ifElseEvaluation.ql");
+
+        evaluator.start(form);
+        assertEquals(3, evaluator.getQuestions().size());
+    }
+
+    @Test
     public void shouldStoreDecimal() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/evaluator/simpleDecimal.ql");
 
         evaluator.start(form);
-        issueTracker.reset();
 
         Value value = evaluator.getQuestionValue("value");
 
@@ -52,11 +67,9 @@ public class EvaluatorTest extends BaseQlTest {
 
     @Test
     public void shouldStoreMoney() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/evaluator/simpleMoney.ql");
 
         evaluator.start(form);
-        issueTracker.reset();
 
         Value value = evaluator.getQuestionValue("value");
 
@@ -68,7 +81,6 @@ public class EvaluatorTest extends BaseQlTest {
 
     @Test
     public void shouldNotDivideByZero() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/evaluator/divideByZero.ql");
 
         evaluator.start(form);
@@ -83,7 +95,6 @@ public class EvaluatorTest extends BaseQlTest {
 
     @Test
     public void shouldDownCastDecimalToInteger() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/evaluator/downcastDecimalToInteger.ql");
 
         evaluator.start(form);
@@ -95,11 +106,9 @@ public class EvaluatorTest extends BaseQlTest {
 
     @Test
     public void shouldMultiplyDecimals() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/evaluator/decimalMultiplication.ql");
 
         evaluator.start(form);
-        issueTracker.reset();
 
         Value value = evaluator.getQuestionValue("result");
 
@@ -108,7 +117,6 @@ public class EvaluatorTest extends BaseQlTest {
 
     @Test
     public void shouldDivideMoneyToDecimal() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/evaluator/moneyDivisionToDecimal.ql");
 
         evaluator.start(form);
@@ -119,7 +127,6 @@ public class EvaluatorTest extends BaseQlTest {
 
     @Test
     public void shouldDivideMoneyToMoney() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/evaluator/moneyDivisionToMoney.ql");
 
         evaluator.start(form);
@@ -134,7 +141,6 @@ public class EvaluatorTest extends BaseQlTest {
 
     @Test
     public void shouldCompareStrings() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/evaluator/stringComparison.ql");
 
         evaluator.start(form);
@@ -146,7 +152,6 @@ public class EvaluatorTest extends BaseQlTest {
 
     @Test
     public void shouldCompareDates() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/evaluator/dateComparison.ql");
 
         evaluator.start(form);
@@ -158,7 +163,6 @@ public class EvaluatorTest extends BaseQlTest {
 
     @Test
     public void shouldEvaluateBooleans() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/evaluator/booleanExpression.ql");
 
         evaluator.start(form);
@@ -170,7 +174,6 @@ public class EvaluatorTest extends BaseQlTest {
 
     @Test
     public void shouldCompareIntegers() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/evaluator/integerComparisonAndOperation.ql");
 
         evaluator.start(form);
@@ -184,7 +187,6 @@ public class EvaluatorTest extends BaseQlTest {
 
     @Test
     public void shouldFormatDateString() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/evaluator/simpleDate.ql");
 
         evaluator.start(form);
@@ -196,7 +198,6 @@ public class EvaluatorTest extends BaseQlTest {
 
     @Test
     public void shouldEvaluateElse() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/evaluator/ifElseEvaluation.ql");
 
         evaluator.start(form);
