@@ -4,6 +4,8 @@ import ql.ast.SourceLocation;
 import ql.ast.expressions.Expression;
 import ql.ast.visitors.FormStatementVisitor;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class IfElseStatement extends IfStatement {
@@ -16,7 +18,7 @@ public class IfElseStatement extends IfStatement {
     }
 
     public List<Statement> getElseStatements() {
-        return elseStatements;
+        return new ArrayList<>(elseStatements);
     }
 
 

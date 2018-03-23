@@ -9,9 +9,6 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 
 public class DependencyManagerTest {
-    @Before
-    public void setUp() throws Exception {
-    }
 
     @Test
     public void shoudReturnCorrectCircularDependencies() {

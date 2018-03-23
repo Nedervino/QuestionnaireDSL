@@ -5,11 +5,12 @@ import ql.ast.statements.*;
 import ql.ast.visitors.FormStatementVisitor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class QuestionCollector implements FormStatementVisitor<Void> {
 
-    final List<Question> questions;
+    private final List<Question> questions;
 
     public QuestionCollector(Form form) {
         questions = new ArrayList<>();
@@ -17,7 +18,7 @@ public class QuestionCollector implements FormStatementVisitor<Void> {
     }
 
     public List<Question> getQuestions() {
-        return questions;
+        return new ArrayList<>(questions);
     }
 
     @Override

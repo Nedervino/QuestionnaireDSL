@@ -5,6 +5,7 @@ import ql.ast.SourceLocation;
 import ql.validator.Validator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -60,11 +61,11 @@ public class IssueTracker {
     }
 
     public List<Error> getErrors() {
-        return errors;
+        return new ArrayList<>(errors);
     }
 
     public List<Warning> getWarnings() {
-        return warnings;
+        return new ArrayList<>(warnings);
     }
 
 }
