@@ -7,7 +7,7 @@ public abstract class Issue {
     private final SourceLocation sourceLocation;
     private final String message;
 
-    public Issue(SourceLocation sourceLocation, String message) {
+    protected Issue(SourceLocation sourceLocation, String message) {
         this.sourceLocation = sourceLocation;
         this.message = message;
     }

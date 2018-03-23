@@ -6,7 +6,7 @@ import ql.parser.FormBuilder;
 
 public class BaseQlTest {
 
-    public static Form createForm(String fileName) {
+    protected static Form createForm(String fileName) {
         String fileContent = new FileScanner().loadFile(fileName);
         return new FormBuilder().createForm(fileContent);
     }

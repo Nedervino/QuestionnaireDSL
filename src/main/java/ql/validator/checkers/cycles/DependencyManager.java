@@ -44,7 +44,7 @@ public class DependencyManager {
         return newEdges;
     }
 
-    protected Set<DependencyPair> makeTransitiveClosure(Set<DependencyPair> input) {
+    private Set<DependencyPair> makeTransitiveClosure(Set<DependencyPair> input) {
         Set<DependencyPair> transitiveClosure = new HashSet<>(input);
 
         while (true) {

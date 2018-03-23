@@ -4,7 +4,7 @@ public abstract class ASTNode {
 
     private final SourceLocation sourceLocation;
 
-    public ASTNode(SourceLocation sourceLocation) {
+    protected ASTNode(SourceLocation sourceLocation) {
         this.sourceLocation = sourceLocation;
     }
 

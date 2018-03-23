@@ -42,7 +42,7 @@ public class ExpressionChecker implements Checker, FormStatementVisitor<Void>, E
      * @param binaryOperation
      * @return ErrorType if incompatible, otherwise the dominating return type of the two children
      */
-    public Type checkTypeCompatibility(BinaryOperation binaryOperation) {
+    private Type checkTypeCompatibility(BinaryOperation binaryOperation) {
         Type leftType = binaryOperation.getLeft().accept(this);
         Type rightType = binaryOperation.getRight().accept(this);
 

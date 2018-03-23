@@ -7,7 +7,7 @@ public abstract class UnaryOperation extends Expression {
 
     private final Expression expression;
 
-    public UnaryOperation(Expression expression, SourceLocation sourceLocation) {
+    protected UnaryOperation(Expression expression, SourceLocation sourceLocation) {
         super(sourceLocation);
         this.expression = expression;
     }

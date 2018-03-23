@@ -67,7 +67,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     }
 
     //TODO: remove all isCalculated methods and add UndefinedValue type
-    public boolean isCalculated(ASTNode node) {
+    private boolean isCalculated(ASTNode node) {
         return questionValues.containsKey(node);
     }
 
@@ -113,7 +113,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
         return null;
     }
 
-    void visit(List<Statement> statements) {
+    private void visit(List<Statement> statements) {
         for (Statement statement : statements) {
             statement.accept(this);
         }

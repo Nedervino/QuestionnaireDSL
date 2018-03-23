@@ -6,7 +6,7 @@ import ql.ast.visitors.TypeVisitor;
 
 public abstract class Type extends ASTNode {
 
-    public Type(SourceLocation sourceLocation) {
+    protected Type(SourceLocation sourceLocation) {
         super(sourceLocation);
     }
 
@@ -16,7 +16,7 @@ public abstract class Type extends ASTNode {
         return toString().equals(type);
     }
 
-    public boolean isNumeric() {
+    protected boolean isNumeric() {
         return false;
     }
 

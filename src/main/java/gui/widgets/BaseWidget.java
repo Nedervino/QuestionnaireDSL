@@ -13,7 +13,7 @@ public abstract class BaseWidget implements Widget {
     // private final Value value;
     // private final String identifier;
 
-    public BaseWidget(FormEvaluator evaluator, Question question) {
+    protected BaseWidget(FormEvaluator evaluator, Question question) {
         this.evaluator = evaluator;
         this.question = question;
         // this.value = value;

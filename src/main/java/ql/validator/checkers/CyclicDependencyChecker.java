@@ -93,11 +93,11 @@ public class CyclicDependencyChecker implements Checker, FormStatementVisitor<Vo
         return null;
     }
 
-    public List<Variable> visitUnaryOperation(UnaryOperation unaryOperation) {
+    private List<Variable> visitUnaryOperation(UnaryOperation unaryOperation) {
         return unaryOperation.getExpression().accept(this);
     }
 
-    public List<Variable> visitBinaryOperation(BinaryOperation binaryOperation) {
+    private List<Variable> visitBinaryOperation(BinaryOperation binaryOperation) {
         List<Variable> result = new ArrayList<>();
         Optional.ofNullable(binaryOperation.getLeft().accept(this)).ifPresent(result::addAll);
         Optional.ofNullable(binaryOperation.getRight().accept(this)).ifPresent(result::addAll);

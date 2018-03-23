@@ -6,7 +6,7 @@ import ql.ast.visitors.ExpressionVisitor;
 
 public abstract class Expression extends ASTNode {
 
-    public Expression(SourceLocation sourceLocation) {
+    protected Expression(SourceLocation sourceLocation) {
         super(sourceLocation);
     }
 

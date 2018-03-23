@@ -220,7 +220,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         return new Variable(ctx.IDENTIFIER().getText(), getSourceLocation(ctx));
     }
 
-    public SourceLocation getSourceLocation(ParserRuleContext ctx) {
+    private SourceLocation getSourceLocation(ParserRuleContext ctx) {
         return new SourceLocation(ctx.start.getLine(), ctx.start.getCharPositionInLine());
     }
 }

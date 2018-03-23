@@ -4,7 +4,7 @@ import ql.ast.SourceLocation;
 
 public abstract class NumberType extends Type {
 
-    public NumberType(SourceLocation sourceLocation) {
+    protected NumberType(SourceLocation sourceLocation) {
         super(sourceLocation);
     }
 

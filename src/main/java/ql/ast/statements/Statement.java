@@ -6,7 +6,7 @@ import ql.ast.visitors.FormStatementVisitor;
 
 public abstract class Statement extends ASTNode {
 
-    public Statement(SourceLocation sourceLocation) {
+    protected Statement(SourceLocation sourceLocation) {
         super(sourceLocation);
     }
 

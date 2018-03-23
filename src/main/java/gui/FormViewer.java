@@ -42,7 +42,7 @@ public class FormViewer {
 
     }
 
-    public void initialiseFrame() {
+    private void initialiseFrame() {
         frame = new JFrame("Form Viewer");
         panel = new JPanel();
 
