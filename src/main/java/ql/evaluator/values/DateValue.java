@@ -31,7 +31,7 @@ public class DateValue implements Value<Date> {
 
     @Override
     public BooleanValue equal(DateValue value) {
-        return new BooleanValue(value.equals(value.getValue()));
+        return new BooleanValue(getValue().equals(value.getValue()));
     }
 
     @Override

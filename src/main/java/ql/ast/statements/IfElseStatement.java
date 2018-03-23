@@ -5,7 +5,6 @@ import ql.ast.expressions.Expression;
 import ql.ast.visitors.FormStatementVisitor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class IfElseStatement extends IfStatement {

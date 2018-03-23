@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ql.BaseQlTest;
 import ql.ast.Form;
+import ql.evaluator.values.BooleanValue;
 import ql.evaluator.values.Value;
 
 import java.math.BigDecimal;
@@ -200,8 +201,8 @@ public class EvaluatorTest extends BaseQlTest {
 
         evaluator.start(form);
 
-        Value value = evaluator.getQuestionValue("flag");
+        BooleanValue value = (BooleanValue) evaluator.getQuestionValue("flag");
 
-        assertEquals(true, value);
+        assertEquals(true, value.getValue());
     }
 }

@@ -61,7 +61,7 @@ public class BooleanValue implements Value<Boolean> {
 
     @Override
     public BooleanValue negation() {
-        return new BooleanValue(!getValue().booleanValue());
+        return new BooleanValue(!getValue());
     }
 
 }

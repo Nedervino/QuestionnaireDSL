@@ -4,7 +4,6 @@ import ql.ast.statements.Statement;
 import ql.ast.visitors.FormStatementVisitor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Form extends ASTNode {

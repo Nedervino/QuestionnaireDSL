@@ -20,10 +20,8 @@ public class LiteralTest {
 
     @Test
     public void canParseBooleanLiteral() {
-        final Boolean EXPECTED_RESULT = true;
         BooleanLiteral booleanLiteral = (BooleanLiteral) formBuilder.createExpression("true");
-
-        assertEquals(EXPECTED_RESULT, booleanLiteral.getValue());
+        assertEquals(true, booleanLiteral.getValue());
     }
 
 

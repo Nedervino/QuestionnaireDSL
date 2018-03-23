@@ -1,7 +1,6 @@
 package qls.ast;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Stylesheet extends ASTNode {

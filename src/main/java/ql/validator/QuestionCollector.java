@@ -5,7 +5,6 @@ import ql.ast.statements.*;
 import ql.ast.visitors.FormStatementVisitor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class QuestionCollector implements FormStatementVisitor<Void> {
