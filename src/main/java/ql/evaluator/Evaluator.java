@@ -1,5 +1,6 @@
 package ql.evaluator;
 
+import issuetracker.Error;
 import issuetracker.IssueTracker;
 import ql.ast.ASTNode;
 import ql.ast.Form;
@@ -48,11 +49,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public void evaluate() {
-        try {
-            visit(form);
-        } catch (ArithmeticException e) {
-            issueTracker.addError(null, "Attempted to divide by zero.");
-        }
+        visit(form);
     }
 
     @Override
@@ -173,7 +170,11 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
         Value rightValue = visitRight(node);
         Value result = null;
         if (isCalculated(leftValue, rightValue)) {
-            result = leftValue.divide(rightValue);
+            try {
+                result = leftValue.divide(rightValue);
+            } catch (ArithmeticException e) {
+                issueTracker.addError(node.getRight().getSourceLocation(), "Attempted to divide by zero.");
+            }
         }
         return result;
     }
