@@ -1,6 +1,6 @@
 package main;
 
-import gui.FormViewer;
+import gui.v1.FormViewer;
 import issuetracker.IssueTracker;
 import ql.ast.Form;
 import ql.evaluator.Evaluator;
