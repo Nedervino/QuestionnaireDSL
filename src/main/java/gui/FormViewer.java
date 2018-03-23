@@ -12,10 +12,10 @@ import java.util.LinkedList;
 public class FormViewer {
 
     // private FormEvaluator evaluator;
-    FormEvaluator evaluator;
+    final FormEvaluator evaluator;
     // private JPanel panel;
     JPanel panel;
-    private LinkedList<GUIElement> elements;
+    private final LinkedList<GUIElement> elements;
     private JFrame frame;
 
     public FormViewer(FormEvaluator evaluator) {

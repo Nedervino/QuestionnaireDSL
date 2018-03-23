@@ -23,10 +23,10 @@ import java.util.Map;
 public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<Value>, FormEvaluator {
 
     //TODO: questionValues use String identifier, ASTNodes are not necessary anymore. Also allows removal of idLookup
-    private Map<ASTNode, Value> questionValues;
-    private Map<String, Question> idLookup;
+    private final Map<ASTNode, Value> questionValues;
+    private final Map<String, Question> idLookup;
     private Form form;
-    private IssueTracker issueTracker;
+    private final IssueTracker issueTracker;
 
     public Evaluator() {
         issueTracker = IssueTracker.getIssueTracker();

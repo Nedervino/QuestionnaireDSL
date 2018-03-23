@@ -3,7 +3,7 @@ package ql.evaluator.values;
 public class BooleanValue implements Value<Boolean> {
 
     //TODO for all: hoe handelen we null values? Catch je nullpointerExceptions ergens
-    private Boolean value;
+    private final Boolean value;
 
     public BooleanValue(Boolean value) {
         this.value = value;

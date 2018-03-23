@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class RadioWidget extends BaseWidget {
 
-    private Map<String, JRadioButton> choiceButtonMap;
-    private JPanel panel;
+    private final Map<String, JRadioButton> choiceButtonMap;
+    private final JPanel panel;
 
     public RadioWidget(FormEvaluator evaluator, Question question) {
         super(evaluator, question);

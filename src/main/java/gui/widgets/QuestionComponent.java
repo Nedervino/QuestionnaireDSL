@@ -11,8 +11,8 @@ public class QuestionComponent {
 
     private JPanel panel;
 
-    private JLabel label;
-    private Widget widget;
+    private final JLabel label;
+    private final Widget widget;
 
     public QuestionComponent(FormEvaluator formEvaluator, Question question) {
         label = new JLabel(question.getLabel());

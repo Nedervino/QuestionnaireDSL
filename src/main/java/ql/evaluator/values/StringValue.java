@@ -2,7 +2,7 @@ package ql.evaluator.values;
 
 public class StringValue implements Value<String> {
 
-    private String value;
+    private final String value;
 
     public StringValue(String value) {
         this.value = value;

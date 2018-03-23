@@ -7,8 +7,8 @@ import java.awt.*;
 
 public class QuestionElement extends GUIElement {
 
-    private FormEvaluator evaluator;
-    private Question question;
+    private final FormEvaluator evaluator;
+    private final Question question;
 
     public QuestionElement(Question question, int yLocation, FormEvaluator evaluator) {
         super(yLocation);

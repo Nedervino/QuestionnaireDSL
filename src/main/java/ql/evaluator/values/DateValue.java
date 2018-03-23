@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class DateValue implements Value<Date> {
 
-    private Date value;
+    private final Date value;
 
     public DateValue(Date value) {
         this.value = value;

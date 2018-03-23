@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 
 public class GUIElementConstructionVisitorForm implements FormStatementVisitor<Void>, TypeVisitor<Void> {
 
-    private FormViewer formViewer;
+    private final FormViewer formViewer;
     private int pointer = 100;
     private QuestionElement newElement;
 

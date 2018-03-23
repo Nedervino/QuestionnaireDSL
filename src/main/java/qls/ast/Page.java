@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Page extends ASTNode {
 
-    private String identifier;
-    private List<Component> components;
+    private final String identifier;
+    private final List<Component> components;
 
     public Page(String identifier, List<Component> components, SourceLocation sourceLocation) {
         super(sourceLocation);

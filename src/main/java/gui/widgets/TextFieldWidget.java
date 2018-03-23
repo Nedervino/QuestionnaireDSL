@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class TextFieldWidget extends BaseWidget {
 
-    private JFormattedTextField textField;
+    private final JFormattedTextField textField;
 
     public TextFieldWidget(FormEvaluator evaluator, Question question) {
         super(evaluator, question);

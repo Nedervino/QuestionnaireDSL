@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class CheckboxWidget extends BaseWidget {
 
-    private JCheckBox checkBox;
+    private final JCheckBox checkBox;
 
     public CheckboxWidget(FormEvaluator evaluator, Question question) {
         super(evaluator, question);

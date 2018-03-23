@@ -16,7 +16,7 @@ public class QuestionDuplicationChecker implements Checker, FormStatementVisitor
 
     private final Set<String> questionLabels;
     private final IssueTracker issueTracker;
-    private SymbolTable symbolTable;
+    private final SymbolTable symbolTable;
 
 
     public QuestionDuplicationChecker(IssueTracker issueTracker) {

@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class FormElement extends GUIElement {
 
-    private Form node;
+    private final Form node;
 
     public FormElement(Form node, int yLoc) {
         super(yLoc);

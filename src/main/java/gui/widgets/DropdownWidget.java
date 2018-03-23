@@ -11,7 +11,7 @@ public class DropdownWidget extends BaseWidget {
 
     private final String TRUE_LABEL = "YES";
     private final String FALSE_LABEL = "NO";
-    private JComboBox<String> dropdown;
+    private final JComboBox<String> dropdown;
 
     public DropdownWidget(FormEvaluator evaluator, Question question) {
         super(evaluator, question);
@@ -33,7 +33,7 @@ public class DropdownWidget extends BaseWidget {
 
     @Override
     public void registerChangeListener(WidgetListener widgetListener) {
-        boolean newValue = dropdown.getSelectedItem().equals(TRUE_LABEL) ? true : false;
+        boolean newValue = dropdown.getSelectedItem().equals(TRUE_LABEL);
         widgetListener.updateEnvironment(question, new BooleanValue(newValue));
     }
 

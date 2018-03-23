@@ -9,7 +9,7 @@ import java.util.List;
 
 public class QuestionCollector implements FormStatementVisitor<Void> {
 
-    List<Question> questions;
+    final List<Question> questions;
 
     public QuestionCollector(Form form) {
         questions = new ArrayList<>();

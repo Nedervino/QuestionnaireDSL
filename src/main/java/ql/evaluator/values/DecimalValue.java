@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class DecimalValue extends NumericValue<Double> {
 
-    private double value;
+    private final double value;
 
     public DecimalValue(double value) {
         this.value = value;

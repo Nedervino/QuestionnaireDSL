@@ -2,8 +2,8 @@ package qls.ast;
 
 public class SourceLocation {
 
-    private int line;
-    private int column;
+    private final int line;
+    private final int column;
 
     public SourceLocation(int line, int column) {
         this.line = line;

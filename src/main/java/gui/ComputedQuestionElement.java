@@ -8,8 +8,8 @@ import java.awt.*;
 
 public class ComputedQuestionElement extends GUIElement {
 
-    private ComputedQuestion node;
-    private FormEvaluator evaluator;
+    private final ComputedQuestion node;
+    private final FormEvaluator evaluator;
 
     public ComputedQuestionElement(ComputedQuestion node, int yLoc, FormEvaluator evaluator) {
         super(yLoc);

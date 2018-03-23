@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Stylesheet extends ASTNode {
 
-    private String stylesheetId;
-    private List<Page> pages;
+    private final String stylesheetId;
+    private final List<Page> pages;
 
     public Stylesheet(String stylesheetId, List<Page> pages, SourceLocation sourceLocation) {
         super(sourceLocation);
