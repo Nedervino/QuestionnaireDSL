@@ -262,11 +262,11 @@ public class ExpressionChecker implements Checker, FormStatementVisitor<Void>, E
 
     @Override
     public Type visit(Variable variable) {
-        if (!symbolTable.isDeclared(variable.toString())) {
+        if (!symbolTable.isDeclared(variable.getName())) {
             issueTracker.addError(variable.getSourceLocation(), "Reference to undefined question");
             return new ErrorType(variable.getSourceLocation());
         }
-        return symbolTable.lookup(variable.toString());
+        return symbolTable.lookup(variable.getName());
     }
 
 }

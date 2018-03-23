@@ -69,7 +69,7 @@ public class ASTConstructionVisitorTest extends BaseQlTest {
         Variable variable = (Variable) ifStatement.getCondition();
 
         assertEquals(3, ifStatement.getIfStatements().size());
-        assertEquals("hasSoldHouse", variable.toString());
+        assertEquals("hasSoldHouse", variable.getName());
     }
 
     // @Test

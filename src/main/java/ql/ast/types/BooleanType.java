@@ -15,6 +15,25 @@ public class BooleanType extends Type {
     }
 
     @Override
+    public boolean isOfType(Type type) {
+        return false;
+    }
+
+    public boolean isOfType(BooleanType type) {
+        return true;
+    }
+
+    // @Override
+    // public boolean equals(Type t) {
+    //     return t.isDecimal();
+    // }
+    //
+    // @Override
+    // public boolean isDecimal() {
+    //     return true;
+    // }
+
+    @Override
     public <T> T accept(TypeVisitor<T> visitor) {
         return visitor.visit(this);
     }

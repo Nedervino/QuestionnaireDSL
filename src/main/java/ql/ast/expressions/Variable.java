@@ -12,7 +12,7 @@ public class Variable extends Expression {
         this.value = value;
     }
 
-    public String toString() {
+    public String getName() {
         return value;
     }
 

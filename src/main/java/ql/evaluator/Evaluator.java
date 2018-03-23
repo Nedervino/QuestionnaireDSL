@@ -331,7 +331,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public Value visit(Variable variable) {
-        String varName = variable.toString();
+        String varName = variable.getName();
         Question declarationNode = findDeclarationNode(varName);
         Value value = null;
         if (isCalculated(declarationNode)) {
