@@ -19,7 +19,7 @@ public class FormUI {
 
     public void display() {
         JPanel panel = new JPanel();
-        for(QuestionUI question : questions) {
+        for (QuestionUI question : questions) {
             panel.add(question.getComponent());
         }
         initialiseFrame(panel);

@@ -2,11 +2,8 @@ package main;
 
 import gui.FormUI;
 import gui.FormUIFactory;
-import gui.v1.FormViewer;
 import issuetracker.IssueTracker;
 import ql.ast.Form;
-import ql.evaluator.Evaluator;
-import ql.evaluator.FormEvaluator;
 import ql.parser.FormBuilder;
 import ql.validator.Validator;
 import qls.ast.Stylesheet;
@@ -23,7 +20,7 @@ public class Main {
 
         //TODO: pass file (non-string) instead of filecontents to formbuilder
 
-        String qlFileName = "src/input/ql/correct/gui/allQuestionTypes.ql";
+        String qlFileName = "src/input/ql/correct/gui/allComputedQuestionTypes.ql";
         String qlFile = new FileScanner().loadFile(qlFileName);
 
         FormBuilder formBuilder = new FormBuilder();

@@ -1,6 +1,5 @@
 package gui;
 
-import gui.widgets.TextFieldWidget;
 import gui.widgets.Widget;
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;

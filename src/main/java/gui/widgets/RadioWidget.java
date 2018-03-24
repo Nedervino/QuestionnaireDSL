@@ -4,7 +4,6 @@ import gui.WidgetListener;
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;
 import ql.evaluator.values.BooleanValue;
-import ql.evaluator.values.Value;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,10 +38,10 @@ public class RadioWidget extends BaseWidget {
 
         BooleanValue evaluatable = ((BooleanValue) evaluator.getQuestionValue(question.getId()));
         boolean value = evaluatable != null ? evaluatable.getValue() : false;
-        if(value) {
-            buttonGroup.setSelected(choiceButtonMap.get("true").getModel(),true);
+        if (value) {
+            buttonGroup.setSelected(choiceButtonMap.get("true").getModel(), true);
         } else {
-            buttonGroup.setSelected(choiceButtonMap.get("false").getModel(),true);
+            buttonGroup.setSelected(choiceButtonMap.get("false").getModel(), true);
         }
 
     }

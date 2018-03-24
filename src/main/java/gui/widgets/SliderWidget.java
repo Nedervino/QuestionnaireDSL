@@ -3,8 +3,6 @@ package gui.widgets;
 import gui.WidgetListener;
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;
-import ql.evaluator.values.DecimalValue;
-import ql.evaluator.values.IntegerValue;
 import ql.evaluator.values.Value;
 
 import javax.swing.*;

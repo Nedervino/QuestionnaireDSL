@@ -33,7 +33,7 @@ public class TextFieldWidget extends BaseWidget {
     @Override
     public void setValue() {
         Value value = evaluator.getQuestionValue(question.getId());
-        if(value != null) {
+        if (value != null) {
             textField.setValue(value.getValue());
         }
     }

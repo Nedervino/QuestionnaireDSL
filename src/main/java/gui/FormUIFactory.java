@@ -16,7 +16,7 @@ public class FormUIFactory {
         evaluator.start(form);
 
         List<QuestionUI> questions = new ArrayList<>();
-        for(Question question : evaluator.getQuestions()) {
+        for (Question question : evaluator.getQuestions()) {
             questions.add(new QuestionUI(evaluator, question));
         }
         return new FormUI(questions);
