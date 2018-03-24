@@ -25,8 +25,8 @@ public class RadioWidget extends BaseWidget {
 
         ButtonGroup buttonGroup = new ButtonGroup();
 
-        String[] test = {"one", "two", "three"};
-        for (int i = 0; i < 3; i++) {
+        String[] test = {"true", "false"};
+        for (int i = 0; i < test.length; i++) {
             String name = test[i];
             JRadioButton button = new JRadioButton(name);
             button.setActionCommand(name);

@@ -11,9 +11,9 @@ form taxOfficeExample {
         q3: decimal
     "Integer?"
         q4: integer
-    "String?"
+    "Money?"
         q5: money
-    "Decimal?"
+    "Date?"
         q6: date
     "Generated error type"
         q7: integer = 1/0

@@ -1,8 +1,6 @@
 package gui;
 
-import gui.widgets.RadioWidget;
-import gui.widgets.TextFieldWidget;
-import gui.widgets.Widget;
+import gui.widgets.*;
 import ql.ast.statements.Question;
 import ql.ast.types.*;
 import ql.ast.visitors.TypeVisitor;
@@ -26,12 +24,12 @@ public class WidgetFactory implements TypeVisitor<Widget> {
 
     @Override
     public Widget visit(DecimalType decimalType) {
-        return new TextFieldWidget(evaluator, question);
+        return new SliderWidget(evaluator, question);
     }
 
     @Override
     public Widget visit(IntegerType integerType) {
-        return new TextFieldWidget(evaluator, question);
+        return new SpinboxWidget(evaluator, question);
     }
 
     @Override
