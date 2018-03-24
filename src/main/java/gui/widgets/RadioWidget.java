@@ -4,6 +4,7 @@ import gui.WidgetListener;
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;
 import ql.evaluator.values.BooleanValue;
+import ql.evaluator.values.Value;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +15,7 @@ public class RadioWidget extends BaseWidget {
 
     private final Map<String, JRadioButton> choiceButtonMap;
     private final JPanel panel;
+    private final ButtonGroup buttonGroup;
 
     public RadioWidget(FormEvaluator evaluator, Question question) {
         super(evaluator, question);
@@ -23,7 +25,7 @@ public class RadioWidget extends BaseWidget {
 
         this.choiceButtonMap = new HashMap<>();
 
-        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup = new ButtonGroup();
 
         String[] test = {"true", "false"};
         for (int i = 0; i < test.length; i++) {
@@ -31,7 +33,16 @@ public class RadioWidget extends BaseWidget {
             JRadioButton button = new JRadioButton(name);
             button.setActionCommand(name);
             buttonGroup.add(button);
+            choiceButtonMap.put(name, button);
             panel.add(button);
+        }
+
+        BooleanValue evaluatable = ((BooleanValue) evaluator.getQuestionValue(question.getId()));
+        boolean value = evaluatable != null ? evaluatable.getValue() : false;
+        if(value) {
+            buttonGroup.setSelected(choiceButtonMap.get("true").getModel(),true);
+        } else {
+            buttonGroup.setSelected(choiceButtonMap.get("false").getModel(),true);
         }
 
     }

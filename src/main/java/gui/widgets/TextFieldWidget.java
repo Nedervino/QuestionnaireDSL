@@ -4,6 +4,7 @@ import gui.WidgetListener;
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;
 import ql.evaluator.values.StringValue;
+import ql.evaluator.values.Value;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +16,7 @@ public class TextFieldWidget extends BaseWidget {
     public TextFieldWidget(FormEvaluator evaluator, Question question) {
         super(evaluator, question);
         textField = new JFormattedTextField();
-        textField.setPreferredSize(new Dimension(150, 50));
+        textField.setPreferredSize(new Dimension(200, 50));
         setValue();
     }
 
@@ -31,8 +32,10 @@ public class TextFieldWidget extends BaseWidget {
 
     @Override
     public void setValue() {
-        System.out.println(evaluator.getQuestionValue(question.getId()));
-        textField.setValue(evaluator.getQuestionValue(question.getId()));
+        Value value = evaluator.getQuestionValue(question.getId());
+        if(value != null) {
+            textField.setValue(value.getValue());
+        }
     }
 
     @Override

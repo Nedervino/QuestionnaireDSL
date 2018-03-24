@@ -5,6 +5,7 @@ import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;
 import ql.evaluator.values.DecimalValue;
 import ql.evaluator.values.IntegerValue;
+import ql.evaluator.values.Value;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,16 +17,20 @@ public class SliderWidget extends BaseWidget {
     public SliderWidget(FormEvaluator evaluator, Question question) {
         super(evaluator, question);
 
-        // IntegerValue value = (IntegerValue) evaluator.getQuestionValue(question.getId());
-        // int CURRENT_VALUE = value.getValue();
-
-        int CURRENT_VALUE = 5;
-        int START = CURRENT_VALUE - 5;
-        int END = CURRENT_VALUE + 5;
+        Value value = evaluator.getQuestionValue(question.getId());
+        Number number = value != null ? (Number) value.getValue() : 0;
+        int CURRENT_VALUE = number.intValue();
+        int START = 0;
+        int END = CURRENT_VALUE + 10;
 
         slider = new JSlider(START, END, CURRENT_VALUE);
+        slider.setMinorTickSpacing(5);
+        slider.setMajorTickSpacing(10);
+        slider.setSnapToTicks(true);
+        slider.setPaintTicks(true);
+        slider.setPaintLabels(true);
 
-        slider.setPreferredSize(new Dimension(100, 50));
+        slider.setPreferredSize(new Dimension(200, 50));
     }
 
     @Override

@@ -16,7 +16,7 @@ public class SpinboxWidget extends BaseWidget {
         super(evaluator, question);
         String[] choices = {"1", "2", "3", "4"};
         spinner = new JSpinner(new SpinnerListModel(choices));
-        spinner.setPreferredSize(new Dimension(100, 50));
+        spinner.setPreferredSize(new Dimension(200, 50));
     }
 
     @Override
