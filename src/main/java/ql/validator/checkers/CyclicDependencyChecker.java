@@ -12,8 +12,7 @@ import ql.ast.expressions.unary.UnaryOperation;
 import ql.ast.statements.*;
 import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormStatementVisitor;
-import ql.validator.checkers.cycles.DependencyManager;
-import ql.validator.checkers.cycles.DependencyPair;
+import ql.validator.checkers.dependencies.DependencyManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,7 +41,7 @@ public class CyclicDependencyChecker implements Checker, FormStatementVisitor<Vo
     }
 
     private void logCircularDependencies() {
-        for (DependencyPair circularDependency : dependencyManager.getCircularDependencies()) {
+        for (DependencyManager.DependencyPair circularDependency : dependencyManager.getCircularDependencies()) {
             issueTracker.addError(new SourceLocation(0, 0), String.format("Variable %s involved in circular dependency", circularDependency.getSource()));
         }
     }

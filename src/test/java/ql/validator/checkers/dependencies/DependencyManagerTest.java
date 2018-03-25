@@ -1,8 +1,7 @@
-package ql.validator.checkers.cycles;
+package ql.validator.checkers.dependencies;
 
 import org.junit.Test;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -18,7 +17,7 @@ public class DependencyManagerTest {
         dependencyManager.addDependency("b","c");
         dependencyManager.addDependency("c","a");
 
-        Set<DependencyPair> circularDependencies = dependencyManager.getCircularDependencies();
+        Set<DependencyManager.DependencyPair> circularDependencies = dependencyManager.getCircularDependencies();
 
         assertEquals(EXPECTED_REFLEXIVE_PAIRS, circularDependencies.size());
     }
