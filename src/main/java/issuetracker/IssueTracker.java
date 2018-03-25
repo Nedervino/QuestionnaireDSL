@@ -56,7 +56,7 @@ public class IssueTracker {
     }
 
     public boolean hasErrors() {
-        return errors.size() > 0;
+        return !errors.isEmpty();
     }
 
     public List<Error> getErrors() {

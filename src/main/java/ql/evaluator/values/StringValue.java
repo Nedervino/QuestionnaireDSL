@@ -18,6 +18,7 @@ public class StringValue implements Value<String> {
         return value.equal(this);
     }
 
+    @Override
     public BooleanValue equal(StringValue value) {
         return new BooleanValue(value.getValue().equals(getValue()));
     }
@@ -27,6 +28,7 @@ public class StringValue implements Value<String> {
         return value.notEqual(this);
     }
 
+    @Override
     public BooleanValue notEqual(StringValue value) {
         return new BooleanValue(value.getValue().equals(getValue()));
     }

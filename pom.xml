@@ -38,11 +38,30 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>main.Main</mainClass>
+                    <!--<arguments>-->
+                        <!--<argument>src/input/ql/correct/gui/allComputedQuestionTypes.ql</argument>-->
+                    <!--</arguments>-->
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr4-maven-plugin</artifactId>
                 <version>4.7</version>
                 <executions>
                     <execution>
+                        <id>parser-generation</id>
                         <goals>
                             <goal>antlr4</goal>
                         </goals>
