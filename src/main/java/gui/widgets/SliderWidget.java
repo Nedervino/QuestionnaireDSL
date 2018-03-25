@@ -10,7 +10,7 @@ import java.awt.*;
 
 public class SliderWidget extends BaseWidget {
 
-    private JSlider slider;
+    private final JSlider slider;
 
     public SliderWidget(FormEvaluator evaluator, Question question) {
         super(evaluator, question);

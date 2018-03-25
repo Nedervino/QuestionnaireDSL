@@ -18,7 +18,7 @@ public class SourceLocation {
         return this.column;
     }
 
-    public String toString() {
+    public String getFormattedLocation() {
         return String.format("(%s, %s)", line, column);
     }
 }

@@ -14,7 +14,7 @@ public class QuestionUI {
 
     private final JLabel label;
     private final Widget widget;
-    private JPanel panel;
+    private final JPanel panel;
 
     public QuestionUI(FormEvaluator formEvaluator, Question question) {
         label = new JLabel(question.getLabel());

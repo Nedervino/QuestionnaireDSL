@@ -13,9 +13,9 @@ public class DependencyManagerTest {
         final int EXPECTED_REFLEXIVE_PAIRS = 3;
 
         DependencyManager dependencyManager = new DependencyManager();
-        dependencyManager.addDependency("a","b");
-        dependencyManager.addDependency("b","c");
-        dependencyManager.addDependency("c","a");
+        dependencyManager.addDependency("a", "b");
+        dependencyManager.addDependency("b", "c");
+        dependencyManager.addDependency("c", "a");
 
         Set<DependencyManager.DependencyPair> circularDependencies = dependencyManager.getCircularDependencies();
 

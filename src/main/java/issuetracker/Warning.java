@@ -9,8 +9,8 @@ public class Warning extends Issue {
     }
 
     @Override
-    public String toString() {
-        return String.format("Warning: %s: %s", this.getSourceLocation().toString(), this.getMessage());
+    public String getFormattedMessage() {
+        return String.format("Warning: %s: %s", this.getSourceLocation().getFormattedLocation(), this.getMessage());
     }
 
 }

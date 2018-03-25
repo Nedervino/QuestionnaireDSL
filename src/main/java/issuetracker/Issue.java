@@ -20,6 +20,6 @@ public abstract class Issue {
         return message;
     }
 
-    public abstract String toString();
+    public abstract String getFormattedMessage();
 
 }

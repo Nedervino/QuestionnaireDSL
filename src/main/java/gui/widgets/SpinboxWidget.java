@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class SpinboxWidget extends BaseWidget {
 
-    private JSpinner spinner;
+    private final JSpinner spinner;
 
     public SpinboxWidget(FormEvaluator evaluator, Question question) {
         super(evaluator, question);

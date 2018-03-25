@@ -24,7 +24,7 @@ public class CheckboxWidget extends BaseWidget {
 
     @Override
     public void setVisible(boolean visible) {
-
+        checkBox.setVisible(visible);
     }
 
     @Override
