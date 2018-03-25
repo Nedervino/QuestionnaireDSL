@@ -4,7 +4,7 @@ This repository, managed by team Kazan, contains work on two DSLs (QL and QLS) t
 
 ## Collaborators:
 * Tim Nederveen ([@nedervino](mailto:tim.nederveen@hotmail.com)) - 11198591
-* Bram Oosterlee ([@bmoosterlee](mailto:bram.oosterlee@student.uva.nl)) - TODO 
+* Bram Oosterlee ([@bmoosterlee](mailto:bram.oosterlee@student.uva.nl)) - 11857366
 
 ## Stack
 * Java 1.8

@@ -41,13 +41,6 @@ public class Main {
             System.err.println("Form not passing validation");
             System.exit(1);
         }
-
-        // if (!issueTracker.hasErrors()) {
-        //     FormEvaluator evaluator = new Evaluator();
-        //     evaluator.start(form);
-        //     FormViewer formViewer = new FormViewer(evaluator);
-        //     formViewer.start(form, stylesheet);
-        // }
     }
 
 }
