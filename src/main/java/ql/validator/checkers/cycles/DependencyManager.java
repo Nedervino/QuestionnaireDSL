@@ -11,12 +11,8 @@ public class DependencyManager {
         this.dependencies = new HashSet<>();
     }
 
-    public DependencyManager(Set<DependencyPair> dependencies) {
-        this.dependencies = dependencies;
-    }
-
-    public void addDependency(DependencyPair pair) {
-        dependencies.add(pair);
+    public void addDependency(String source, String location) {
+        dependencies.add(new DependencyPair(source, location));
     }
 
     public Set<DependencyPair> getCircularDependencies() {
