@@ -25,7 +25,7 @@ public class DateValue implements Value<Date> {
     }
 
     @Override
-    public BooleanValue equal(Value value) {
+    public Value equal(Value value) {
         return value.equal(this);
     }
 
@@ -35,7 +35,7 @@ public class DateValue implements Value<Date> {
     }
 
     @Override
-    public BooleanValue greaterThanEqual(Value value) {
+    public Value greaterThanEqual(Value value) {
         return value.greaterThanEqual(this);
     }
 
@@ -45,7 +45,7 @@ public class DateValue implements Value<Date> {
     }
 
     @Override
-    public BooleanValue greaterThan(Value value) {
+    public Value greaterThan(Value value) {
         return value.greaterThan(this);
     }
 
@@ -55,7 +55,7 @@ public class DateValue implements Value<Date> {
     }
 
     @Override
-    public BooleanValue lessThanEqual(Value value) {
+    public Value lessThanEqual(Value value) {
         return value.lessThanEqual(this);
     }
 
@@ -65,7 +65,7 @@ public class DateValue implements Value<Date> {
     }
 
     @Override
-    public BooleanValue lessThan(Value value) {
+    public Value lessThan(Value value) {
         return value.lessThan(this);
     }
 
@@ -75,7 +75,7 @@ public class DateValue implements Value<Date> {
     }
 
     @Override
-    public BooleanValue notEqual(Value value) {
+    public Value notEqual(Value value) {
         return value.notEqual(this);
     }
 

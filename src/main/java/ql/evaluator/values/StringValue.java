@@ -14,7 +14,7 @@ public class StringValue implements Value<String> {
     }
 
     @Override
-    public BooleanValue equal(Value value) {
+    public Value equal(Value value) {
         return value.equal(this);
     }
 
@@ -24,7 +24,7 @@ public class StringValue implements Value<String> {
     }
 
     @Override
-    public BooleanValue notEqual(Value value) {
+    public Value notEqual(Value value) {
         return value.notEqual(this);
     }
 

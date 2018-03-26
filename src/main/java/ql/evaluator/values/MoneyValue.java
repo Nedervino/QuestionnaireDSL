@@ -81,7 +81,7 @@ public class MoneyValue extends NumericValue<BigDecimal> {
     }
 
     @Override
-    public NumericValue negative() {
+    public Value negative() {
         return new MoneyValue(getValue().negate());
     }
 
@@ -91,7 +91,7 @@ public class MoneyValue extends NumericValue<BigDecimal> {
     }
 
     @Override
-    public BooleanValue and(Value value) {
+    public Value and(Value value) {
         return value.and(this);
     }
 
@@ -101,32 +101,32 @@ public class MoneyValue extends NumericValue<BigDecimal> {
     }
 
     @Override
-    public BooleanValue greaterThanEqual(Value value) {
+    public Value greaterThanEqual(Value value) {
         return value.greaterThanEqual(this);
     }
 
     @Override
-    public BooleanValue greaterThan(Value value) {
+    public Value greaterThan(Value value) {
         return value.greaterThan(this);
     }
 
     @Override
-    public BooleanValue equal(Value value) {
+    public Value equal(Value value) {
         return value.equal(this);
     }
 
     @Override
-    public BooleanValue lessThanEqual(Value value) {
+    public Value lessThanEqual(Value value) {
         return value.lessThanEqual(this);
     }
 
     @Override
-    public BooleanValue lessThan(Value value) {
+    public Value lessThan(Value value) {
         return value.lessThan(this);
     }
 
     @Override
-    public BooleanValue notEqual(Value value) {
+    public Value notEqual(Value value) {
         return value.notEqual(this);
     }
 
