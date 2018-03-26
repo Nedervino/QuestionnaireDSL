@@ -21,9 +21,7 @@ import java.util.Map;
 
 public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<Value>, FormEvaluator {
 
-    //TODO: questionValues use String identifier, ASTNodes are not necessary anymore. Also allows removal of idLookup
-    private final Map<ASTNode, Value> questionValues;
-    private final Map<String, Question> idLookup;
+    private final Map<String, Value> questionValues;
     private final IssueTracker issueTracker;
     private Form form;
     private QuestionCollector questionCollector;
@@ -31,7 +29,6 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     public Evaluator() {
         issueTracker = IssueTracker.getIssueTracker();
         questionValues = new HashMap<>();
-        idLookup = new HashMap<>();
         questionCollector = new QuestionCollector();
     }
 
@@ -43,7 +40,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public void setValue(String questionId, Value value) {
-        questionValues.put(idLookup.get(questionId), value);
+        questionValues.put(questionId, value);
     }
 
     @Override
@@ -58,20 +55,17 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public Value getQuestionValue(String questionId) {
-        return questionValues.get(idLookup.get(questionId));
+        return questionValues.get(questionId);
     }
 
     @Override
     public Void visit(Question node) {
-        idLookup.put(node.getId(), node);
         return null;
     }
 
     @Override
     public Void visit(ComputedQuestion node) {
-        idLookup.put(node.getId(), node);
-
-        questionValues.put(node, node.getExpression().accept(this));
+        questionValues.put(node.getId(), node.getExpression().accept(this));
         return null;
     }
 
@@ -218,7 +212,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public Value visit(Variable variable) {
-        return questionValues.get(idLookup.get(variable.getName()));
+        return questionValues.get(variable.getName());
     }
 
     @Override
