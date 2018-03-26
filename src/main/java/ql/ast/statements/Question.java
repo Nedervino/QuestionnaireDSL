@@ -17,6 +17,10 @@ public class Question extends Statement {
         this.type = type;
     }
 
+    public boolean isOfType(String otherType) {
+        return this.type.isOfType(otherType);
+    }
+
     public String getLabel() {
         return label;
     }

@@ -10,7 +10,7 @@ public class Warning extends Issue {
 
     @Override
     public String getFormattedMessage() {
-        return String.format("Warning: %s: %s", this.getSourceLocation().getFormattedLocation(), this.getMessage());
+        return String.format("Warning: %s: %s", sourceLocation.getFormattedLocation(), this.getMessage());
     }
 
 }

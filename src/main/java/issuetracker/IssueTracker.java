@@ -1,6 +1,7 @@
 package issuetracker;
 
 
+import ql.ast.ASTNode;
 import ql.ast.SourceLocation;
 import ql.validator.Validator;
 
@@ -40,6 +41,17 @@ public class IssueTracker {
     public void addError(SourceLocation sourceLocation, String errorMessage) {
         Error error = new Error(sourceLocation, errorMessage);
         errors.add(error);
+    }
+
+    public void addWarning(ASTNode node, String warningMessage) {
+        SourceLocation sourceLocation = node.getSourceLocation();
+        addWarning(sourceLocation, warningMessage);
+    }
+
+
+    public void addError(ASTNode node, String errorMessage) {
+        SourceLocation sourceLocation = node.getSourceLocation();
+        addError(sourceLocation, errorMessage);
     }
 
     public void reset() {

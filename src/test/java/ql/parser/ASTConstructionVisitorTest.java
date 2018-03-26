@@ -41,7 +41,7 @@ public class ASTConstructionVisitorTest extends BaseQlTest {
         Form form = createForm("src/input/ql/correct/simple.ql");
         Question question = (Question) form.getStatements().get(0);
 
-        assertTrue(question.getType().isOfType("boolean"));
+        assertTrue(question.isOfType("boolean"));
         assertEquals("hasSoldHouse", question.getId());
         assertEquals("Did you sell a house in 2010?", question.getLabel());
     }
@@ -51,7 +51,7 @@ public class ASTConstructionVisitorTest extends BaseQlTest {
         Form form = createForm("src/input/ql/correct/simple.ql");
         Question question = (Question) form.getStatements().get(0);
 
-        assertTrue(question.getType().isOfType("boolean"));
+        assertTrue(question.isOfType("boolean"));
         assertEquals("hasSoldHouse", question.getId());
         assertEquals("Did you sell a house in 2010?", question.getLabel());
     }

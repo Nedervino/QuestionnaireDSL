@@ -10,7 +10,7 @@ public class Error extends Issue {
 
     @Override
     public String getFormattedMessage() {
-        return String.format("Error: %s: %s", this.getSourceLocation().getFormattedLocation(), this.getMessage());
+        return String.format("Error: %s: %s", sourceLocation.getFormattedLocation(), this.getMessage());
     }
 
 }

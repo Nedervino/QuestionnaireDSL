@@ -118,7 +118,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
         try {
             return getLeftValue(node).divide(getRightValue(node));
         } catch (ArithmeticException e) {
-            issueTracker.addError(node.getRight().getSourceLocation(), "Attempted to divide by zero.");
+            issueTracker.addError(node.getRight(), "Attempted to divide by zero.");
         }
         return null;
     }

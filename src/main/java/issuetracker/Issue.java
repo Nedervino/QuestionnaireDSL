@@ -4,7 +4,7 @@ import ql.ast.SourceLocation;
 
 public abstract class Issue {
 
-    private final SourceLocation sourceLocation;
+    protected final SourceLocation sourceLocation;
     private final String message;
 
     protected Issue(SourceLocation sourceLocation, String message) {

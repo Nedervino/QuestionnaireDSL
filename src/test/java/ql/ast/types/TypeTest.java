@@ -19,31 +19,31 @@ public class TypeTest {
     @Test
     public void canParseBooleanType() {
         Question question = (Question) formBuilder.createStatement("\"test\" testQuestion: boolean");
-        assertTrue(question.getType().isOfType("boolean"));
+        assertTrue(question.isOfType("boolean"));
     }
 
     @Test
     public void canParseDecimalType() {
         Question question = (Question) formBuilder.createStatement("\"test\" testQuestion: decimal");
-        assertTrue(question.getType().isOfType("decimal"));
+        assertTrue(question.isOfType("decimal"));
     }
 
     @Test
     public void canParseIntegerType() {
         Question question = (Question) formBuilder.createStatement("\"test\" testQuestion: integer");
-        assertTrue(question.getType().isOfType("integer"));
+        assertTrue(question.isOfType("integer"));
     }
 
     @Test
     public void canParseMoneyType() {
         Question question = (Question) formBuilder.createStatement("\"test\" testQuestion: money");
-        assertTrue(question.getType().isOfType("money"));
+        assertTrue(question.isOfType("money"));
     }
 
     @Test
     public void canParseStringType() {
         Question question = (Question) formBuilder.createStatement("\"test\" testQuestion: string");
-        assertTrue(question.getType().isOfType("string"));
+        assertTrue(question.isOfType("string"));
     }
 
 }
