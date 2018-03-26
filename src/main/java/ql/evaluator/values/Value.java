@@ -4,11 +4,6 @@ public interface Value<T> {
 
     T getValue();
 
-    //TODO: should be removed from interface, code smell to include for all types
-    default boolean getBooleanValue() {
-        throw new UnsupportedOperationException(getValue().toString());
-    }
-
     default Value add(Value value) {
         throw new UnsupportedOperationException(getValue().toString());
     }

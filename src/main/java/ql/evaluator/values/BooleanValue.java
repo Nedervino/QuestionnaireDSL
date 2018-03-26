@@ -15,11 +15,6 @@ public class BooleanValue implements Value<Boolean> {
     }
 
     @Override
-    public boolean getBooleanValue() {
-        return value;
-    }
-
-    @Override
     public Value and(Value value) {
         return value.and(this);
     }
