@@ -27,11 +27,13 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     private final Map<String, Question> idLookup;
     private final IssueTracker issueTracker;
     private Form form;
+    private QuestionCollector questionCollector;
 
     public Evaluator() {
         issueTracker = IssueTracker.getIssueTracker();
         questionValues = new HashMap<>();
         idLookup = new HashMap<>();
+        questionCollector = new QuestionCollector();
     }
 
     @Override
@@ -53,7 +55,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public List<Question> getQuestions() {
-        return new ArrayList(idLookup.values());
+        return questionCollector.getQuestions(form);
     }
 
     @Override
@@ -120,7 +122,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
         Expression expression = node.getCondition();
         Value value = expression.accept(this);
         List<Statement> statements;
-        if (isCalculated(expression)) {
+        if (isCalculated(value)) {
             if (value.getBooleanValue()) {
                 statements = node.getIfStatements();
             } else {
