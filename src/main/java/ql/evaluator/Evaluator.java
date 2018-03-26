@@ -1,9 +1,7 @@
 package ql.evaluator;
 
 import issuetracker.IssueTracker;
-import ql.ast.ASTNode;
 import ql.ast.Form;
-import ql.ast.expressions.Expression;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
