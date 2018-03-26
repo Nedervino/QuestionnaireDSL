@@ -79,7 +79,7 @@ public class QuestionDuplicationChecker implements Checker, FormStatementVisitor
      */
     private void checkDuplication(Question question) {
         if (symbolTable.isDeclared(question.getId())) {
-            if (!symbolTable.lookup(question.getId()).toString().equals(question.getType().toString())) {
+            if (!symbolTable.lookup(question.getId()).isOfType(question.getType().toString())) {
                 issueTracker.addError(question.getSourceLocation(), String.format("Question with identifier \"%s\" declared on multiple locations", question.getId()));
             }
         } else {

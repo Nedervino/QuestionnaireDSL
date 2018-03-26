@@ -1,6 +1,7 @@
 package ql.validator;
 
 import issuetracker.IssueTracker;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import ql.BaseQlTest;
@@ -17,12 +18,17 @@ public class QuestionDuplicationCheckerTest extends BaseQlTest {
     @Before
     public void setUp() throws Exception {
         issueTracker = IssueTracker.getIssueTracker();
+        issueTracker.reset();
         questionDuplicationChecker = new QuestionDuplicationChecker(issueTracker);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        issueTracker.reset();
     }
 
     @Test
     public void shouldIssueWarningForDuplicateLabel() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/incorrect/validator/duplicateQuestionLabels.ql");
         boolean passesTests = questionDuplicationChecker.passesTests(form);
         assertTrue(passesTests);
@@ -33,7 +39,6 @@ public class QuestionDuplicationCheckerTest extends BaseQlTest {
 
     @Test
     public void shouldIssueErrorForDuplicateIDWithDifferentType() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/incorrect/validator/duplicateQuestionIDsDifferentTypes.ql");
         boolean passesTests = questionDuplicationChecker.passesTests(form);
         assertFalse(passesTests);
@@ -44,7 +49,6 @@ public class QuestionDuplicationCheckerTest extends BaseQlTest {
 
     @Test
     public void shouldIssueNothingForDuplicateIDWithSameType() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/incorrect/validator/duplicateQuestionIDsSameTypes.ql");
         boolean passesTests = questionDuplicationChecker.passesTests(form);
         assertTrue(passesTests);
@@ -54,7 +58,6 @@ public class QuestionDuplicationCheckerTest extends BaseQlTest {
 
     @Test
     public void shouldIssueNothingForRegularForm() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/simple.ql");
         boolean passesTests = questionDuplicationChecker.passesTests(form);
         assertTrue(passesTests);

@@ -2,6 +2,7 @@ package ql.validator;
 
 import issuetracker.Error;
 import issuetracker.IssueTracker;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import ql.BaseQlTest;
@@ -18,12 +19,17 @@ public class ExpressionCheckerTest extends BaseQlTest {
     @Before
     public void setUp() throws Exception {
         issueTracker = IssueTracker.getIssueTracker();
+        issueTracker.reset();
         expressionChecker = new ExpressionChecker(issueTracker);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        issueTracker.reset();
     }
 
     @Test
     public void shouldIssueErrorForUndefinedQuestionReference() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/incorrect/validator/undefinedQuestion.ql");
 
         boolean passesTests = expressionChecker.passesTests(form);
@@ -35,7 +41,6 @@ public class ExpressionCheckerTest extends BaseQlTest {
 
     @Test
     public void shouldIssueErrorForNonBooleanCondition() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/incorrect/validator/nonBooleanCondition.ql");
 
         boolean passesTests = expressionChecker.passesTests(form);
@@ -47,7 +52,6 @@ public class ExpressionCheckerTest extends BaseQlTest {
 
     @Test
     public void shouldIssueTypeErrorsForNonNumericMismatches() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/incorrect/validator/incompatibleBinaryExpressionTypes.ql");
 
         boolean passesTests = expressionChecker.passesTests(form);
@@ -62,7 +66,6 @@ public class ExpressionCheckerTest extends BaseQlTest {
 
     @Test
     public void shouldIssueErrorForNonNumericInArithmeticExpression() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/incorrect/validator/nonNumericInArithmeticExpression.ql");
 
         boolean passesTests = expressionChecker.passesTests(form);
@@ -82,7 +85,6 @@ public class ExpressionCheckerTest extends BaseQlTest {
 
     @Test
     public void shouldIssueNoErrorForNumericExpressionsWithMoneyType() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/validator/numericExpressionsWithMoneyType.ql");
 
 
@@ -95,7 +97,6 @@ public class ExpressionCheckerTest extends BaseQlTest {
 
     @Test
     public void shouldIssueNoErrorForDifferentNumericCombinations() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/validator/numericCombinations.ql");
 
 
@@ -108,7 +109,6 @@ public class ExpressionCheckerTest extends BaseQlTest {
 
     @Test
     public void shouldIssueErrorForNonBooleanInBooleanExpression() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/incorrect/validator/nonBooleanInBoolean.ql");
 
 
@@ -124,7 +124,6 @@ public class ExpressionCheckerTest extends BaseQlTest {
 
     @Test
     public void shouldIssueErrorForNonNumericInComparisonExpression() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/incorrect/validator/nonNumericInComparison.ql");
 
 

@@ -10,6 +10,7 @@ import ql.ast.statements.IfStatement;
 import ql.ast.statements.Question;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ASTConstructionVisitorTest extends BaseQlTest {
 
@@ -40,7 +41,7 @@ public class ASTConstructionVisitorTest extends BaseQlTest {
         Form form = createForm("src/input/ql/correct/simple.ql");
         Question question = (Question) form.getStatements().get(0);
 
-        assertEquals("boolean", question.getType().toString());
+        assertTrue(question.getType().isOfType("boolean"));
         assertEquals("hasSoldHouse", question.getId());
         assertEquals("Did you sell a house in 2010?", question.getLabel());
     }
@@ -50,7 +51,7 @@ public class ASTConstructionVisitorTest extends BaseQlTest {
         Form form = createForm("src/input/ql/correct/simple.ql");
         Question question = (Question) form.getStatements().get(0);
 
-        assertEquals("boolean", question.getType().toString());
+        assertTrue(question.getType().isOfType("boolean"));
         assertEquals("hasSoldHouse", question.getId());
         assertEquals("Did you sell a house in 2010?", question.getLabel());
     }

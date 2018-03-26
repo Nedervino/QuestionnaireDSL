@@ -1,6 +1,7 @@
 package ql.validator;
 
 import issuetracker.IssueTracker;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import ql.BaseQlTest;
@@ -17,12 +18,17 @@ public class CyclicDependencyCheckerTest extends BaseQlTest {
     @Before
     public void setUp() throws Exception {
         issueTracker = IssueTracker.getIssueTracker();
+        issueTracker.reset();
         cyclicDependencyChecker = new CyclicDependencyChecker(issueTracker);
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        issueTracker.reset();
     }
 
     @Test
     public void shouldIssueErrorForCycleWithinQuestion() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/incorrect/validator/cyclicalWithinQuestion.ql");
         boolean passesTests = cyclicDependencyChecker.passesTests(form);
         assertFalse(passesTests);
@@ -33,7 +39,6 @@ public class CyclicDependencyCheckerTest extends BaseQlTest {
 
     @Test
     public void shouldIssueErrorForCycleBetweenQuestions() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/incorrect/validator/cyclicalBetweenQuestions.ql");
         boolean passesTests = cyclicDependencyChecker.passesTests(form);
         assertFalse(passesTests);
@@ -45,7 +50,6 @@ public class CyclicDependencyCheckerTest extends BaseQlTest {
 
     @Test
     public void shouldIssueNothingForRegularForm() {
-        issueTracker.reset();
         Form form = createForm("src/input/ql/correct/simple.ql");
         boolean passesTests = cyclicDependencyChecker.passesTests(form);
         assertTrue(passesTests);
