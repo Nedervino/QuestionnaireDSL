@@ -15,7 +15,7 @@ public class DateValue implements Value<Date> {
 
     @Override
     public String toString() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(DateLiteral.DATE_FORMAT);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DateLiteral.getDateFormat());
         return dateFormat.format(getValue());
     }
 
