@@ -95,28 +95,28 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     }
 
     //TODO: remove, place accept directly in visits
-    private Value visitLeft(BinaryOperation node) {
+    private Value getLeftValue(BinaryOperation node) {
         return node.getLeft().accept(this);
     }
 
-    private Value visitRight(BinaryOperation node) {
+    private Value getRightValue(BinaryOperation node) {
         return node.getRight().accept(this);
     }
 
     @Override
     public Value visit(Addition node) {
-        return visitLeft(node).add(visitRight(node));
+        return getLeftValue(node).add(getRightValue(node));
     }
 
     @Override
     public Value visit(And node) {
-        return visitLeft(node).and(visitRight(node));
+        return getLeftValue(node).and(getRightValue(node));
     }
 
     @Override
     public Value visit(Division node) {
         try {
-            return visitLeft(node).divide(visitRight(node));
+            return getLeftValue(node).divide(getRightValue(node));
         } catch (ArithmeticException e) {
             issueTracker.addError(node.getRight().getSourceLocation(), "Attempted to divide by zero.");
         }
@@ -125,47 +125,47 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public Value visit(Equal node) {
-        return visitLeft(node).equal(visitRight(node));
+        return getLeftValue(node).equal(getRightValue(node));
     }
 
     @Override
     public Value visit(GreaterThanEqual node) {
-        return visitLeft(node).greaterThanEqual(visitRight(node));
+        return getLeftValue(node).greaterThanEqual(getRightValue(node));
     }
 
     @Override
     public Value visit(GreaterThan node) {
-        return visitLeft(node).greaterThan(visitRight(node));
+        return getLeftValue(node).greaterThan(getRightValue(node));
     }
 
     @Override
     public Value visit(LessThanEqual node) {
-        return visitLeft(node).lessThanEqual(visitRight(node));
+        return getLeftValue(node).lessThanEqual(getRightValue(node));
     }
 
     @Override
     public Value visit(LessThan node) {
-        return visitLeft(node).lessThan(visitRight(node));
+        return getLeftValue(node).lessThan(getRightValue(node));
     }
 
     @Override
     public Value visit(Multiplication node) {
-        return visitLeft(node).multiply(visitRight(node));
+        return getLeftValue(node).multiply(getRightValue(node));
     }
 
     @Override
     public Value visit(NotEqual node) {
-        return visitLeft(node).notEqual(visitRight(node));
+        return getLeftValue(node).notEqual(getRightValue(node));
     }
 
     @Override
     public Value visit(Or node) {
-        return visitLeft(node).or(visitRight(node));
+        return getLeftValue(node).or(getRightValue(node));
     }
 
     @Override
     public Value visit(Subtraction node) {
-        return visitLeft(node).subtract(visitRight(node));
+        return getLeftValue(node).subtract(getRightValue(node));
     }
 
     @Override
