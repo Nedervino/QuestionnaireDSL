@@ -17,7 +17,7 @@ public class ExpressionCheckerTest extends BaseQlTest {
     public void setUp() throws Exception {
         expressionChecker = new ExpressionChecker();
     }
-    
+
     @Test
     public void shouldIssueErrorForUndefinedQuestionReference() {
         Form form = createForm("src/input/ql/incorrect/validator/undefinedQuestion.ql");

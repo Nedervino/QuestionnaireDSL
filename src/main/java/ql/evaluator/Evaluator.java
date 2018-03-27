@@ -69,7 +69,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public Void visit(IfStatement node) {
-        if (((BooleanValue)node.getCondition().accept(this)).getValue()) {
+        if (((BooleanValue) node.getCondition().accept(this)).getValue()) {
             visit(node.getIfStatements());
         }
 
@@ -85,12 +85,12 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     @Override
     public Void visit(IfElseStatement node) {
         List<Statement> statements;
-            if (((BooleanValue)node.getCondition().accept(this)).getValue()) {
-                statements = node.getIfStatements();
-            } else {
-                statements = node.getElseStatements();
-            }
-            visit(statements);
+        if (((BooleanValue) node.getCondition().accept(this)).getValue()) {
+            statements = node.getIfStatements();
+        } else {
+            statements = node.getElseStatements();
+        }
+        visit(statements);
         return null;
     }
 

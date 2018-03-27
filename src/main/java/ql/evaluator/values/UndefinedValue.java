@@ -7,60 +7,74 @@ public class UndefinedValue implements Value<Void> {
         return null;
     }
 
-    @Override public Value add(Value value) {
+    @Override
+    public Value add(Value value) {
         return new UndefinedValue();
     }
 
-    @Override public Value subtract(Value value) {
-        return new UndefinedValue();
-    }
-    
-    @Override public Value divide(Value value) {
+    @Override
+    public Value subtract(Value value) {
         return new UndefinedValue();
     }
 
-    @Override public Value multiply(Value value) {
+    @Override
+    public Value divide(Value value) {
         return new UndefinedValue();
     }
 
-    @Override public Value equal(Value value) {
+    @Override
+    public Value multiply(Value value) {
         return new UndefinedValue();
     }
 
-    @Override public Value notEqual(Value value) {
-        return new UndefinedValue();
-    }
-    
-    @Override public Value greaterThanEqual(Value value) {
+    @Override
+    public Value equal(Value value) {
         return new UndefinedValue();
     }
 
-    @Override public Value greaterThan(Value value) {
+    @Override
+    public Value notEqual(Value value) {
         return new UndefinedValue();
     }
 
-    @Override public Value lessThanEqual(Value value) {
-        return new UndefinedValue();
-    }
-    
-    @Override public Value lessThan(Value value) {
-        return new UndefinedValue();
-    }
-    
-    @Override public Value or(Value value) {
+    @Override
+    public Value greaterThanEqual(Value value) {
         return new UndefinedValue();
     }
 
-    @Override public Value and(Value value) {
+    @Override
+    public Value greaterThan(Value value) {
         return new UndefinedValue();
     }
 
-    @Override public Value negation() {
+    @Override
+    public Value lessThanEqual(Value value) {
         return new UndefinedValue();
     }
 
-    @Override public Value negative() {
+    @Override
+    public Value lessThan(Value value) {
         return new UndefinedValue();
     }
-    
+
+    @Override
+    public Value or(Value value) {
+        return new UndefinedValue();
+    }
+
+    @Override
+    public Value and(Value value) {
+        return new UndefinedValue();
+    }
+
+    @Override
+    public Value negation() {
+        return new UndefinedValue();
+    }
+
+    @Override
+    public Value negative() {
+        return new UndefinedValue();
+    }
+
 }

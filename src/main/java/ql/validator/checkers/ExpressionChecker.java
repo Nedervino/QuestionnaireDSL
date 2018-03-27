@@ -1,6 +1,5 @@
 package ql.validator.checkers;
 
-import issuetracker.IssueTracker;
 import ql.ast.Form;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;

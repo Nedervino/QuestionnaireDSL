@@ -1,8 +1,6 @@
 package ql.validator.checkers;
 
 import issuetracker.Error;
-import issuetracker.Issue;
-import issuetracker.IssueTracker;
 import issuetracker.Warning;
 import ql.ast.Form;
 import ql.ast.SourceLocation;

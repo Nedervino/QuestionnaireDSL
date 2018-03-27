@@ -1,6 +1,5 @@
 package ql.validator;
 
-import issuetracker.IssueTracker;
 import ql.ast.Form;
 import ql.validator.checkers.Checker;
 import ql.validator.checkers.CyclicDependencyChecker;

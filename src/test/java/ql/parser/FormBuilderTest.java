@@ -7,7 +7,7 @@ import org.junit.rules.ExpectedException;
 import ql.BaseQlTest;
 
 /**
- *  Checks if ANTLR-generated parser can parse all basic form elements
+ * Checks if ANTLR-generated parser can parse all basic form elements
  */
 public class FormBuilderTest extends BaseQlTest {
 

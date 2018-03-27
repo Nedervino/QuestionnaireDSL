@@ -1,6 +1,5 @@
 package ql.validator.checkers;
 
-import issuetracker.IssueTracker;
 import ql.ast.Form;
 import ql.ast.statements.*;
 import ql.ast.types.Type;

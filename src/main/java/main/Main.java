@@ -2,7 +2,6 @@ package main;
 
 import gui.FormUI;
 import gui.FormUIFactory;
-import issuetracker.IssueTracker;
 import ql.ast.Form;
 import ql.parser.FormBuilder;
 import ql.validator.Validator;
@@ -18,8 +17,7 @@ public class Main {
 
         //TODO: pass file (non-string) instead of filecontents to formbuilder
 
-        // String qlFileName = "src/input/ql/correct/gui/allComputedQuestionTypes.ql";
-        String qlFileName = "src/input/ql/incorrect/validator/cyclicalBetweenQuestions.ql";
+        String qlFileName = "src/input/ql/correct/gui/allComputedQuestionTypes.ql";
         String qlFile = new FileScanner().loadFile(qlFileName);
 
         FormBuilder formBuilder = new FormBuilder();

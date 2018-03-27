@@ -20,12 +20,12 @@ public class DateLiteral extends Expression {
         this.value = dateFormat.parse(value);
     }
 
-    public Date getValue() {
-        return value;
-    }
-
     public static String getDateFormat() {
         return DATE_FORMAT;
+    }
+
+    public Date getValue() {
+        return value;
     }
 
     @Override

@@ -24,7 +24,7 @@ public class DropdownWidget extends BaseWidget {
 
     @Override
     public void setValue() {
-        if (((BooleanValue)evaluator.getQuestionValue(question.getId())).getValue()) {
+        if (((BooleanValue) evaluator.getQuestionValue(question.getId())).getValue()) {
             dropdown.setSelectedItem(TRUE_LABEL);
         } else {
             dropdown.setSelectedItem(FALSE_LABEL);
