@@ -38,6 +38,7 @@ public class CyclicDependencyChecker extends BaseChecker implements FormStatemen
 
     @Override
     public boolean passesTests(Form form) {
+        issueTracker.reset();
         form.accept(this);
         return !issueTracker.hasErrors();
     }

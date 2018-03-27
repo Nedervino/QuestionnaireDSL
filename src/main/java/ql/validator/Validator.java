@@ -29,20 +29,31 @@ public class Validator {
 
         //Check for duplicate question identifiers and labels
         if (!questionDuplicationChecker.passesTests(form)) {
+            questionDuplicationChecker.logErrors();
             return false;
         }
 
         //Check for reference to undefined questions, non-boolean conditionals, and invalid operand types
         if (!expressionChecker.passesTests(form)) {
+            expressionChecker.logErrors();
             return false;
         }
 
         //Check cyclic dependencies between questions
         if (!cyclicDependencyChecker.passesTests(form)) {
+            cyclicDependencyChecker.logErrors();
             return false;
         }
 
+        logWarnings();
+
         return true;
+    }
+
+    private void logWarnings() {
+        questionDuplicationChecker.logWarnings();
+        expressionChecker.logWarnings();
+        cyclicDependencyChecker.logWarnings();
     }
 
 }

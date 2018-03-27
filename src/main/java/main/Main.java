@@ -16,8 +16,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        IssueTracker issueTracker = new IssueTracker();
-
         //TODO: pass file (non-string) instead of filecontents to formbuilder
 
         String qlFileName = "src/input/ql/correct/gui/allComputedQuestionTypes.ql";

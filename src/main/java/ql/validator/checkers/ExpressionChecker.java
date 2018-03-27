@@ -26,6 +26,7 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
 
     @Override
     public boolean passesTests(Form form) {
+        issueTracker.reset();
         symbolTable = new SymbolTable(form);
         form.accept(this);
         return !issueTracker.hasErrors();
