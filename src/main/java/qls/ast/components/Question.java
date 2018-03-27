@@ -1,6 +1,6 @@
 package qls.ast.components;
 
-import qls.ast.SourceLocation;
+import ql.ast.SourceLocation;
 
 public class Question extends Component {
 

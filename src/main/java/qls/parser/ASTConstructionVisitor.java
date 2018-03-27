@@ -1,11 +1,11 @@
 package qls.parser;
 
 import org.antlr.v4.runtime.ParserRuleContext;
+import ql.ast.SourceLocation;
 import qls.QLSBaseVisitor;
 import qls.QLSParser;
-import qls.ast.ASTNode;
+import ql.ast.ASTNode;
 import qls.ast.Page;
-import qls.ast.SourceLocation;
 import qls.ast.Stylesheet;
 import qls.ast.components.Component;
 

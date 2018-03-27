@@ -1,6 +1,6 @@
 package qls.ast.widget;
 
-import qls.ast.SourceLocation;
+import ql.ast.SourceLocation;
 
 public class Checkbox extends WidgetType {
 
