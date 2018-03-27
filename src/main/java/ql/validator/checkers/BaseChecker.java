@@ -11,7 +11,7 @@ public abstract class BaseChecker implements Checker {
     protected final IssueTracker issueTracker;
 
     public BaseChecker() {
-        this.issueTracker = IssueTracker.getIssueTracker();
+        this.issueTracker = new IssueTracker();
     }
 
     @Override

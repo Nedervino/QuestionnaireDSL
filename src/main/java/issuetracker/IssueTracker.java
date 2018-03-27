@@ -20,23 +20,15 @@ public class IssueTracker {
     private final List<Warning> warnings;
 
 
-    private IssueTracker() {
+    public IssueTracker() {
         errors = new ArrayList<>();
         warnings = new ArrayList<>();
-    }
-
-    public static IssueTracker getIssueTracker() {
-        if (issueTracker == null) {
-            issueTracker = new IssueTracker();
-        }
-        return issueTracker;
     }
 
     public void addWarning(SourceLocation sourceLocation, String warningMessage) {
         Warning warning = new Warning(sourceLocation, warningMessage);
         warnings.add(warning);
     }
-
 
     public void addError(SourceLocation sourceLocation, String errorMessage) {
         Error error = new Error(sourceLocation, errorMessage);

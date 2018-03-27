@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        IssueTracker issueTracker = IssueTracker.getIssueTracker();
+        IssueTracker issueTracker = new IssueTracker();
 
         //TODO: pass file (non-string) instead of filecontents to formbuilder
 

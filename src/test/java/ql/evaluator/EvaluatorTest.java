@@ -21,7 +21,7 @@ public class EvaluatorTest extends BaseQlTest {
     @Before
     public void setUp() throws Exception {
         evaluator = new Evaluator();
-        issueTracker = IssueTracker.getIssueTracker();
+        issueTracker = new IssueTracker();
     }
 
     @Test

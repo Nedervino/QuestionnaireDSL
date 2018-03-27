@@ -25,7 +25,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     private QuestionCollector questionCollector;
 
     public Evaluator() {
-        issueTracker = IssueTracker.getIssueTracker();
+        issueTracker = new IssueTracker();
         questionValues = new HashMap<>();
         questionCollector = new QuestionCollector();
     }
