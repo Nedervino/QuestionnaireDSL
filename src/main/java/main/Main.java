@@ -30,7 +30,7 @@ public class Main {
         // Stylesheet stylesheet = stylesheetBuilder.createForm(qlFile);
         Stylesheet stylesheet = null;
 
-        if (Validator.passesTypeChecks(form)) {
+        if (Validator.passesChecks(form)) {
             System.out.println("Successfully passed all checks");
             FormUI formUI = new FormUIFactory().getFormUI(form);
             formUI.display();

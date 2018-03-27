@@ -41,10 +41,10 @@ form incompatibleTypes {
 
 
     //Integer, decimal, and boolean same-types
-    "Test" q18: integer = (2 + 2)
-    "Test" q19: decimal = (2.1 + 2.1)
+    "Test" q21: integer = (2 + 2)
+    "Test" q22: decimal = (2.1 + 2.1)
     //"Test" q20: string = ("hi" + "hi")         //string concatenation is checked by verifytype
-    "Test" q21: boolean = (false || false)
+    "Test" q23: boolean = (false || false)
     // "Test" q22: money = (10,28 + 8,80)        //money operations are checked by verifytype
 
 }
