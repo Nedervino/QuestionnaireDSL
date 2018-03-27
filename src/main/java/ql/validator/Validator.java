@@ -13,17 +13,11 @@ import ql.validator.checkers.QuestionDuplicationChecker;
  */
 public class Validator {
 
-    private final Checker questionDuplicationChecker;
-    private final Checker expressionChecker;
-    private final Checker cyclicDependencyChecker;
+    private static final Checker questionDuplicationChecker = new QuestionDuplicationChecker();
+    private static final Checker expressionChecker = new ExpressionChecker();
+    private static final Checker cyclicDependencyChecker = new CyclicDependencyChecker();
 
-    public Validator() {
-        questionDuplicationChecker = new QuestionDuplicationChecker();
-        expressionChecker = new ExpressionChecker();
-        cyclicDependencyChecker = new CyclicDependencyChecker();
-    }
-
-    public boolean passesTypeChecks(Form form) {
+    public static boolean passesTypeChecks(Form form) {
 
         //TODO: passesTests return issuetracker. No global tracker, no singleton
 
@@ -50,7 +44,7 @@ public class Validator {
         return true;
     }
 
-    private void logWarnings() {
+    private static void logWarnings() {
         questionDuplicationChecker.logWarnings();
         expressionChecker.logWarnings();
         cyclicDependencyChecker.logWarnings();

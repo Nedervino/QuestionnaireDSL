@@ -18,7 +18,8 @@ public class Main {
 
         //TODO: pass file (non-string) instead of filecontents to formbuilder
 
-        String qlFileName = "src/input/ql/correct/gui/allComputedQuestionTypes.ql";
+        // String qlFileName = "src/input/ql/correct/gui/allComputedQuestionTypes.ql";
+        String qlFileName = "src/input/ql/incorrect/validator/cyclicalBetweenQuestions.ql";
         String qlFile = new FileScanner().loadFile(qlFileName);
 
         FormBuilder formBuilder = new FormBuilder();
@@ -31,7 +32,7 @@ public class Main {
         // Stylesheet stylesheet = stylesheetBuilder.createForm(qlFile);
         Stylesheet stylesheet = null;
 
-        if (new Validator().passesTypeChecks(form)) {
+        if (Validator.passesTypeChecks(form)) {
             System.out.println("Successfully passed all checks");
             FormUI formUI = new FormUIFactory().getFormUI(form);
             formUI.display();
