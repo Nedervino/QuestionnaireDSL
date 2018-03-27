@@ -20,14 +20,9 @@ import java.util.List;
  * Checks AST for references to undefined questions, conditions of non-boolean type,
  * and invalid operand/operator type combinations
  */
-public class ExpressionChecker implements Checker, FormStatementVisitor<Void>, ExpressionVisitor<Type>, TypeVisitor<Type> {
+public class ExpressionChecker extends BaseChecker implements FormStatementVisitor<Void>, ExpressionVisitor<Type>, TypeVisitor<Type> {
 
-    private final IssueTracker issueTracker;
     private SymbolTable symbolTable;
-
-    public ExpressionChecker(IssueTracker issueTracker) {
-        this.issueTracker = issueTracker;
-    }
 
     @Override
     public boolean passesTests(Form form) {

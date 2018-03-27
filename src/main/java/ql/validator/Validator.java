@@ -13,17 +13,14 @@ import ql.validator.checkers.QuestionDuplicationChecker;
  */
 public class Validator {
 
-
-    private final IssueTracker issueTracker;
     private final Checker questionDuplicationChecker;
     private final Checker expressionChecker;
     private final Checker cyclicDependencyChecker;
 
     public Validator() {
-        issueTracker = IssueTracker.getIssueTracker();
-        questionDuplicationChecker = new QuestionDuplicationChecker(issueTracker);
-        expressionChecker = new ExpressionChecker(issueTracker);
-        cyclicDependencyChecker = new CyclicDependencyChecker(issueTracker);
+        questionDuplicationChecker = new QuestionDuplicationChecker();
+        expressionChecker = new ExpressionChecker();
+        cyclicDependencyChecker = new CyclicDependencyChecker();
     }
 
     public boolean passesTypeChecks(Form form) {
@@ -32,23 +29,18 @@ public class Validator {
 
         //Check for duplicate question identifiers and labels
         if (!questionDuplicationChecker.passesTests(form)) {
-            issueTracker.logErrors();
             return false;
         }
 
         //Check for reference to undefined questions, non-boolean conditionals, and invalid operand types
         if (!expressionChecker.passesTests(form)) {
-            issueTracker.logErrors();
             return false;
         }
 
         //Check cyclic dependencies between questions
         if (!cyclicDependencyChecker.passesTests(form)) {
-            issueTracker.logErrors();
             return false;
         }
-
-        issueTracker.logWarnings();
 
         return true;
     }

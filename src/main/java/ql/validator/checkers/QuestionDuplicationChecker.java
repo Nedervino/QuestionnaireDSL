@@ -13,15 +13,14 @@ import java.util.Set;
 /**
  * Checks AST for question duplications, giving errors for duplicate identifiers and warnings for duplicate labels
  */
-public class QuestionDuplicationChecker implements Checker, FormStatementVisitor<Void> {
+public class QuestionDuplicationChecker extends BaseChecker implements Checker, FormStatementVisitor<Void> {
 
     private final Set<String> questionLabels;
-    private final IssueTracker issueTracker;
     private final SymbolTable symbolTable;
 
 
-    public QuestionDuplicationChecker(IssueTracker issueTracker) {
-        this.issueTracker = issueTracker;
+    public QuestionDuplicationChecker() {
+        super();
         this.questionLabels = new HashSet<>();
         this.symbolTable = new SymbolTable();
     }

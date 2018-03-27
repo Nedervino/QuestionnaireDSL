@@ -1,6 +1,9 @@
 package ql.validator.checkers;
 
+import issuetracker.Error;
+import issuetracker.Issue;
 import issuetracker.IssueTracker;
+import issuetracker.Warning;
 import ql.ast.Form;
 import ql.ast.SourceLocation;
 import ql.ast.expressions.Variable;
@@ -22,22 +25,31 @@ import java.util.Optional;
 /**
  * Checks AST for cyclic dependencies between questions
  */
-public class CyclicDependencyChecker implements Checker, FormStatementVisitor<Void>, ExpressionVisitor<List<Variable>> {
+public class CyclicDependencyChecker extends BaseChecker implements FormStatementVisitor<Void>, ExpressionVisitor<List<Variable>> {
 
+    //TODO: keep internal issueTracker? Or do not use that at all
 
-    private final IssueTracker issueTracker;
     private final DependencyManager dependencyManager;
 
-    public CyclicDependencyChecker(IssueTracker issueTracker) {
-        this.issueTracker = issueTracker;
+    public CyclicDependencyChecker() {
+        super();
         this.dependencyManager = new DependencyManager();
     }
 
     @Override
     public boolean passesTests(Form form) {
         form.accept(this);
-        logCircularDependencies();
         return !issueTracker.hasErrors();
+    }
+
+    @Override
+    public List<Error> getErrors() {
+        return issueTracker.getErrors();
+    }
+
+    @Override
+    public List<Warning> getWarnings() {
+        return issueTracker.getWarnings();
     }
 
     private void logCircularDependencies() {
@@ -62,6 +74,7 @@ public class CyclicDependencyChecker implements Checker, FormStatementVisitor<Vo
     @Override
     public Void visit(Form form) {
         visitStatements(form.getStatements());
+        logCircularDependencies();
         return null;
     }
 
