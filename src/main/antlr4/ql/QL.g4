@@ -57,21 +57,21 @@ logicalOperator     : AND
                     | OR
                     ;
 
-value               : BOOLEANLITERAL                                #booleanLiteral
-                    | INTEGERLITERAL                                #integerLiteral
-                    | STRINGLITERAL                                 #stringLiteral
-                    | MONEYLITERAL                                  #moneyLiteral
-                    | DECIMALLITERAL                                #decimalLiteral
-                    | DATELITERAL                                   #dateLiteral
-                    | IDENTIFIER                                    #variable
+value               : BOOLEANLITERAL                                        #booleanLiteral
+                    | INTEGERLITERAL                                        #integerLiteral
+                    | STRINGLITERAL                                         #stringLiteral
+                    | MONEYLITERAL                                          #moneyLiteral
+                    | DECIMALLITERAL                                        #decimalLiteral
+                    | DATELITERAL                                           #dateLiteral
+                    | IDENTIFIER                                            #variable
                     ;
 
-type                : 'boolean'                                     #booleanType
-                    | 'integer'                                     #integerType
-                    | 'string'                                      #stringType
-                    | 'money'                                       #moneyType
-                    | 'decimal'                                     #decimalType
-                    | 'date'                                        #dateType
+type                : 'boolean'                                             #booleanType
+                    | 'integer'                                             #integerType
+                    | 'string'                                              #stringType
+                    | 'money'                                               #moneyType
+                    | 'decimal'                                             #decimalType
+                    | 'date'                                                #dateType
                     ;
 
 
@@ -89,7 +89,6 @@ DIGIT               : [0-9];
 
 
 //Operators
-
 //Relational
 LESSTHAN            : '<';
 LESSTHANOREQUAL     : '<=';

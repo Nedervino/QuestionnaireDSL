@@ -2,11 +2,11 @@ grammar QLS;
 
 
 
-stylesheet      : 'stylesheet' IDENTIFIER '{' page* '}';
+stylesheet      : 'stylesheet' IDENTIFIER LEFTBRACKET page* RIGHTBRACKET;
 
 page            : 'page' IDENTIFIER block;
 
-block           : '{'(component)*'}';
+block           : LEFTBRACKET component* RIGHTBRACKET;
 
 component       : section
                 | defaultWidget
@@ -18,25 +18,29 @@ defaultWidget   : 'default' type (widget | widgetStyle);
 
 widget          : 'widget' widgetType;
 
-type            : 'boolean'                                     #booleanType
-                | 'integer'                                     #integerType
-                | 'string'                                      #stringType
-                | 'money'                                       #moneyType
-                | 'decimal'                                     #decimalType
-                | 'date'                                        #dateType
+type            : 'boolean'                                                                 #booleanType
+                | 'integer'                                                                 #integerType
+                | 'string'                                                                  #stringType
+                | 'money'                                                                   #moneyType
+                | 'decimal'                                                                 #decimalType
+                | 'date'                                                                    #dateType
                 ;
 
-widgetType      : 'slider'                                                    #sliderWidget
-                | 'spinbox'                                                   #spinboxWidget
-                | 'text'                                                      #textWidget
-                | 'radio' '(' yes=STRINGLITERAL ',' no=STRINGLITERAL ')'      #radioWidget
-                | 'checkbox'                                                  #checkboxWidget
-                | 'dropdown' '(' yes=STRINGLITERAL ',' no=STRINGLITERAL ')'   #dropdownWidget
+widgetType      : 'slider' sliderMap                                                        #sliderWidget
+                | 'spinbox' (LEFTPARENTHESES yes=STRINGLITERAL RIGHTPARENTHESES)?           #spinboxWidget
+                | 'text'                                                                    #textWidget
+                | 'radio' choiceMap?                                                        #radioWidget
+                | 'checkbox'                                                                #checkboxWidget
+                | 'dropdown' choiceMap?                                                     #dropdownWidget
                 ;
 
-widgetStyle     : '{' styleRule+ widget? '}';
+sliderMap       : LEFTPARENTHESES start=INTEGERLITERAL',' end=INTEGERLITERAL',' step=INTEGERLITERAL RIGHTPARENTHESES;
 
-styleRule       : IDENTIFIER ':' value;
+choiceMap       : LEFTPARENTHESES yes=STRINGLITERAL ',' no=STRINGLITERAL RIGHTPARENTHESES;
+
+widgetStyle     : LEFTBRACKET styleRule+ widget? RIGHTBRACKET;
+
+styleRule       : IDENTIFIER COLON value;
 
 value           : INTEGERLITERAL
                 | STRINGLITERAL
@@ -46,14 +50,28 @@ value           : INTEGERLITERAL
 
 
 
+
+
+
 //Literals
-//HEXCOLOR           : '#' ('0'..'9' | 'a'..'f'){6};
-INTEGERLITERAL  : DIGIT+;
-STRINGLITERAL   : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
+//HEXCOLOR            : '#' ('0'..'9' | 'a'..'f'){6};
+HEXCOLOR            : '#' ('0'..'9' | 'a'..'f')+;
+INTEGERLITERAL      : DIGIT+;
+STRINGLITERAL       : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
+DECIMALLITERAL      : DIGIT+ '.' DIGIT+;
 
-IDENTIFIER      : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
-DIGIT           : [0-9];
+IDENTIFIER          : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
+DIGIT               : [0-9];
 
-WHITESPACE      : (' ' | '\t' | '\n' | '\r')+ -> skip;
-MULTICOMMENT    : '/*' .*? '*/' -> skip;
-SINGLECOMMENT   : '//' ~[\r\n]* '\r'? '\n' -> skip;
+COLON               : ':';
+COMMA               : ',';
+
+LEFTBRACKET         : '{';
+RIGHTBRACKET        : '}';
+
+LEFTPARENTHESES     : '(';
+RIGHTPARENTHESES    : ')';
+
+WHITESPACE          : (' ' | '\t' | '\n' | '\r')+ -> skip;
+MULTICOMMENT        : '/*' .*? '*/' -> skip;
+SINGLECOMMENT       : '//' ~[\r\n]* '\r'? '\n' -> skip;
