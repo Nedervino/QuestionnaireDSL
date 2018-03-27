@@ -1,7 +1,5 @@
 package ql.validator;
 
-import issuetracker.IssueTracker;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import ql.BaseQlTest;
@@ -13,18 +11,10 @@ import static org.junit.Assert.*;
 public class CyclicDependencyCheckerTest extends BaseQlTest {
 
     private CyclicDependencyChecker cyclicDependencyChecker;
-    private IssueTracker issueTracker;
 
     @Before
     public void setUp() throws Exception {
-        issueTracker = IssueTracker.getIssueTracker();
-        issueTracker.reset();
-        cyclicDependencyChecker = new CyclicDependencyChecker(issueTracker);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        issueTracker.reset();
+        cyclicDependencyChecker = new CyclicDependencyChecker();
     }
 
     @Test
@@ -32,9 +22,9 @@ public class CyclicDependencyCheckerTest extends BaseQlTest {
         Form form = createForm("src/input/ql/incorrect/validator/cyclicalWithinQuestion.ql");
         boolean passesTests = cyclicDependencyChecker.passesTests(form);
         assertFalse(passesTests);
-        assertEquals(issueTracker.getWarnings().size(), 0);
-        assertEquals(issueTracker.getErrors().size(), 1);
-        assertEquals(issueTracker.getErrors().get(0).getMessage(), "Variable first involved in circular dependency");
+        assertEquals(cyclicDependencyChecker.getWarnings().size(), 0);
+        assertEquals(cyclicDependencyChecker.getErrors().size(), 1);
+        assertEquals(cyclicDependencyChecker.getErrors().get(0).getMessage(), "Variable first involved in circular dependency");
     }
 
     @Test
@@ -42,10 +32,10 @@ public class CyclicDependencyCheckerTest extends BaseQlTest {
         Form form = createForm("src/input/ql/incorrect/validator/cyclicalBetweenQuestions.ql");
         boolean passesTests = cyclicDependencyChecker.passesTests(form);
         assertFalse(passesTests);
-        assertEquals(issueTracker.getWarnings().size(), 0);
-        assertEquals(issueTracker.getErrors().size(), 2);
-        assertEquals(issueTracker.getErrors().get(0).getMessage(), "Variable second involved in circular dependency");
-        assertEquals(issueTracker.getErrors().get(1).getMessage(), "Variable first involved in circular dependency");
+        assertEquals(cyclicDependencyChecker.getWarnings().size(), 0);
+        assertEquals(cyclicDependencyChecker.getErrors().size(), 2);
+        assertEquals(cyclicDependencyChecker.getErrors().get(0).getMessage(), "Variable second involved in circular dependency");
+        assertEquals(cyclicDependencyChecker.getErrors().get(1).getMessage(), "Variable first involved in circular dependency");
     }
 
     @Test

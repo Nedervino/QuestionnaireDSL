@@ -14,4 +14,8 @@ public interface Checker {
 
     List<Warning> getWarnings();
 
+    void logErrors();
+
+    void logWarnings();
+
 }

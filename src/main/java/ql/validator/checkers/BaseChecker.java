@@ -23,4 +23,14 @@ public abstract class BaseChecker implements Checker {
     public List<Warning> getWarnings() {
         return issueTracker.getWarnings();
     }
+
+    @Override
+    public void logErrors() {
+        issueTracker.logErrors();
+    }
+
+    @Override
+    public void logWarnings() {
+        issueTracker.logWarnings();
+    }
 }
