@@ -44,7 +44,7 @@ styleRule       : IDENTIFIER COLON value;
 
 value           : INTEGERLITERAL
                 | STRINGLITERAL
-//                | HEXCOLOR
+                | HEXCOLOR
                 ;
 
 
@@ -58,7 +58,7 @@ value           : INTEGERLITERAL
 HEXCOLOR            : '#' ('0'..'9' | 'a'..'f')+;
 INTEGERLITERAL      : DIGIT+;
 STRINGLITERAL       : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
-DECIMALLITERAL      : DIGIT+ '.' DIGIT+;
+//DECIMALLITERAL      : DIGIT+ '.' DIGIT+;
 
 IDENTIFIER          : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
 DIGIT               : [0-9];

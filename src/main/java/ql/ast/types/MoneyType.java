@@ -12,7 +12,7 @@ public class MoneyType extends NumberType {
     }
 
     @Override
-    public String toString() {
+    public String getType() {
         return "money";
     }
 
@@ -23,7 +23,7 @@ public class MoneyType extends NumberType {
 
     @Override
     public boolean isOfType(String type) {
-        return Objects.equals(type, "numeric") || toString().equals(type);
+        return Objects.equals(type, "numeric") || getType().equals(type);
     }
 
 }

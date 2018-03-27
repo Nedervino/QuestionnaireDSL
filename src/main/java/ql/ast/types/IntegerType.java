@@ -10,7 +10,7 @@ public class IntegerType extends NumberType {
     }
 
     @Override
-    public String toString() {
+    public String getType() {
         return "integer";
     }
 

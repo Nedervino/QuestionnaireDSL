@@ -10,7 +10,7 @@ public class DecimalType extends NumberType {
     }
 
     @Override
-    public String toString() {
+    public String getType() {
         return "decimal";
     }
 

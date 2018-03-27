@@ -78,7 +78,7 @@ public class ExpressionChecker implements Checker, FormStatementVisitor<Void>, E
         if (actualType.isOfType(expectedType) || (expectedType.equals("numeric") && (actualType.isOfType("integer") || actualType.isOfType("decimal"))) || actualType.isOfType("error")) {
             return actualType;
         } else {
-            issueTracker.addError(actualType, String.format("Type mismatch. Actual: %s Expected: %s", actualType.toString(), expectedType));
+            issueTracker.addError(actualType, String.format("Type mismatch. Actual: %s Expected: %s", actualType.getType(), expectedType));
             return new ErrorType(actualType.getSourceLocation());
         }
     }

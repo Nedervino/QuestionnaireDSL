@@ -10,7 +10,7 @@ public class ErrorType extends Type {
     }
 
     @Override
-    public String toString() {
+    public String getType() {
         return "error";
     }
 

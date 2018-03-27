@@ -81,7 +81,7 @@ public class QuestionDuplicationChecker implements Checker, FormStatementVisitor
     private void checkDuplication(Question question) {
         if (symbolTable.isDeclared(question.getId())) {
             Type alreadyPresent = symbolTable.lookup(question.getId());
-            if (!alreadyPresent.isOfType(question.getType().toString())) {
+            if (!alreadyPresent.isOfType(question.getType().getType())) {
                 issueTracker.addError(question, String.format("Question with identifier \"%s\" declared on multiple locations", question.getId()));
             }
         } else {

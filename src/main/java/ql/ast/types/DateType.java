@@ -10,7 +10,7 @@ public class DateType extends Type {
     }
 
     @Override
-    public String toString() {
+    public String getType() {
         return "date";
     }
 

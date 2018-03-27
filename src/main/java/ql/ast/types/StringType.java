@@ -10,7 +10,7 @@ public class StringType extends Type {
     }
 
     @Override
-    public String toString() {
+    public String getType() {
         return "string";
     }
 

@@ -10,10 +10,10 @@ public abstract class Type extends ASTNode {
         super(sourceLocation);
     }
 
-    public abstract String toString();
+    public abstract String getType();
 
     public boolean isOfType(String type) {
-        return toString().equals(type);
+        return getType().equals(type);
     }
 
     protected boolean isNumeric() {
@@ -24,7 +24,7 @@ public abstract class Type extends ASTNode {
         if (otherType.isNumeric()) {
             return this.isNumeric();
         } else {
-            return this.toString().equals(otherType.toString());
+            return this.getType().equals(otherType.getType());
         }
     }
 

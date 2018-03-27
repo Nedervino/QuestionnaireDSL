@@ -196,6 +196,21 @@ public class EvaluatorTest extends BaseQlTest {
         assertEquals("01-02-1999", value.toString());
     }
 
+
+    // @Test
+    // public void shouldStoreDateString() throws ParseException{
+    //     Form form = createForm("src/input/ql/correct/evaluator/simpleDate.ql");
+    //
+    //     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+    //     Date expected = dateFormat.parse("01-02-1999");
+    //
+    //     evaluator.start(form);
+    //
+    //     DateValue value = (DateValue) evaluator.getQuestionValue("value");
+    //
+    //     assertEquals(expected, value.getValue());
+    // }
+
     @Test
     public void shouldEvaluateElse() {
         Form form = createForm("src/input/ql/correct/evaluator/ifElseEvaluation.ql");
