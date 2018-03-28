@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 public class IssueTracker {
 
     private final static Logger LOGGER = Logger.getLogger(Validator.class.getName());
-    private static IssueTracker issueTracker;
     private final List<Error> errors;
     private final List<Warning> warnings;
 

@@ -8,6 +8,7 @@ import javax.swing.*;
 
 public abstract class BaseWidget implements Widget {
 
+    //TODO: remove evaluator reference from baseWidget (circular)
     protected final FormEvaluator evaluator;
     protected final Question question;
 

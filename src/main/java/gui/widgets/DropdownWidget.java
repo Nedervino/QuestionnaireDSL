@@ -15,16 +15,18 @@ public class DropdownWidget extends BaseWidget {
 
     public DropdownWidget(FormEvaluator evaluator, Question question) {
         super(evaluator, question);
+
         dropdown = new JComboBox<>();
         dropdown.addItem(TRUE_LABEL);
         dropdown.addItem(FALSE_LABEL);
-        dropdown.setSelectedItem(FALSE_LABEL);
+
         setValue();
+
     }
 
     @Override
     public void setValue() {
-        if (((BooleanValue) evaluator.getQuestionValue(question.getId())).getValue()) {
+        if ((boolean) evaluator.getQuestionValue(question.getId()).getValue()) {
             dropdown.setSelectedItem(TRUE_LABEL);
         } else {
             dropdown.setSelectedItem(FALSE_LABEL);
@@ -33,8 +35,7 @@ public class DropdownWidget extends BaseWidget {
 
     @Override
     public void registerChangeListener(WidgetListener widgetListener) {
-        boolean newValue = dropdown.getSelectedItem().equals(TRUE_LABEL);
-        widgetListener.updateEnvironment(question, new BooleanValue(newValue));
+        dropdown.addActionListener(e -> widgetListener.onQuestionUpdated(question, new BooleanValue(dropdown.getSelectedIndex() == 0)));
     }
 
     @Override

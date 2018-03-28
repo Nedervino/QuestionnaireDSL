@@ -3,10 +3,8 @@ package gui;
 import ql.ast.statements.Question;
 import ql.evaluator.values.Value;
 
-public class WidgetListener {
+public interface WidgetListener {
 
-    public void updateEnvironment(Question question, Value value) {
-
-    }
+    void onQuestionUpdated(Question question, Value value);
 
 }

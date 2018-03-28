@@ -3,6 +3,7 @@ package gui.widgets;
 import gui.WidgetListener;
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;
+import ql.evaluator.values.IntegerValue;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +31,10 @@ public class SpinboxWidget extends BaseWidget {
 
     @Override
     public void registerChangeListener(WidgetListener widgetListener) {
-
+        spinner.addChangeListener(e -> {
+            IntegerValue integerValue = new IntegerValue((int) spinner.getValue());
+            widgetListener.onQuestionUpdated(question, integerValue);
+        });
     }
 
     @Override

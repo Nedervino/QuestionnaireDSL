@@ -62,7 +62,7 @@ public class RadioWidget extends BaseWidget {
         for (JRadioButton button : choiceButtonMap.values()) {
             button.addActionListener(e -> {
                 if (button.isSelected()) {
-                    widgetListener.updateEnvironment(question, new BooleanValue(Boolean.parseBoolean(button.getText())));
+                    widgetListener.onQuestionUpdated(question, new BooleanValue(Boolean.parseBoolean(button.getText())));
                 }
             });
 

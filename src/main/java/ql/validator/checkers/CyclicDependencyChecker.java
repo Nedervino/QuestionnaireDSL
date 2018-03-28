@@ -51,6 +51,7 @@ public class CyclicDependencyChecker extends BaseChecker implements FormStatemen
         return issueTracker.getWarnings();
     }
 
+    //Possible solve: return list of errors from dependencymanager
     private void logCircularDependencies() {
         for (DependencyManager.DependencyPair circularDependency : dependencyManager.getCircularDependencies()) {
             issueTracker.addError(new SourceLocation(0, 0), String.format("Variable %s involved in circular dependency", circularDependency.getSource()));

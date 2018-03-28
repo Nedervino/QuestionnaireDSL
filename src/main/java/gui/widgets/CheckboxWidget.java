@@ -3,6 +3,7 @@ package gui.widgets;
 import gui.WidgetListener;
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;
+import ql.evaluator.values.BooleanValue;
 
 import javax.swing.*;
 
@@ -29,7 +30,7 @@ public class CheckboxWidget extends BaseWidget {
 
     @Override
     public void registerChangeListener(WidgetListener widgetListener) {
-
+            checkBox.addActionListener(e -> widgetListener.onQuestionUpdated(question, new BooleanValue(checkBox.isSelected())));
     }
 
 }

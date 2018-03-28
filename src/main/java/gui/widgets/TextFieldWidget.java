@@ -21,11 +21,6 @@ public class TextFieldWidget extends BaseWidget {
     }
 
     @Override
-    public void registerChangeListener(WidgetListener widgetListener) {
-        textField.addActionListener(e -> widgetListener.updateEnvironment(question, new StringValue(textField.getText())));
-    }
-
-    @Override
     public void setVisible(boolean visible) {
         textField.setVisible(visible);
     }
@@ -36,6 +31,11 @@ public class TextFieldWidget extends BaseWidget {
         if (value != null) {
             textField.setValue(value.getValue());
         }
+    }
+
+    @Override
+    public void registerChangeListener(WidgetListener widgetListener) {
+        textField.addActionListener(e -> widgetListener.onQuestionUpdated(question, new StringValue(textField.getText())));
     }
 
     @Override

@@ -3,6 +3,7 @@ package gui.widgets;
 import gui.WidgetListener;
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;
+import ql.evaluator.values.DecimalValue;
 import ql.evaluator.values.Value;
 
 import javax.swing.*;
@@ -43,7 +44,12 @@ public class SliderWidget extends BaseWidget {
 
     @Override
     public void registerChangeListener(WidgetListener widgetListener) {
-        //TODO
+        slider.addChangeListener(e -> {
+            //wait until user has released slider before updating
+            if (!slider.getValueIsAdjusting()) {
+                widgetListener.onQuestionUpdated(question, new DecimalValue(slider.getValue()));
+            }
+        });
     }
 
     @Override
