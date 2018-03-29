@@ -20,15 +20,14 @@ public class EvaluatorTest extends BaseQlTest {
 
     @Before
     public void setUp() throws Exception {
-        evaluator = new Evaluator();
         issueTracker = new IssueTracker();
     }
 
     @Test
     public void shouldStoreIntegerValueDecimalAsInteger() {
         Form form = createForm("src/input/ql/correct/evaluator/integerValueDecimal.ql");
-
-        evaluator.start(form);
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         Value value = evaluator.getQuestionValue("value");
 
@@ -38,7 +37,8 @@ public class EvaluatorTest extends BaseQlTest {
     @Test
     public void shouldKeepSameStateAfterReevaluation() {
         Form form = createForm("src/input/ql/correct/evaluator/booleanExpression.ql");
-        evaluator.start(form);
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         assertEquals(4, evaluator.getQuestions().size());
 
@@ -49,16 +49,17 @@ public class EvaluatorTest extends BaseQlTest {
     @Test
     public void shouldReturnAllQuestionsInIfElseForm() {
         Form form = createForm("src/input/ql/correct/evaluator/ifElseEvaluation.ql");
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
-        evaluator.start(form);
         assertEquals(3, evaluator.getQuestions().size());
     }
 
     @Test
     public void shouldStoreDecimal() {
         Form form = createForm("src/input/ql/correct/evaluator/simpleDecimal.ql");
-
-        evaluator.start(form);
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         Value value = evaluator.getQuestionValue("value");
 
@@ -68,8 +69,8 @@ public class EvaluatorTest extends BaseQlTest {
     @Test
     public void shouldStoreMoney() {
         Form form = createForm("src/input/ql/correct/evaluator/simpleMoney.ql");
-
-        evaluator.start(form);
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         Value value = evaluator.getQuestionValue("value");
 
@@ -82,8 +83,8 @@ public class EvaluatorTest extends BaseQlTest {
     @Test
     public void shouldNotDivideByZero() {
         Form form = createForm("src/input/ql/correct/evaluator/divideByZero.ql");
-
-        evaluator.start(form);
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         assertEquals(0, issueTracker.getWarnings().size());
         assertEquals(1, issueTracker.getErrors().size());
@@ -96,8 +97,8 @@ public class EvaluatorTest extends BaseQlTest {
     @Test
     public void shouldDownCastDecimalToInteger() {
         Form form = createForm("src/input/ql/correct/evaluator/downcastDecimalToInteger.ql");
-
-        evaluator.start(form);
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         Value value = evaluator.getQuestionValue("result");
 
@@ -107,8 +108,8 @@ public class EvaluatorTest extends BaseQlTest {
     @Test
     public void shouldMultiplyDecimals() {
         Form form = createForm("src/input/ql/correct/evaluator/decimalMultiplication.ql");
-
-        evaluator.start(form);
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         Value value = evaluator.getQuestionValue("result");
 
@@ -118,8 +119,8 @@ public class EvaluatorTest extends BaseQlTest {
     @Test
     public void shouldDivideMoneyToDecimal() {
         Form form = createForm("src/input/ql/correct/evaluator/moneyDivisionToDecimal.ql");
-
-        evaluator.start(form);
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         Value value = evaluator.getQuestionValue("result");
         assertEquals(0.8125, value.getValue());
@@ -128,8 +129,8 @@ public class EvaluatorTest extends BaseQlTest {
     @Test
     public void shouldDivideMoneyToMoney() {
         Form form = createForm("src/input/ql/correct/evaluator/moneyDivisionToMoney.ql");
-
-        evaluator.start(form);
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         Value value = evaluator.getQuestionValue("result");
 
@@ -142,8 +143,8 @@ public class EvaluatorTest extends BaseQlTest {
     @Test
     public void shouldCompareStrings() {
         Form form = createForm("src/input/ql/correct/evaluator/stringComparison.ql");
-
-        evaluator.start(form);
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         Value value = evaluator.getQuestionValue("result");
 
@@ -153,8 +154,8 @@ public class EvaluatorTest extends BaseQlTest {
     @Test
     public void shouldCompareDates() {
         Form form = createForm("src/input/ql/correct/evaluator/dateComparison.ql");
-
-        evaluator.start(form);
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         Value value = evaluator.getQuestionValue("result");
 
@@ -164,8 +165,8 @@ public class EvaluatorTest extends BaseQlTest {
     @Test
     public void shouldEvaluateBooleans() {
         Form form = createForm("src/input/ql/correct/evaluator/booleanExpression.ql");
-
-        evaluator.start(form);
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         Value value = evaluator.getQuestionValue("result");
 
@@ -175,8 +176,8 @@ public class EvaluatorTest extends BaseQlTest {
     @Test
     public void shouldCompareIntegers() {
         Form form = createForm("src/input/ql/correct/evaluator/integerComparisonAndOperation.ql");
-
-        evaluator.start(form);
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         Value value = evaluator.getQuestionValue("result");
         Value value2 = evaluator.getQuestionValue("result2");
@@ -188,8 +189,8 @@ public class EvaluatorTest extends BaseQlTest {
     @Test
     public void shouldFormatDateString() {
         Form form = createForm("src/input/ql/correct/evaluator/simpleDate.ql");
-
-        evaluator.start(form);
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         Value value = evaluator.getQuestionValue("value");
 
@@ -214,8 +215,8 @@ public class EvaluatorTest extends BaseQlTest {
     @Test
     public void shouldEvaluateElse() {
         Form form = createForm("src/input/ql/correct/evaluator/ifElseEvaluation.ql");
-
-        evaluator.start(form);
+        evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         BooleanValue value = (BooleanValue) evaluator.getQuestionValue("flag");
 
