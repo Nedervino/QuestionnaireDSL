@@ -52,8 +52,9 @@ public class LiteralTest {
 
     @Test
     public void canParseStringLiteral() {
-        final String EXPECTED_RESULT = "\"testString\"";
-        StringLiteral stringLiteral = (StringLiteral) formBuilder.createExpression(EXPECTED_RESULT);
+        final String INPUT = "\"testString\"";
+        final String EXPECTED_RESULT = INPUT.substring(1, INPUT.length()-1);
+        StringLiteral stringLiteral = (StringLiteral) formBuilder.createExpression(INPUT);
 
         assertEquals(EXPECTED_RESULT, stringLiteral.getValue());
     }

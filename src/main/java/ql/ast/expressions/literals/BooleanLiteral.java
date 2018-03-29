@@ -13,7 +13,7 @@ public class BooleanLiteral extends Expression {
         this.value = Boolean.parseBoolean(value);
     }
 
-    public Boolean getValue() {
+    public boolean getValue() {
         return value;
     }
 
