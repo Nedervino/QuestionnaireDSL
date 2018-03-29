@@ -12,8 +12,8 @@ public class FormUIFactory {
 
     public FormUI getFormUI(Form form) {
         //TODO: optionally move form to evaluator constructor
-        FormEvaluator evaluator = new Evaluator();
-        evaluator.start(form);
+        FormEvaluator evaluator = new Evaluator(form);
+        evaluator.evaluate();
 
         List<QuestionUI> questions = new ArrayList<>();
         for (Question question : evaluator.getQuestions()) {
@@ -21,4 +21,6 @@ public class FormUIFactory {
         }
         return new FormUI(questions);
     }
+
+
 }

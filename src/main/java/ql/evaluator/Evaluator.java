@@ -24,26 +24,22 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     private Form form;
     private QuestionCollector questionCollector;
 
-    public Evaluator() {
+    public Evaluator(Form form) {
+        this.form = form;
         issueTracker = new IssueTracker();
         questionValues = new HashMap<>();
         questionCollector = new QuestionCollector();
     }
 
     @Override
-    public void start(Form form) {
-        this.form = form;
-        evaluate();
+    public void evaluate() {
+        visit(form);
     }
+
 
     @Override
     public void setValue(String questionId, Value value) {
         questionValues.put(questionId, value);
-    }
-
-    @Override
-    public void evaluate() {
-        visit(form);
     }
 
     @Override
