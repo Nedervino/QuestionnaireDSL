@@ -1,4 +1,4 @@
-package gui.widgets;
+package ql.gui.widgets;
 
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;

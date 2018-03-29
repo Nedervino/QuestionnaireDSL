@@ -1,7 +1,7 @@
 package main;
 
-import gui.FormUI;
-import gui.FormUIFactory;
+import ql.gui.FormUI;
+import ql.gui.FormUIFactory;
 import ql.ast.Form;
 import ql.parser.FormBuilder;
 import ql.validator.Validator;

@@ -1,6 +1,6 @@
-package gui.widgets;
+package ql.gui.widgets;
 
-import gui.WidgetListener;
+import ql.gui.WidgetListener;
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;
 import ql.evaluator.values.StringValue;

@@ -1,4 +1,4 @@
-package gui;
+package ql.gui;
 
 import ql.ast.statements.Question;
 import ql.evaluator.values.Value;

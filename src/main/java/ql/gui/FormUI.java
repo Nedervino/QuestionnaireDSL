@@ -1,4 +1,4 @@
-package gui;
+package ql.gui;
 
 import javax.swing.*;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package gui;
+package ql.gui;
 
-import gui.widgets.*;
+import ql.gui.widgets.*;
 import ql.ast.statements.Question;
 import ql.ast.types.*;
 import ql.ast.visitors.TypeVisitor;

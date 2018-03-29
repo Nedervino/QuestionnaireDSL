@@ -1,4 +1,4 @@
-package gui;
+package ql.gui;
 
 import ql.ast.Form;
 import ql.ast.statements.Question;
@@ -21,6 +21,5 @@ public class FormUIFactory {
         }
         return new FormUI(questions);
     }
-
 
 }
