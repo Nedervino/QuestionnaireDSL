@@ -18,6 +18,7 @@ public class Main {
         //TODO: pass file (non-string) instead of filecontents to formbuilder
 
         String qlFileName = "src/input/ql/correct/if.ql";
+        // String qlFileName = "src/input/ql/correct/gui/allComputedQuestions.ql";
         String qlFile = new FileScanner().loadFile(qlFileName);
 
         FormBuilder formBuilder = new FormBuilder();

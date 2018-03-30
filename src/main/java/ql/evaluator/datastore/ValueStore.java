@@ -5,11 +5,11 @@ import ql.evaluator.values.Value;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ValueTable {
+public class ValueStore {
 
     private final Map<String, Value> valueMap;
 
-    public ValueTable() {
+    public ValueStore() {
         valueMap = new HashMap<>();
     }
 

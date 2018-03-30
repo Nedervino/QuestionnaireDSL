@@ -5,12 +5,12 @@ import ql.ast.statements.Question;
 
 import java.util.*;
 
-public class QuestionTable {
+public class QuestionStore {
 
     private final Map<String, Question> questionMap;
     private final Map<String, Expression> conditionMap;
 
-    public QuestionTable() {
+    public QuestionStore() {
         questionMap = new LinkedHashMap<>();
         conditionMap = new HashMap<>();
     }

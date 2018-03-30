@@ -5,11 +5,11 @@ import ql.ast.expressions.Expression;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ExpressionTable {
+public class ExpressionStore {
 
     private final Map<String, Expression> expressionMap;
 
-    public ExpressionTable() {
+    public ExpressionStore() {
         expressionMap = new HashMap<>();
     }
 
