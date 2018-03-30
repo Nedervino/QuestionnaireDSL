@@ -11,6 +11,9 @@ import ql.ast.expressions.unary.Negative;
 import ql.ast.statements.*;
 import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormStatementVisitor;
+import ql.evaluator.datastore.ExpressionTable;
+import ql.evaluator.datastore.QuestionTable;
+import ql.evaluator.datastore.ValueTable;
 import ql.evaluator.values.*;
 
 import java.util.HashMap;
@@ -20,18 +23,22 @@ import java.util.Map;
 
 public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<Value>, FormEvaluator {
 
-    //TODO: move Maps to own class
-    private final Map<String, Value> valueMap;
-    private final Map<String, Expression> expressionMap;
+    private final ExpressionTable expressionTable;
+    private final QuestionTable questionTable;
+    private final ValueTable valueTable;
+
     private final IssueTracker issueTracker;
     private final QuestionCollector questionCollector;
     private Form form;
 
     public Evaluator(Form form) {
         this.form = form;
+
+        expressionTable = new ExpressionTable();
+        questionTable = new QuestionTable();
+        valueTable = new ValueTable();
+
         issueTracker = new IssueTracker();
-        valueMap = new HashMap<>();
-        expressionMap = new HashMap<>();
         questionCollector = new QuestionCollector();
     }
 
@@ -43,9 +50,9 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public void setValue(String questionId, Value value) {
-        System.out.printf("Updating. Value for %s was %s\n", questionId, valueMap.get(questionId).getValue().toString());
-        valueMap.put(questionId, value);
-        System.out.printf("Value for %s is now %s\n", questionId, valueMap.get(questionId).getValue().toString());
+        System.out.printf("Updating. Value for %s was %s\n", questionId, valueTable.getValue(questionId).getValue().toString());
+        valueTable.setValue(questionId, value);
+        System.out.printf("Value for %s is now %s\n", questionId, valueTable.getValue(questionId).getValue().toString());
 
     }
 
@@ -56,12 +63,12 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public Value getQuestionValue(String questionId) {
-        return valueMap.get(questionId);
+        return valueTable.getValue(questionId);
     }
 
     @Override
     public boolean questionIsComputed(String questionId) {
-        return expressionMap.containsKey(questionId);
+        return expressionTable.hasExpression(questionId);
     }
 
     @Override
@@ -71,7 +78,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public Void visit(ComputedQuestion node) {
-        valueMap.put(node.getId(), node.getExpression().accept(this));
+        valueTable.setValue(node.getId(), node.getExpression().accept(this));
         return null;
     }
 
@@ -217,7 +224,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public Value visit(Variable variable) {
-        return valueMap.get(variable.getName());
+        return valueTable.getValue(variable.getName());
     }
 
     @Override
