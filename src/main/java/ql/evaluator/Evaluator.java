@@ -2,14 +2,9 @@ package ql.evaluator;
 
 import ql.ast.Form;
 import ql.ast.expressions.Expression;
-import ql.ast.expressions.Variable;
-import ql.ast.expressions.binary.*;
-import ql.ast.expressions.literals.*;
 import ql.ast.expressions.unary.Negation;
-import ql.ast.expressions.unary.Negative;
 import ql.ast.statements.*;
 import ql.ast.types.*;
-import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormStatementVisitor;
 import ql.ast.visitors.TypeVisitor;
 import ql.evaluator.datastore.ExpressionStore;
@@ -28,18 +23,12 @@ public class Evaluator implements FormStatementVisitor<String>, TypeVisitor<Valu
     private final ValueStore valueStore;
     private final ExpressionEvaluator expressionEvaluator;
 
-    private final QuestionCollector questionCollector;
-    private Form form;
-
     public Evaluator(Form form) {
-        this.form = form;
 
         expressionStore = new ExpressionStore();
         questionStore = new QuestionStore();
         valueStore = new ValueStore();
         expressionEvaluator = new ExpressionEvaluator(valueStore);
-
-        questionCollector = new QuestionCollector();
 
         visit(form);
     }
@@ -58,10 +47,9 @@ public class Evaluator implements FormStatementVisitor<String>, TypeVisitor<Valu
 
     @Override
     public void setValue(String questionId, Value value) {
-        System.out.printf("Updating. Value for %s was %s\n", questionId, valueStore.getValue(questionId).getValue().toString());
+        // System.out.printf("Updating. Value for %s was %s\n", questionId, valueStore.getValue(questionId).getValue().toString());
         valueStore.setValue(questionId, value);
-        System.out.printf("Value for %s is now %s\n", questionId, valueStore.getValue(questionId).getValue().toString());
-
+        // System.out.printf("Value for %s is now %s\n", questionId, valueStore.getValue(questionId).getValue().toString());
     }
 
     @Override
@@ -77,6 +65,16 @@ public class Evaluator implements FormStatementVisitor<String>, TypeVisitor<Valu
     @Override
     public boolean questionIsComputed(String questionId) {
         return expressionStore.hasExpression(questionId);
+    }
+
+    @Override
+    public boolean questionIsEnabled(String questionId) {
+        if(questionStore.hasConditionDependency(questionId)) {
+            Expression conditionExpression = questionStore.getConditionDependency(questionId);
+            BooleanValue condition = (BooleanValue) expressionEvaluator.evaluate(conditionExpression);
+            return condition.getValue();
+        }
+        return true;
     }
 
     @Override

@@ -17,4 +17,5 @@ public interface FormEvaluator {
 
     void setValue(String questionId, Value value);
 
+    boolean questionIsEnabled(String questionId);
 }
