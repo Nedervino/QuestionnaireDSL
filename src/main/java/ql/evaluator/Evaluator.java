@@ -20,6 +20,8 @@ import java.util.List;
 
 public class Evaluator implements FormStatementVisitor<String>, ExpressionVisitor<Value>, FormEvaluator {
 
+    //TODO: Split up ExpressionEvaluator to own class
+
     private final ExpressionStore expressionStore;
     private final QuestionStore questionStore;
     private final ValueStore valueStore;
@@ -37,11 +39,19 @@ public class Evaluator implements FormStatementVisitor<String>, ExpressionVisito
 
         issueTracker = new IssueTracker();
         questionCollector = new QuestionCollector();
+
+        visit(form);
     }
 
     @Override
     public void evaluate() {
-        visit(form);
+        for (Question question : getQuestions()) {
+            if (expressionStore.hasExpression(question.getId())) {
+                //TODO: replace with static expressionevaluator
+                Value value = expressionStore.getExpression(question.getId()).accept(this);
+                valueStore.setValue(question.getId(), value);
+            }
+        }
     }
 
 
@@ -55,7 +65,7 @@ public class Evaluator implements FormStatementVisitor<String>, ExpressionVisito
 
     @Override
     public List<Question> getQuestions() {
-        return questionCollector.getQuestions(form);
+        return questionStore.getQuestions();
     }
 
     @Override
@@ -70,18 +80,25 @@ public class Evaluator implements FormStatementVisitor<String>, ExpressionVisito
 
     @Override
     public String visit(Form form) {
-        visit(form.getStatements());
+        for (Statement statement : form.getStatements()) {
+            statement.accept(this);
+        }
         return null;
     }
 
     @Override
     public String visit(Question question) {
+        questionStore.addQuestion(question);
+        // valueStore.setValue(question.getId(), new StringValue(""));
         return question.getId();
     }
 
     @Override
     public String visit(ComputedQuestion question) {
-        valueStore.setValue(question.getId(), question.getExpression().accept(this));
+        // valueStore.setValue(question.getId(), question.getExpression().accept(this));
+
+        questionStore.addQuestion(question);
+        expressionStore.addExpression(question.getId(), question.getExpression());
         return question.getId();
     }
 
@@ -99,12 +116,6 @@ public class Evaluator implements FormStatementVisitor<String>, ExpressionVisito
         //     visit(node.getIfStatements());
         // }
         return null;
-    }
-
-    private void visit(List<Statement> statements) {
-        for (Statement statement : statements) {
-            statement.accept(this);
-        }
     }
 
     @Override

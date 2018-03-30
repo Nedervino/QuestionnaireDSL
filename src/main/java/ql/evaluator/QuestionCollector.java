@@ -7,7 +7,7 @@ import ql.ast.visitors.FormStatementVisitor;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: Duplicate of validator.symboltable.SymbolTable inner class
+//TODO: Currently not used. Duplicate of validator.symboltable.SymbolTable inner class
 public class QuestionCollector implements FormStatementVisitor<List<Question>> {
 
     List<Question> getQuestions(Form form) {
