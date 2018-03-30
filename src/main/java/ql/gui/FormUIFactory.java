@@ -17,9 +17,13 @@ public class FormUIFactory {
 
         List<QuestionUI> questions = new ArrayList<>();
         for (Question question : evaluator.getQuestions()) {
-            questions.add(new QuestionUI(evaluator, question));
+            questions.add(getQuestionUI(evaluator, question));
         }
         return new FormUI(questions);
+    }
+
+    public QuestionUI getQuestionUI(FormEvaluator evaluator, Question question) {
+        return new QuestionUI(evaluator, question);
     }
 
 }

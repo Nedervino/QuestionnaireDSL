@@ -1,5 +1,6 @@
 package ql.gui;
 
+import ql.evaluator.values.Value;
 import ql.gui.widgets.Widget;
 import ql.ast.statements.Question;
 import ql.evaluator.FormEvaluator;
@@ -7,18 +8,21 @@ import ql.evaluator.FormEvaluator;
 import javax.swing.*;
 import java.awt.*;
 
-public class QuestionUI {
+public class QuestionUI implements WidgetListener {
 
     //TODO: Inconsistent with input widgets
-    //TODO: Move Question field from widget to QuestionUI
+    //TODO: Move Question / formEvaluator field from widget to QuestionUI
 
     private final JLabel label;
     private final Widget widget;
     private final JPanel panel;
+    private final FormEvaluator formEvaluator;
 
     public QuestionUI(FormEvaluator formEvaluator, Question question) {
+        this.formEvaluator = formEvaluator;
         label = new JLabel(question.getLabel());
         widget = new WidgetFactory().createWidget(question, formEvaluator);
+        widget.registerChangeListener(this);
         widget.setVisible(true);
 
         panel = new JPanel(new BorderLayout());
@@ -40,4 +44,8 @@ public class QuestionUI {
         panel.setVisible(visible);
     }
 
+    @Override
+    public void onQuestionUpdated(Question question, Value value) {
+        formEvaluator.setValue(question.getId(), value);
+    }
 }
