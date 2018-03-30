@@ -1,9 +1,9 @@
 package ql.gui.widgets;
 
+import ql.environment.Environment;
 import ql.gui.WidgetListener;
 import ql.ast.statements.Question;
-import ql.evaluator.FormEvaluator;
-import ql.evaluator.values.BooleanValue;
+import ql.environment.values.BooleanValue;
 
 import javax.swing.*;
 
@@ -13,8 +13,8 @@ public class DropdownWidget extends BaseWidget {
     private final String FALSE_LABEL = "NO";
     private final JComboBox<String> dropdown;
 
-    public DropdownWidget(FormEvaluator evaluator, Question question, boolean isEditable) {
-        super(evaluator, question, isEditable);
+    public DropdownWidget(Environment environment, Question question, boolean isEditable) {
+        super(environment, question, isEditable);
 
         dropdown = new JComboBox<>();
         dropdown.addItem(TRUE_LABEL);
@@ -25,7 +25,7 @@ public class DropdownWidget extends BaseWidget {
 
     @Override
     public void setValue() {
-        if ((boolean) evaluator.getQuestionValue(question.getId()).getValue()) {
+        if ((boolean) environment.getQuestionValue(question.getId()).getValue()) {
             dropdown.setSelectedItem(TRUE_LABEL);
         } else {
             dropdown.setSelectedItem(FALSE_LABEL);

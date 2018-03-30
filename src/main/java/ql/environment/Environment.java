@@ -1,11 +1,11 @@
-package ql.evaluator;
+package ql.environment;
 
 import ql.ast.statements.Question;
-import ql.evaluator.values.Value;
+import ql.environment.values.Value;
 
 import java.util.List;
 
-public interface FormEvaluator {
+public interface Environment {
 
     void evaluate();
 

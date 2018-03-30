@@ -1,4 +1,4 @@
-package ql.evaluator.values;
+package ql.environment.values;
 
 public abstract class NumericValue<T> implements Value<T> {
 

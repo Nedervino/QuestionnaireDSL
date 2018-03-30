@@ -1,9 +1,9 @@
 package ql.gui;
 
-import ql.evaluator.values.Value;
+import ql.environment.values.Value;
 import ql.gui.widgets.Widget;
 import ql.ast.statements.Question;
-import ql.evaluator.FormEvaluator;
+import ql.environment.Environment;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,19 +11,19 @@ import java.awt.*;
 public class QuestionUI implements WidgetListener {
 
     //TODO: Inconsistent with input widgets
-    //TODO: Move Question / formEvaluator field from widget to QuestionUI
+    //TODO: Move Question / environment field from widget to QuestionUI
 
     private final JLabel label;
     private final Widget widget;
     private final JPanel panel;
-    private final FormEvaluator formEvaluator;
+    private final Environment environment;
     private final Question question;
 
-    public QuestionUI(FormEvaluator formEvaluator, Question question) {
+    public QuestionUI(Environment environment, Question question) {
         this.question = question;
-        this.formEvaluator = formEvaluator;
+        this.environment = environment;
         label = new JLabel(question.getLabel());
-        widget = new WidgetFactory().createWidget(question, formEvaluator);
+        widget = new WidgetFactory().createWidget(question, environment);
         widget.registerChangeListener(this);
 
         panel = new JPanel(new BorderLayout());
@@ -49,11 +49,11 @@ public class QuestionUI implements WidgetListener {
     }
 
     public boolean isEnabled() {
-        return formEvaluator.questionIsEnabled(question.getId());
+        return environment.questionIsEnabled(question.getId());
     }
 
     @Override
     public void onQuestionUpdated(Question question, Value value) {
-        formEvaluator.setValue(question.getId(), value);
+        environment.setValue(question.getId(), value);
     }
 }

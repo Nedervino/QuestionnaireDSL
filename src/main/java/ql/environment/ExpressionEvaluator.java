@@ -1,4 +1,4 @@
-package ql.evaluator;
+package ql.environment;
 
 import ql.ast.expressions.Expression;
 import ql.ast.expressions.Variable;
@@ -7,8 +7,8 @@ import ql.ast.expressions.literals.*;
 import ql.ast.expressions.unary.Negation;
 import ql.ast.expressions.unary.Negative;
 import ql.ast.visitors.ExpressionVisitor;
-import ql.evaluator.datastore.ValueStore;
-import ql.evaluator.values.*;
+import ql.environment.datastore.ValueStore;
+import ql.environment.values.*;
 
 public class ExpressionEvaluator implements ExpressionVisitor<Value>{
 

@@ -1,23 +1,28 @@
-package ql.evaluator.values;
+package ql.environment.values;
 
 import java.util.Objects;
 
-public class DecimalValue extends NumericValue<Double> {
+public class IntegerValue extends NumericValue<Integer> {
+    //make all final
+    private final Integer value;
 
-    private final double value;
-
-    public DecimalValue(double value) {
+    public IntegerValue(int value) {
         this.value = value;
     }
 
     @Override
-    public Double getValue() {
+    public Integer getValue() {
         return value;
     }
 
     @Override
-    public Value add(DecimalValue value) {
-        return new DecimalValue(value.getValue() + getValue());
+    public Value add(IntegerValue value) {
+        return new IntegerValue(value.getValue() + getValue());
+    }
+
+    @Override
+    public Value divide(IntegerValue value) {
+        return new IntegerValue(value.getValue() / getValue());
     }
 
     @Override
@@ -26,38 +31,38 @@ public class DecimalValue extends NumericValue<Double> {
     }
 
     @Override
-    public Value divide(IntegerValue value) {
-        return new MoneyValue(value.getValue() / getValue());
-    }
-
-    @Override
     public Value divide(MoneyValue value) {
         return new MoneyValue(value.getValue().doubleValue() / getValue());
     }
 
     @Override
-    public BooleanValue equal(DecimalValue value) {
+    public BooleanValue equal(IntegerValue value) {
         return new BooleanValue(Objects.equals(value.getValue(), getValue()));
     }
 
     @Override
-    public BooleanValue greaterThanEqual(DecimalValue value) {
+    public BooleanValue greaterThanEqual(IntegerValue value) {
         return new BooleanValue(value.getValue() >= getValue());
     }
 
     @Override
-    public BooleanValue greaterThan(DecimalValue value) {
+    public BooleanValue greaterThan(IntegerValue value) {
         return new BooleanValue(value.getValue() > getValue());
     }
 
     @Override
-    public BooleanValue lessThanEqual(DecimalValue value) {
+    public BooleanValue lessThanEqual(IntegerValue value) {
         return new BooleanValue(value.getValue() <= getValue());
     }
 
     @Override
-    public BooleanValue lessThan(DecimalValue value) {
+    public BooleanValue lessThan(IntegerValue value) {
         return new BooleanValue(value.getValue() < getValue());
+    }
+
+    @Override
+    public Value multiply(IntegerValue value) {
+        return new IntegerValue(value.getValue() * getValue());
     }
 
     @Override
@@ -66,28 +71,23 @@ public class DecimalValue extends NumericValue<Double> {
     }
 
     @Override
-    public Value multiply(IntegerValue value) {
-        return new DecimalValue(value.getValue() * getValue());
-    }
-
-    @Override
     public Value multiply(MoneyValue value) {
-        return new MoneyValue(value.getValue().doubleValue() * getValue());
+        return value.multiply(new MoneyValue(getValue()));
     }
 
     @Override
-    public BooleanValue notEqual(DecimalValue value) {
+    public BooleanValue notEqual(IntegerValue value) {
         return new BooleanValue(!Objects.equals(value.getValue(), getValue()));
     }
 
     @Override
-    public Value subtract(DecimalValue value) {
-        return new DecimalValue(value.getValue() - getValue());
+    public Value subtract(IntegerValue value) {
+        return new IntegerValue(value.getValue() - getValue());
     }
 
     @Override
     public Value negative() {
-        return new DecimalValue(-getValue());
+        return new IntegerValue(-getValue());
     }
 
     @Override

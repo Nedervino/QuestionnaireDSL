@@ -1,4 +1,4 @@
-package ql.evaluator;
+package ql.environment;
 
 import ql.ast.Form;
 import ql.ast.expressions.Expression;
@@ -7,23 +7,23 @@ import ql.ast.statements.*;
 import ql.ast.types.*;
 import ql.ast.visitors.FormStatementVisitor;
 import ql.ast.visitors.TypeVisitor;
-import ql.evaluator.datastore.ExpressionStore;
-import ql.evaluator.datastore.QuestionStore;
-import ql.evaluator.datastore.ValueStore;
-import ql.evaluator.values.*;
+import ql.environment.datastore.ExpressionStore;
+import ql.environment.datastore.QuestionStore;
+import ql.environment.datastore.ValueStore;
+import ql.environment.values.*;
 
 import java.util.Date;
 import java.util.List;
 
 
-public class Evaluator implements FormStatementVisitor<String>, TypeVisitor<Value>, FormEvaluator {
+public class FormEnvironment implements FormStatementVisitor<String>, TypeVisitor<Value>, Environment {
 
     private final ExpressionStore expressionStore;
     private final QuestionStore questionStore;
     private final ValueStore valueStore;
     private final ExpressionEvaluator expressionEvaluator;
 
-    public Evaluator(Form form) {
+    public FormEnvironment(Form form) {
 
         expressionStore = new ExpressionStore();
         questionStore = new QuestionStore();
@@ -37,7 +37,7 @@ public class Evaluator implements FormStatementVisitor<String>, TypeVisitor<Valu
     public void evaluate() {
         for (Question question : getQuestions()) {
             if (expressionStore.hasExpression(question.getId())) {
-                //TODO: replace with static expressionevaluator
+                //TODO: replace with static expressionEvaluator
                 Value value = expressionEvaluator.evaluate(expressionStore.getExpression(question.getId()));
                 valueStore.setValue(question.getId(), value);
             }

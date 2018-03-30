@@ -2,9 +2,9 @@ package ql.gui.widgets;
 
 import ql.gui.WidgetListener;
 import ql.ast.statements.Question;
-import ql.evaluator.FormEvaluator;
-import ql.evaluator.values.StringValue;
-import ql.evaluator.values.Value;
+import ql.environment.Environment;
+import ql.environment.values.StringValue;
+import ql.environment.values.Value;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,8 +13,8 @@ public class TextFieldWidget extends BaseWidget {
 
     private final JFormattedTextField textField;
 
-    public TextFieldWidget(FormEvaluator evaluator, Question question, boolean isEditable) {
-        super(evaluator, question, isEditable);
+    public TextFieldWidget(Environment environment, Question question, boolean isEditable) {
+        super(environment, question, isEditable);
         textField = new JFormattedTextField();
         textField.setPreferredSize(new Dimension(200, 50));
         setValue();
@@ -27,7 +27,7 @@ public class TextFieldWidget extends BaseWidget {
 
     @Override
     public void setValue() {
-        Value value = evaluator.getQuestionValue(question.getId());
+        Value value = environment.getQuestionValue(question.getId());
         if (value != null) {
             textField.setValue(value.getValue());
         }

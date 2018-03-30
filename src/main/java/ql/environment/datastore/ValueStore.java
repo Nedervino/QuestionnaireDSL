@@ -1,6 +1,6 @@
-package ql.evaluator.datastore;
+package ql.environment.datastore;
 
-import ql.evaluator.values.Value;
+import ql.environment.values.Value;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package ql.evaluator.datastore;
+package ql.environment.datastore;
 
 import ql.ast.expressions.Expression;
 import ql.ast.statements.Question;
