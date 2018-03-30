@@ -13,6 +13,8 @@ public interface FormEvaluator {
 
     Value getQuestionValue(String questionId);
 
+    boolean questionIsComputed(String questionId);
+
     void setValue(String questionId, Value value);
 
 }

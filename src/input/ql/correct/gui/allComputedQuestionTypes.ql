@@ -15,7 +15,7 @@ form taxOfficeExample {
         q5: money = 1234,00
     "Date?"
         q6: date = 12-12-2012
-    "Generated error type"
-        q7: integer = 1/0
+//    "Generated error type"
+//        q7: integer = 1/0
 
 }
