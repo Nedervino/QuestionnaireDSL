@@ -21,13 +21,13 @@ public class Validator {
         Checker cyclicDependencyChecker = new CyclicDependencyChecker();
 
         //Check for duplicate question identifiers and labels
-        if(detectsErrors(questionDuplicationChecker, form)) return false;
+        if (detectsErrors(questionDuplicationChecker, form)) return false;
 
         //Check for reference to undefined questions, non-boolean conditionals, and invalid operand types
-        if(detectsErrors(expressionChecker, form)) return false;
+        if (detectsErrors(expressionChecker, form)) return false;
 
         //Check cyclic dependencies between questions
-        if(detectsErrors(cyclicDependencyChecker, form)) return false;
+        if (detectsErrors(cyclicDependencyChecker, form)) return false;
 
         return true;
     }

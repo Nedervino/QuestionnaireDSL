@@ -22,7 +22,7 @@ public class FormUI {
         JPanel questionContainer = new JPanel();
         for (QuestionUI question : questions) {
             questionContainer.add(question.getComponent());
-            questionContainer.add(Box.createRigidArea(new Dimension(0,40)));
+            questionContainer.add(Box.createRigidArea(new Dimension(0, 40)));
 
         }
         // JScrollPane scrollPane = new JScrollPane(questionContainer);

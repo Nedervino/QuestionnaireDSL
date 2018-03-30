@@ -1,7 +1,7 @@
 package ql.gui.widgets;
 
-import ql.gui.WidgetListener;
 import ql.environment.values.Value;
+import ql.gui.WidgetListener;
 
 import javax.swing.*;
 

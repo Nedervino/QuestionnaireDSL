@@ -24,12 +24,10 @@ public class FormEnvironment implements FormStatementVisitor<String>, TypeVisito
     private final ExpressionEvaluator expressionEvaluator;
 
     public FormEnvironment(Form form) {
-
         expressionStore = new ExpressionStore();
         questionStore = new QuestionStore();
         valueStore = new ValueStore();
         expressionEvaluator = new ExpressionEvaluator(valueStore);
-
         visit(form);
     }
 
@@ -47,9 +45,7 @@ public class FormEnvironment implements FormStatementVisitor<String>, TypeVisito
 
     @Override
     public void setValue(String questionId, Value value) {
-        // System.out.printf("Updating. Value for %s was %s\n", questionId, valueStore.getValue(questionId).getValue().toString());
         valueStore.setValue(questionId, value);
-        // System.out.printf("Value for %s is now %s\n", questionId, valueStore.getValue(questionId).getValue().toString());
     }
 
     @Override
@@ -69,7 +65,7 @@ public class FormEnvironment implements FormStatementVisitor<String>, TypeVisito
 
     @Override
     public boolean questionIsEnabled(String questionId) {
-        if(questionStore.hasConditionDependency(questionId)) {
+        if (questionStore.hasConditionDependency(questionId)) {
             Expression conditionExpression = questionStore.getConditionDependency(questionId);
             BooleanValue condition = (BooleanValue) expressionEvaluator.evaluate(conditionExpression);
             return condition.getValue();
@@ -94,8 +90,6 @@ public class FormEnvironment implements FormStatementVisitor<String>, TypeVisito
 
     @Override
     public String visit(ComputedQuestion question) {
-        // valueStore.setValue(question.getId(), question.getExpression().accept(this));
-
         questionStore.addQuestion(question);
         expressionStore.addExpression(question.getId(), question.getExpression());
         return question.getId();
@@ -106,14 +100,10 @@ public class FormEnvironment implements FormStatementVisitor<String>, TypeVisito
     public String visit(IfStatement node) {
         for (Statement statement : node.getIfStatements()) {
             String identifier = statement.accept(this);
-            if(identifier != null) {
+            if (identifier != null) {
                 questionStore.addConditionDependency(identifier, node.getCondition());
             }
         }
-
-        // if (((BooleanValue) node.getCondition().accept(this)).getValue()) {
-        //     visit(node.getIfStatements());
-        // }
         return null;
     }
 
@@ -121,25 +111,17 @@ public class FormEnvironment implements FormStatementVisitor<String>, TypeVisito
     public String visit(IfElseStatement node) {
         for (Statement statement : node.getIfStatements()) {
             String identifier = statement.accept(this);
-            if(identifier != null) {
+            if (identifier != null) {
                 questionStore.addConditionDependency(identifier, node.getCondition());
             }
         }
 
         for (Statement statement : node.getElseStatements()) {
             String identifier = statement.accept(this);
-            if(identifier != null) {
+            if (identifier != null) {
                 questionStore.addConditionDependency(identifier, new Negation(node.getCondition(), node.getSourceLocation()));
             }
         }
-
-        // List<Statement> statements;
-        // if (((BooleanValue) node.getCondition().accept(this)).getValue()) {
-        //     statements = node.getIfStatements();
-        // } else {
-        //     statements = node.getElseStatements();
-        // }
-        // visit(statements);
         return null;
     }
 

@@ -10,7 +10,7 @@ import ql.ast.visitors.ExpressionVisitor;
 import ql.environment.datastore.ValueStore;
 import ql.environment.values.*;
 
-public class ExpressionEvaluator implements ExpressionVisitor<Value>{
+public class ExpressionEvaluator implements ExpressionVisitor<Value> {
 
     private ValueStore valueStore;
 

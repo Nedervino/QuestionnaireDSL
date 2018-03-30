@@ -1,10 +1,10 @@
 package ql.gui.widgets;
 
-import ql.environment.Environment;
-import ql.gui.WidgetListener;
 import ql.ast.statements.Question;
+import ql.environment.Environment;
 import ql.environment.values.DecimalValue;
 import ql.environment.values.Value;
+import ql.gui.WidgetListener;
 
 import javax.swing.*;
 import java.awt.*;

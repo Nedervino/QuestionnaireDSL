@@ -4,7 +4,8 @@ import org.junit.Test;
 import ql.BaseQlTest;
 import ql.ast.Form;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class ValidatorTest extends BaseQlTest {
 

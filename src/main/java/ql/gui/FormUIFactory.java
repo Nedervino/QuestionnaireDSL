@@ -2,8 +2,8 @@ package ql.gui;
 
 import ql.ast.Form;
 import ql.ast.statements.Question;
-import ql.environment.FormEnvironment;
 import ql.environment.Environment;
+import ql.environment.FormEnvironment;
 
 import java.util.ArrayList;
 import java.util.List;

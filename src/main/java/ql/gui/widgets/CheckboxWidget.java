@@ -1,9 +1,9 @@
 package ql.gui.widgets;
 
-import ql.gui.WidgetListener;
 import ql.ast.statements.Question;
 import ql.environment.Environment;
 import ql.environment.values.BooleanValue;
+import ql.gui.WidgetListener;
 
 import javax.swing.*;
 
@@ -29,7 +29,7 @@ public class CheckboxWidget extends BaseWidget {
 
     @Override
     public void registerChangeListener(WidgetListener widgetListener) {
-            checkBox.addActionListener(e -> widgetListener.onQuestionUpdated(question, new BooleanValue(checkBox.isSelected())));
+        checkBox.addActionListener(e -> widgetListener.onQuestionUpdated(question, new BooleanValue(checkBox.isSelected())));
     }
 
     @Override

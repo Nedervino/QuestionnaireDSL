@@ -158,7 +158,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitStringLiteral(QLParser.StringLiteralContext ctx) {
-        String inputWithoutQuotes = ctx.STRINGLITERAL().getText().substring(1, ctx.STRINGLITERAL().getText().length()-1);
+        String inputWithoutQuotes = ctx.STRINGLITERAL().getText().substring(1, ctx.STRINGLITERAL().getText().length() - 1);
         return new StringLiteral(inputWithoutQuotes, getSourceLocation(ctx));
     }
 

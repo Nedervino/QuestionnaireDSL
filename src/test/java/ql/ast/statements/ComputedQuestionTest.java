@@ -3,7 +3,6 @@ package ql.ast.statements;
 import org.junit.Before;
 import org.junit.Test;
 import ql.ast.expressions.literals.*;
-import ql.ast.statements.ComputedQuestion;
 import ql.parser.FormBuilder;
 
 import java.math.BigDecimal;
@@ -17,7 +16,6 @@ public class ComputedQuestionTest {
     private final double DELTA = 1e-15;
 
     private FormBuilder formBuilder;
-
 
 
     @Before

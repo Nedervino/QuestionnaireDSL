@@ -1,9 +1,9 @@
 package ql.gui;
 
-import ql.environment.values.Value;
-import ql.gui.widgets.Widget;
 import ql.ast.statements.Question;
 import ql.environment.Environment;
+import ql.environment.values.Value;
+import ql.gui.widgets.Widget;
 
 import javax.swing.*;
 import java.awt.*;
