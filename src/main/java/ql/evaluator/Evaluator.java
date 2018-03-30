@@ -1,23 +1,27 @@
 package ql.evaluator;
 
 import ql.ast.Form;
+import ql.ast.expressions.Expression;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
 import ql.ast.expressions.unary.Negation;
 import ql.ast.expressions.unary.Negative;
 import ql.ast.statements.*;
+import ql.ast.types.*;
 import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormStatementVisitor;
+import ql.ast.visitors.TypeVisitor;
 import ql.evaluator.datastore.ExpressionStore;
 import ql.evaluator.datastore.QuestionStore;
 import ql.evaluator.datastore.ValueStore;
 import ql.evaluator.values.*;
 
+import java.util.Date;
 import java.util.List;
 
 
-public class Evaluator implements FormStatementVisitor<String>, FormEvaluator {
+public class Evaluator implements FormStatementVisitor<String>, TypeVisitor<Value>, FormEvaluator {
 
     private final ExpressionStore expressionStore;
     private final QuestionStore questionStore;
@@ -86,7 +90,7 @@ public class Evaluator implements FormStatementVisitor<String>, FormEvaluator {
     @Override
     public String visit(Question question) {
         questionStore.addQuestion(question);
-        // valueStore.setValue(question.getId(), new StringValue(""));
+        valueStore.setValue(question.getId(), question.getType().accept(this));
         return question.getId();
     }
 
@@ -142,4 +146,39 @@ public class Evaluator implements FormStatementVisitor<String>, FormEvaluator {
     }
 
 
+    @Override
+    public Value visit(BooleanType booleanType) {
+        return new BooleanValue(false);
+    }
+
+    @Override
+    public Value visit(DecimalType decimalType) {
+        return new DecimalValue(0.0);
+    }
+
+    @Override
+    public Value visit(IntegerType integerType) {
+        return new IntegerValue(0);
+    }
+
+    @Override
+    public Value visit(MoneyType moneyType) {
+        return new MoneyValue(0.00);
+    }
+
+    @Override
+    public Value visit(StringType stringType) {
+        return new StringValue("");
+    }
+
+    @Override
+    public Value visit(DateType dateType) {
+        return new DateValue(new Date());
+    }
+
+    @Override
+    public Value visit(ErrorType errorType) {
+        //TODO: optionally remove from visitor interface
+        return null;
+    }
 }
