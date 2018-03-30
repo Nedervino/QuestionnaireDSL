@@ -2,7 +2,6 @@ package ql.evaluator;
 
 import issuetracker.IssueTracker;
 import ql.ast.Form;
-import ql.ast.expressions.Expression;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
@@ -11,21 +10,19 @@ import ql.ast.expressions.unary.Negative;
 import ql.ast.statements.*;
 import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormStatementVisitor;
-import ql.evaluator.datastore.ExpressionTable;
-import ql.evaluator.datastore.QuestionTable;
-import ql.evaluator.datastore.ValueTable;
+import ql.evaluator.datastore.ExpressionStore;
+import ql.evaluator.datastore.QuestionStore;
+import ql.evaluator.datastore.ValueStore;
 import ql.evaluator.values.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
-public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<Value>, FormEvaluator {
+public class Evaluator implements FormStatementVisitor<String>, ExpressionVisitor<Value>, FormEvaluator {
 
-    private final ExpressionTable expressionTable;
-    private final QuestionTable questionTable;
-    private final ValueTable valueTable;
+    private final ExpressionStore expressionStore;
+    private final QuestionStore questionStore;
+    private final ValueStore valueStore;
 
     private final IssueTracker issueTracker;
     private final QuestionCollector questionCollector;
@@ -34,9 +31,9 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     public Evaluator(Form form) {
         this.form = form;
 
-        expressionTable = new ExpressionTable();
-        questionTable = new QuestionTable();
-        valueTable = new ValueTable();
+        expressionStore = new ExpressionStore();
+        questionStore = new QuestionStore();
+        valueStore = new ValueStore();
 
         issueTracker = new IssueTracker();
         questionCollector = new QuestionCollector();
@@ -50,9 +47,9 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public void setValue(String questionId, Value value) {
-        System.out.printf("Updating. Value for %s was %s\n", questionId, valueTable.getValue(questionId).getValue().toString());
-        valueTable.setValue(questionId, value);
-        System.out.printf("Value for %s is now %s\n", questionId, valueTable.getValue(questionId).getValue().toString());
+        System.out.printf("Updating. Value for %s was %s\n", questionId, valueStore.getValue(questionId).getValue().toString());
+        valueStore.setValue(questionId, value);
+        System.out.printf("Value for %s is now %s\n", questionId, valueStore.getValue(questionId).getValue().toString());
 
     }
 
@@ -63,30 +60,44 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public Value getQuestionValue(String questionId) {
-        return valueTable.getValue(questionId);
+        return valueStore.getValue(questionId);
     }
 
     @Override
     public boolean questionIsComputed(String questionId) {
-        return expressionTable.hasExpression(questionId);
+        return expressionStore.hasExpression(questionId);
     }
 
     @Override
-    public Void visit(Question node) {
+    public String visit(Form form) {
+        visit(form.getStatements());
         return null;
     }
 
     @Override
-    public Void visit(ComputedQuestion node) {
-        valueTable.setValue(node.getId(), node.getExpression().accept(this));
-        return null;
+    public String visit(Question question) {
+        return question.getId();
     }
 
     @Override
-    public Void visit(IfStatement node) {
-        if (((BooleanValue) node.getCondition().accept(this)).getValue()) {
-            visit(node.getIfStatements());
+    public String visit(ComputedQuestion question) {
+        valueStore.setValue(question.getId(), question.getExpression().accept(this));
+        return question.getId();
+    }
+
+    //TODO: handle nested dependencies within which parent is false but child is true
+    @Override
+    public String visit(IfStatement node) {
+        for (Statement statement : node.getIfStatements()) {
+            String identifier = statement.accept(this);
+            if(identifier != null) {
+                questionStore.addConditionDependency(identifier, node.getCondition());
+            }
         }
+
+        // if (((BooleanValue) node.getCondition().accept(this)).getValue()) {
+        //     visit(node.getIfStatements());
+        // }
         return null;
     }
 
@@ -97,14 +108,28 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
     }
 
     @Override
-    public Void visit(IfElseStatement node) {
-        List<Statement> statements;
-        if (((BooleanValue) node.getCondition().accept(this)).getValue()) {
-            statements = node.getIfStatements();
-        } else {
-            statements = node.getElseStatements();
+    public String visit(IfElseStatement node) {
+        for (Statement statement : node.getIfStatements()) {
+            String identifier = statement.accept(this);
+            if(identifier != null) {
+                questionStore.addConditionDependency(identifier, node.getCondition());
+            }
         }
-        visit(statements);
+
+        for (Statement statement : node.getElseStatements()) {
+            String identifier = statement.accept(this);
+            if(identifier != null) {
+                questionStore.addConditionDependency(identifier, new Negation(node.getCondition(), node.getSourceLocation()));
+            }
+        }
+
+        // List<Statement> statements;
+        // if (((BooleanValue) node.getCondition().accept(this)).getValue()) {
+        //     statements = node.getIfStatements();
+        // } else {
+        //     statements = node.getElseStatements();
+        // }
+        // visit(statements);
         return null;
     }
 
@@ -224,13 +249,7 @@ public class Evaluator implements FormStatementVisitor<Void>, ExpressionVisitor<
 
     @Override
     public Value visit(Variable variable) {
-        return valueTable.getValue(variable.getName());
-    }
-
-    @Override
-    public Void visit(Form form) {
-        visit(form.getStatements());
-        return null;
+        return valueStore.getValue(variable.getName());
     }
 
 }
