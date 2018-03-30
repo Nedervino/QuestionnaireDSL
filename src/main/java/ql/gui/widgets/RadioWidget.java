@@ -16,8 +16,8 @@ public class RadioWidget extends BaseWidget {
     private final JPanel panel;
     private final ButtonGroup buttonGroup;
 
-    public RadioWidget(FormEvaluator evaluator, Question question) {
-        super(evaluator, question);
+    public RadioWidget(FormEvaluator evaluator, Question question, boolean isEditable) {
+        super(evaluator, question, isEditable);
 
         panel = new JPanel();
         panel.setPreferredSize(new Dimension(200, 50));

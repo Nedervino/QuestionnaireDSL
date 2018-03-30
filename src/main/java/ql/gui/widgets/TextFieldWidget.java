@@ -13,8 +13,8 @@ public class TextFieldWidget extends BaseWidget {
 
     private final JFormattedTextField textField;
 
-    public TextFieldWidget(FormEvaluator evaluator, Question question) {
-        super(evaluator, question);
+    public TextFieldWidget(FormEvaluator evaluator, Question question, boolean isEditable) {
+        super(evaluator, question, isEditable);
         textField = new JFormattedTextField();
         textField.setPreferredSize(new Dimension(200, 50));
         setValue();

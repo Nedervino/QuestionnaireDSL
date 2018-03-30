@@ -11,11 +11,10 @@ public class CheckboxWidget extends BaseWidget {
 
     private final JCheckBox checkBox;
 
-    public CheckboxWidget(FormEvaluator evaluator, Question question) {
-        super(evaluator, question);
+    public CheckboxWidget(FormEvaluator evaluator, Question question, boolean isEditable) {
+        super(evaluator, question, isEditable);
         checkBox = new JCheckBox();
-        checkBox.setEnabled(true);
-        checkBox.setVisible(true);
+        checkBox.setEnabled(isEditable);
     }
 
     @Override

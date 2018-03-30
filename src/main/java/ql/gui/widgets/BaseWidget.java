@@ -11,10 +11,12 @@ public abstract class BaseWidget implements Widget {
     //TODO: remove evaluator reference from baseWidget (circular)
     protected final FormEvaluator evaluator;
     protected final Question question;
+    protected final boolean isEditable;
 
-    protected BaseWidget(FormEvaluator evaluator, Question question) {
+    protected BaseWidget(FormEvaluator evaluator, Question question, boolean isEditable) {
         this.evaluator = evaluator;
         this.question = question;
+        this.isEditable = isEditable;
     }
 
     @Override

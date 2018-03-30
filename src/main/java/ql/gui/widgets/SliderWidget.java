@@ -13,8 +13,8 @@ public class SliderWidget extends BaseWidget {
 
     private final JSlider slider;
 
-    public SliderWidget(FormEvaluator evaluator, Question question) {
-        super(evaluator, question);
+    public SliderWidget(FormEvaluator evaluator, Question question, boolean isEditable) {
+        super(evaluator, question, isEditable);
 
         Value value = evaluator.getQuestionValue(question.getId());
         Number number = value != null ? (Number) value.getValue() : 0;

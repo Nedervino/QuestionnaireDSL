@@ -13,15 +13,14 @@ public class DropdownWidget extends BaseWidget {
     private final String FALSE_LABEL = "NO";
     private final JComboBox<String> dropdown;
 
-    public DropdownWidget(FormEvaluator evaluator, Question question) {
-        super(evaluator, question);
+    public DropdownWidget(FormEvaluator evaluator, Question question, boolean isEditable) {
+        super(evaluator, question, isEditable);
 
         dropdown = new JComboBox<>();
         dropdown.addItem(TRUE_LABEL);
         dropdown.addItem(FALSE_LABEL);
-
         setValue();
-
+        dropdown.setEnabled(isEditable);
     }
 
     @Override
