@@ -1,6 +1,5 @@
 package ql.evaluator;
 
-import issuetracker.IssueTracker;
 import ql.ast.Form;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
@@ -18,15 +17,13 @@ import ql.evaluator.values.*;
 import java.util.List;
 
 
-public class Evaluator implements FormStatementVisitor<String>, ExpressionVisitor<Value>, FormEvaluator {
-
-    //TODO: Split up ExpressionEvaluator to own class
+public class Evaluator implements FormStatementVisitor<String>, FormEvaluator {
 
     private final ExpressionStore expressionStore;
     private final QuestionStore questionStore;
     private final ValueStore valueStore;
+    private final ExpressionEvaluator expressionEvaluator;
 
-    private final IssueTracker issueTracker;
     private final QuestionCollector questionCollector;
     private Form form;
 
@@ -36,8 +33,8 @@ public class Evaluator implements FormStatementVisitor<String>, ExpressionVisito
         expressionStore = new ExpressionStore();
         questionStore = new QuestionStore();
         valueStore = new ValueStore();
+        expressionEvaluator = new ExpressionEvaluator(valueStore);
 
-        issueTracker = new IssueTracker();
         questionCollector = new QuestionCollector();
 
         visit(form);
@@ -48,7 +45,7 @@ public class Evaluator implements FormStatementVisitor<String>, ExpressionVisito
         for (Question question : getQuestions()) {
             if (expressionStore.hasExpression(question.getId())) {
                 //TODO: replace with static expressionevaluator
-                Value value = expressionStore.getExpression(question.getId()).accept(this);
+                Value value = expressionEvaluator.evaluate(expressionStore.getExpression(question.getId()));
                 valueStore.setValue(question.getId(), value);
             }
         }
@@ -144,123 +141,5 @@ public class Evaluator implements FormStatementVisitor<String>, ExpressionVisito
         return null;
     }
 
-    //TODO: remove, place accept directly in visits
-    private Value getLeftValue(BinaryOperation node) {
-        return node.getLeft().accept(this);
-    }
-
-    private Value getRightValue(BinaryOperation node) {
-        return node.getRight().accept(this);
-    }
-
-    @Override
-    public Value visit(Addition node) {
-        return getLeftValue(node).add(getRightValue(node));
-    }
-
-    @Override
-    public Value visit(And node) {
-        return getLeftValue(node).and(getRightValue(node));
-    }
-
-    @Override
-    public Value visit(Division node) {
-        try {
-            return getLeftValue(node).divide(getRightValue(node));
-        } catch (ArithmeticException e) {
-            issueTracker.addError(node.getRight(), "Attempted to divide by zero.");
-        }
-        return null;
-    }
-
-    @Override
-    public Value visit(Equal node) {
-        return getLeftValue(node).equal(getRightValue(node));
-    }
-
-    @Override
-    public Value visit(GreaterThanEqual node) {
-        return getLeftValue(node).greaterThanEqual(getRightValue(node));
-    }
-
-    @Override
-    public Value visit(GreaterThan node) {
-        return getLeftValue(node).greaterThan(getRightValue(node));
-    }
-
-    @Override
-    public Value visit(LessThanEqual node) {
-        return getLeftValue(node).lessThanEqual(getRightValue(node));
-    }
-
-    @Override
-    public Value visit(LessThan node) {
-        return getLeftValue(node).lessThan(getRightValue(node));
-    }
-
-    @Override
-    public Value visit(Multiplication node) {
-        return getLeftValue(node).multiply(getRightValue(node));
-    }
-
-    @Override
-    public Value visit(NotEqual node) {
-        return getLeftValue(node).notEqual(getRightValue(node));
-    }
-
-    @Override
-    public Value visit(Or node) {
-        return getLeftValue(node).or(getRightValue(node));
-    }
-
-    @Override
-    public Value visit(Subtraction node) {
-        return getLeftValue(node).subtract(getRightValue(node));
-    }
-
-    @Override
-    public Value visit(Negation node) {
-        return node.getExpression().accept(this).negation();
-    }
-
-    @Override
-    public Value visit(Negative node) {
-        return node.getExpression().accept(this).negative();
-    }
-
-    @Override
-    public Value visit(StringLiteral node) {
-        return new StringValue(node.getValue());
-    }
-
-    @Override
-    public Value visit(IntegerLiteral node) {
-        return new IntegerValue(node.getValue());
-    }
-
-    @Override
-    public Value visit(BooleanLiteral node) {
-        return new BooleanValue(node.getValue());
-    }
-
-    @Override
-    public Value visit(DateLiteral node) {
-        return new DateValue(node.getValue());
-    }
-
-    @Override
-    public Value visit(DecimalLiteral node) {
-        return new DecimalValue(node.getValue());
-    }
-
-    @Override
-    public Value visit(MoneyLiteral node) {
-        return new MoneyValue(node.getValue());
-    }
-
-    @Override
-    public Value visit(Variable variable) {
-        return valueStore.getValue(variable.getName());
-    }
 
 }
