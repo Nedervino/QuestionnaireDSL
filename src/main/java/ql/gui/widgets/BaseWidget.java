@@ -24,14 +24,4 @@ public abstract class BaseWidget implements Widget {
         return null;
     }
 
-    @Override
-    public JComponent getComponent() {
-        return null;
-    }
-
-    @Override
-    public void setVisible(boolean visible) {
-
-    }
-
 }

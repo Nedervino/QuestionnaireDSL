@@ -19,10 +19,6 @@ public class WidgetFactory implements TypeVisitor<Widget> {
         return question.getType().accept(this);
     }
 
-    public boolean isEnabled(FormEvaluator evaluator) {
-        return evaluator.questionIsEnabled(question.getId());
-    }
-
     @Override
     public Widget visit(BooleanType booleanType) {
         return new RadioWidget(evaluator, question, isEditable);

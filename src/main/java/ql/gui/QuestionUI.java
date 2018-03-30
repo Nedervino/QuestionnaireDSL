@@ -17,19 +17,22 @@ public class QuestionUI implements WidgetListener {
     private final Widget widget;
     private final JPanel panel;
     private final FormEvaluator formEvaluator;
+    private final Question question;
 
     public QuestionUI(FormEvaluator formEvaluator, Question question) {
+        this.question = question;
         this.formEvaluator = formEvaluator;
         label = new JLabel(question.getLabel());
         widget = new WidgetFactory().createWidget(question, formEvaluator);
         widget.registerChangeListener(this);
-        widget.setVisible(true);
 
         panel = new JPanel(new BorderLayout());
         panel.add(label, BorderLayout.CENTER);
         panel.add(widget.getComponent(), BorderLayout.EAST);
 
         panel.setPreferredSize(new Dimension(600, 50));
+
+        setVisible(isEnabled());
     }
 
     public void update() {
@@ -41,7 +44,12 @@ public class QuestionUI implements WidgetListener {
     }
 
     public void setVisible(boolean visible) {
-        panel.setVisible(visible);
+        label.setVisible(visible);
+        widget.setVisible(visible);
+    }
+
+    public boolean isEnabled() {
+        return formEvaluator.questionIsEnabled(question.getId());
     }
 
     @Override

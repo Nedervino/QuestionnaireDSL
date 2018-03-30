@@ -41,4 +41,9 @@ public class DropdownWidget extends BaseWidget {
     public JComponent getComponent() {
         return dropdown;
     }
+
+    @Override
+    public void setVisible(boolean visible) {
+        dropdown.setVisible(visible);
+    }
 }

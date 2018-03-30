@@ -32,4 +32,9 @@ public class CheckboxWidget extends BaseWidget {
             checkBox.addActionListener(e -> widgetListener.onQuestionUpdated(question, new BooleanValue(checkBox.isSelected())));
     }
 
+    @Override
+    public JComponent getComponent() {
+        return checkBox;
+    }
+
 }
