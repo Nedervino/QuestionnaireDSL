@@ -12,6 +12,7 @@ import ql.environment.datastore.QuestionStore;
 import ql.environment.datastore.ValueStore;
 import ql.environment.values.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,12 +23,14 @@ public class FormEnvironment implements FormStatementVisitor<String>, TypeVisito
     private final QuestionStore questionStore;
     private final ValueStore valueStore;
     private final ExpressionEvaluator expressionEvaluator;
+    private final List<EnvironmentListener> listeners;
 
     public FormEnvironment(Form form) {
         expressionStore = new ExpressionStore();
         questionStore = new QuestionStore();
         valueStore = new ValueStore();
         expressionEvaluator = new ExpressionEvaluator(valueStore);
+        listeners = new ArrayList<>();
         visit(form);
     }
 
@@ -40,12 +43,24 @@ public class FormEnvironment implements FormStatementVisitor<String>, TypeVisito
                 valueStore.setValue(question.getId(), value);
             }
         }
+        notifyChangeListeners();
     }
 
+    @Override
+    public void registerChangeListener(EnvironmentListener environmentListener) {
+        listeners.add(environmentListener);
+    }
+
+    private void notifyChangeListeners() {
+        for(EnvironmentListener listener : listeners) {
+            listener.onEnvironmentUpdated();
+        }
+    }
 
     @Override
     public void setValue(String questionId, Value value) {
         valueStore.setValue(questionId, value);
+        evaluate();
     }
 
     @Override

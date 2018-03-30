@@ -17,5 +17,7 @@ public interface Environment {
 
     void setValue(String questionId, Value value);
 
+    void registerChangeListener(EnvironmentListener environmentListener);
+
     boolean questionIsEnabled(String questionId);
 }

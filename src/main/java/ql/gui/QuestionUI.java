@@ -2,13 +2,14 @@ package ql.gui;
 
 import ql.ast.statements.Question;
 import ql.environment.Environment;
+import ql.environment.EnvironmentListener;
 import ql.environment.values.Value;
 import ql.gui.widgets.Widget;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class QuestionUI implements WidgetListener {
+public class QuestionUI implements WidgetListener, EnvironmentListener {
 
     //TODO: Inconsistent with input widgets
     //TODO: Move Question / environment field from widget to QuestionUI
@@ -55,5 +56,11 @@ public class QuestionUI implements WidgetListener {
     @Override
     public void onQuestionUpdated(Question question, Value value) {
         environment.setValue(question.getId(), value);
+    }
+
+    @Override
+    public void onEnvironmentUpdated() {
+        setVisible(isEnabled());
+        widget.setValue();
     }
 }
