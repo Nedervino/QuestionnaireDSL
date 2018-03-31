@@ -58,13 +58,16 @@ public class FormEnvironment implements FormStatementVisitor<String>, Environmen
     }
 
     @Override
-    public void setValue(String questionId, Value value) {
+    public boolean setValue(String questionId, Value value) {
+        if(questionIsComputed(questionId)) {
+            return false;
+        }
         System.out.printf("Was: %s%n", getQuestionValue(questionId).getValue().toString());
         valueStore.setValue(questionId, value);
         System.out.printf("Will be: %s%n", value.getValue().toString());
         evaluate();
         System.out.printf("Is: %s%n", getQuestionValue(questionId).getValue().toString());
-
+        return true;
     }
 
     @Override

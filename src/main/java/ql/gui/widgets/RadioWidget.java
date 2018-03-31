@@ -60,7 +60,7 @@ public class RadioWidget extends BaseWidget {
     public void registerChangeListener(WidgetListener widgetListener) {
         for (JRadioButton button : choiceButtonMap.values()) {
             button.addActionListener(e -> {
-                if (button.isSelected()) {
+                if (button.isSelected() && isEditable) {
                     widgetListener.onQuestionUpdated(question, new BooleanValue(Boolean.parseBoolean(button.getText())));
                 }
             });
