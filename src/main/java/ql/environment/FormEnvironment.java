@@ -52,14 +52,14 @@ public class FormEnvironment implements FormStatementVisitor<String>, Environmen
     }
 
     private void notifyChangeListeners() {
-        for(EnvironmentListener listener : listeners) {
+        for (EnvironmentListener listener : listeners) {
             listener.onEnvironmentUpdated();
         }
     }
 
     @Override
     public boolean setValue(String questionId, Value value) {
-        if(questionIsComputed(questionId)) {
+        if (questionIsComputed(questionId)) {
             return false;
         }
         System.out.printf("Was: %s%n", getQuestionValue(questionId).getValue().toString());

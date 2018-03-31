@@ -1,7 +1,6 @@
 package ql.environment.values;
 
 import ql.ast.expressions.literals.DateLiteral;
-import ql.ast.types.DateType;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -35,7 +35,8 @@ public class DropdownWidget extends BaseWidget {
     @Override
     public void registerChangeListener(WidgetListener widgetListener) {
         dropdown.addActionListener(e -> {
-            if(isEditable) widgetListener.onQuestionUpdated(question, new BooleanValue(dropdown.getSelectedIndex() == 0));
+            if (isEditable)
+                widgetListener.onQuestionUpdated(question, new BooleanValue(dropdown.getSelectedIndex() == 0));
         });
     }
 

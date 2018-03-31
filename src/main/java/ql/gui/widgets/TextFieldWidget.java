@@ -8,12 +8,11 @@ import ql.environment.values.*;
 import ql.gui.WidgetListener;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.text.DateFormatter;
 import javax.swing.text.NumberFormatter;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -50,20 +49,20 @@ public class TextFieldWidget extends BaseWidget {
         textField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-            if(isEditable) {
-                Value value = null;
-                if (question.isOfType("integer")) {
-                    value = new IntegerValue(textField.getText());
-                } else if (question.isOfType("decimal")) {
-                    value = new DecimalValue(textField.getText());
-                } else if (question.isOfType("money")) {
-                    value = new MoneyValue(textField.getText());
-                } else if (question.isOfType("string")) {
-                    value = new StringValue(textField.getText());
+                if (isEditable) {
+                    Value value = null;
+                    if (question.isOfType("integer")) {
+                        value = new IntegerValue(textField.getText());
+                    } else if (question.isOfType("decimal")) {
+                        value = new DecimalValue(textField.getText());
+                    } else if (question.isOfType("money")) {
+                        value = new MoneyValue(textField.getText());
+                    } else if (question.isOfType("string")) {
+                        value = new StringValue(textField.getText());
+                    }
+                    Value finalValue = value;
+                    widgetListener.onQuestionUpdated(question, finalValue);
                 }
-                Value finalValue = value;
-                widgetListener.onQuestionUpdated(question, finalValue);
-            }
             }
         });
     }
@@ -72,7 +71,6 @@ public class TextFieldWidget extends BaseWidget {
     public JComponent getComponent() {
         return textField;
     }
-
 
 
     private JFormattedTextField createTextField(Question question) {

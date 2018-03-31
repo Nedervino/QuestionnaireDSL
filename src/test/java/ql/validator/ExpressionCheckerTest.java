@@ -109,7 +109,7 @@ public class ExpressionCheckerTest extends BaseQlTest {
     @Test
     public void shouldIssueErrorForNonBooleanInBooleanExpression() {
         Form form = createForm("src/input/ql/incorrect/validator/nonBooleanInBoolean.ql");
-        
+
         boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
 

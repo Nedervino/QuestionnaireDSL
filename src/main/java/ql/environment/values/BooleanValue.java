@@ -9,10 +9,10 @@ public class BooleanValue implements Value<Boolean> {
         this.value = value;
     }
 
-    public BooleanValue (String input) {
-        if(input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("true")) {
+    public BooleanValue(String input) {
+        if (input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("true")) {
             value = true;
-        } else if(input.equalsIgnoreCase("no") || input.equalsIgnoreCase("false")) {
+        } else if (input.equalsIgnoreCase("no") || input.equalsIgnoreCase("false")) {
             value = false;
         }
         throw new IllegalArgumentException();

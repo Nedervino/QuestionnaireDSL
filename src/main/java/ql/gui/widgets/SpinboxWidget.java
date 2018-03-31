@@ -36,7 +36,7 @@ public class SpinboxWidget extends BaseWidget {
     @Override
     public void registerChangeListener(WidgetListener widgetListener) {
         spinner.addChangeListener(e -> {
-            if(isEditable) {
+            if (isEditable) {
                 IntegerValue integerValue = new IntegerValue((int) spinner.getValue());
                 widgetListener.onQuestionUpdated(question, integerValue);
             }

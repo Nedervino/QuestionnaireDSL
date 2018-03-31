@@ -30,7 +30,7 @@ public class CheckboxWidget extends BaseWidget {
     @Override
     public void registerChangeListener(WidgetListener widgetListener) {
         checkBox.addActionListener(e -> {
-            if(isEditable) widgetListener.onQuestionUpdated(question, new BooleanValue(checkBox.isSelected()));
+            if (isEditable) widgetListener.onQuestionUpdated(question, new BooleanValue(checkBox.isSelected()));
         });
     }
 

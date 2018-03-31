@@ -47,13 +47,13 @@ public class QuestionUI implements WidgetListener, EnvironmentListener {
         return panel;
     }
 
+    private boolean isVisible() {
+        return environment.questionIsVisible(question.getId());
+    }
+
     public void setVisible(boolean visible) {
         label.setVisible(visible);
         widget.setVisible(visible);
-    }
-
-    private boolean isVisible() {
-        return environment.questionIsVisible(question.getId());
     }
 
     @Override

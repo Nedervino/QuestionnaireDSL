@@ -4,14 +4,16 @@ public class UndefinedValue implements Value<Void> {
 
     //TODO: currently not used
 
+    public UndefinedValue() {
+    }
+
+    public UndefinedValue(String input) {
+    }
+
     @Override
     public Void getValue() {
         return null;
     }
-
-    public UndefinedValue(){}
-
-    public UndefinedValue(String input) {}
 
     @Override
     public Value add(Value value) {
