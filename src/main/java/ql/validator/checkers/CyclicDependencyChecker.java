@@ -25,8 +25,6 @@ import java.util.Optional;
  */
 public class CyclicDependencyChecker extends BaseChecker implements FormStatementVisitor<Void>, ExpressionVisitor<List<Variable>> {
 
-    //TODO: keep internal issueTracker? Or do not use that at all
-
     private final DependencyManager dependencyManager;
 
     public CyclicDependencyChecker() {
