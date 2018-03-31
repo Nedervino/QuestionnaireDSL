@@ -1,8 +1,10 @@
 package ql.gui.widgets;
 
+import ql.ast.expressions.literals.IntegerLiteral;
 import ql.ast.statements.Question;
 import ql.environment.Environment;
 import ql.environment.values.DecimalValue;
+import ql.environment.values.IntegerValue;
 import ql.environment.values.Value;
 import ql.gui.WidgetListener;
 
@@ -30,12 +32,14 @@ public class SliderWidget extends BaseWidget {
         slider.setPaintLabels(true);
 
         slider.setPreferredSize(new Dimension(200, 50));
+        setValue();
         setEditable(isEditable);
     }
 
     @Override
     public void setValue() {
-        //TODO
+        IntegerValue value = (IntegerValue) environment.getQuestionValue(question.getId());
+        slider.setValue(value.getValue());
     }
 
     @Override

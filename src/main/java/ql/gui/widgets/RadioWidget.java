@@ -35,7 +35,12 @@ public class RadioWidget extends BaseWidget {
             choiceButtonMap.put(name, button);
             panel.add(button);
         }
+        setValue();
+        setEditable(isEditable);
+    }
 
+    @Override
+    public void setValue() {
         BooleanValue evaluatable = ((BooleanValue) environment.getQuestionValue(question.getId()));
         boolean value = evaluatable != null ? evaluatable.getValue() : false;
         if (value) {
@@ -44,12 +49,6 @@ public class RadioWidget extends BaseWidget {
             buttonGroup.setSelected(choiceButtonMap.get("false").getModel(), true);
         }
 
-        setEditable(isEditable);
-    }
-
-    @Override
-    public void setValue() {
-        //TODO
     }
 
     public void setEditable(boolean isEditable) {
@@ -73,7 +72,6 @@ public class RadioWidget extends BaseWidget {
                     widgetListener.onInputValueUpdated(question, new BooleanValue(Boolean.parseBoolean(button.getText())));
                 }
             });
-
         }
     }
 

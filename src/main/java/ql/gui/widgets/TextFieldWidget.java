@@ -26,8 +26,8 @@ public class TextFieldWidget extends BaseWidget {
         super(environment, question, isEditable);
         textField = createTextField(question);
         textField.setPreferredSize(new Dimension(200, 50));
-        setEditable(isEditable);
         setValue();
+        setEditable(isEditable);
     }
 
     @Override

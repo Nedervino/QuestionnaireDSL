@@ -14,12 +14,14 @@ public class CheckboxWidget extends BaseWidget {
     public CheckboxWidget(Environment environment, Question question, boolean isEditable) {
         super(environment, question, isEditable);
         checkBox = new JCheckBox();
+        setValue();
         setEditable(isEditable);
     }
 
     @Override
     public void setValue() {
-
+        BooleanValue value = (BooleanValue) environment.getQuestionValue(question.getId()).getValue();
+        checkBox.setSelected(value.getValue());
     }
 
     @Override
