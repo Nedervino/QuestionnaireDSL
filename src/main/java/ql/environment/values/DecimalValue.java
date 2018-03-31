@@ -11,6 +11,11 @@ public class DecimalValue extends NumericValue<Double> {
     }
 
     @Override
+    public Value fromString(String input) {
+        return new DecimalValue(Double.parseDouble(input));
+    }
+
+    @Override
     public Double getValue() {
         return value;
     }

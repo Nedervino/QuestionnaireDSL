@@ -10,6 +10,17 @@ public class BooleanValue implements Value<Boolean> {
     }
 
     @Override
+    public BooleanValue fromString(String input) {
+        if(input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("true")) {
+            return new BooleanValue(true);
+        }
+        if(input.equalsIgnoreCase("no") || input.equalsIgnoreCase("false")) {
+            return new BooleanValue(false);
+        }
+        throw new IllegalArgumentException();
+    }
+
+    @Override
     public Boolean getValue() {
         return value;
     }

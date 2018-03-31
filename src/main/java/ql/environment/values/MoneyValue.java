@@ -15,6 +15,11 @@ public class MoneyValue extends NumericValue<BigDecimal> {
         this(new BigDecimal(value));
     }
 
+    @Override
+    public Value fromString(String input) {
+        return null;
+    }
+
     private void round() {
         value = value.setScale(2, BigDecimal.ROUND_HALF_EVEN);
     }

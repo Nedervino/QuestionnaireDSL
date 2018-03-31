@@ -9,6 +9,11 @@ public class StringValue implements Value<String> {
     }
 
     @Override
+    public Value fromString(String input) {
+        return new StringValue(input);
+    }
+
+    @Override
     public String getValue() {
         return value;
     }

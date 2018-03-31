@@ -2,9 +2,16 @@ package ql.environment.values;
 
 public class UndefinedValue implements Value<Void> {
 
+    //TODO: currently not used
+
     @Override
     public Void getValue() {
         return null;
+    }
+
+    @Override
+    public Value fromString(String input) {
+        return new UndefinedValue();
     }
 
     @Override

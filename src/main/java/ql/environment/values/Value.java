@@ -4,11 +4,12 @@ public interface Value<T> {
 
     T getValue();
 
+    Value fromString(String input);
+
     default Value add(Value value) {
         throw new UnsupportedOperationException(getValue().toString());
     }
 
-    //refactor: value
     default Value add(MoneyValue value) {
         throw new UnsupportedOperationException(getValue().toString());
     }

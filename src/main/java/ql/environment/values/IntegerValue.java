@@ -11,6 +11,11 @@ public class IntegerValue extends NumericValue<Integer> {
     }
 
     @Override
+    public Value fromString(String input) {
+        return new IntegerValue(Integer.parseInt(input));
+    }
+
+    @Override
     public Integer getValue() {
         return value;
     }

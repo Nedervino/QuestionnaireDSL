@@ -7,6 +7,7 @@ import org.junit.Test;
 import ql.BaseQlTest;
 import ql.ast.Form;
 import ql.environment.values.BooleanValue;
+import ql.environment.values.DateValue;
 import ql.environment.values.Value;
 
 import java.math.BigDecimal;
@@ -192,9 +193,9 @@ public class FormEnvironmentTest extends BaseQlTest {
         environment = new FormEnvironment(form);
         environment.evaluate();
 
-        Value value = environment.getQuestionValue("value");
+        DateValue value = (DateValue) environment.getQuestionValue("value");
 
-        assertEquals("01-02-1999", value.toString());
+        assertEquals("01-02-1999", value.getDisplayValue());
     }
 
 
