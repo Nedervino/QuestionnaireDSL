@@ -1,6 +1,5 @@
 package ql.gui.widgets;
 
-import ql.ast.expressions.literals.IntegerLiteral;
 import ql.ast.statements.Question;
 import ql.environment.Environment;
 import ql.environment.values.DecimalValue;

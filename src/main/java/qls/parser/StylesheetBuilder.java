@@ -9,14 +9,13 @@ import qls.ast.Stylesheet;
 
 public class StylesheetBuilder {
 
-    public Stylesheet buildASTFromString(String formContent) {
+    public Stylesheet createStylesheet(String formContent) {
         QLSParser parser = createParser(formContent);
 
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
         QLSParser.StylesheetContext stylesheetContext = parser.stylesheet();
-        Stylesheet stylesheet = (Stylesheet) astConstructionVisitor.visit(stylesheetContext);
-        return stylesheet;
-        // return new Stylesheet("test", new ArrayList<>(), null);
+
+        return (Stylesheet) astConstructionVisitor.visit(stylesheetContext);
     }
 
     public QLSParser createParser(String input) {

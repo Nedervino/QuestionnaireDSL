@@ -52,7 +52,7 @@ public class RadioWidget extends BaseWidget {
     }
 
     public void setEditable(boolean isEditable) {
-        for(JRadioButton button : choiceButtonMap.values()) {
+        for (JRadioButton button : choiceButtonMap.values()) {
             button.setEnabled(isEditable);
         }
     }

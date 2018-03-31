@@ -158,7 +158,7 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
         //If issue logged further down the tree, don't log new error
         if (returnedType.isOfType("error")) {
             return returnedType;
-        } else if (returnedType.isNumeric() || returnedType.isOfType("boolean")){
+        } else if (returnedType.isNumeric() || returnedType.isOfType("boolean")) {
             return new BooleanType(operation.getSourceLocation());
         } else {
             issueTracker.addError(operation, String.format("Type mismatch. Comparison expression containing operands of type %s", returnedType));

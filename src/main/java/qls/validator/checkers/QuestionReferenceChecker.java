@@ -2,13 +2,12 @@ package qls.validator.checkers;
 
 import issuetracker.Error;
 import issuetracker.Warning;
-import ql.ast.Form;
 import ql.validator.checkers.Checker;
 import qls.ast.Stylesheet;
 
 import java.util.List;
 
-public class QuestionReferenceChecker implements Checker<Stylesheet>{
+public class QuestionReferenceChecker implements Checker<Stylesheet> {
     @Override
     public boolean passesTests(Stylesheet stylesheet) {
         return false;

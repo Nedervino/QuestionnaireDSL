@@ -31,7 +31,7 @@ public class Main {
         String qlsFile = new FileScanner().loadFile(qlsFileName);
 
         StylesheetBuilder stylesheetBuilder = new StylesheetBuilder();
-        // Stylesheet stylesheet = stylesheetBuilder.createForm(qlFile);
+        // Stylesheet stylesheet = stylesheetBuilder.createStylesheet(qlFile);
         Stylesheet stylesheet = null;
 
         if (Validator.passesChecks(form)) {
@@ -42,6 +42,8 @@ public class Main {
             System.err.println("Form not passing validation");
             System.exit(1);
         }
+
+
     }
 
 }
