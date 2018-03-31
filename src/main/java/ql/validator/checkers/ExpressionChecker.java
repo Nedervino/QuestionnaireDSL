@@ -123,7 +123,6 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
         return verifyType(checkTypeCompatibility(division), "numeric");
     }
 
-    //TODO: Equal should also accept boolean
     @Override
     public Type visit(Equal equal) {
         return visitComparisonExpression(equal);
@@ -149,7 +148,6 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
         return visitComparisonExpression(lessThan);
     }
 
-    //TODO: can accept both numeric and boolean
     @Override
     public Type visit(NotEqual notEqual) {
         return visitComparisonExpression(notEqual);

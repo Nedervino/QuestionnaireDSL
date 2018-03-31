@@ -19,6 +19,7 @@ public abstract class BaseWidget implements Widget {
     @Override
     public Value getValue() {
         return null;
+        //TODO
     }
 
 }

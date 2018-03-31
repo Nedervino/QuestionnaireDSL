@@ -80,7 +80,6 @@ public class MoneyValue extends NumericValue<BigDecimal> {
 
     @Override
     public Value subtract(MoneyValue value) {
-        //terms are flipped back since we flip the terms in the double dispacht in subtract(Value value)
         return new MoneyValue(value.getValue().subtract(getValue()));
     }
 

@@ -37,9 +37,8 @@ public class ExpressionEvaluator implements ExpressionVisitor<Value> {
         try {
             return getLeftValue(node).divide(getRightValue(node));
         } catch (ArithmeticException e) {
-            // issueTracker.addError(node.getRight(), "Attempted to divide by zero.");
+            throw new IllegalArgumentException();
         }
-        return null;
     }
 
     @Override
