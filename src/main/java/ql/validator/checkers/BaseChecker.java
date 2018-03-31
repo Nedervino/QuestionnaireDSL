@@ -3,10 +3,11 @@ package ql.validator.checkers;
 import issuetracker.Error;
 import issuetracker.IssueTracker;
 import issuetracker.Warning;
+import ql.ast.Form;
 
 import java.util.List;
 
-public abstract class BaseChecker implements Checker {
+public abstract class BaseChecker implements Checker<Form> {
 
     protected final IssueTracker issueTracker;
 

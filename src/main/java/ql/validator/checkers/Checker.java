@@ -6,9 +6,9 @@ import ql.ast.Form;
 
 import java.util.List;
 
-public interface Checker {
+public interface Checker<T> {
 
-    boolean passesTests(Form form);
+    boolean passesTests(T ast);
 
     List<Error> getErrors();
 

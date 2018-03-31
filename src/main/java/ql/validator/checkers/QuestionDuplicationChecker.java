@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * Checks AST for question duplications, giving errors for duplicate identifiers and warnings for duplicate labels
  */
-public class QuestionDuplicationChecker extends BaseChecker implements Checker, FormStatementVisitor<Void> {
+public class QuestionDuplicationChecker extends BaseChecker implements FormStatementVisitor<Void> {
 
     private final Set<String> questionLabels;
     private final SymbolTable symbolTable;
