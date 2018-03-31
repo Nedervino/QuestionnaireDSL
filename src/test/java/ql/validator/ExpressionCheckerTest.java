@@ -96,7 +96,7 @@ public class ExpressionCheckerTest extends BaseQlTest {
     }
 
     @Test
-    public void shouldIssueNoErrorForNumericComparisons() {
+    public void shouldIssueNoErrorForNumericOrBooleanComparisons() {
         Form form = createForm("src/input/ql/correct/comparisonExpressions.ql");
 
         boolean passesTests = expressionChecker.passesTests(form);
@@ -121,8 +121,8 @@ public class ExpressionCheckerTest extends BaseQlTest {
     }
 
     @Test
-    public void shouldIssueErrorForNonNumericInComparisonExpression() {
-        Form form = createForm("src/input/ql/incorrect/validator/nonNumericInComparison.ql");
+    public void shouldIssueErrorForNonNumericOrBooleanInComparisonExpression() {
+        Form form = createForm("src/input/ql/incorrect/validator/nonNumericOrBooleanInComparison.ql");
 
         boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);

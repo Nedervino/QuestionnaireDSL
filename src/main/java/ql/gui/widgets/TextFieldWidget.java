@@ -26,13 +26,18 @@ public class TextFieldWidget extends BaseWidget {
         super(environment, question, isEditable);
         textField = createTextField(question);
         textField.setPreferredSize(new Dimension(200, 50));
-        textField.setEditable(isEditable);
         setValue();
+        setEditable(isEditable);
     }
 
     @Override
     public void setVisible(boolean visible) {
         textField.setVisible(visible);
+    }
+
+    @Override
+    public void setEditable(boolean isEditable) {
+        textField.setEditable(isEditable);
     }
 
     @Override
@@ -50,6 +55,7 @@ public class TextFieldWidget extends BaseWidget {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (isEditable) {
+                    //TODO optional visitor
                     Value value = null;
                     if (question.isOfType("integer")) {
                         value = new IntegerValue(textField.getText());
@@ -61,7 +67,7 @@ public class TextFieldWidget extends BaseWidget {
                         value = new StringValue(textField.getText());
                     }
                     Value finalValue = value;
-                    widgetListener.onQuestionUpdated(question, finalValue);
+                    widgetListener.onInputValueUpdated(question, finalValue);
                 }
             }
         });
@@ -127,7 +133,7 @@ public class TextFieldWidget extends BaseWidget {
 
             @Override
             public JFormattedTextField visit(ErrorType errorType) {
-                return null;
+                throw new IllegalArgumentException();
             }
         });
     }

@@ -16,7 +16,7 @@ public abstract class Type extends ASTNode {
         return getType().equals(type);
     }
 
-    protected boolean isNumeric() {
+    public boolean isNumeric() {
         return false;
     }
 

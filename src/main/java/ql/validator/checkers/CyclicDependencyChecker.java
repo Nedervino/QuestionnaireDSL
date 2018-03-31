@@ -25,8 +25,6 @@ import java.util.Optional;
  */
 public class CyclicDependencyChecker extends BaseChecker implements FormStatementVisitor<Void>, ExpressionVisitor<List<Variable>> {
 
-    //TODO: keep internal issueTracker? Or do not use that at all
-
     private final DependencyManager dependencyManager;
 
     public CyclicDependencyChecker() {
@@ -51,7 +49,7 @@ public class CyclicDependencyChecker extends BaseChecker implements FormStatemen
         return issueTracker.getWarnings();
     }
 
-    //Possible solve: return list of errors from dependencymanager
+    //TODO: Possible solve: return list of errors from dependencymanager
     private void logCircularDependencies() {
         for (DependencyManager.DependencyPair circularDependency : dependencyManager.getCircularDependencies()) {
             issueTracker.addError(new SourceLocation(0, 0), String.format("Variable %s involved in circular dependency", circularDependency.getSource()));
@@ -81,7 +79,6 @@ public class CyclicDependencyChecker extends BaseChecker implements FormStatemen
     @Override
     public Void visit(IfStatement ifStatement) {
         visitStatements(ifStatement.getIfStatements());
-        // ifStatement.getCondition().accept(this);
         return null;
     }
 
@@ -89,7 +86,6 @@ public class CyclicDependencyChecker extends BaseChecker implements FormStatemen
     public Void visit(IfElseStatement ifElseStatement) {
         visitStatements(ifElseStatement.getIfStatements());
         visitStatements(ifElseStatement.getElseStatements());
-        // ifElseStatement.getCondition().accept(this);
         return null;
     }
 

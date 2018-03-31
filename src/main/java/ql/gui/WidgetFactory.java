@@ -6,51 +6,52 @@ import ql.ast.visitors.TypeVisitor;
 import ql.environment.Environment;
 import ql.gui.widgets.*;
 
-public class WidgetFactory implements TypeVisitor<Widget> {
+public class WidgetFactory {
 
-    private Environment environment;
-    private Question question;
-    private boolean isEditable;
+    public Widget createWidget(Question inputQuestion, Environment inputEnvironment) {
+        final Question question = inputQuestion;
+        final Environment environment = inputEnvironment;
+        final boolean isEditable = !environment.questionIsComputed(question.getId());
 
-    public Widget createWidget(Question question, Environment environment) {
-        isEditable = !environment.questionIsComputed(question.getId());
-        this.environment = environment;
-        this.question = question;
-        return question.getType().accept(this);
+        return question.getType().accept(new TypeVisitor<Widget>() {
+
+            @Override
+            public Widget visit(BooleanType booleanType) {
+                return new RadioWidget(environment, question, isEditable);
+            }
+
+            @Override
+            public Widget visit(DecimalType decimalType) {
+                return new SliderWidget(environment, question, isEditable);
+            }
+
+            @Override
+            public Widget visit(IntegerType integerType) {
+                return new SpinboxWidget(environment, question, isEditable);
+            }
+
+            @Override
+            public Widget visit(MoneyType moneyType) {
+                return new TextFieldWidget(environment, question, isEditable);
+            }
+
+            @Override
+            public Widget visit(StringType stringType) {
+                return new TextFieldWidget(environment, question, isEditable);
+            }
+
+            @Override
+            public Widget visit(DateType dateType) {
+                return new TextFieldWidget(environment, question, isEditable);
+            }
+
+            @Override
+            public Widget visit(ErrorType errorType) {
+                throw new IllegalArgumentException();
+            }
+
+        });
     }
 
-    @Override
-    public Widget visit(BooleanType booleanType) {
-        return new RadioWidget(environment, question, isEditable);
-    }
 
-    @Override
-    public Widget visit(DecimalType decimalType) {
-        return new SliderWidget(environment, question, isEditable);
-    }
-
-    @Override
-    public Widget visit(IntegerType integerType) {
-        return new SpinboxWidget(environment, question, isEditable);
-    }
-
-    @Override
-    public Widget visit(MoneyType moneyType) {
-        return new TextFieldWidget(environment, question, isEditable);
-    }
-
-    @Override
-    public Widget visit(StringType stringType) {
-        return new TextFieldWidget(environment, question, isEditable);
-    }
-
-    @Override
-    public Widget visit(DateType dateType) {
-        return new TextFieldWidget(environment, question, isEditable);
-    }
-
-    @Override
-    public Widget visit(ErrorType errorType) {
-        return null;
-    }
 }

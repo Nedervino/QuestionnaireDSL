@@ -106,7 +106,7 @@ public class FormEnvironment implements FormStatementVisitor<String>, Environmen
     @Override
     public String visit(Question question) {
         questionStore.addQuestion(question);
-        //Initialise environment with default values
+        // Initialise environment with default values
         valueStore.setValue(question.getId(), question.getType().accept(new TypeVisitor<Value>() {
 
             @Override
@@ -141,8 +141,7 @@ public class FormEnvironment implements FormStatementVisitor<String>, Environmen
 
             @Override
             public Value visit(ErrorType errorType) {
-                //TODO: optionally remove from visitor interface
-                return null;
+                throw new IllegalArgumentException();
             }
 
         }));

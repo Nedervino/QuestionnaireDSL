@@ -15,4 +15,6 @@ form taxOfficeExample {
         lessThanEqual: boolean = 3 > 4
     "Greater than equal"
         lessThanEqual: boolean = 3 >= 4
+    "Booleans"
+        booleanEqual: boolean = true == false
 }

@@ -70,7 +70,7 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
      */
     private Type verifyType(Type actualType, String expectedType) {
         //If issue logged further down the tree, don't log new error
-        if (actualType.isOfType(expectedType) || (expectedType.equals("numeric") && (actualType.isOfType("integer") || actualType.isOfType("decimal"))) || actualType.isOfType("error")) {
+        if (actualType.isOfType(expectedType) || (expectedType.equals("numeric") && actualType.isNumeric()) || actualType.isOfType("error")) {
             return actualType;
         } else {
             issueTracker.addError(actualType, String.format("Type mismatch. Actual: %s Expected: %s", actualType.getType(), expectedType));
@@ -123,7 +123,6 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
         return verifyType(checkTypeCompatibility(division), "numeric");
     }
 
-    //TODO: Equal should also accept boolean
     @Override
     public Type visit(Equal equal) {
         return visitComparisonExpression(equal);
@@ -132,13 +131,11 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
     @Override
     public Type visit(GreaterThanEqual greaterThanEqual) {
         return visitComparisonExpression(greaterThanEqual);
-
     }
 
     @Override
     public Type visit(GreaterThan greaterThan) {
         return visitComparisonExpression(greaterThan);
-
     }
 
     @Override
@@ -151,18 +148,21 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
         return visitComparisonExpression(lessThan);
     }
 
-    //TODO: can accept both numeric and boolean
     @Override
     public Type visit(NotEqual notEqual) {
         return visitComparisonExpression(notEqual);
     }
 
     private Type visitComparisonExpression(BinaryOperation operation) {
-        Type returnedType = verifyType(checkTypeCompatibility(operation), "numeric");
+        Type returnedType = checkTypeCompatibility(operation);
+        //If issue logged further down the tree, don't log new error
         if (returnedType.isOfType("error")) {
             return returnedType;
-        } else {
+        } else if (returnedType.isNumeric() || returnedType.isOfType("boolean")) {
             return new BooleanType(operation.getSourceLocation());
+        } else {
+            issueTracker.addError(operation, String.format("Type mismatch. Comparison expression containing operands of type %s", returnedType));
+            return new ErrorType(operation.getSourceLocation());
         }
     }
 

@@ -9,7 +9,7 @@ import ql.validator.checkers.QuestionDuplicationChecker;
 
 /**
  * The validator detects:
- *
+ * <p>
  * - reference to undefined questions
  * - duplicate question declarations with different types
  * - conditions that are not of the type boolean
@@ -18,8 +18,6 @@ import ql.validator.checkers.QuestionDuplicationChecker;
  * - duplicate labels (warning)
  */
 public class Validator {
-
-    //TODO: passesTests return issuetracker.
 
     public static boolean passesChecks(Form form) {
 

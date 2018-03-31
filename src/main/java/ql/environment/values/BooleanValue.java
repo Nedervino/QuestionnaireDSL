@@ -2,7 +2,6 @@ package ql.environment.values;
 
 public class BooleanValue implements Value<Boolean> {
 
-    //TODO for all: hoe handelen we null values? Catch je nullpointerExceptions ergens
     private final Boolean value;
 
     public BooleanValue(Boolean value) {

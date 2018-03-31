@@ -3,7 +3,7 @@ package ql.environment.values;
 import java.util.Objects;
 
 public class IntegerValue extends NumericValue<Integer> {
-    //make all final
+
     private final Integer value;
 
     public IntegerValue(int value) {

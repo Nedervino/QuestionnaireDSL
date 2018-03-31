@@ -5,6 +5,6 @@ import ql.environment.values.Value;
 
 public interface WidgetListener {
 
-    void onQuestionUpdated(Question question, Value value);
+    void onInputValueUpdated(Question question, Value value);
 
 }

@@ -20,7 +20,7 @@ This repository, managed by team Kazan, contains work on two DSLs (QL and QLS) t
 
 ## Setup instructions for IntelliJ
 * File -> New -> Project from existing sources -> Kazan
-* Run the antlr4 plugin to generate required parsers from the grammar
+* Make sure to run the antlr4 maven plugin to generate required parsers from the grammar
 * Run /endlesql/Kazan/src/main/java/main/main
 
 

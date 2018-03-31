@@ -15,6 +15,8 @@ public interface Widget {
 
     void setVisible(boolean visible);
 
+    void setEditable(boolean isEditable);
+
     void registerChangeListener(WidgetListener widgetListener);
 
 }

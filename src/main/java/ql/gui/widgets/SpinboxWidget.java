@@ -18,8 +18,8 @@ public class SpinboxWidget extends BaseWidget {
         // spinner = new JSpinner(new SpinnerListModel(choices));
         spinner = new JSpinner();
         spinner.setPreferredSize(new Dimension(200, 50));
-        spinner.setEnabled(isEditable);
         setValue();
+        setEditable(isEditable);
     }
 
     @Override
@@ -34,11 +34,16 @@ public class SpinboxWidget extends BaseWidget {
     }
 
     @Override
+    public void setEditable(boolean isEditable) {
+        spinner.setEnabled(isEditable);
+    }
+
+    @Override
     public void registerChangeListener(WidgetListener widgetListener) {
         spinner.addChangeListener(e -> {
             if (isEditable) {
                 IntegerValue integerValue = new IntegerValue((int) spinner.getValue());
-                widgetListener.onQuestionUpdated(question, integerValue);
+                widgetListener.onInputValueUpdated(question, integerValue);
             }
         });
     }

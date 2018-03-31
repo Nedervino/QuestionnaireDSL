@@ -3,6 +3,7 @@ package ql.gui.widgets;
 import ql.ast.statements.Question;
 import ql.environment.Environment;
 import ql.environment.values.DecimalValue;
+import ql.environment.values.IntegerValue;
 import ql.environment.values.Value;
 import ql.gui.WidgetListener;
 
@@ -30,12 +31,14 @@ public class SliderWidget extends BaseWidget {
         slider.setPaintLabels(true);
 
         slider.setPreferredSize(new Dimension(200, 50));
-        slider.setEnabled(isEditable);
+        setValue();
+        setEditable(isEditable);
     }
 
     @Override
     public void setValue() {
-        //TODO
+        IntegerValue value = (IntegerValue) environment.getQuestionValue(question.getId());
+        slider.setValue(value.getValue());
     }
 
     @Override
@@ -44,11 +47,16 @@ public class SliderWidget extends BaseWidget {
     }
 
     @Override
+    public void setEditable(boolean isEditable) {
+        slider.setEnabled(isEditable);
+    }
+
+    @Override
     public void registerChangeListener(WidgetListener widgetListener) {
         slider.addChangeListener(e -> {
             //wait until user has released slider before updating
             if (!slider.getValueIsAdjusting() && isEditable) {
-                widgetListener.onQuestionUpdated(question, new DecimalValue(slider.getValue()));
+                widgetListener.onInputValueUpdated(question, new DecimalValue(slider.getValue()));
             }
         });
     }

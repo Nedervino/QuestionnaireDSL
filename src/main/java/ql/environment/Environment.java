@@ -18,8 +18,8 @@ public interface Environment {
     /**
      * Sets the value in case its question is editable, returns if it was updated
      *
-     * @return          <code>true</code> if the question was editable
-     *                  <code>false</code> if the question was computed
+     * @return <code>true</code> if the question was editable
+     * <code>false</code> if the question was computed
      */
     boolean setValue(String questionId, Value value);
 

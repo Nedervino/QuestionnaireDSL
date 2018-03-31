@@ -182,7 +182,7 @@ public class ASTConstructionVisitor extends QLBaseVisitor<ASTNode> {
         try {
             return new DateLiteral(ctx.getText(), getSourceLocation(ctx));
         } catch (ParseException e) {
-            throw new IllegalArgumentException(String.format("Invalid date: %s", ctx.getText()));
+            throw new IllegalArgumentException(String.format("Invalid date: %s at line: %s", ctx.getText(), ctx.start.getLine()));
         }
     }
 
