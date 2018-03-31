@@ -132,13 +132,11 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
     @Override
     public Type visit(GreaterThanEqual greaterThanEqual) {
         return visitComparisonExpression(greaterThanEqual);
-
     }
 
     @Override
     public Type visit(GreaterThan greaterThan) {
         return visitComparisonExpression(greaterThan);
-
     }
 
     @Override
