@@ -9,13 +9,11 @@ public class BooleanValue implements Value<Boolean> {
         this.value = value;
     }
 
-    @Override
-    public BooleanValue fromString(String input) {
+    public BooleanValue (String input) {
         if(input.equalsIgnoreCase("yes") || input.equalsIgnoreCase("true")) {
-            return new BooleanValue(true);
-        }
-        if(input.equalsIgnoreCase("no") || input.equalsIgnoreCase("false")) {
-            return new BooleanValue(false);
+            value = true;
+        } else if(input.equalsIgnoreCase("no") || input.equalsIgnoreCase("false")) {
+            value = false;
         }
         throw new IllegalArgumentException();
     }

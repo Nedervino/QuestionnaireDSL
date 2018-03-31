@@ -10,9 +10,8 @@ public class IntegerValue extends NumericValue<Integer> {
         this.value = value;
     }
 
-    @Override
-    public Value fromString(String input) {
-        return new IntegerValue(Integer.parseInt(input));
+    public IntegerValue(String input) {
+        value = Integer.parseInt(input);
     }
 
     @Override

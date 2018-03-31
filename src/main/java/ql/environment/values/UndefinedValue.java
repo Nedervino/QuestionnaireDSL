@@ -9,10 +9,9 @@ public class UndefinedValue implements Value<Void> {
         return null;
     }
 
-    @Override
-    public Value fromString(String input) {
-        return new UndefinedValue();
-    }
+    public UndefinedValue(){}
+
+    public UndefinedValue(String input) {}
 
     @Override
     public Value add(Value value) {

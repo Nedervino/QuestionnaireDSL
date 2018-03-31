@@ -10,9 +10,8 @@ public class DecimalValue extends NumericValue<Double> {
         this.value = value;
     }
 
-    @Override
-    public Value fromString(String input) {
-        return new DecimalValue(Double.parseDouble(input));
+    public DecimalValue(String input) {
+        value = Double.parseDouble(input);
     }
 
     @Override

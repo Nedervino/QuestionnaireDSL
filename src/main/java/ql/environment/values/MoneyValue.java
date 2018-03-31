@@ -15,9 +15,8 @@ public class MoneyValue extends NumericValue<BigDecimal> {
         this(new BigDecimal(value));
     }
 
-    @Override
-    public Value fromString(String input) {
-        return null;
+    public MoneyValue(String input) {
+        value = new BigDecimal(input);
     }
 
     private void round() {

@@ -15,11 +15,10 @@ public class DateValue implements Value<Date> {
         this.value = value;
     }
 
-    @Override
-    public Value fromString(String input) {
+    public DateValue(String input) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat(DateLiteral.getDateFormat());
-            return new DateValue(dateFormat.parse(input));
+            value = dateFormat.parse(input);
         } catch (ParseException e) {
             throw new IllegalArgumentException();
         }
