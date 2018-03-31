@@ -1,6 +1,7 @@
 package ql.validator.checkers;
 
 import ql.ast.Form;
+import ql.ast.expressions.Expression;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
@@ -126,41 +127,49 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
     //TODO: Equal should also accept boolean
     @Override
     public Type visit(Equal equal) {
-        return verifyType(checkTypeCompatibility(equal), "numeric");
+        return visitComparisonExpression(equal);
     }
 
     @Override
     public Type visit(GreaterThanEqual greaterThanEqual) {
-        return verifyType(checkTypeCompatibility(greaterThanEqual), "numeric");
+        return visitComparisonExpression(greaterThanEqual);
 
     }
 
     @Override
     public Type visit(GreaterThan greaterThan) {
-        return verifyType(checkTypeCompatibility(greaterThan), "numeric");
+        return visitComparisonExpression(greaterThan);
 
     }
 
     @Override
     public Type visit(LessThanEqual lessThanEqual) {
-        return verifyType(checkTypeCompatibility(lessThanEqual), "numeric");
+        return visitComparisonExpression(lessThanEqual);
     }
 
     @Override
     public Type visit(LessThan lessThan) {
-        return verifyType(checkTypeCompatibility(lessThan), "numeric");
-
-    }
-
-    @Override
-    public Type visit(Multiplication multiplication) {
-        return verifyType(checkTypeCompatibility(multiplication), "numeric");
+        return visitComparisonExpression(lessThan);
     }
 
     //TODO: can accept both numeric and boolean
     @Override
     public Type visit(NotEqual notEqual) {
-        return verifyType(checkTypeCompatibility(notEqual), "numeric");
+        return visitComparisonExpression(notEqual);
+    }
+
+    private Type visitComparisonExpression(BinaryOperation operation) {
+        Type returnedType = verifyType(checkTypeCompatibility(operation), "numeric");
+        if(returnedType.isOfType("error")) {
+            return returnedType;
+        } else {
+            return new BooleanType(operation.getSourceLocation());
+        }
+    }
+
+    @Override
+    public Type visit(Multiplication multiplication) {
+        return verifyType(checkTypeCompatibility(multiplication), "numeric");
     }
 
     @Override
