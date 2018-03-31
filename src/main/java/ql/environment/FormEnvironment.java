@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class FormEnvironment implements FormStatementVisitor<String>, TypeVisitor<Value>, Environment {
+public class FormEnvironment implements FormStatementVisitor<String>, Environment {
 
     private final ExpressionStore expressionStore;
     private final QuestionStore questionStore;
@@ -59,8 +59,12 @@ public class FormEnvironment implements FormStatementVisitor<String>, TypeVisito
 
     @Override
     public void setValue(String questionId, Value value) {
+        System.out.printf("Was: %s%n", getQuestionValue(questionId).getValue().toString());
         valueStore.setValue(questionId, value);
+        System.out.printf("Will be: %s%n", value.getValue().toString());
         evaluate();
+        System.out.printf("Is: %s%n", getQuestionValue(questionId).getValue().toString());
+
     }
 
     @Override
@@ -99,7 +103,46 @@ public class FormEnvironment implements FormStatementVisitor<String>, TypeVisito
     @Override
     public String visit(Question question) {
         questionStore.addQuestion(question);
-        valueStore.setValue(question.getId(), question.getType().accept(this));
+        //Initialise environment with default values
+        valueStore.setValue(question.getId(), question.getType().accept(new TypeVisitor<Value>() {
+
+            @Override
+            public Value visit(BooleanType booleanType) {
+                return new BooleanValue(false);
+            }
+
+            @Override
+            public Value visit(DecimalType decimalType) {
+                return new DecimalValue(0.0);
+            }
+
+            @Override
+            public Value visit(IntegerType integerType) {
+                return new IntegerValue(0);
+            }
+
+            @Override
+            public Value visit(MoneyType moneyType) {
+                return new MoneyValue(0.00);
+            }
+
+            @Override
+            public Value visit(StringType stringType) {
+                return new StringValue("");
+            }
+
+            @Override
+            public Value visit(DateType dateType) {
+                return new DateValue(new Date());
+            }
+
+            @Override
+            public Value visit(ErrorType errorType) {
+                //TODO: optionally remove from visitor interface
+                return null;
+            }
+
+        }));
         return question.getId();
     }
 
@@ -140,40 +183,4 @@ public class FormEnvironment implements FormStatementVisitor<String>, TypeVisito
         return null;
     }
 
-
-    @Override
-    public Value visit(BooleanType booleanType) {
-        return new BooleanValue(false);
-    }
-
-    @Override
-    public Value visit(DecimalType decimalType) {
-        return new DecimalValue(0.0);
-    }
-
-    @Override
-    public Value visit(IntegerType integerType) {
-        return new IntegerValue(0);
-    }
-
-    @Override
-    public Value visit(MoneyType moneyType) {
-        return new MoneyValue(0.00);
-    }
-
-    @Override
-    public Value visit(StringType stringType) {
-        return new StringValue("");
-    }
-
-    @Override
-    public Value visit(DateType dateType) {
-        return new DateValue(new Date());
-    }
-
-    @Override
-    public Value visit(ErrorType errorType) {
-        //TODO: optionally remove from visitor interface
-        return null;
-    }
 }
