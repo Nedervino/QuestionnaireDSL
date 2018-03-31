@@ -53,7 +53,7 @@ public class SliderWidget extends BaseWidget {
         slider.addChangeListener(e -> {
             //wait until user has released slider before updating
             if (!slider.getValueIsAdjusting() && isEditable) {
-                widgetListener.onQuestionUpdated(question, new DecimalValue(slider.getValue()));
+                widgetListener.onInputValueUpdated(question, new DecimalValue(slider.getValue()));
             }
         });
     }

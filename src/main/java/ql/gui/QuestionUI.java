@@ -53,7 +53,7 @@ public class QuestionUI implements WidgetListener, EnvironmentListener {
     }
 
     @Override
-    public void onQuestionUpdated(Question question, Value value) {
+    public void onInputValueUpdated(Question question, Value value) {
         environment.setValue(question.getId(), value);
     }
 

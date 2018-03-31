@@ -67,7 +67,7 @@ public class TextFieldWidget extends BaseWidget {
                         value = new StringValue(textField.getText());
                     }
                     Value finalValue = value;
-                    widgetListener.onQuestionUpdated(question, finalValue);
+                    widgetListener.onInputValueUpdated(question, finalValue);
                 }
             }
         });
