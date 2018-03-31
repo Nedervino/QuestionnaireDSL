@@ -34,9 +34,9 @@ widgetType      : 'slider' sliderMap                                            
                 | 'dropdown' choiceMap?                                                     #dropdownWidget
                 ;
 
-sliderMap       : LEFTPARENTHESES start=INTEGERLITERAL',' end=INTEGERLITERAL',' step=INTEGERLITERAL RIGHTPARENTHESES;
+sliderMap       : LEFTPARENTHESES start=INTEGERLITERAL COMMA end=INTEGERLITERAL COMMA step=INTEGERLITERAL RIGHTPARENTHESES;
 
-choiceMap       : LEFTPARENTHESES yes=STRINGLITERAL ',' no=STRINGLITERAL RIGHTPARENTHESES;
+choiceMap       : LEFTPARENTHESES yes=STRINGLITERAL COMMA no=STRINGLITERAL RIGHTPARENTHESES;
 
 widgetStyle     : LEFTBRACKET styleRule+ widget? RIGHTBRACKET;
 
@@ -57,7 +57,7 @@ value           : INTEGERLITERAL
 //HEXCOLOR            : '#' ('0'..'9' | 'a'..'f'){6};
 HEXCOLOR            : '#' ('0'..'9' | 'a'..'f')+;
 INTEGERLITERAL      : DIGIT+;
-STRINGLITERAL       : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
+STRINGLITERAL       : '"' (~('"' | '\\' | '\r' | '\n'))* '"';
 //DECIMALLITERAL      : DIGIT+ '.' DIGIT+;
 
 IDENTIFIER          : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
