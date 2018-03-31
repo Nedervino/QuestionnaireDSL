@@ -55,7 +55,7 @@ public class TextFieldWidget extends BaseWidget {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (isEditable) {
-                    //TODO
+                    //TODO optional visitor
                     Value value = null;
                     if (question.isOfType("integer")) {
                         value = new IntegerValue(textField.getText());

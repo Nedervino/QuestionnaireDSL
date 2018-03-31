@@ -3,6 +3,10 @@
 */
 
 form taxOfficeExample {
-    "Logical not"
+    "NOT:"
         logicalNot: boolean = !true
+    "AND:"
+        logicalAnd: boolean = true && false
+    "OR:"
+        hasBoughtHouse: boolean = true || false
 }

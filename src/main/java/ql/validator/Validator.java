@@ -19,8 +19,6 @@ import ql.validator.checkers.QuestionDuplicationChecker;
  */
 public class Validator {
 
-    //TODO: passesTests return issuetracker.
-
     public static boolean passesChecks(Form form) {
 
         Checker questionDuplicationChecker = new QuestionDuplicationChecker();

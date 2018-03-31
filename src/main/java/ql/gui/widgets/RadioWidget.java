@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RadioWidget extends BaseWidget {
-    //TODO
+    //TODO create separate button map for arbitrary types
 
     private final Map<String, JRadioButton> choiceButtonMap;
     private final JPanel panel;
