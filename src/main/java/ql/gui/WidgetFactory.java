@@ -13,7 +13,7 @@ public class WidgetFactory implements TypeVisitor<Widget> {
     private boolean isEditable;
 
     public Widget createWidget(Question question, Environment environment) {
-        isEditable = environment.questionIsComputed(question.getId());
+        isEditable = !environment.questionIsComputed(question.getId());
         this.environment = environment;
         this.question = question;
         return question.getType().accept(this);

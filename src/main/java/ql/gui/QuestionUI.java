@@ -36,7 +36,7 @@ public class QuestionUI implements WidgetListener, EnvironmentListener {
 
         panel.setPreferredSize(new Dimension(600, 50));
 
-        setVisible(isEnabled());
+        setVisible(isVisible());
     }
 
     public void update() {
@@ -52,8 +52,8 @@ public class QuestionUI implements WidgetListener, EnvironmentListener {
         widget.setVisible(visible);
     }
 
-    public boolean isEnabled() {
-        return environment.questionIsEnabled(question.getId());
+    private boolean isVisible() {
+        return environment.questionIsVisible(question.getId());
     }
 
     @Override
@@ -63,7 +63,7 @@ public class QuestionUI implements WidgetListener, EnvironmentListener {
 
     @Override
     public void onEnvironmentUpdated() {
-        setVisible(isEnabled());
+        setVisible(isVisible());
         widget.setValue();
     }
 }

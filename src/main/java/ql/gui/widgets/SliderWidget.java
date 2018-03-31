@@ -30,6 +30,7 @@ public class SliderWidget extends BaseWidget {
         slider.setPaintLabels(true);
 
         slider.setPreferredSize(new Dimension(200, 50));
+        slider.setEnabled(isEditable);
     }
 
     @Override

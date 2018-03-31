@@ -19,7 +19,7 @@ public class Main {
 
         String qlFileName = "src/input/ql/correct/if.ql";
         // String qlFileName = "src/input/ql/correct/gui/dependentValue.ql";
-        // String qlFileName = "src/input/ql/correct/gui/allComputedQuestions.ql";
+        // String qlFileName = "src/input/ql/correct/gui/allComputedQuestionTypes.ql";
         String qlFile = new FileScanner().loadFile(qlFileName);
 
         FormBuilder formBuilder = new FormBuilder();

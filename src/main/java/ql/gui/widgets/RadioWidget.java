@@ -42,7 +42,6 @@ public class RadioWidget extends BaseWidget {
         } else {
             buttonGroup.setSelected(choiceButtonMap.get("false").getModel(), true);
         }
-
     }
 
     @Override

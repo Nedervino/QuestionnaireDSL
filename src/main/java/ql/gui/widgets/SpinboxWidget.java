@@ -18,6 +18,7 @@ public class SpinboxWidget extends BaseWidget {
         // spinner = new JSpinner(new SpinnerListModel(choices));
         spinner = new JSpinner();
         spinner.setPreferredSize(new Dimension(200, 50));
+        spinner.setEnabled(isEditable);
         setValue();
     }
 
