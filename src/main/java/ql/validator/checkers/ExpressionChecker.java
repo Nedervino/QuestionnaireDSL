@@ -1,7 +1,6 @@
 package ql.validator.checkers;
 
 import ql.ast.Form;
-import ql.ast.expressions.Expression;
 import ql.ast.expressions.Variable;
 import ql.ast.expressions.binary.*;
 import ql.ast.expressions.literals.*;
@@ -160,7 +159,7 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
 
     private Type visitComparisonExpression(BinaryOperation operation) {
         Type returnedType = verifyType(checkTypeCompatibility(operation), "numeric");
-        if(returnedType.isOfType("error")) {
+        if (returnedType.isOfType("error")) {
             return returnedType;
         } else {
             return new BooleanType(operation.getSourceLocation());

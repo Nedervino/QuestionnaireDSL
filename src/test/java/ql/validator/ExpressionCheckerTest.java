@@ -77,7 +77,6 @@ public class ExpressionCheckerTest extends BaseQlTest {
     public void shouldIssueNoErrorForNumericExpressionsWithMoneyType() {
         Form form = createForm("src/input/ql/correct/validator/numericExpressionsWithMoneyType.ql");
 
-
         boolean passesTests = expressionChecker.passesTests(form);
         assertTrue(passesTests);
 
@@ -89,6 +88,16 @@ public class ExpressionCheckerTest extends BaseQlTest {
     public void shouldIssueNoErrorForDifferentNumericCombinations() {
         Form form = createForm("src/input/ql/correct/validator/numericCombinations.ql");
 
+        boolean passesTests = expressionChecker.passesTests(form);
+        assertTrue(passesTests);
+
+        assertEquals(0, expressionChecker.getWarnings().size());
+        assertEquals(0, expressionChecker.getErrors().size());
+    }
+
+    @Test
+    public void shouldIssueNoErrorForNumericComparisons() {
+        Form form = createForm("src/input/ql/correct/comparisonExpressions.ql");
 
         boolean passesTests = expressionChecker.passesTests(form);
         assertTrue(passesTests);
@@ -100,8 +109,7 @@ public class ExpressionCheckerTest extends BaseQlTest {
     @Test
     public void shouldIssueErrorForNonBooleanInBooleanExpression() {
         Form form = createForm("src/input/ql/incorrect/validator/nonBooleanInBoolean.ql");
-
-
+        
         boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
 
@@ -115,7 +123,6 @@ public class ExpressionCheckerTest extends BaseQlTest {
     @Test
     public void shouldIssueErrorForNonNumericInComparisonExpression() {
         Form form = createForm("src/input/ql/incorrect/validator/nonNumericInComparison.ql");
-
 
         boolean passesTests = expressionChecker.passesTests(form);
         assertFalse(passesTests);
