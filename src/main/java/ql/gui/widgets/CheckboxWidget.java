@@ -14,7 +14,7 @@ public class CheckboxWidget extends BaseWidget {
     public CheckboxWidget(Environment environment, Question question, boolean isEditable) {
         super(environment, question, isEditable);
         checkBox = new JCheckBox();
-        checkBox.setEnabled(isEditable);
+        setEditable(isEditable);
     }
 
     @Override
@@ -25,6 +25,11 @@ public class CheckboxWidget extends BaseWidget {
     @Override
     public void setVisible(boolean visible) {
         checkBox.setVisible(visible);
+    }
+
+    @Override
+    public void setEditable(boolean isEditable) {
+        checkBox.setEnabled(isEditable);
     }
 
     @Override

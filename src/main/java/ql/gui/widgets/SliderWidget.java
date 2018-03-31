@@ -30,7 +30,7 @@ public class SliderWidget extends BaseWidget {
         slider.setPaintLabels(true);
 
         slider.setPreferredSize(new Dimension(200, 50));
-        slider.setEnabled(isEditable);
+        setEditable(isEditable);
     }
 
     @Override
@@ -41,6 +41,11 @@ public class SliderWidget extends BaseWidget {
     @Override
     public void setVisible(boolean visible) {
         slider.setVisible(visible);
+    }
+
+    @Override
+    public void setEditable(boolean isEditable) {
+        slider.setEnabled(isEditable);
     }
 
     @Override

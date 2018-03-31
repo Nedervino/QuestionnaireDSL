@@ -18,8 +18,8 @@ public class SpinboxWidget extends BaseWidget {
         // spinner = new JSpinner(new SpinnerListModel(choices));
         spinner = new JSpinner();
         spinner.setPreferredSize(new Dimension(200, 50));
-        spinner.setEnabled(isEditable);
         setValue();
+        setEditable(isEditable);
     }
 
     @Override
@@ -31,6 +31,11 @@ public class SpinboxWidget extends BaseWidget {
     @Override
     public void setVisible(boolean visible) {
         this.spinner.setVisible(visible);
+    }
+
+    @Override
+    public void setEditable(boolean isEditable) {
+        spinner.setEnabled(isEditable);
     }
 
     @Override

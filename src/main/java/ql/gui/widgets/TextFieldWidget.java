@@ -26,13 +26,18 @@ public class TextFieldWidget extends BaseWidget {
         super(environment, question, isEditable);
         textField = createTextField(question);
         textField.setPreferredSize(new Dimension(200, 50));
-        textField.setEditable(isEditable);
+        setEditable(isEditable);
         setValue();
     }
 
     @Override
     public void setVisible(boolean visible) {
         textField.setVisible(visible);
+    }
+
+    @Override
+    public void setEditable(boolean isEditable) {
+        textField.setEditable(isEditable);
     }
 
     @Override

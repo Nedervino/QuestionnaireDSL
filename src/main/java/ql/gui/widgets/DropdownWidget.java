@@ -20,7 +20,7 @@ public class DropdownWidget extends BaseWidget {
         dropdown.addItem(TRUE_LABEL);
         dropdown.addItem(FALSE_LABEL);
         setValue();
-        dropdown.setEnabled(isEditable);
+        setEditable(isEditable);
     }
 
     @Override
@@ -30,6 +30,16 @@ public class DropdownWidget extends BaseWidget {
         } else {
             dropdown.setSelectedItem(FALSE_LABEL);
         }
+    }
+
+    @Override
+    public void setVisible(boolean visible) {
+        dropdown.setVisible(visible);
+    }
+
+    @Override
+    public void setEditable(boolean isEditable) {
+        dropdown.setEnabled(isEditable);
     }
 
     @Override
@@ -43,10 +53,5 @@ public class DropdownWidget extends BaseWidget {
     @Override
     public JComponent getComponent() {
         return dropdown;
-    }
-
-    @Override
-    public void setVisible(boolean visible) {
-        dropdown.setVisible(visible);
     }
 }

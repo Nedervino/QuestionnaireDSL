@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RadioWidget extends BaseWidget {
+    //TODO
 
     private final Map<String, JRadioButton> choiceButtonMap;
     private final JPanel panel;
@@ -42,11 +43,19 @@ public class RadioWidget extends BaseWidget {
         } else {
             buttonGroup.setSelected(choiceButtonMap.get("false").getModel(), true);
         }
+
+        setEditable(isEditable);
     }
 
     @Override
     public void setValue() {
         //TODO
+    }
+
+    public void setEditable(boolean isEditable) {
+        for(JRadioButton button : choiceButtonMap.values()) {
+            button.setEnabled(isEditable);
+        }
     }
 
     @Override
