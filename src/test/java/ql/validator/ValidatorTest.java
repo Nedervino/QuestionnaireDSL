@@ -10,8 +10,8 @@ import static org.junit.Assert.assertTrue;
 public class ValidatorTest extends BaseQlTest {
 
     @Test
-    public void shouldFailForCycles() throws Exception {
-        Form form = createForm("src/input/ql/incorrect/validator/cyclicalBetweenQuestions.ql");
+    public void shouldFailForReferenceToUndefinedQuestion() throws Exception {
+        Form form = createForm("src/input/ql/incorrect/validator/undefinedQuestion.ql");
         assertFalse(Validator.passesChecks(form));
     }
 
@@ -22,8 +22,20 @@ public class ValidatorTest extends BaseQlTest {
     }
 
     @Test
+    public void shouldFailForNonBooleanConditionals() throws Exception {
+        Form form = createForm("src/input/ql/incorrect/validator/nonBooleanCondition.ql");
+        assertFalse(Validator.passesChecks(form));
+    }
+
+    @Test
     public void shouldFailForExpressionMismatches() throws Exception {
         Form form = createForm("src/input/ql/incorrect/validator/incompatibleBinaryExpressionTypes.ql");
+        assertFalse(Validator.passesChecks(form));
+    }
+
+    @Test
+    public void shouldFailForCycles() throws Exception {
+        Form form = createForm("src/input/ql/incorrect/validator/cyclicalBetweenQuestions.ql");
         assertFalse(Validator.passesChecks(form));
     }
 

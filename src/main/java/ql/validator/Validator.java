@@ -8,7 +8,14 @@ import ql.validator.checkers.QuestionDuplicationChecker;
 
 
 /**
- * Performs validation for the AST by checking invalid references, expressions, duplications, and cyclic dependencies
+ * The validator detects:
+ *
+ * - reference to undefined questions
+ * - duplicate question declarations with different types
+ * - conditions that are not of the type boolean
+ * - operands of invalid type to operators
+ * - cyclic dependencies between questions
+ * - duplicate labels (warning)
  */
 public class Validator {
 
