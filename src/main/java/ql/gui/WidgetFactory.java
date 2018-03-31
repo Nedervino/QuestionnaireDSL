@@ -47,7 +47,7 @@ public class WidgetFactory {
 
             @Override
             public Widget visit(ErrorType errorType) {
-                return null;
+                throw new IllegalArgumentException();
             }
 
         });

@@ -141,8 +141,7 @@ public class FormEnvironment implements FormStatementVisitor<String>, Environmen
 
             @Override
             public Value visit(ErrorType errorType) {
-                //TODO: optionally remove from visitor interface
-                return null;
+                throw new IllegalArgumentException();
             }
 
         }));

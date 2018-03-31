@@ -39,10 +39,6 @@ public class QuestionUI implements WidgetListener, EnvironmentListener {
         setVisible(isVisible());
     }
 
-    public void update() {
-        widget.setValue();
-    }
-
     public JComponent getComponent() {
         return panel;
     }

@@ -50,6 +50,7 @@ public class TextFieldWidget extends BaseWidget {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (isEditable) {
+                    //TODO
                     Value value = null;
                     if (question.isOfType("integer")) {
                         value = new IntegerValue(textField.getText());
@@ -127,7 +128,7 @@ public class TextFieldWidget extends BaseWidget {
 
             @Override
             public JFormattedTextField visit(ErrorType errorType) {
-                return null;
+                throw new IllegalArgumentException();
             }
         });
     }
