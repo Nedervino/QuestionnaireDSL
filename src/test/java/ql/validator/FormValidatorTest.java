@@ -44,4 +44,10 @@ public class FormValidatorTest extends BaseQlTest {
         Form form = createForm("src/input/ql/correct/gui/allComputedQuestionTypes.ql");
         assertTrue(FormValidator.passesChecks(form));
     }
+
+    @Test
+    public void shouldFailForForwardReference() throws Exception {
+        Form form = createForm("src/input/ql/incorrect/validator/forwardReferenceQuestion.ql");
+        assertFalse(FormValidator.passesChecks(form));
+    }
 }
