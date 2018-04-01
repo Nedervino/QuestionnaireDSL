@@ -3,6 +3,7 @@ package qls.parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import ql.ast.ASTNode;
 import ql.ast.SourceLocation;
+import ql.ast.types.*;
 import qls.QLSBaseVisitor;
 import qls.QLSParser;
 import qls.ast.Page;
@@ -35,8 +36,54 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     }
 
     @Override
+    public ASTNode visitQuestion(QLSParser.QuestionContext ctx) {
+        return super.visitQuestion(ctx);
+    }
+
+    @Override
+    public ASTNode visitSection(QLSParser.SectionContext ctx) {
+        String sectionIdentifier = ctx.STRINGLITERAL().getText().substring(1, ctx.STRINGLITERAL().getText().length() - 1);
+        return super.visitSection(ctx);
+    }
+
+    @Override
+    public ASTNode visitDefaultRule(QLSParser.DefaultRuleContext ctx) {
+        return super.visitDefaultRule(ctx);
+    }
+
+    @Override
     public ASTNode visitWidget(QLSParser.WidgetContext ctx) {
         return visit(ctx.widgetType());
+    }
+
+    @Override
+    public ASTNode visitBooleanType(QLSParser.BooleanTypeContext ctx) {
+        return new BooleanType(getSourceLocation(ctx));
+    }
+
+    @Override
+    public ASTNode visitIntegerType(QLSParser.IntegerTypeContext ctx) {
+        return new IntegerType(getSourceLocation(ctx));
+    }
+
+    @Override
+    public ASTNode visitDecimalType(QLSParser.DecimalTypeContext ctx) {
+        return new DecimalType(getSourceLocation(ctx));
+    }
+
+    @Override
+    public ASTNode visitDateType(QLSParser.DateTypeContext ctx) {
+        return new DateType(getSourceLocation(ctx));
+    }
+
+    @Override
+    public ASTNode visitStringType(QLSParser.StringTypeContext ctx) {
+        return new StringType(getSourceLocation(ctx));
+    }
+
+    @Override
+    public ASTNode visitMoneyType(QLSParser.MoneyTypeContext ctx) {
+        return new MoneyType(getSourceLocation(ctx));
     }
 
     @Override
