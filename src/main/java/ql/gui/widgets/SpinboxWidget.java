@@ -3,6 +3,7 @@ package ql.gui.widgets;
 import ql.ast.statements.Question;
 import ql.environment.Environment;
 import ql.environment.values.IntegerValue;
+import ql.environment.values.Value;
 import ql.gui.WidgetListener;
 
 import javax.swing.*;
@@ -29,6 +30,11 @@ public class SpinboxWidget extends BaseWidget {
     }
 
     @Override
+    public Value getValue() {
+        return new IntegerValue((int) spinner.getValue());
+    }
+
+    @Override
     public void setVisible(boolean visible) {
         this.spinner.setVisible(visible);
     }
@@ -42,8 +48,7 @@ public class SpinboxWidget extends BaseWidget {
     public void registerChangeListener(WidgetListener widgetListener) {
         spinner.addChangeListener(e -> {
             if (isEditable) {
-                IntegerValue integerValue = new IntegerValue((int) spinner.getValue());
-                widgetListener.onInputValueUpdated(question, integerValue);
+                widgetListener.onInputValueUpdated(question, getValue());
             }
         });
     }
