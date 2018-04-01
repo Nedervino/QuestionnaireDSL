@@ -14,6 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        //TODO: Apply same package structure as for ql package.
         //TODO: pass file (non-string) instead of filecontents to formbuilder
 
         String qlFileName = "src/input/qls/correct/taxOfficeExample.ql";

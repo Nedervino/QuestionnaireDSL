@@ -6,12 +6,6 @@ stylesheet      : 'stylesheet' IDENTIFIER LEFTBRACKET page* RIGHTBRACKET;
 
 page            : 'page' IDENTIFIER LEFTBRACKET (section | defaultRule)* RIGHTBRACKET;
 
-//block           : LEFTBRACKET component* RIGHTBRACKET;
-//
-//component       : section
-//                | defaultRule
-//                ;
-
 section         : 'section' STRINGLITERAL LEFTBRACKET segment* RIGHTBRACKET
                 | 'section' STRINGLITERAL segment
                 ;
@@ -22,7 +16,7 @@ segment         : section
                 ;
 
 question        : 'question' IDENTIFIER widget?
-//                | 'question' IDENTIFIER styleRule?
+//              | 'question' IDENTIFIER styleRule?
                 ;
 
 defaultRule     : 'default' type (widget | widgetStyle);
@@ -38,10 +32,10 @@ type            : 'boolean'                                                     
                 ;
 
 widgetType      : 'slider' sliderMap                                                        #sliderWidget
-                | 'spinbox' (LEFTPARENTHESES yes=STRINGLITERAL RIGHTPARENTHESES)?           #spinboxWidget
+                | 'spinbox'                                                                 #spinboxWidget
                 | 'text'                                                                    #textWidget
                 | 'radio' choiceMap?                                                        #radioWidget
-                | 'checkbox'                                                                #checkboxWidget
+                | 'checkbox'  (LEFTPARENTHESES yes=STRINGLITERAL RIGHTPARENTHESES)?         #checkboxWidget
                 | 'dropdown' choiceMap?                                                     #dropdownWidget
                 ;
 
@@ -51,7 +45,11 @@ choiceMap       : LEFTPARENTHESES yes=STRINGLITERAL COMMA no=STRINGLITERAL RIGHT
 
 widgetStyle     : LEFTBRACKET styleProperty+ widget? RIGHTBRACKET;
 
-styleProperty   : IDENTIFIER COLON value;
+styleProperty   : 'width' COLON INTEGERLITERAL                                              #widthProperty
+                | 'font' COLON STRINGLITERAL                                                #fontProperty
+                | 'fontsize' COLON INTEGERLITERAL                                           #fontSizeProperty
+                | 'color' COLON HEXCOLOR                                                    #colorProperty
+                ;
 
 value           : INTEGERLITERAL
                 | STRINGLITERAL
@@ -60,16 +58,11 @@ value           : INTEGERLITERAL
 
 
 
-
-
-
-
 //Literals
 //HEXCOLOR            : '#' ('0'..'9' | 'a'..'f'){6};
 HEXCOLOR            : '#' ('0'..'9' | 'a'..'f')+;
 INTEGERLITERAL      : DIGIT+;
 STRINGLITERAL       : '"' (~('"' | '\\' | '\r' | '\n'))* '"';
-//DECIMALLITERAL      : DIGIT+ '.' DIGIT+;
 
 IDENTIFIER          : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
 DIGIT               : [0-9];
