@@ -1,5 +1,7 @@
 package ql.environment.values;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
 import java.util.Objects;
 
 public class DecimalValue extends NumericValue<Double> {
@@ -11,7 +13,7 @@ public class DecimalValue extends NumericValue<Double> {
     }
 
     public DecimalValue(String input) {
-        value = Double.parseDouble(input);
+        value = NumberUtils.toDouble(input, 0);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package ql.environment.values;
 
 import java.math.BigDecimal;
+import org.apache.commons.lang3.math.NumberUtils;
 
 public class MoneyValue extends NumericValue<BigDecimal> {
 
@@ -16,7 +17,7 @@ public class MoneyValue extends NumericValue<BigDecimal> {
     }
 
     public MoneyValue(String input) {
-        value = new BigDecimal(input);
+        value = new BigDecimal(NumberUtils.toDouble(input, 0));
     }
 
     private void round() {
