@@ -7,12 +7,12 @@ import qls.ast.properties.WidthProperty;
 
 public interface PropertyVisitor<T> {
 
-    public T visit(ColorProperty property);
+    T visit(ColorProperty property);
 
-    public T visit(FontProperty property);
+    T visit(FontProperty property);
 
-    public T visit(FontSizeProperty property);
+    T visit(FontSizeProperty property);
 
-    public T visit(WidthProperty property);
+    T visit(WidthProperty property);
 
 }

@@ -12,7 +12,7 @@ import ql.environment.values.*;
 
 public class ExpressionEvaluator implements ExpressionVisitor<Value> {
 
-    private ValueStore valueStore;
+    private final ValueStore valueStore;
 
     public ExpressionEvaluator(ValueStore valueStore) {
         this.valueStore = valueStore;

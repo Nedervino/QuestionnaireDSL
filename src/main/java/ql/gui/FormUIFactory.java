@@ -21,7 +21,7 @@ public class FormUIFactory {
         return new FormUI(questions);
     }
 
-    public QuestionUI getQuestionUI(Environment environment, Question question) {
+    private QuestionUI getQuestionUI(Environment environment, Question question) {
         return new QuestionUI(environment, question);
     }
 

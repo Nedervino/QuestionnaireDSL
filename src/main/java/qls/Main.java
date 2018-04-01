@@ -1,14 +1,14 @@
 package qls;
 
-import ql.main.FileScanner;
 import ql.ast.Form;
 import ql.gui.FormUI;
 import ql.gui.FormUIFactory;
+import ql.main.FileScanner;
 import ql.parser.FormBuilder;
 import ql.validator.FormValidator;
-import qls.validator.StylesheetValidator;
 import qls.ast.Stylesheet;
 import qls.parser.StylesheetBuilder;
+import qls.validator.StylesheetValidator;
 
 public class Main {
 

@@ -33,6 +33,7 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
         return new Page(pageId, components, getSourceLocation(ctx));
     }
 
+
     @Override
     public ASTNode visitSection(QLSParser.SectionContext ctx) {
         return super.visitSection(ctx);
@@ -45,7 +46,7 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitFontProperty(QLSParser.FontPropertyContext ctx) {
-        return new FontProperty(ctx.STRINGLITERAL().getText(),getSourceLocation(ctx));
+        return new FontProperty(ctx.STRINGLITERAL().getText(), getSourceLocation(ctx));
     }
 
     @Override
