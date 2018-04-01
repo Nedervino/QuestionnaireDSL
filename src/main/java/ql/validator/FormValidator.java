@@ -1,10 +1,7 @@
 package ql.validator;
 
 import ql.ast.Form;
-import ql.validator.checkers.Checker;
-import ql.validator.checkers.CyclicDependencyChecker;
-import ql.validator.checkers.ExpressionChecker;
-import ql.validator.checkers.QuestionDuplicationChecker;
+import ql.validator.checkers.*;
 
 
 /**
@@ -24,6 +21,7 @@ public class FormValidator {
         Checker questionDuplicationChecker = new QuestionDuplicationChecker();
         Checker expressionChecker = new ExpressionChecker();
         Checker cyclicDependencyChecker = new CyclicDependencyChecker();
+        Checker forwardReferenceChecker = new ForwardReferenceChecker();
 
         //Check for duplicate question identifiers and labels
         if (detectsErrors(questionDuplicationChecker, form)) return false;
@@ -33,6 +31,9 @@ public class FormValidator {
 
         //Check cyclic dependencies between questions
         if (detectsErrors(cyclicDependencyChecker, form)) return false;
+
+        //Checks for forward references to questions
+        if(detectsErrors(forwardReferenceChecker, form)) return false;
 
         return true;
     }
