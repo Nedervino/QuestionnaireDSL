@@ -19,6 +19,4 @@ public class Page extends ASTNode {
         this.components = components;
     }
 
-
-
 }

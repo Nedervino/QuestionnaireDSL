@@ -4,17 +4,28 @@ grammar QLS;
 
 stylesheet      : 'stylesheet' IDENTIFIER LEFTBRACKET page* RIGHTBRACKET;
 
-page            : 'page' IDENTIFIER block;
+page            : 'page' IDENTIFIER LEFTBRACKET (section | defaultRule)* RIGHTBRACKET;
 
-block           : LEFTBRACKET component* RIGHTBRACKET;
+//block           : LEFTBRACKET component* RIGHTBRACKET;
+//
+//component       : section
+//                | defaultRule
+//                ;
 
-component       : section
-                | defaultWidget
+section         : 'section' IDENTIFIER LEFTBRACKET segment* RIGHTBRACKET
+                | 'section' IDENTIFIER segment
                 ;
 
-section         : 'section' IDENTIFIER block;
+segment         : section
+                | question
+                | defaultRule
+                ;
 
-defaultWidget   : 'default' type (widget | widgetStyle);
+question        : 'question' IDENTIFIER widget?
+                | 'question' IDENTIFIER styleRule?
+                ;
+
+defaultRule     : 'default' type (widget | widgetStyle);
 
 widget          : 'widget' widgetType;
 
