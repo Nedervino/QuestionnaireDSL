@@ -88,9 +88,13 @@ public class FormEnvironment implements FormStatementVisitor<String>, Environmen
     @Override
     public boolean questionIsVisible(String questionId) {
         if (questionStore.hasConditionDependency(questionId)) {
-            Expression conditionExpression = questionStore.getConditionDependency(questionId);
-            BooleanValue condition = (BooleanValue) expressionEvaluator.evaluate(conditionExpression);
-            return condition.getValue();
+            List<Expression> conditionExpressions = questionStore.getConditionDependencies(questionId);
+            for(Expression conditionExpression : conditionExpressions) {
+                BooleanValue condition = (BooleanValue) expressionEvaluator.evaluate(conditionExpression);
+                if (!condition.getValue()) {
+                    return false;
+                }
+            }
         }
         return true;
     }
