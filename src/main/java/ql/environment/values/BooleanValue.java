@@ -13,8 +13,9 @@ public class BooleanValue implements Value<Boolean> {
             value = true;
         } else if (input.equalsIgnoreCase("no") || input.equalsIgnoreCase("false")) {
             value = false;
+        } else {
+            throw new IllegalArgumentException();
         }
-        throw new IllegalArgumentException();
     }
 
     @Override

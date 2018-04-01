@@ -42,6 +42,11 @@ public class SliderWidget extends BaseWidget {
     }
 
     @Override
+    public Value getValue() {
+        return new DecimalValue(slider.getValue());
+    }
+
+    @Override
     public void setVisible(boolean visible) {
         slider.setVisible(visible);
     }
@@ -56,7 +61,7 @@ public class SliderWidget extends BaseWidget {
         slider.addChangeListener(e -> {
             //wait until user has released slider before updating
             if (!slider.getValueIsAdjusting() && isEditable) {
-                widgetListener.onInputValueUpdated(question, new DecimalValue(slider.getValue()));
+                widgetListener.onInputValueUpdated(question, getValue());
             }
         });
     }

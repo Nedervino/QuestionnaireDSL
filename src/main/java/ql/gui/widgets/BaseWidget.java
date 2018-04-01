@@ -16,10 +16,4 @@ public abstract class BaseWidget implements Widget {
         this.isEditable = isEditable;
     }
 
-    @Override
-    public Value getValue() {
-        return null;
-        //TODO
-    }
-
 }
