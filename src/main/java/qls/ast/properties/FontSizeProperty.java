@@ -5,8 +5,15 @@ import qls.ast.visitors.PropertyVisitor;
 
 public class FontSizeProperty extends Property {
 
-    protected FontSizeProperty(SourceLocation sourceLocation) {
+    private final int value;
+
+    public FontSizeProperty(int value, SourceLocation sourceLocation) {
         super(sourceLocation);
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     @Override

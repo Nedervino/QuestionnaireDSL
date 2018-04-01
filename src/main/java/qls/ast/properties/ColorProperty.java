@@ -5,8 +5,15 @@ import qls.ast.visitors.PropertyVisitor;
 
 public class ColorProperty extends Property {
 
-    protected ColorProperty(SourceLocation sourceLocation) {
+    private final String value;
+
+    public ColorProperty(String value, SourceLocation sourceLocation) {
         super(sourceLocation);
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
     }
 
     @Override

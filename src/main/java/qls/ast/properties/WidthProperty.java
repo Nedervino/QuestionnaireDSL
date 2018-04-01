@@ -5,8 +5,15 @@ import qls.ast.visitors.PropertyVisitor;
 
 public class WidthProperty extends Property {
 
-    protected WidthProperty(SourceLocation sourceLocation) {
+    private final int value;
+
+    public WidthProperty(int value, SourceLocation sourceLocation) {
         super(sourceLocation);
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     @Override

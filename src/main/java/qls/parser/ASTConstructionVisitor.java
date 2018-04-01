@@ -8,6 +8,10 @@ import qls.QLSParser;
 import qls.ast.Page;
 import qls.ast.Stylesheet;
 import qls.ast.components.Component;
+import qls.ast.properties.ColorProperty;
+import qls.ast.properties.FontProperty;
+import qls.ast.properties.FontSizeProperty;
+import qls.ast.properties.WidthProperty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,38 +38,27 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
         return super.visitSection(ctx);
     }
 
-    // @Override
-    // public ASTNode visitBooleanType(QLSParser.BooleanTypeContext ctx) {
-    //     return new BooleanType(getSourceLocation(ctx));
-    // }
-    //
-    // @Override
-    // public ASTNode (QLSParser.IntegerTypeContext ctx) {
-    //     return new IntegerType(getSourceLocation(ctx));
-    // }
-    //
-    // @Override
-    // public ASTNode (QLSParser.StringTypeContext ctx) {
-    //     return new StringType(getSourceLocation(ctx));
-    // }
-    //
-    // @Override
-    // public ASTNode visitDecimalType(QLSParser.DecimalTypeContext ctx) {
-    //     return new DecimalType(getSourceLocation(ctx));
-    // }
-    //
-    // @Override
-    // public ASTNode visitDateType(QLSParser.DateTypeContext ctx) {
-    //     return new DateType(getSourceLocation(ctx));
-    // }
-    //
-    // @Override
-    // public ASTNode visitMoneyType(QLSParser.MoneyTypeContext ctx) {
-    //     return new MoneyType(getSourceLocation(ctx));
-    // }
-    //
+    @Override
+    public ASTNode visitColorProperty(QLSParser.ColorPropertyContext ctx) {
+        return new ColorProperty(ctx.HEXCOLOR().getText(), getSourceLocation(ctx));
+    }
 
-    public SourceLocation getSourceLocation(ParserRuleContext ctx) {
+    @Override
+    public ASTNode visitFontProperty(QLSParser.FontPropertyContext ctx) {
+        return new FontProperty(ctx.STRINGLITERAL().getText(),getSourceLocation(ctx));
+    }
+
+    @Override
+    public ASTNode visitFontSizeProperty(QLSParser.FontSizePropertyContext ctx) {
+        return new FontSizeProperty(Integer.parseInt(ctx.INTEGERLITERAL().getText()), getSourceLocation(ctx));
+    }
+
+    @Override
+    public ASTNode visitWidthProperty(QLSParser.WidthPropertyContext ctx) {
+        return new WidthProperty(Integer.parseInt(ctx.INTEGERLITERAL().getText()), getSourceLocation(ctx));
+    }
+
+    private SourceLocation getSourceLocation(ParserRuleContext ctx) {
         return new SourceLocation(ctx.start.getLine(), ctx.start.getCharPositionInLine());
     }
 }

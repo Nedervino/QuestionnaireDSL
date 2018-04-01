@@ -6,7 +6,7 @@ import qls.ast.visitors.PropertyVisitor;
 
 public abstract class Property extends ASTNode {
 
-    protected Property(SourceLocation sourceLocation) {
+    public Property(SourceLocation sourceLocation) {
         super(sourceLocation);
     }
 
