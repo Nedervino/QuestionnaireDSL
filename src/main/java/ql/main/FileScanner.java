@@ -1,4 +1,4 @@
-package main;
+package ql.main;
 
 import java.io.IOException;
 import java.nio.file.Files;

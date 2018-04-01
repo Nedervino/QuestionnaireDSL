@@ -1,6 +1,6 @@
 package ql;
 
-import main.FileScanner;
+import ql.main.FileScanner;
 import ql.ast.Form;
 import ql.parser.FormBuilder;
 

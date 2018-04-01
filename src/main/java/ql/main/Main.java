@@ -1,4 +1,4 @@
-package main;
+package ql.main;
 
 import ql.ast.Form;
 import ql.gui.FormUI;

@@ -16,15 +16,15 @@ This repository, managed by team Kazan, contains work on two DSLs (QL and QLS) t
 ## How to run
 * ```mvn antlr4:antlr4``` to generate parsers from grammar
 * ```mvn exec:java``` to run
-* Alternatively, instead of directly running generate a JAR with ```mvn package``` and run with ```java -cp target/querylanguage-1.0-SNAPSHOT-jar-with-dependencies.jar main.Main``` 
+* Alternatively, instead of directly running generate a JAR with ```mvn package``` and run with ```java -cp target/querylanguage-1.0-SNAPSHOT-jar-with-dependencies.jar ql.main.Main``` 
 
 ## Setup instructions for IntelliJ
 * File -> New -> Project from existing sources -> Kazan
 * Make sure to run the antlr4 maven plugin to generate required parsers from the grammar
-* Run /endlesql/Kazan/src/main/java/main/main
+* Run /endless-ql/Kazan/src/main/java/ql/main/Main
 
 
 ## How does it work?
 A .g4 file containing Lexer/Parser rules for the DSLs can be found in src/main/antlr4. Before running, Maven will need to generate the required classes from this grammar using the included ANTLR v4 plugin.
-Once this is done, you can define the form you wish to create in src/main/java/ql/Main. src/input contains example input questionnaires used for generating the form interface.
+Once this is done, you can define the form you wish to create in src/main/java/ql/main/Main. src/input contains example input questionnaires used for generating the form interface.
 
