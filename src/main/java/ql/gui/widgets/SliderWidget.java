@@ -21,7 +21,7 @@ public class SliderWidget extends BaseWidget {
         Number number = value != null ? (Number) value.getValue() : 0;
         int CURRENT_VALUE = number.intValue();
         int START = 0;
-        int END = CURRENT_VALUE + 10;
+        int END = (CURRENT_VALUE+1) * 2;
 
         slider = new JSlider(START, END, CURRENT_VALUE);
         slider.setMinorTickSpacing(5);
@@ -37,8 +37,9 @@ public class SliderWidget extends BaseWidget {
 
     @Override
     public void setValue() {
-        IntegerValue value = (IntegerValue) environment.getQuestionValue(question.getId());
-        slider.setValue(value.getValue());
+        Value value = environment.getQuestionValue(question.getId());
+        Number number = value != null ? (Number) value.getValue() : 0;
+        slider.setValue(number.intValue());
     }
 
     @Override
