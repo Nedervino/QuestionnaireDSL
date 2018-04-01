@@ -12,12 +12,10 @@ import ql.environment.datastore.QuestionStore;
 import ql.environment.datastore.ValueStore;
 import ql.environment.values.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
-public class FormEnvironment implements FormStatementVisitor<String>, Environment {
+public class FormEnvironment implements FormStatementVisitor<List<String>>, Environment {
 
     private final ExpressionStore expressionStore;
     private final QuestionStore questionStore;
@@ -100,7 +98,7 @@ public class FormEnvironment implements FormStatementVisitor<String>, Environmen
     }
 
     @Override
-    public String visit(Form form) {
+    public List<String> visit(Form form) {
         for (Statement statement : form.getStatements()) {
             statement.accept(this);
         }
@@ -108,7 +106,7 @@ public class FormEnvironment implements FormStatementVisitor<String>, Environmen
     }
 
     @Override
-    public String visit(Question question) {
+    public List<String> visit(Question question) {
         questionStore.addQuestion(question);
         // Initialise environment with default values
         valueStore.setValue(question.getId(), question.getType().accept(new TypeVisitor<Value>() {
@@ -149,44 +147,57 @@ public class FormEnvironment implements FormStatementVisitor<String>, Environmen
             }
 
         }));
-        return question.getId();
+        return Arrays.asList(new String[]{question.getId()});
     }
 
     @Override
-    public String visit(ComputedQuestion question) {
+    public List<String> visit(ComputedQuestion question) {
         questionStore.addQuestion(question);
         expressionStore.addExpression(question.getId(), question.getExpression());
-        return question.getId();
+        return Arrays.asList(new String[]{question.getId()});
     }
 
     //TODO: handle nested dependencies within which parent is false but child is true
     @Override
-    public String visit(IfStatement node) {
+    public List<String> visit(IfStatement node) {
+        List<String> allIdentifiers = new LinkedList<>();
+
         for (Statement statement : node.getIfStatements()) {
-            String identifier = statement.accept(this);
-            if (identifier != null) {
-                questionStore.addConditionDependency(identifier, node.getCondition());
+            List<String> identifiers = statement.accept(this);
+            if (identifiers != null) {
+                for (String identifier : identifiers) {
+                    questionStore.addConditionDependency(identifier, node.getCondition());
+                }
+                allIdentifiers.addAll(identifiers);
             }
         }
-        return null;
+        return allIdentifiers;
     }
 
     @Override
-    public String visit(IfElseStatement node) {
+    public List<String> visit(IfElseStatement node) {
+        List<String> allIdentifiers = new LinkedList<>();
+
         for (Statement statement : node.getIfStatements()) {
-            String identifier = statement.accept(this);
-            if (identifier != null) {
-                questionStore.addConditionDependency(identifier, node.getCondition());
+            List<String> identifiers = statement.accept(this);
+            if (identifiers != null) {
+                for(String identifier : identifiers) {
+                    questionStore.addConditionDependency(identifier, node.getCondition());
+                }
+                allIdentifiers.addAll(identifiers);
             }
         }
 
         for (Statement statement : node.getElseStatements()) {
-            String identifier = statement.accept(this);
-            if (identifier != null) {
-                questionStore.addConditionDependency(identifier, new Negation(node.getCondition(), node.getSourceLocation()));
+            List<String> identifiers = statement.accept(this);
+            if (identifiers != null) {
+                for (String identifier : identifiers) {
+                    questionStore.addConditionDependency(identifier, new Negation(node.getCondition(), node.getSourceLocation()));
+                }
+                allIdentifiers.addAll(identifiers);
             }
         }
-        return null;
+        return allIdentifiers;
     }
 
 }
