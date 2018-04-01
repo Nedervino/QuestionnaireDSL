@@ -12,8 +12,8 @@ page            : 'page' IDENTIFIER LEFTBRACKET (section | defaultRule)* RIGHTBR
 //                | defaultRule
 //                ;
 
-section         : 'section' IDENTIFIER LEFTBRACKET segment* RIGHTBRACKET
-                | 'section' IDENTIFIER segment
+section         : 'section' STRINGLITERAL LEFTBRACKET segment* RIGHTBRACKET
+                | 'section' STRINGLITERAL segment
                 ;
 
 segment         : section
@@ -22,7 +22,7 @@ segment         : section
                 ;
 
 question        : 'question' IDENTIFIER widget?
-                | 'question' IDENTIFIER styleRule?
+//                | 'question' IDENTIFIER styleRule?
                 ;
 
 defaultRule     : 'default' type (widget | widgetStyle);
@@ -49,9 +49,9 @@ sliderMap       : LEFTPARENTHESES start=INTEGERLITERAL COMMA end=INTEGERLITERAL 
 
 choiceMap       : LEFTPARENTHESES yes=STRINGLITERAL COMMA no=STRINGLITERAL RIGHTPARENTHESES;
 
-widgetStyle     : LEFTBRACKET styleRule+ widget? RIGHTBRACKET;
+widgetStyle     : LEFTBRACKET styleProperty+ widget? RIGHTBRACKET;
 
-styleRule       : IDENTIFIER COLON value;
+styleProperty   : IDENTIFIER COLON value;
 
 value           : INTEGERLITERAL
                 | STRINGLITERAL
