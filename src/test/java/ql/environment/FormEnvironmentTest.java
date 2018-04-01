@@ -85,13 +85,11 @@ public class FormEnvironmentTest extends BaseQlTest {
     public void shouldNotDivideByZero() {
         Form form = createForm("src/input/ql/correct/environment/divideByZero.ql");
         environment = new FormEnvironment(form);
-        environment.evaluate();
-
-        assertEquals(0, issueTracker.getWarnings().size());
-        assertEquals(1, issueTracker.getErrors().size());
-        for (Error error : issueTracker.getErrors()) {
-            System.out.println(error.getMessage());
-            assertEquals("Attempted to divide by zero.", error.getMessage());
+        try {
+            environment.evaluate();
+        }
+        catch(IllegalArgumentException e){
+            assertEquals("Attempted to divide by zero.", e.getMessage());
         }
     }
 
