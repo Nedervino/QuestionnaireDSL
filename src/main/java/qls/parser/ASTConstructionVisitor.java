@@ -4,11 +4,14 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import ql.ast.ASTNode;
 import ql.ast.SourceLocation;
 import ql.ast.types.*;
+import ql.gui.widgets.Widget;
 import qls.QLSBaseVisitor;
 import qls.QLSParser;
 import qls.ast.Page;
 import qls.ast.Stylesheet;
 import qls.ast.components.Component;
+import qls.ast.components.Question;
+import qls.ast.components.Section;
 import qls.ast.properties.ColorProperty;
 import qls.ast.properties.FontProperty;
 import qls.ast.properties.FontSizeProperty;
@@ -24,6 +27,9 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     public ASTNode visitStylesheet(QLSParser.StylesheetContext ctx) {
         String formId = ctx.IDENTIFIER().getText();
         List<Page> pages = new ArrayList<>();
+        for(QLSParser.PageContext pageContext : ctx.page()){
+            pages.add((Page) visit(pageContext));
+        }
         return new Stylesheet(formId, pages, getSourceLocation(ctx));
     }
 
@@ -31,13 +37,20 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     public ASTNode visitPage(QLSParser.PageContext ctx) {
         String pageId = ctx.IDENTIFIER().getText();
         List<Component> components = new ArrayList<>();
+        for(QLSParser.SectionContext sectionContext : ctx.section()){
+            components.add((Component) visit(sectionContext));
+        }
+        for(QLSParser.DefaultRuleContext defaultRuleContext : ctx.defaultRule()){
+            components.add((Component) visit(defaultRuleContext));
+        }
 
         return new Page(pageId, components, getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitQuestion(QLSParser.QuestionContext ctx) {
-        return super.visitQuestion(ctx);
+        String questionId = ctx.IDENTIFIER().getText();
+        return new Question(questionId, (Widget) visit(ctx.widget()), getSourceLocation(ctx));
     }
 
     @Override
