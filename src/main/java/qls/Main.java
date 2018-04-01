@@ -10,12 +10,23 @@ import qls.ast.Stylesheet;
 import qls.parser.StylesheetBuilder;
 import qls.validator.StylesheetValidator;
 
+import javax.swing.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 public class Main {
 
     public static void main(String[] args) {
 
         //TODO: Apply same package structure as for ql package.
         //TODO: pass file (non-string) instead of filecontents to formbuilder
+
+        PrintStream printStream = new PrintStream(new ByteArrayOutputStream()) {
+            public void println(String message){
+                JOptionPane.showMessageDialog(null, message);
+            }
+        };
+        System.setOut(printStream);
 
         String qlFileName = "src/input/qls/correct/taxOfficeExample.ql";
         String qlFile = new FileScanner().loadFile(qlFileName);
