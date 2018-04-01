@@ -37,12 +37,12 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     public ASTNode visitPage(QLSParser.PageContext ctx) {
         String pageId = ctx.IDENTIFIER().getText();
         List<Component> components = new ArrayList<>();
-        for(QLSParser.SectionContext sectionContext : ctx.section()){
-            components.add((Component) visit(sectionContext));
-        }
-        for(QLSParser.DefaultRuleContext defaultRuleContext : ctx.defaultRule()){
-            components.add((Component) visit(defaultRuleContext));
-        }
+        // for(QLSParser.SectionContext sectionContext : ctx.section()){
+        //     components.add((Component) visit(sectionContext));
+        // }
+        // for(QLSParser.DefaultRuleContext defaultRuleContext : ctx.defaultRule()){
+        //     components.add((Component) visit(defaultRuleContext));
+        // }
 
         return new Page(pageId, components, getSourceLocation(ctx));
     }
@@ -50,7 +50,8 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitQuestion(QLSParser.QuestionContext ctx) {
         String questionId = ctx.IDENTIFIER().getText();
-        return new Question(questionId, (Widget) visit(ctx.widget()), getSourceLocation(ctx));
+        // return new Question(questionId, (Widget) visit(ctx.widget()), getSourceLocation(ctx));
+        return null;
     }
 
     @Override
