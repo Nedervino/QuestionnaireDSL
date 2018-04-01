@@ -55,19 +55,43 @@ public class TextFieldWidget extends BaseWidget {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (isEditable) {
-                    //TODO optional visitor
-                    Value value = null;
-                    if (question.isOfType("integer")) {
-                        value = new IntegerValue(textField.getText());
-                    } else if (question.isOfType("decimal")) {
-                        value = new DecimalValue(textField.getText());
-                    } else if (question.isOfType("money")) {
-                        value = new MoneyValue(textField.getText());
-                    } else if (question.isOfType("string")) {
-                        value = new StringValue(textField.getText());
-                    }
-                    Value finalValue = value;
-                    widgetListener.onInputValueUpdated(question, finalValue);
+                    Value value = question.getType().accept(new TypeVisitor<Value>() {
+                        @Override
+                        public Value visit(BooleanType booleanType) {
+                            return new BooleanValue(textField.getText());
+                        }
+
+                        @Override
+                        public Value visit(DecimalType decimalType) {
+                            return new DecimalValue(textField.getText());
+                        }
+
+                        @Override
+                        public Value visit(IntegerType integerType) {
+                            return new IntegerValue(textField.getText());
+                        }
+
+                        @Override
+                        public Value visit(MoneyType moneyType) {
+                            return new MoneyValue(textField.getText());
+                        }
+
+                        @Override
+                        public Value visit(StringType stringType) {
+                            return new StringValue(textField.getText());
+                        }
+
+                        @Override
+                        public Value visit(DateType dateType) {
+                            return new DateValue(textField.getText());
+                        }
+
+                        @Override
+                        public Value visit(ErrorType errorType) {
+                            throw new IllegalArgumentException();
+                        }
+                    });
+                    widgetListener.onInputValueUpdated(question, value);
                 }
             }
         });
