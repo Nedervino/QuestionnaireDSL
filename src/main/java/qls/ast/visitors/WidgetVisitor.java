@@ -4,18 +4,18 @@ import qls.ast.widgets.*;
 
 public interface WidgetVisitor<T> {
 
-    T visit(Default widget);
+    T visit(DefaultType widget);
 
-    T visit(Checkbox widget);
+    T visit(CheckboxType widget);
 
-    T visit(Dropdown widget);
+    T visit(DropdownType widget);
 
-    T visit(Radio widget);
+    T visit(RadioType widget);
 
-    T visit(Slider widget);
+    T visit(SliderType widget);
 
-    T visit(Spinbox widget);
+    T visit(SpinboxType widget);
 
-    T visit(TextField widget);
+    T visit(TextFieldType widget);
 
 }

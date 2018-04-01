@@ -12,6 +12,7 @@ import qls.ast.properties.ColorProperty;
 import qls.ast.properties.FontProperty;
 import qls.ast.properties.FontSizeProperty;
 import qls.ast.properties.WidthProperty;
+import qls.ast.widgets.WidgetType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +34,39 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
         return new Page(pageId, components, getSourceLocation(ctx));
     }
 
+    @Override
+    public ASTNode visitWidget(QLSParser.WidgetContext ctx) {
+        return visit(ctx.widgetType());
+    }
 
     @Override
-    public ASTNode visitSection(QLSParser.SectionContext ctx) {
-        return super.visitSection(ctx);
+    public ASTNode visitCheckboxType(QLSParser.CheckboxTypeContext ctx) {
+        return super.visitCheckboxType(ctx);
+    }
+
+    @Override
+    public ASTNode visitDropdownType(QLSParser.DropdownTypeContext ctx) {
+        return super.visitDropdownType(ctx);
+    }
+
+    @Override
+    public ASTNode visitRadioType(QLSParser.RadioTypeContext ctx) {
+        return super.visitRadioType(ctx);
+    }
+
+    @Override
+    public ASTNode visitSliderType(QLSParser.SliderTypeContext ctx) {
+        return super.visitSliderType(ctx);
+    }
+
+    @Override
+    public ASTNode visitSpinboxType(QLSParser.SpinboxTypeContext ctx) {
+        return super.visitSpinboxType(ctx);
+    }
+
+    @Override
+    public ASTNode visitTextfieldType(QLSParser.TextfieldTypeContext ctx) {
+        return super.visitTextfieldType(ctx);
     }
 
     @Override

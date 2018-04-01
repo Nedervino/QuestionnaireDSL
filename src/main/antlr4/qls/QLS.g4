@@ -31,12 +31,12 @@ type            : 'boolean'                                                     
                 | 'date'                                                                    #dateType
                 ;
 
-widgetType      : 'slider' sliderMap                                                        #sliderWidget
-                | 'spinbox'                                                                 #spinboxWidget
-                | 'text'                                                                    #textWidget
-                | 'radio' choiceMap?                                                        #radioWidget
-                | 'checkbox'  (LEFTPARENTHESES yes=STRINGLITERAL RIGHTPARENTHESES)?         #checkboxWidget
-                | 'dropdown' choiceMap?                                                     #dropdownWidget
+widgetType      : 'slider' sliderMap                                                        #sliderType
+                | 'spinbox'                                                                 #spinboxType
+                | 'textfield'                                                               #textfieldType
+                | 'radio' choiceMap?                                                        #radioType
+                | 'checkbox'  (LEFTPARENTHESES yes=STRINGLITERAL RIGHTPARENTHESES)?         #checkboxType
+                | 'dropdown' choiceMap?                                                     #dropdownType
                 ;
 
 sliderMap       : LEFTPARENTHESES start=INTEGERLITERAL COMMA end=INTEGERLITERAL COMMA step=INTEGERLITERAL RIGHTPARENTHESES;
