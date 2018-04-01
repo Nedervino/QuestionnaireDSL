@@ -13,7 +13,7 @@ import qls.validator.checkers.WidgetCompatibilityChecker;
  * - (default) widget assignments are compatible with question types (e.g. no radio button for integer widgets).
  * - you cannot place a single question multiple times.
  */
-public class Validator {
+public class StylesheetValidator {
 
     public static boolean passesChecks(Stylesheet stylesheet) {
 

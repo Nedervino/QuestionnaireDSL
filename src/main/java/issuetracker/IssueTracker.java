@@ -3,7 +3,7 @@ package issuetracker;
 
 import ql.ast.ASTNode;
 import ql.ast.SourceLocation;
-import ql.validator.Validator;
+import ql.validator.FormValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  */
 public class IssueTracker {
 
-    private final static Logger LOGGER = Logger.getLogger(Validator.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(FormValidator.class.getName());
     private final List<Error> errors;
     private final List<Warning> warnings;
 

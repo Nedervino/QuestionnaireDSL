@@ -4,7 +4,7 @@ import ql.ast.Form;
 import ql.gui.FormUI;
 import ql.gui.FormUIFactory;
 import ql.parser.FormBuilder;
-import ql.validator.Validator;
+import ql.validator.FormValidator;
 
 /**
  * This program parses an input file following QL DSL specification, for which it renders a graphical form
@@ -25,7 +25,7 @@ public class Main {
         FormBuilder formBuilder = new FormBuilder();
         Form form = formBuilder.createForm(qlFile);
 
-        if (Validator.passesChecks(form)) {
+        if (FormValidator.passesChecks(form)) {
             System.out.println("Successfully passed all checks");
             FormUI formUI = new FormUIFactory().getFormUI(form);
             formUI.display();
