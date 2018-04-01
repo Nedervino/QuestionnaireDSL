@@ -1,8 +1,7 @@
-package qls.ast.widget;
+package qls.ast.widgets;
 
 import ql.ast.ASTNode;
 import ql.ast.SourceLocation;
-import qls.ast.visitors.WidgetVisitor;
 
 public abstract class WidgetType extends ASTNode {
 

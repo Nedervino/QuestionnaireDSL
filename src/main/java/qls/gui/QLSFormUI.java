@@ -11,4 +11,8 @@ public class QLSFormUI extends FormUI {
         super(questions);
     }
 
+    @Override
+    public void display() {
+        super.display();
+    }
 }

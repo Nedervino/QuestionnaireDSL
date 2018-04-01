@@ -31,7 +31,7 @@ public class QuestionUI implements WidgetListener, EnvironmentListener {
         widget.registerChangeListener(this);
 
         panel = new JPanel(new BorderLayout());
-        panel.add(label, BorderLayout.CENTER);
+        panel.add(label, BorderLayout.WEST);
         panel.add(widget.getComponent(), BorderLayout.EAST);
 
         panel.setPreferredSize(new Dimension(600, 50));

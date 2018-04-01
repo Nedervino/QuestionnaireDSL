@@ -1,6 +1,6 @@
 package qls.ast.visitors;
 
-import qls.ast.widget.*;
+import qls.ast.widgets.*;
 
 public interface WidgetVisitor<T> {
 
