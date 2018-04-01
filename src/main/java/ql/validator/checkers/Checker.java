@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface Checker<T> {
 
+    //TODO: Handle allow for stylesheet parameter
+
     boolean passesTests(T ast);
 
     List<Error> getErrors();

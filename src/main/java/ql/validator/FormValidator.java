@@ -17,7 +17,7 @@ import ql.validator.checkers.QuestionDuplicationChecker;
  * - cyclic dependencies between questions
  * - duplicate labels (warning)
  */
-public class Validator {
+public class FormValidator {
 
     public static boolean passesChecks(Form form) {
 

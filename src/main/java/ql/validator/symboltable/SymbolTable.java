@@ -48,12 +48,12 @@ public class SymbolTable {
 
         private final List<Question> questions;
 
-        public QuestionCollector(Form form) {
+        protected QuestionCollector(Form form) {
             questions = new ArrayList<>();
             form.accept(this);
         }
 
-        public List<Question> getQuestions() {
+        protected List<Question> getQuestions() {
             return new ArrayList<>(questions);
         }
 

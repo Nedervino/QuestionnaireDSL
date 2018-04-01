@@ -1,7 +1,7 @@
 package ql;
 
-import main.FileScanner;
 import ql.ast.Form;
+import ql.main.FileScanner;
 import ql.parser.FormBuilder;
 
 public class BaseQlTest {

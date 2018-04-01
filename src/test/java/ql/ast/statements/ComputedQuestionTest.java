@@ -13,8 +13,6 @@ import static org.junit.Assert.assertTrue;
 
 public class ComputedQuestionTest {
 
-    private final double DELTA = 1e-15;
-
     private FormBuilder formBuilder;
 
 
@@ -32,6 +30,7 @@ public class ComputedQuestionTest {
 
     @Test
     public void canParseComputedDecimal() {
+        final double DELTA = 1e-15;
         ComputedQuestion question = (ComputedQuestion) formBuilder.createStatement("\"test\" testQuestion: decimal = 23423.03");
         DecimalLiteral decimalLiteral = (DecimalLiteral) question.getExpression();
         assertEquals(23423.03, decimalLiteral.getValue(), DELTA);

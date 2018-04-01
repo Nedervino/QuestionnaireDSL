@@ -23,7 +23,6 @@ public class FormUI {
         for (QuestionUI question : questions) {
             questionContainer.add(question.getComponent());
             questionContainer.add(Box.createRigidArea(new Dimension(0, 40)));
-
         }
         // JScrollPane scrollPane = new JScrollPane(questionContainer);
         // questionContainer.setPreferredSize(new Dimension(500,
@@ -36,7 +35,8 @@ public class FormUI {
         frame = new JFrame("Form Viewer");
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(600, 800);
+
+        frame.setSize(700, 700);
         frame.add(panel);
         frame.setVisible(true);
     }

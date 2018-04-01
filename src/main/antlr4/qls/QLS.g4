@@ -4,17 +4,22 @@ grammar QLS;
 
 stylesheet      : 'stylesheet' IDENTIFIER LEFTBRACKET page* RIGHTBRACKET;
 
-page            : 'page' IDENTIFIER block;
+page            : 'page' IDENTIFIER LEFTBRACKET (section | defaultRule)* RIGHTBRACKET;
 
-block           : LEFTBRACKET component* RIGHTBRACKET;
-
-component       : section
-                | defaultWidget
+section         : 'section' STRINGLITERAL LEFTBRACKET segment* RIGHTBRACKET
+                | 'section' STRINGLITERAL segment
                 ;
 
-section         : 'section' IDENTIFIER block;
+segment         : section
+                | question
+                | defaultRule
+                ;
 
-defaultWidget   : 'default' type (widget | widgetStyle);
+question        : 'question' IDENTIFIER widget?
+//              | 'question' IDENTIFIER styleRule?
+                ;
+
+defaultRule     : 'default' type (widget | widgetStyle);
 
 widget          : 'widget' widgetType;
 
@@ -27,20 +32,24 @@ type            : 'boolean'                                                     
                 ;
 
 widgetType      : 'slider' sliderMap                                                        #sliderWidget
-                | 'spinbox' (LEFTPARENTHESES yes=STRINGLITERAL RIGHTPARENTHESES)?           #spinboxWidget
+                | 'spinbox'                                                                 #spinboxWidget
                 | 'text'                                                                    #textWidget
                 | 'radio' choiceMap?                                                        #radioWidget
-                | 'checkbox'                                                                #checkboxWidget
+                | 'checkbox'  (LEFTPARENTHESES yes=STRINGLITERAL RIGHTPARENTHESES)?         #checkboxWidget
                 | 'dropdown' choiceMap?                                                     #dropdownWidget
                 ;
 
-sliderMap       : LEFTPARENTHESES start=INTEGERLITERAL',' end=INTEGERLITERAL',' step=INTEGERLITERAL RIGHTPARENTHESES;
+sliderMap       : LEFTPARENTHESES start=INTEGERLITERAL COMMA end=INTEGERLITERAL COMMA step=INTEGERLITERAL RIGHTPARENTHESES;
 
-choiceMap       : LEFTPARENTHESES yes=STRINGLITERAL ',' no=STRINGLITERAL RIGHTPARENTHESES;
+choiceMap       : LEFTPARENTHESES yes=STRINGLITERAL COMMA no=STRINGLITERAL RIGHTPARENTHESES;
 
-widgetStyle     : LEFTBRACKET styleRule+ widget? RIGHTBRACKET;
+widgetStyle     : LEFTBRACKET styleProperty+ widget? RIGHTBRACKET;
 
-styleRule       : IDENTIFIER COLON value;
+styleProperty   : 'width' COLON INTEGERLITERAL                                              #widthProperty
+                | 'font' COLON STRINGLITERAL                                                #fontProperty
+                | 'fontsize' COLON INTEGERLITERAL                                           #fontSizeProperty
+                | 'color' COLON HEXCOLOR                                                    #colorProperty
+                ;
 
 value           : INTEGERLITERAL
                 | STRINGLITERAL
@@ -49,16 +58,11 @@ value           : INTEGERLITERAL
 
 
 
-
-
-
-
 //Literals
 //HEXCOLOR            : '#' ('0'..'9' | 'a'..'f'){6};
 HEXCOLOR            : '#' ('0'..'9' | 'a'..'f')+;
 INTEGERLITERAL      : DIGIT+;
-STRINGLITERAL       : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
-//DECIMALLITERAL      : DIGIT+ '.' DIGIT+;
+STRINGLITERAL       : '"' (~('"' | '\\' | '\r' | '\n'))* '"';
 
 IDENTIFIER          : ('a'..'z'|'A'..'Z')('a'..'z'|'A'..'Z'|'0'..'9'|'_')*;
 DIGIT               : [0-9];

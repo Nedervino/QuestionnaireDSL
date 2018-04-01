@@ -79,7 +79,7 @@ type                : 'boolean'                                             #boo
 //Literals
 BOOLEANLITERAL      : ('true' | 'false');
 INTEGERLITERAL      : DIGIT+;
-STRINGLITERAL       : '"' ('a'..'z'|'A'..'Z'|'0'..'9'|' '|'?'|'.'|','|':')* '"';
+STRINGLITERAL       : '"' (~('"' | '\\' | '\r' | '\n'))* '"';
 MONEYLITERAL        : DIGIT+ ',' DIGIT DIGIT;
 DECIMALLITERAL      : DIGIT+ '.' DIGIT+;
 DATELITERAL         : DIGIT DIGIT '-' DIGIT DIGIT '-' DIGIT DIGIT DIGIT DIGIT;
