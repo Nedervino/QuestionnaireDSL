@@ -18,7 +18,9 @@ question        : 'question' IDENTIFIER widget?
 //              | 'question' IDENTIFIER styleRule?
                 ;
 
-defaultRule     : 'default' type (widget | widgetStyle);
+defaultRule     : 'default' type widget                                                     #widgetRule
+                | 'default' type style                                                      #styleRule
+                ;
 
 widget          : 'widget' widgetType;
 
@@ -42,7 +44,7 @@ sliderMap       : LEFTPARENTHESES start=INTEGERLITERAL COMMA end=INTEGERLITERAL 
 
 choiceMap       : LEFTPARENTHESES yes=STRINGLITERAL COMMA no=STRINGLITERAL RIGHTPARENTHESES;
 
-widgetStyle     : LEFTBRACKET styleProperty+ widget? RIGHTBRACKET;
+style           : LEFTBRACKET styleProperty+ widget? RIGHTBRACKET;
 
 styleProperty   : 'width' COLON INTEGERLITERAL                                              #widthProperty
                 | 'font' COLON STRINGLITERAL                                                #fontProperty

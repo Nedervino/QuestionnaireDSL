@@ -7,6 +7,7 @@ import ql.parser.FormBuilder;
 import ql.utilities.IOHandler;
 import ql.validator.FormValidator;
 import qls.ast.Stylesheet;
+import qls.gui.QLSFormUIFactory;
 import qls.parser.StylesheetBuilder;
 import qls.validator.StylesheetValidator;
 
@@ -18,7 +19,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //TODO: pass file (non-string) instead of filecontents to formbuilder
+        //TODO: pass file (non-string) instead of filecontents to formbuilder, shorten main method
 
         outputInDialog();
 
@@ -39,10 +40,10 @@ public class Main {
 
         if (!StylesheetValidator.passesChecks(stylesheet)) {
             System.out.println("Stylesheet not passing validation. See error logs for more details");
-            System.exit(1);
+            // System.exit(1);
         }
 
-        FormUI formUI = new FormUIFactory().getFormUI(form);
+        FormUI formUI = new QLSFormUIFactory(stylesheet).getFormUI(form);
         formUI.display();
     }
 

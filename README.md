@@ -4,31 +4,31 @@ The project is based on the [Language Workbench Challenge](https://homepages.cwi
 
 
 
-## Collaborators:
+### Collaborators:
 * Tim Nederveen ([@nedervino](mailto:tim.nederveen@hotmail.com))
 * Bram Oosterlee ([@bmoosterlee](mailto:bram.oosterlee@student.uva.nl))
 
-## Stack
+### Stack
 * Java 1.8
 * Swing
 * ANTLR4
 * JUnit 4
 * Maven
 
-## How to run
+### How to run
 * ```mvn antlr4:antlr4``` to generate parsers from grammar
 * ```mvn exec:java``` to run
 * Alternatively, instead of directly running generate a JAR with ```mvn package``` and run with ```java -cp target/querylanguage-1.0-jar-with-dependencies.jar ql.Main``` 
 
-## Setup instructions for IntelliJ
+### Setup instructions for IntelliJ
 * File -> New -> Project from existing sources -> Kazan
 * Make sure to run the antlr4 maven plugin to generate required parsers from the grammar
 * Run /endless-ql/Kazan/src/main/java/ql/Main
 
-## Running Tests
+### Running Tests
 ```mvn test```
 
-## How does it work?
+### How does it work?
 .g4 files containing Lexer/Parser rules for both the QL and QLS DSLs can be found in src/main/antlr4. Before running, Maven will need to generate the required classes from this grammar using the included ANTLR v4 plugin.
 Once this is done, you can define the form you wish to create in src/main/java/ql/Main. src/input contains example input files used for generating the form and its corresponding styling.
 The parser of the DSL is implemented using a grammar-based parser generator, and the internal DSL program structure is represented using abstract syntax trees. The DSL programs are interpreted.
@@ -37,7 +37,7 @@ The parser of the DSL is implemented using a grammar-based parser generator, and
 The program accepts a .ql input file which specifies the questions to be contained in the form, including their label, excepted answer type (one of integer, decimal, boolean, text, date, or money),
 and computed output fields (computed questions) based on answers to other questions.  
 
-## Syntax
+### Syntax
 The following is an example of a valid QL program:
 ```
 form taxOfficeExample
@@ -63,7 +63,7 @@ form taxOfficeExample
 }
 ```
 
-## Validation
+### Validation
 Input QL forms are checked for the following violations:
    * reference to undefined questions
    * duplicate question declarations with different types
@@ -80,7 +80,7 @@ Optionally, the program can be passed a second input file with .qls extension, u
 QLS allows you to place questions of a base QL program in pages and sections. Furthermore, you can define default 
 widget types and styles for questions of a particular type (e.g. boolean questions). Such default styles can be overridden on a per widget basis.
 
-## Syntax
+### Syntax
 The following is an example of a valid QLS program to accompany the previous QL example:
 ```
 stylesheet taxOfficeExample 
@@ -126,7 +126,7 @@ stylesheet taxOfficeExample
 
 The following widgets are supported: slider, spinbox (for numbers), text, yesno-radios, checkbox, yesno-dropdown (for booleans)
 
-## Validation
+### Validation
 
 Input QLS stylesheets are checked for the following violations:
 

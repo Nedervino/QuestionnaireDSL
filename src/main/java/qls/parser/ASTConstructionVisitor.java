@@ -13,10 +13,9 @@ import qls.ast.components.Component;
 import qls.ast.components.Question;
 import qls.ast.components.Section;
 import qls.ast.defaultrules.DefaultRule;
-import qls.ast.properties.ColorProperty;
-import qls.ast.properties.FontProperty;
-import qls.ast.properties.FontSizeProperty;
-import qls.ast.properties.WidthProperty;
+import qls.ast.defaultrules.DefaultStyle;
+import qls.ast.defaultrules.DefaultWidget;
+import qls.ast.properties.*;
 import qls.ast.widgets.*;
 
 import java.util.ArrayList;
@@ -66,9 +65,20 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     }
 
     @Override
-    public ASTNode visitDefaultRule(QLSParser.DefaultRuleContext ctx) {
-        //TODO
-        return super.visitDefaultRule(ctx);
+    public ASTNode visitWidgetRule(QLSParser.WidgetRuleContext ctx) {
+        Type type = (Type) visit(ctx.type());
+        WidgetType widgetType = (WidgetType) visit(ctx.widget());
+        return new DefaultWidget(type, widgetType, getSourceLocation(ctx));
+    }
+
+    @Override
+    public ASTNode visitStyleRule(QLSParser.StyleRuleContext ctx) {
+        Type type = (Type) visit(ctx.type());
+        List<Property> styleProperties = ctx.style().styleProperty().stream()
+                .map(stylePropertyContext -> (Property) visit(stylePropertyContext))
+                .collect(Collectors.toList());
+        WidgetType widgetType = ctx.style().widget() == null ? null : (WidgetType) visit(ctx.style().widget());
+        return new DefaultStyle(type, styleProperties, widgetType, getSourceLocation(ctx));
     }
 
     @Override
