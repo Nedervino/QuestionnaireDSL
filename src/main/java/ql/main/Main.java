@@ -6,6 +6,10 @@ import ql.gui.FormUIFactory;
 import ql.parser.FormBuilder;
 import ql.validator.FormValidator;
 
+import javax.swing.*;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 /**
  * This program parses an input file following QL DSL specification, for which it renders a graphical form
  */
@@ -14,6 +18,13 @@ public class Main {
     public static void main(String[] args) {
 
         //TODO: pass file (non-string) instead of filecontents to formbuilder
+
+        PrintStream printStream = new PrintStream(new ByteArrayOutputStream()) {
+            public void println(String message){
+                JOptionPane.showMessageDialog(null, message);
+            }
+        };
+        System.setOut(printStream);
 
         // String qlFileName = "src/input/ql/correct/if.ql";
         // String qlFileName = "src/input/ql/correct/ifElse.ql";
