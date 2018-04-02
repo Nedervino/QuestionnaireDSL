@@ -8,7 +8,7 @@ import java.util.*;
 public class QuestionStore {
 
     private final Map<String, Question> questionMap;
-    private final Map<String, Expression> conditionMap;
+    private final Map<String, List<Expression>> conditionMap;
 
     public QuestionStore() {
         questionMap = new LinkedHashMap<>();
@@ -27,14 +27,17 @@ public class QuestionStore {
     }
 
     public void addConditionDependency(String questionIdentifier, Expression expression) {
-        conditionMap.put(questionIdentifier, expression);
+        if(!hasConditionDependency(questionIdentifier)){
+            conditionMap.put(questionIdentifier, new LinkedList<>());
+        }
+        conditionMap.get(questionIdentifier).add(expression);
     }
 
     public boolean hasConditionDependency(String questionIdentifier) {
         return conditionMap.containsKey(questionIdentifier);
     }
 
-    public Expression getConditionDependency(String questionIdentifier) {
+    public List<Expression> getConditionDependencies(String questionIdentifier) {
         return conditionMap.get(questionIdentifier);
     }
 

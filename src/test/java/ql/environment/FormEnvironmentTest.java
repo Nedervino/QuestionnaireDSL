@@ -49,7 +49,7 @@ public class FormEnvironmentTest extends BaseQlTest {
 
     @Test
     public void shouldReturnAllQuestionsInIfElseForm() {
-        Form form = createForm("src/input/ql/correct/environment/ifElseEvaluation.ql");
+        Form form = createForm("src/input/ql/correct/environment/ifElseDeclaration.ql");
         environment = new FormEnvironment(form);
         environment.evaluate();
 
