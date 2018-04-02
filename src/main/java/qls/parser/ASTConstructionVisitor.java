@@ -3,12 +3,16 @@ package qls.parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import ql.ast.ASTNode;
 import ql.ast.SourceLocation;
+import ql.ast.statements.Statement;
 import ql.ast.types.*;
 import qls.QLSBaseVisitor;
 import qls.QLSParser;
 import qls.ast.Page;
 import qls.ast.Stylesheet;
 import qls.ast.components.Component;
+import qls.ast.components.Question;
+import qls.ast.components.Section;
+import qls.ast.defaultrules.DefaultRule;
 import qls.ast.properties.ColorProperty;
 import qls.ast.properties.FontProperty;
 import qls.ast.properties.FontSizeProperty;
@@ -17,48 +21,53 @@ import qls.ast.widgets.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitStylesheet(QLSParser.StylesheetContext ctx) {
-        String formId = ctx.IDENTIFIER().getText();
+        String stylesheetId = ctx.IDENTIFIER().getText();
         List<Page> pages = new ArrayList<>();
-        for (QLSParser.PageContext pageContext : ctx.page()) {
-            pages.add((Page) visit(pageContext));
-        }
-        return new Stylesheet(formId, pages, getSourceLocation(ctx));
+        ctx.page().forEach(pageContext -> pages.add((Page) visit(pageContext)));
+        return new Stylesheet(stylesheetId, pages, getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitPage(QLSParser.PageContext ctx) {
         String pageId = ctx.IDENTIFIER().getText();
-        List<Component> components = new ArrayList<>();
-        // for(QLSParser.SectionContext sectionContext : ctx.section()){
-        //     components.add((Component) visit(sectionContext));
-        // }
-        // for(QLSParser.DefaultRuleContext defaultRuleContext : ctx.defaultRule()){
-        //     components.add((Component) visit(defaultRuleContext));
-        // }
+        List<Component> components = ctx.component().stream()
+                .map(componentContext -> (Component) visit(componentContext))
+                .collect(Collectors.toList());
+        List<DefaultRule> rules = ctx.defaultRule().stream()
+                .map(defaultRuleContext -> (DefaultRule) visit(defaultRuleContext))
+                .collect(Collectors.toList());
+        return new Page(pageId, components, rules, getSourceLocation(ctx));
+    }
 
-        return new Page(pageId, components, getSourceLocation(ctx));
+    @Override
+    public ASTNode visitSection(QLSParser.SectionContext ctx) {
+        String sectionId = ctx.STRINGLITERAL().getText().substring(1, ctx.STRINGLITERAL().getText().length() - 1);
+        List<Component> components = ctx.component().stream()
+                .map(componentContext -> (Component) visit(componentContext))
+                .collect(Collectors.toList());
+        List<DefaultRule> rules = ctx.defaultRule().stream()
+                .map(defaultRuleContext -> (DefaultRule) visit(defaultRuleContext))
+                .collect(Collectors.toList());
+        return new Section(sectionId, components, rules,getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitQuestion(QLSParser.QuestionContext ctx) {
         String questionId = ctx.IDENTIFIER().getText();
-        // return new Question(questionId, (Widget) visit(ctx.widget()), getSourceLocation(ctx));
-        return null;
-    }
-
-    @Override
-    public ASTNode visitSection(QLSParser.SectionContext ctx) {
-        String sectionIdentifier = ctx.STRINGLITERAL().getText().substring(1, ctx.STRINGLITERAL().getText().length() - 1);
-        return super.visitSection(ctx);
+        WidgetType widgetType = (ctx.widget() == null) ? null : (WidgetType) visit(ctx.widget());
+        return new Question(questionId, widgetType, getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitDefaultRule(QLSParser.DefaultRuleContext ctx) {
+        //TODO
         return super.visitDefaultRule(ctx);
     }
 

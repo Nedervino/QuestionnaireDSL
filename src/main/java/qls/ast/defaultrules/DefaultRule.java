@@ -1,4 +1,12 @@
 package qls.ast.defaultrules;
 
-public class DefaultRule {
+import ql.ast.ASTNode;
+import ql.ast.SourceLocation;
+
+public class DefaultRule extends ASTNode {
+
+    protected DefaultRule(SourceLocation sourceLocation) {
+        super(sourceLocation);
+    }
+
 }

@@ -5,7 +5,7 @@ import ql.ast.SourceLocation;
 
 public abstract class WidgetType extends ASTNode {
 
-    public WidgetType(SourceLocation sourceLocation) {
+    protected WidgetType(SourceLocation sourceLocation) {
         super(sourceLocation);
     }
 
