@@ -1,9 +1,10 @@
-package ql.main;
+package ql;
 
 import ql.ast.Form;
 import ql.gui.FormUI;
 import ql.gui.FormUIFactory;
 import ql.parser.FormBuilder;
+import ql.utilities.IOHandler;
 import ql.validator.FormValidator;
 
 import javax.swing.*;
@@ -21,12 +22,14 @@ public class Main {
 
         outputInDialog();
 
-        // String qlFileName = "src/input/ql/correct/ifElse.ql";
-        String qlFileName = "src/input/ql/incorrect/validator/cyclicalBetweenQuestions.ql";
+        String qlFileName = "src/input/ql/correct/ifElse.ql";
+        // String qlFileName = "src/input/ql/incorrect/validator/cyclicalBetweenQuestions.ql";
         // String qlFileName = "src/input/ql/correct/gui/dependentValue.ql";
         // String qlFileName = "src/input/ql/correct/gui/allComputedQuestionTypes.ql";
         // String qlFileName = "src/input/ql/correct/gui/allQuestionTypes.ql";
-        String qlFile = new FileScanner().loadFile(qlFileName);
+
+        String qlFile = IOHandler.loadFileUsingDialog("ql");
+        // String qlFile = IOHandler.loadFile(qlFileName);
 
         FormBuilder formBuilder = new FormBuilder();
         Form form = formBuilder.createForm(qlFile);

@@ -3,7 +3,7 @@ package qls;
 import ql.ast.Form;
 import ql.gui.FormUI;
 import ql.gui.FormUIFactory;
-import ql.main.FileScanner;
+import ql.utilities.IOHandler;
 import ql.parser.FormBuilder;
 import ql.validator.FormValidator;
 import qls.ast.Stylesheet;
@@ -24,13 +24,13 @@ public class Main {
         outputInDialog();
 
         String qlFileName = "src/input/qls/correct/taxOfficeExample.ql";
-        String qlFile = new FileScanner().loadFile(qlFileName);
+        String qlFile = IOHandler.loadFile(qlFileName);
 
         FormBuilder formBuilder = new FormBuilder();
         Form form = formBuilder.createForm(qlFile);
 
         String qlsFileName = "src/input/qls/correct/taxOfficeExample.qls";
-        String qlsFile = new FileScanner().loadFile(qlsFileName);
+        String qlsFile = IOHandler.loadFile(qlsFileName);
 
         StylesheetBuilder stylesheetBuilder = new StylesheetBuilder();
         Stylesheet stylesheet = stylesheetBuilder.createStylesheet(qlsFile);
