@@ -1,11 +1,9 @@
 package qls.gui;
 
 import org.junit.Test;
-import ql.BaseQlTest;
 import ql.ast.Form;
 import qls.BaseQlsTest;
 import qls.ast.Stylesheet;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class QuestionUITest extends BaseQlsTest {
 

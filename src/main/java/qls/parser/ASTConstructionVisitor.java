@@ -4,14 +4,11 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import ql.ast.ASTNode;
 import ql.ast.SourceLocation;
 import ql.ast.types.*;
-import ql.gui.widgets.Widget;
 import qls.QLSBaseVisitor;
 import qls.QLSParser;
 import qls.ast.Page;
 import qls.ast.Stylesheet;
 import qls.ast.components.Component;
-import qls.ast.components.Question;
-import qls.ast.components.Section;
 import qls.ast.properties.ColorProperty;
 import qls.ast.properties.FontProperty;
 import qls.ast.properties.FontSizeProperty;
@@ -27,7 +24,7 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     public ASTNode visitStylesheet(QLSParser.StylesheetContext ctx) {
         String formId = ctx.IDENTIFIER().getText();
         List<Page> pages = new ArrayList<>();
-        for(QLSParser.PageContext pageContext : ctx.page()){
+        for (QLSParser.PageContext pageContext : ctx.page()) {
             pages.add((Page) visit(pageContext));
         }
         return new Stylesheet(formId, pages, getSourceLocation(ctx));
@@ -102,7 +99,7 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitCheckboxType(QLSParser.CheckboxTypeContext ctx) {
-        if(ctx.yes != null) {
+        if (ctx.yes != null) {
             return new CheckboxType(ctx.yes.getText(), getSourceLocation(ctx));
         }
         return new CheckboxType(getSourceLocation(ctx));
@@ -110,7 +107,7 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitDropdownType(QLSParser.DropdownTypeContext ctx) {
-        if(ctx.choiceMap().yes != null && ctx.choiceMap().no != null) {
+        if (ctx.choiceMap().yes != null && ctx.choiceMap().no != null) {
             return new DropdownType(ctx.choiceMap().yes.getText(), ctx.choiceMap().no.getText(), getSourceLocation(ctx));
         }
         return new DropdownType(getSourceLocation(ctx));
@@ -118,7 +115,7 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitRadioType(QLSParser.RadioTypeContext ctx) {
-        if(ctx.choiceMap().yes != null && ctx.choiceMap().no != null) {
+        if (ctx.choiceMap().yes != null && ctx.choiceMap().no != null) {
             return new RadioType(ctx.choiceMap().yes.getText(), ctx.choiceMap().no.getText(), getSourceLocation(ctx));
         }
         return new RadioType(getSourceLocation(ctx));

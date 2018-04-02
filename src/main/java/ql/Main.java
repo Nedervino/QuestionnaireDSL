@@ -28,8 +28,8 @@ public class Main {
         // String qlFileName = "src/input/ql/correct/gui/allComputedQuestionTypes.ql";
         // String qlFileName = "src/input/ql/correct/gui/allQuestionTypes.ql";
 
-        String qlFile = IOHandler.loadFileUsingDialog("ql");
-        // String qlFile = IOHandler.loadFile(qlFileName);
+        // String qlFile = IOHandler.loadFileUsingDialog("ql");
+        String qlFile = IOHandler.loadFile(qlFileName);
 
         FormBuilder formBuilder = new FormBuilder();
         Form form = formBuilder.createForm(qlFile);
@@ -46,7 +46,7 @@ public class Main {
 
     public static void outputInDialog() {
         PrintStream printStream = new PrintStream(new ByteArrayOutputStream()) {
-            public void println(String message){
+            public void println(String message) {
                 JOptionPane.showMessageDialog(null, message);
             }
         };

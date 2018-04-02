@@ -3,9 +3,6 @@ package ql.gui;
 import org.junit.Test;
 import ql.BaseQlTest;
 import ql.ast.Form;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import static org.junit.Assert.*;
 
 public class QuestionUITest extends BaseQlTest {
 

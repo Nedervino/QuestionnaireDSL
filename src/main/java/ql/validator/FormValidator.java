@@ -33,7 +33,7 @@ public class FormValidator {
         if (detectsErrors(cyclicDependencyChecker, form)) return false;
 
         //Checks for forward references to questions
-        if(detectsErrors(forwardReferenceChecker, form)) return false;
+        if (detectsErrors(forwardReferenceChecker, form)) return false;
 
         return true;
     }

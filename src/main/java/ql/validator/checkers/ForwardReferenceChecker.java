@@ -85,7 +85,7 @@ public class ForwardReferenceChecker extends BaseChecker implements FormStatemen
      */
     private void checkForwardReference(Variable variable) {
         String variableName = variable.getName();
-        if(!declarationHistory.contains(variableName)){
+        if (!declarationHistory.contains(variableName)) {
             issueTracker.addError(variable, String.format("Question with identifier \"%s\" is referred to before it's declaration", variableName));
         }
     }
@@ -210,7 +210,7 @@ public class ForwardReferenceChecker extends BaseChecker implements FormStatemen
         return null;
     }
 
-    public void visitChildren(BinaryOperation binaryOperation){
+    public void visitChildren(BinaryOperation binaryOperation) {
         binaryOperation.getLeft().accept(this);
         binaryOperation.getRight().accept(this);
 

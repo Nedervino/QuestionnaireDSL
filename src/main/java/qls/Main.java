@@ -3,8 +3,8 @@ package qls;
 import ql.ast.Form;
 import ql.gui.FormUI;
 import ql.gui.FormUIFactory;
-import ql.utilities.IOHandler;
 import ql.parser.FormBuilder;
+import ql.utilities.IOHandler;
 import ql.validator.FormValidator;
 import qls.ast.Stylesheet;
 import qls.parser.StylesheetBuilder;
@@ -51,7 +51,7 @@ public class Main {
 
     public static void outputInDialog() {
         PrintStream printStream = new PrintStream(new ByteArrayOutputStream()) {
-            public void println(String message){
+            public void println(String message) {
                 JOptionPane.showMessageDialog(null, message);
             }
         };

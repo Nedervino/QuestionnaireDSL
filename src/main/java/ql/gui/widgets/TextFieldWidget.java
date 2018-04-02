@@ -45,7 +45,7 @@ public class TextFieldWidget extends BaseWidget {
         Value value = environment.getQuestionValue(question.getId());
 
         //Only update value if different from current display value or if value wasn't set before
-        if(textField.getText().length() > 0) {
+        if (textField.getText().length() > 0) {
             boolean changed = !(boolean) value.equal(getValue()).getValue();
             if (changed) {
                 textField.setValue(value.getValue());

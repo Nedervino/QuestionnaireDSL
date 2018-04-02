@@ -3,7 +3,6 @@ package ql.gui.widgets;
 import ql.ast.statements.Question;
 import ql.environment.Environment;
 import ql.environment.values.DecimalValue;
-import ql.environment.values.IntegerValue;
 import ql.environment.values.Value;
 import ql.gui.WidgetListener;
 
@@ -24,8 +23,8 @@ public class SliderWidget extends BaseWidget {
         final int END = CURRENT_VALUE + 10;
 
         slider = new JSlider(START, END, CURRENT_VALUE);
-        slider.setMinorTickSpacing((END - START)/10);
-        slider.setMajorTickSpacing((END-START)/5);
+        slider.setMinorTickSpacing((END - START) / 10);
+        slider.setMajorTickSpacing((END - START) / 5);
         slider.setSnapToTicks(true);
         slider.setPaintTicks(true);
         slider.setPaintLabels(true);

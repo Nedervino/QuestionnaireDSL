@@ -12,7 +12,10 @@ import ql.environment.datastore.QuestionStore;
 import ql.environment.datastore.ValueStore;
 import ql.environment.values.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 
 public class FormEnvironment implements FormStatementVisitor<List<String>>, Environment {
@@ -86,7 +89,7 @@ public class FormEnvironment implements FormStatementVisitor<List<String>>, Envi
     @Override
     public boolean questionIsVisible(String questionId) {
         if (questionStore.hasConditionDependency(questionId)) {
-            for(Expression conditionExpression : questionStore.getConditionDependencies(questionId)) {
+            for (Expression conditionExpression : questionStore.getConditionDependencies(questionId)) {
                 BooleanValue condition = (BooleanValue) expressionEvaluator.evaluate(conditionExpression);
                 if (!condition.getValue()) {
                     return false;
@@ -176,7 +179,7 @@ public class FormEnvironment implements FormStatementVisitor<List<String>>, Envi
 
         for (Statement statement : node.getIfStatements()) {
             List<String> identifiers = statement.accept(this);
-            for(String identifier : identifiers) {
+            for (String identifier : identifiers) {
                 questionStore.addConditionDependency(identifier, node.getCondition());
             }
             dependingQuestions.addAll(identifiers);

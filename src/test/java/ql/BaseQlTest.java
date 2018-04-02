@@ -1,8 +1,8 @@
 package ql;
 
 import ql.ast.Form;
-import ql.utilities.IOHandler;
 import ql.parser.FormBuilder;
+import ql.utilities.IOHandler;
 
 public class BaseQlTest {
 

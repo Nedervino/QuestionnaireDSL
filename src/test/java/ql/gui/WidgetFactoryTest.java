@@ -1,6 +1,5 @@
 package ql.gui;
 
-import issuetracker.IssueTracker;
 import org.junit.Before;
 import org.junit.Test;
 import ql.BaseQlTest;
@@ -10,13 +9,11 @@ import ql.ast.types.BooleanType;
 import ql.ast.types.MoneyType;
 import ql.environment.Environment;
 import ql.environment.FormEnvironment;
-import ql.environment.values.BooleanValue;
 import ql.gui.widgets.RadioWidget;
 import ql.gui.widgets.SpinboxWidget;
 import ql.gui.widgets.Widget;
 import qls.ast.Stylesheet;
 import qls.parser.StylesheetBuilder;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import static org.junit.Assert.assertEquals;
 

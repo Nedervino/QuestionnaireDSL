@@ -80,8 +80,7 @@ public class FormEnvironmentTest extends BaseQlTest {
         environment = new FormEnvironment(form);
         try {
             environment.evaluate();
-        }
-        catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertEquals("Attempted to divide by zero.", e.getMessage());
         }
     }
