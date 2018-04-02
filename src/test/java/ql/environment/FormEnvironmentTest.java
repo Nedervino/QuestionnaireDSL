@@ -1,27 +1,29 @@
 package ql.environment;
 
-import issuetracker.Error;
-import issuetracker.IssueTracker;
-import org.junit.Before;
 import org.junit.Test;
 import ql.BaseQlTest;
 import ql.ast.Form;
 import ql.environment.values.BooleanValue;
 import ql.environment.values.DateValue;
+import ql.environment.values.IntegerValue;
 import ql.environment.values.Value;
 
 import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class FormEnvironmentTest extends BaseQlTest {
 
     private Environment environment;
-    private IssueTracker issueTracker;
 
-    @Before
-    public void setUp() throws Exception {
-        issueTracker = new IssueTracker();
+    @Test
+    public void shouldEvaluateAllAncestorsForVisibility() {
+        Form form = createForm("src/input/ql/correct/gui/nestedIf.ql");
+        environment = new FormEnvironment(form);
+        environment.evaluate();
+
+        assertTrue(environment.questionIsVisible("result"));
     }
 
     @Test
@@ -35,25 +37,16 @@ public class FormEnvironmentTest extends BaseQlTest {
         assertEquals(4, value.getValue());
     }
 
+    //TODO
     @Test
-    public void shouldKeepSameStateAfterReevaluation() {
-        Form form = createForm("src/input/ql/correct/environment/booleanExpression.ql");
+    public void shouldKeepStateAfterSettingAndEvaluation() {
+        Form form = createForm("src/input/ql/correct/gui/dependentValue.ql");
         environment = new FormEnvironment(form);
+        environment.setValue("q1", new IntegerValue(40));
+        environment.setValue("q2", new IntegerValue(10));
+        assertEquals(50, environment.getQuestionValue("q3").getValue());
         environment.evaluate();
-
-        assertEquals(4, environment.getQuestions().size());
-
-        environment.evaluate();
-        assertEquals(4, environment.getQuestions().size());
-    }
-
-    @Test
-    public void shouldReturnAllQuestionsInIfElseForm() {
-        Form form = createForm("src/input/ql/correct/environment/ifElseDeclaration.ql");
-        environment = new FormEnvironment(form);
-        environment.evaluate();
-
-        assertEquals(3, environment.getQuestions().size());
+        assertEquals(50, environment.getQuestionValue("q3").getValue());
     }
 
     @Test
@@ -196,29 +189,14 @@ public class FormEnvironmentTest extends BaseQlTest {
         assertEquals("01-02-1999", value.getDisplayValue());
     }
 
-
-    // @Test
-    // public void shouldStoreDateString() throws ParseException{
-    //     Form form = createForm("src/input/ql/correct/environment/simpleDate.ql");
-    //
-    //     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-    //     Date expected = dateFormat.parse("01-02-1999");
-    //
-    //     environment.start(form);
-    //
-    //     DateValue value = (DateValue) environment.getQuestionValue("value");
-    //
-    //     assertEquals(expected, value.getValue());
-    // }
-
     @Test
-    public void shouldEvaluateElse() {
-        Form form = createForm("src/input/ql/correct/environment/ifElseEvaluation.ql");
+    public void shouldEvaluateIfElseStatements() {
+        Form form = createForm("src/input/ql/correct/environment/ifElseDeclaration.ql");
         environment = new FormEnvironment(form);
         environment.evaluate();
 
         BooleanValue value = (BooleanValue) environment.getQuestionValue("flag");
-
+        assertEquals(3, environment.getQuestions().size());
         assertEquals(true, value.getValue());
     }
 }

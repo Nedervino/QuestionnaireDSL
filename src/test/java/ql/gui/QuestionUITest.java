@@ -1,24 +1,27 @@
 package ql.gui;
 
 import org.junit.Test;
+import ql.BaseQlTest;
+import ql.ast.Form;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import static org.junit.Assert.*;
 
-public class QuestionUITest {
-
+public class QuestionUITest extends BaseQlTest {
 
     @Test
     public void canDisplayAllNonComputedQuestionTypes() {
         //TODO
-        String qlFileName = "src/input/ql/correct/gui/allQuestionTypes.ql";
-        throw new NotImplementedException();
+        Form form = createForm("src/input/ql/correct/gui/allQuestionTypes.ql");
+        FormUI formUI = new FormUIFactory().getFormUI(form);
+        formUI.display();
     }
 
     @Test
     public void canDisplayAllComputedQuestionTypes() {
-        String qlFileName = "src/input/ql/correct/gui/allComputedQuestionTypes.ql";
-        throw new NotImplementedException();
+        Form form = createForm("src/input/ql/correct/gui/allComputedQuestionTypes.ql");
+        FormUI formUI = new FormUIFactory().getFormUI(form);
+        formUI.display();
     }
 
 }

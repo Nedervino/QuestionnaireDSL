@@ -7,7 +7,7 @@ form ifElse {
         showBlock: boolean = false
     if (showBlock) {
         "Block is shown"
-        flag: boolean = false
+        flag: boolean = true
     } else {
         "Block is hidden"
         flag2: boolean = true
