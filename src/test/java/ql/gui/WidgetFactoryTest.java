@@ -25,8 +25,7 @@ public class WidgetFactoryTest extends BaseQlTest {
     private Environment environment;
 
     @Before
-    public void setUp() throws Exception {
-        issueTracker = new IssueTracker();
+    public void setUp() {
 
         Form form = createForm("src/input/ql/correct/if.ql");
         environment = new FormEnvironment(form);
