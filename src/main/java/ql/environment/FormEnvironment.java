@@ -86,8 +86,7 @@ public class FormEnvironment implements FormStatementVisitor<List<String>>, Envi
     @Override
     public boolean questionIsVisible(String questionId) {
         if (questionStore.hasConditionDependency(questionId)) {
-            List<Expression> conditionExpressions = questionStore.getConditionDependencies(questionId);
-            for(Expression conditionExpression : conditionExpressions) {
+            for(Expression conditionExpression : questionStore.getConditionDependencies(questionId)) {
                 BooleanValue condition = (BooleanValue) expressionEvaluator.evaluate(conditionExpression);
                 if (!condition.getValue()) {
                     return false;
@@ -147,57 +146,50 @@ public class FormEnvironment implements FormStatementVisitor<List<String>>, Envi
             }
 
         }));
-        return Arrays.asList(new String[]{question.getId()});
+        return Collections.singletonList(question.getId());
     }
 
     @Override
     public List<String> visit(ComputedQuestion question) {
         questionStore.addQuestion(question);
         expressionStore.addExpression(question.getId(), question.getExpression());
-        return Arrays.asList(new String[]{question.getId()});
+        return Collections.singletonList(question.getId());
     }
 
-    //TODO: handle nested dependencies within which parent is false but child is true
     @Override
     public List<String> visit(IfStatement node) {
-        List<String> allIdentifiers = new LinkedList<>();
+        List<String> dependingQuestions = new ArrayList<>();
 
         for (Statement statement : node.getIfStatements()) {
             List<String> identifiers = statement.accept(this);
-            if (identifiers != null) {
-                for (String identifier : identifiers) {
-                    questionStore.addConditionDependency(identifier, node.getCondition());
-                }
-                allIdentifiers.addAll(identifiers);
+            for (String identifier : identifiers) {
+                questionStore.addConditionDependency(identifier, node.getCondition());
             }
+            dependingQuestions.addAll(identifiers);
         }
-        return allIdentifiers;
+        return dependingQuestions;
     }
 
     @Override
     public List<String> visit(IfElseStatement node) {
-        List<String> allIdentifiers = new LinkedList<>();
+        List<String> dependingQuestions = new ArrayList<>();
 
         for (Statement statement : node.getIfStatements()) {
             List<String> identifiers = statement.accept(this);
-            if (identifiers != null) {
-                for(String identifier : identifiers) {
-                    questionStore.addConditionDependency(identifier, node.getCondition());
-                }
-                allIdentifiers.addAll(identifiers);
+            for(String identifier : identifiers) {
+                questionStore.addConditionDependency(identifier, node.getCondition());
             }
+            dependingQuestions.addAll(identifiers);
         }
 
         for (Statement statement : node.getElseStatements()) {
             List<String> identifiers = statement.accept(this);
-            if (identifiers != null) {
-                for (String identifier : identifiers) {
-                    questionStore.addConditionDependency(identifier, new Negation(node.getCondition(), node.getSourceLocation()));
-                }
-                allIdentifiers.addAll(identifiers);
+            for (String identifier : identifiers) {
+                questionStore.addConditionDependency(identifier, new Negation(node.getCondition(), node.getSourceLocation()));
             }
+            dependingQuestions.addAll(identifiers);
         }
-        return allIdentifiers;
+        return dependingQuestions;
     }
 
 }

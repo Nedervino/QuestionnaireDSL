@@ -25,5 +25,12 @@ public interface Environment {
 
     void registerChangeListener(EnvironmentListener environmentListener);
 
+    /**
+     * Returns whether all parent conditionals evaluate such that the question should be visible
+     *
+     * @return <code>true</code> if all conditional ancestors for which the question was in the then block are true,
+     * and all conditional ancestors for which the question was in the else block are false
+     * <code>false</code> otherwise
+     */
     boolean questionIsVisible(String questionId);
 }

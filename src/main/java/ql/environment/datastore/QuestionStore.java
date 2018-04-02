@@ -28,7 +28,7 @@ public class QuestionStore {
 
     public void addConditionDependency(String questionIdentifier, Expression expression) {
         if(!hasConditionDependency(questionIdentifier)){
-            conditionMap.put(questionIdentifier, new LinkedList<>());
+            conditionMap.put(questionIdentifier, new ArrayList<>());
         }
         conditionMap.get(questionIdentifier).add(expression);
     }
