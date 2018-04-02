@@ -6,7 +6,7 @@
 
     <groupId>org.uva.oosterleenederveen</groupId>
     <artifactId>querylanguage</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
 
     <properties>

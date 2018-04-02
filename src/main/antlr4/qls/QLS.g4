@@ -4,15 +4,14 @@ grammar QLS;
 
 stylesheet      : 'stylesheet' IDENTIFIER LEFTBRACKET page* RIGHTBRACKET;
 
-page            : 'page' IDENTIFIER LEFTBRACKET (section | defaultRule)* RIGHTBRACKET;
+page            : 'page' IDENTIFIER LEFTBRACKET component+ defaultRule* RIGHTBRACKET;
 
-section         : 'section' STRINGLITERAL LEFTBRACKET segment* RIGHTBRACKET
-                | 'section' STRINGLITERAL segment
+section         : 'section' STRINGLITERAL LEFTBRACKET component+ defaultRule* RIGHTBRACKET
+                | 'section' STRINGLITERAL component
                 ;
 
-segment         : section
+component       : section
                 | question
-                | defaultRule
                 ;
 
 question        : 'question' IDENTIFIER widget?

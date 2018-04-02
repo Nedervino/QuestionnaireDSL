@@ -18,7 +18,7 @@ The project is based on the [Language Workbench Challenge](https://homepages.cwi
 ## How to run
 * ```mvn antlr4:antlr4``` to generate parsers from grammar
 * ```mvn exec:java``` to run
-* Alternatively, instead of directly running generate a JAR with ```mvn package``` and run with ```java -cp target/querylanguage-1.0-SNAPSHOT-jar-with-dependencies.jar ql.Main``` 
+* Alternatively, instead of directly running generate a JAR with ```mvn package``` and run with ```java -cp target/querylanguage-1.0-jar-with-dependencies.jar ql.Main``` 
 
 ## Setup instructions for IntelliJ
 * File -> New -> Project from existing sources -> Kazan
