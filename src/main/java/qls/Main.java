@@ -18,7 +18,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //TODO: Apply same package structure as for ql package.
         //TODO: pass file (non-string) instead of filecontents to formbuilder
 
         outputInDialog();
@@ -26,14 +25,12 @@ public class Main {
         String qlFileName = "src/input/qls/correct/taxOfficeExample.ql";
         String qlFile = IOHandler.loadFile(qlFileName);
 
-        FormBuilder formBuilder = new FormBuilder();
-        Form form = formBuilder.createForm(qlFile);
+        Form form = FormBuilder.createForm(qlFile);
 
         String qlsFileName = "src/input/qls/correct/taxOfficeExample.qls";
         String qlsFile = IOHandler.loadFile(qlsFileName);
 
-        StylesheetBuilder stylesheetBuilder = new StylesheetBuilder();
-        Stylesheet stylesheet = stylesheetBuilder.createStylesheet(qlsFile);
+        Stylesheet stylesheet = StylesheetBuilder.createStylesheet(qlsFile);
 
         if (!FormValidator.passesChecks(form)) {
             System.out.println("Form not passing validation. See error logs for more details");

@@ -14,17 +14,10 @@ import static org.junit.Assert.assertTrue;
 
 public class ASTConstructionVisitorTest extends BaseQlTest {
 
-    private FormBuilder formBuilder;
-
-    @Before
-    public void setUp() throws Exception {
-        formBuilder = new FormBuilder();
-    }
-
     @Test
     public void visitNestedExpression() {
         final int EXPECTED_RESULT = 4;
-        IntegerLiteral integerLiteral = (IntegerLiteral) formBuilder.createExpression("((((4))))");
+        IntegerLiteral integerLiteral = (IntegerLiteral) FormBuilder.createExpression("((((4))))");
 
         assertEquals(EXPECTED_RESULT, integerLiteral.getValue());
     }
@@ -58,7 +51,7 @@ public class ASTConstructionVisitorTest extends BaseQlTest {
 
     @Test
     public void visitIfStatement() {
-        IfStatement ifStatement = (IfStatement) formBuilder.createStatement("if (hasSoldHouse) {\n" +
+        IfStatement ifStatement = (IfStatement) FormBuilder.createStatement("if (hasSoldHouse) {\n" +
                 "    \"What was the selling price?\"\n" +
                 "      sellingPrice: money\n" +
                 "    \"Private debts for the sold house:\"\n" +
@@ -75,8 +68,8 @@ public class ASTConstructionVisitorTest extends BaseQlTest {
 
     // @Test
     // public void visitUnaryExpression() {
-    //     Negation negation = (Negation) formBuilder.createExpression("!(true)");
-    //     Negative arithmeticNegation = (Negative) formBuilder.createExpression(parser);
+    //     Negation negation = (Negation) FormBuilder.createExpression("!(true)");
+    //     Negative arithmeticNegation = (Negative) FormBuilder.createExpression(parser);
     // }
 
     // @Test

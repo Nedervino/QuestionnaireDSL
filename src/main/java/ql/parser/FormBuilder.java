@@ -14,7 +14,7 @@ import ql.ast.statements.Statement;
  */
 public class FormBuilder {
 
-    public Form createForm(String formContent) {
+    public static Form createForm(String formContent) {
         QLParser parser = createParser(formContent);
 
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
@@ -23,7 +23,7 @@ public class FormBuilder {
         return (Form) astConstructionVisitor.visit(formContext);
     }
 
-    private QLParser createParser(String input) {
+    private static QLParser createParser(String input) {
         CharStream charStream = CharStreams.fromString(input);
         QLLexer lexer = new QLLexer(charStream);
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
@@ -36,14 +36,14 @@ public class FormBuilder {
         return parser;
     }
 
-    public Expression createExpression(String input) {
+    public static Expression createExpression(String input) {
         QLParser parser = createParser(input);
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
         QLParser.ExpressionContext expressionContext = parser.expression();
         return (Expression) astConstructionVisitor.visit(expressionContext);
     }
 
-    public Statement createStatement(String input) {
+    public static Statement createStatement(String input) {
         QLParser parser = createParser(input);
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
         QLParser.StatementContext statementContext = parser.statement();

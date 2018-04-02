@@ -8,7 +8,7 @@ public class BaseQlTest {
 
     protected static Form createForm(String fileName) {
         String fileContent = IOHandler.loadFile(fileName);
-        return new FormBuilder().createForm(fileContent);
+        return FormBuilder.createForm(fileContent);
     }
 
 }

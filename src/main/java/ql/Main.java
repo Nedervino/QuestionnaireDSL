@@ -31,8 +31,7 @@ public class Main {
         // String qlFile = IOHandler.loadFileUsingDialog("ql");
         String qlFile = IOHandler.loadFile(qlFileName);
 
-        FormBuilder formBuilder = new FormBuilder();
-        Form form = formBuilder.createForm(qlFile);
+        Form form = FormBuilder.createForm(qlFile);
 
         if (FormValidator.passesChecks(form)) {
             FormUI formUI = new FormUIFactory().getFormUI(form);

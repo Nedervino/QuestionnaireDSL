@@ -9,7 +9,7 @@ import qls.ast.Stylesheet;
 
 public class StylesheetBuilder {
 
-    public Stylesheet createStylesheet(String formContent) {
+    public static Stylesheet createStylesheet(String formContent) {
         QLSParser parser = createParser(formContent);
 
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
@@ -18,7 +18,7 @@ public class StylesheetBuilder {
         return (Stylesheet) astConstructionVisitor.visit(stylesheetContext);
     }
 
-    public QLSParser createParser(String input) {
+    public static QLSParser createParser(String input) {
         CharStream charStream = CharStreams.fromString(input);
         QLSLexer lexer = new QLSLexer(charStream);
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
