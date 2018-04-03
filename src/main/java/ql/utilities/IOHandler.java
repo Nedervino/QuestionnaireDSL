@@ -18,7 +18,7 @@ public class IOHandler {
         return fileContent;
     }
 
-    public static String loadFileUsingDialog(String allowedExtension) {
+    public static String getFileNameUsingDialog(String allowedExtension) {
         FileDialog fd = new FileDialog(new JFrame(), "Choose a file", FileDialog.LOAD);
         fd.setFilenameFilter((dir, name) -> name.endsWith(allowedExtension));
         fd.setVisible(true);
@@ -28,7 +28,7 @@ public class IOHandler {
             System.exit(0);
         } else {
             String absolutePath = fd.getDirectory().concat(fileName);
-            return loadFile(absolutePath);
+            return absolutePath;
         }
         return null;
     }

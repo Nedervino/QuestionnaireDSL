@@ -27,11 +27,10 @@ public class Main {
         outputInDialog();
 
         String qlFileName = "src/input/qls/correct/taxOfficeExample.ql";
-        String qlFile = IOHandler.loadFile(qlFileName);
 
-        // String qlFile = IOHandler.loadFileUsingDialog(".ql");
+        // String qlFile = IOHandler.getFileNameUsingDialog(".ql");
 
-        Form form = FormBuilder.createForm(qlFile);
+        Form form = FormBuilder.createForm(qlFileName);
 
         String qlsFileName = "src/input/qls/correct/taxOfficeExample.qls";
         String qlsFile = IOHandler.loadFile(qlsFileName);
