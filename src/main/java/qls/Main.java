@@ -15,6 +15,10 @@ import javax.swing.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+/**
+ * This program parses a form input file following QL DSL specification and stylesheet input file following QLS DSL specification,
+ * rendering a graphical questionnaire based on the two inputs
+ */
 public class Main {
 
     public static void main(String[] args) {
@@ -25,6 +29,8 @@ public class Main {
 
         String qlFileName = "src/input/qls/correct/taxOfficeExample.ql";
         String qlFile = IOHandler.loadFile(qlFileName);
+
+        // String qlFile = IOHandler.loadFileUsingDialog(".ql");
 
         Form form = FormBuilder.createForm(qlFile);
 

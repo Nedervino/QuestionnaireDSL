@@ -1,6 +1,7 @@
 package qls.ast.widgets;
 
 import ql.ast.SourceLocation;
+import qls.ast.visitors.WidgetTypeVisitor;
 
 public class DropdownType extends WidgetType {
 
@@ -27,4 +28,10 @@ public class DropdownType extends WidgetType {
     public String getNoLabel() {
         return noLabel;
     }
+
+    @Override
+    public <T> T accept(WidgetTypeVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 }

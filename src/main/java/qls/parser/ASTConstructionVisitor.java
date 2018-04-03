@@ -3,25 +3,23 @@ package qls.parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import ql.ast.ASTNode;
 import ql.ast.SourceLocation;
-import ql.ast.statements.Statement;
 import ql.ast.types.*;
 import qls.QLSBaseVisitor;
 import qls.QLSParser;
 import qls.ast.Page;
 import qls.ast.Stylesheet;
 import qls.ast.components.Component;
-import qls.ast.components.Question;
+import qls.ast.components.QuestionReference;
 import qls.ast.components.Section;
 import qls.ast.defaultrules.DefaultRule;
-import qls.ast.defaultrules.DefaultStyle;
-import qls.ast.defaultrules.DefaultWidget;
+import qls.ast.defaultrules.DefaultStyleRule;
+import qls.ast.defaultrules.DefaultWidgetRule;
 import qls.ast.properties.*;
 import qls.ast.widgets.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
 
@@ -61,14 +59,14 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     public ASTNode visitQuestion(QLSParser.QuestionContext ctx) {
         String questionId = ctx.IDENTIFIER().getText();
         WidgetType widgetType = (ctx.widget() == null) ? null : (WidgetType) visit(ctx.widget());
-        return new Question(questionId, widgetType, getSourceLocation(ctx));
+        return new QuestionReference(questionId, widgetType, getSourceLocation(ctx));
     }
 
     @Override
     public ASTNode visitWidgetRule(QLSParser.WidgetRuleContext ctx) {
         Type type = (Type) visit(ctx.type());
         WidgetType widgetType = (WidgetType) visit(ctx.widget());
-        return new DefaultWidget(type, widgetType, getSourceLocation(ctx));
+        return new DefaultWidgetRule(type, widgetType, getSourceLocation(ctx));
     }
 
     @Override
@@ -78,7 +76,7 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
                 .map(stylePropertyContext -> (Property) visit(stylePropertyContext))
                 .collect(Collectors.toList());
         WidgetType widgetType = ctx.style().widget() == null ? null : (WidgetType) visit(ctx.style().widget());
-        return new DefaultStyle(type, styleProperties, widgetType, getSourceLocation(ctx));
+        return new DefaultStyleRule(type, styleProperties, widgetType, getSourceLocation(ctx));
     }
 
     @Override

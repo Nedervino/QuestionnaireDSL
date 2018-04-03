@@ -1,6 +1,7 @@
 package qls.ast.widgets;
 
 import ql.ast.SourceLocation;
+import qls.ast.visitors.WidgetTypeVisitor;
 
 public class SliderType extends WidgetType {
 
@@ -26,4 +27,10 @@ public class SliderType extends WidgetType {
     public int getStep() {
         return step;
     }
+
+    @Override
+    public <T> T accept(WidgetTypeVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 }

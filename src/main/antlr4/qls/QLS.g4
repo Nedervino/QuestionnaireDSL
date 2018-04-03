@@ -4,7 +4,7 @@ grammar QLS;
 
 stylesheet      : 'stylesheet' IDENTIFIER LEFTBRACKET page* RIGHTBRACKET;
 
-page            : 'page' IDENTIFIER LEFTBRACKET component+ defaultRule* RIGHTBRACKET;
+page            : 'page' IDENTIFIER LEFTBRACKET section+ defaultRule* RIGHTBRACKET;
 
 section         : 'section' STRINGLITERAL LEFTBRACKET component+ defaultRule* RIGHTBRACKET
                 | 'section' STRINGLITERAL component
@@ -15,7 +15,6 @@ component       : section
                 ;
 
 question        : 'question' IDENTIFIER widget?
-//              | 'question' IDENTIFIER styleRule?
                 ;
 
 defaultRule     : 'default' type widget                                                     #widgetRule

@@ -2,6 +2,7 @@ package qls.ast.widgets;
 
 import ql.ast.ASTNode;
 import ql.ast.SourceLocation;
+import qls.ast.visitors.WidgetTypeVisitor;
 
 public abstract class WidgetType extends ASTNode {
 
@@ -9,5 +10,5 @@ public abstract class WidgetType extends ASTNode {
         super(sourceLocation);
     }
 
-    // public abstract <T> T accept(WidgetVisitor<T> visitor); TODO
+    public abstract <T> T accept(WidgetTypeVisitor<T> visitor);
 }

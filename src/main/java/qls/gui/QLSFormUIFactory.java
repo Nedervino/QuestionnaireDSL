@@ -17,6 +17,4 @@ public class QLSFormUIFactory extends FormUIFactory {
         return new QLSFormUI(super.getFormUI(form).getQuestions(), stylesheet);
     }
 
-
-
 }

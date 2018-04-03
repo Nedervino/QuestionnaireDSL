@@ -22,14 +22,10 @@ public class Main {
 
         outputInDialog();
 
-        String qlFileName = "src/input/ql/correct/ifElse.ql";
-        // String qlFileName = "src/input/ql/incorrect/validator/cyclicalBetweenQuestions.ql";
-        // String qlFileName = "src/input/ql/correct/gui/dependentValue.ql";
-        // String qlFileName = "src/input/ql/correct/gui/allComputedQuestionTypes.ql";
-        // String qlFileName = "src/input/ql/correct/gui/allQuestionTypes.ql";
+        // String qlFileName = "src/input/ql/correct/ifElse.ql";
+        // String qlFile = IOHandler.loadFile(qlFileName);
 
-        // String qlFile = IOHandler.loadFileUsingDialog("ql");
-        String qlFile = IOHandler.loadFile(qlFileName);
+        String qlFile = IOHandler.loadFileUsingDialog("ql");
 
         Form form = FormBuilder.createForm(qlFile);
 

@@ -7,16 +7,28 @@ import qls.ast.widgets.WidgetType;
 
 import java.util.List;
 
-public class DefaultStyle extends DefaultRule {
+public class DefaultStyleRule extends DefaultRule {
 
     private final Type type;
     private final List<Property> styleProperties;
     private final WidgetType widgetType;
 
-    public DefaultStyle(Type type, List<Property> styleProperties, WidgetType widgetType, SourceLocation sourceLocation) {
+    public DefaultStyleRule(Type type, List<Property> styleProperties, WidgetType widgetType, SourceLocation sourceLocation) {
         super(sourceLocation);
         this.type = type;
         this.styleProperties = styleProperties;
         this.widgetType = widgetType;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public List<Property> getStyleProperties() {
+        return styleProperties;
+    }
+
+    public WidgetType getWidgetType() {
+        return widgetType;
     }
 }

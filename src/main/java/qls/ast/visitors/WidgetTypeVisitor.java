@@ -2,7 +2,7 @@ package qls.ast.visitors;
 
 import qls.ast.widgets.*;
 
-public interface WidgetVisitor<T> {
+public interface WidgetTypeVisitor<T> {
 
     T visit(DefaultType widget);
 

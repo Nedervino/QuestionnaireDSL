@@ -6,6 +6,7 @@ import qls.ast.Page;
 import qls.ast.Stylesheet;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,13 +22,17 @@ public class QLSFormUI extends FormUI {
         pages = stylesheet.getPages().stream()
                 .map(page -> new PageUI(page))
                 .collect(Collectors.toList());
-
-        // initialiseFrame();
     }
 
     @Override
     public void display() {
-        super.display();
+
+        JPanel pageContainer = new JPanel();
+        for (PageUI page : pages) {
+            pageContainer.add(page.getComponent());
+        }
+
+        initialiseFrame(pageContainer);
     }
 
     private void initialiseFrame(JPanel panel) {
