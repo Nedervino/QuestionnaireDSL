@@ -48,6 +48,11 @@ public class FormEnvironment implements FormStatementVisitor<List<String>>, Envi
     }
 
     @Override
+    public Question getQuestion(String questionId) {
+        return questionStore.getQuestion(questionId);
+    }
+
+    @Override
     public void registerChangeListener(EnvironmentListener environmentListener) {
         listeners.add(environmentListener);
     }

@@ -1,6 +1,5 @@
 package ql.parser;
 
-import org.junit.Before;
 import org.junit.Test;
 import ql.BaseQlTest;
 import ql.ast.Form;

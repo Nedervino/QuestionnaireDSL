@@ -52,7 +52,7 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
         List<DefaultRule> rules = ctx.defaultRule().stream()
                 .map(defaultRuleContext -> (DefaultRule) visit(defaultRuleContext))
                 .collect(Collectors.toList());
-        return new Section(sectionId, components, rules,getSourceLocation(ctx));
+        return new Section(sectionId, components, rules, getSourceLocation(ctx));
     }
 
     @Override

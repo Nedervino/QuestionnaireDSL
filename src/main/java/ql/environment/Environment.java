@@ -11,6 +11,8 @@ public interface Environment {
 
     List<Question> getQuestions();
 
+    Question getQuestion(String questionId);
+
     Value getQuestionValue(String questionId);
 
     boolean questionIsComputed(String questionId);

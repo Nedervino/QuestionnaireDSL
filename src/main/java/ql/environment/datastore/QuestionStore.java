@@ -26,6 +26,11 @@ public class QuestionStore {
         return new ArrayList<>(questionMap.values());
     }
 
+    public Question getQuestion(String questionId) {
+        return questionMap.get(questionId);
+    }
+
+
     public void addConditionDependency(String questionIdentifier, Expression expression) {
         if (!hasConditionDependency(questionIdentifier)) {
             conditionMap.put(questionIdentifier, new ArrayList<>());

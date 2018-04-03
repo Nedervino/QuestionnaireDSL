@@ -1,6 +1,5 @@
 package ql.ast.expressions.literals;
 
-import org.junit.Before;
 import org.junit.Test;
 import ql.parser.FormBuilder;
 

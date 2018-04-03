@@ -1,10 +1,6 @@
 package qls.gui;
 
-import ql.ast.SourceLocation;
-import ql.ast.statements.Question;
-import ql.ast.types.BooleanType;
 import ql.environment.Environment;
-import ql.environment.FormEnvironment;
 import ql.gui.QuestionUI;
 import qls.ast.Page;
 import qls.ast.components.Component;
@@ -14,34 +10,47 @@ import qls.ast.visitors.ComponentVisitor;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import java.util.List;
+import java.awt.*;
 
 public class PageUI {
 
     private final Page page;
     private final JPanel panel;
 
-    public PageUI(Page page) {
+    public PageUI(Page page, Environment environment) {
         this.page = page;
+
         panel = new JPanel();
+        panel.setLayout(new GridBagLayout());
         panel.setBorder(getBorderWithHeader());
-        for(Component component : page.getComponents()) {
+        GridBagConstraints constraints = getConstraints();
+
+        for (Component component : page.getComponents()) {
             component.accept(new ComponentVisitor<Void>() {
 
                 @Override
                 public Void visit(Section section) {
-                    panel.add(new SectionUI(section).getComponent());
+                    panel.add(new SectionUI(section, environment).getComponent(), constraints);
                     return null;
                 }
 
                 @Override
                 public Void visit(QuestionReference questionReference) {
-                    // Question test = new Question("hi", "hi", new BooleanType(null), new SourceLocation(0,0));
-                    // panel.add(new QuestionUI(new FormEnvironment(null), test).getComponent());
+                    panel.add(new QuestionUI(environment, environment.getQuestion(questionReference.getQuestionId())).getComponent(), constraints);
                     return null;
                 }
             });
         }
+    }
+
+    private GridBagConstraints getConstraints() {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.anchor = GridBagConstraints.NORTHWEST;
+        constraints.weightx = 1;
+        constraints.weighty = 1;
+        constraints.gridx = 0;
+        return constraints;
     }
 
     public String getTitle() {
@@ -49,7 +58,7 @@ public class PageUI {
     }
 
     private TitledBorder getBorderWithHeader() {
-        TitledBorder border = BorderFactory.createTitledBorder(page.getPageId());
+        TitledBorder border = BorderFactory.createTitledBorder("Page " + page.getPageId());
         return border;
     }
 

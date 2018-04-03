@@ -1,6 +1,5 @@
 package ql.ast.types;
 
-import org.junit.Before;
 import org.junit.Test;
 import ql.ast.statements.Question;
 import ql.parser.FormBuilder;
