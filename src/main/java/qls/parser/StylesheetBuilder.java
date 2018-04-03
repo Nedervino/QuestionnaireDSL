@@ -3,13 +3,15 @@ package qls.parser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import ql.utilities.IOHandler;
 import qls.QLSLexer;
 import qls.QLSParser;
 import qls.ast.Stylesheet;
 
 public class StylesheetBuilder {
 
-    public static Stylesheet createStylesheet(String formContent) {
+    public static Stylesheet createStylesheet(String qlsFileName) {
+        String formContent = IOHandler.loadFile(qlsFileName);
         QLSParser parser = createParser(formContent);
 
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();

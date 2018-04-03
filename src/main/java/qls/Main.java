@@ -26,16 +26,9 @@ public class Main {
 
         outputInDialog();
 
-        String qlFileName = "src/input/qls/correct/taxOfficeExample.ql";
+        Form form = FormBuilder.createForm("src/input/qls/correct/taxOfficeExample.ql");
 
-        // String qlFile = IOHandler.getFileNameUsingDialog(".ql");
-
-        Form form = FormBuilder.createForm(qlFileName);
-
-        String qlsFileName = "src/input/qls/correct/taxOfficeExample.qls";
-        String qlsFile = IOHandler.loadFile(qlsFileName);
-
-        Stylesheet stylesheet = StylesheetBuilder.createStylesheet(qlsFile);
+        Stylesheet stylesheet = StylesheetBuilder.createStylesheet("src/input/qls/correct/taxOfficeExample.qls");
 
         if (!FormValidator.passesChecks(form)) {
             System.out.println("Form not passing validation. See error logs for more details");
