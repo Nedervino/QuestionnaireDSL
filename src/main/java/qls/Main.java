@@ -22,13 +22,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //TODO: pass file (non-string) instead of filecontents to formbuilder, shorten main method
-
         outputInDialog();
 
-        Form form = FormBuilder.createForm("src/input/qls/correct/taxOfficeExample.ql");
+        String qlFileName = "src/input/qls/correct/taxOfficeExample.ql";
+        byte[] qlFile = IOHandler.loadFile(qlFileName);
+        Form form = FormBuilder.createForm(qlFile);
 
-        Stylesheet stylesheet = StylesheetBuilder.createStylesheet("src/input/qls/correct/taxOfficeExample.qls");
+        String qlsFileName = "src/input/qls/correct/taxOfficeExample.qls";
+        byte[] qlsFile = IOHandler.loadFile(qlsFileName);
+        Stylesheet stylesheet = StylesheetBuilder.createStylesheet(qlsFile);
 
         if (!FormValidator.passesChecks(form)) {
             System.out.println("Form not passing validation. See error logs for more details");

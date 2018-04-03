@@ -12,6 +12,7 @@ import ql.environment.FormEnvironment;
 import ql.gui.widgets.RadioWidget;
 import ql.gui.widgets.SpinboxWidget;
 import ql.gui.widgets.Widget;
+import ql.utilities.IOHandler;
 import qls.ast.Stylesheet;
 import qls.parser.StylesheetBuilder;
 
@@ -28,7 +29,9 @@ public class WidgetFactoryTest extends BaseQlTest {
         environment = new FormEnvironment(form);
 
         StylesheetBuilder stylesheetBuilder = new StylesheetBuilder();
-        Stylesheet stylesheet = stylesheetBuilder.createStylesheet("src/input/qls/correct/form1.qls");
+        String qlsFileName = "src/input/qls/correct/form1.qls";
+        byte[] qlsFile = IOHandler.loadFile(qlsFileName);
+        Stylesheet stylesheet = stylesheetBuilder.createStylesheet(qlsFile);
 
     }
 

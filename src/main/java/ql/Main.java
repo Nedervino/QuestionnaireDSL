@@ -25,9 +25,9 @@ public class Main {
         // String qlFileName = "src/input/ql/correct/ifElse.ql";
         // String qlFile = IOHandler.loadFile(qlFileName);
 
-        String qlFileName = IOHandler.getFileNameUsingDialog("ql");
+        byte[] qlFile = IOHandler.loadFileUsingDialog("ql");
 
-        Form form = FormBuilder.createForm(qlFileName);
+        Form form = FormBuilder.createForm(qlFile);
 
         if (FormValidator.passesChecks(form)) {
             FormUI formUI = new FormUIFactory().getFormUI(form);

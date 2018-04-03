@@ -7,7 +7,8 @@ import ql.utilities.IOHandler;
 public class BaseQlTest {
 
     protected static Form createForm(String fileName) {
-        return FormBuilder.createForm(fileName);
+        byte[] formContent = IOHandler.loadFile(fileName);
+        return FormBuilder.createForm(formContent);
     }
 
 }

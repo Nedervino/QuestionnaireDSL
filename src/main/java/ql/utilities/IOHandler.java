@@ -8,17 +8,17 @@ import java.nio.file.Paths;
 
 public class IOHandler {
 
-    public static String loadFile(String filePath) {
-        String fileContent = "";
+    public static byte[] loadFile(String filePath) {
+        byte[] fileContent = new byte[0];
         try {
-            fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
+            fileContent = Files.readAllBytes(Paths.get(filePath));
         } catch (IOException e) {
             System.err.println("Couldn't process input source: " + e.getMessage());
         }
         return fileContent;
     }
 
-    public static String getFileNameUsingDialog(String allowedExtension) {
+    public static byte[] loadFileUsingDialog(String allowedExtension) {
         FileDialog fd = new FileDialog(new JFrame(), "Choose a file", FileDialog.LOAD);
         fd.setFilenameFilter((dir, name) -> name.endsWith(allowedExtension));
         fd.setVisible(true);
@@ -28,7 +28,8 @@ public class IOHandler {
             System.exit(0);
         } else {
             String absolutePath = fd.getDirectory().concat(fileName);
-            return absolutePath;
+            byte[] formContent = IOHandler.loadFile(absolutePath);
+            return formContent;
         }
         return null;
     }

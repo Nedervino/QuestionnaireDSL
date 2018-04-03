@@ -10,8 +10,8 @@ import qls.ast.Stylesheet;
 
 public class StylesheetBuilder {
 
-    public static Stylesheet createStylesheet(String qlsFileName) {
-        String formContent = IOHandler.loadFile(qlsFileName);
+    public static Stylesheet createStylesheet(byte[] qlsFile) {
+        String formContent = new String(qlsFile);
         QLSParser parser = createParser(formContent);
 
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();

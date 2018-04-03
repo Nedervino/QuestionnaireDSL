@@ -8,7 +8,8 @@ import qls.parser.StylesheetBuilder;
 public class BaseQlsTest extends BaseQlTest {
 
     protected static Stylesheet createStylesheet(String fileName) {
-        return new StylesheetBuilder().createStylesheet(fileName);
+        byte[] qlsFile = IOHandler.loadFile(fileName);
+        return new StylesheetBuilder().createStylesheet(qlsFile);
     }
 
 }

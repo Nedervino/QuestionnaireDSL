@@ -15,9 +15,9 @@ import ql.utilities.IOHandler;
  */
 public class FormBuilder {
 
-    public static Form createForm(String qlFileName) {
-        String formContent = IOHandler.loadFile(qlFileName);
-        QLParser parser = createParser(formContent);
+    public static Form createForm(byte[] qlFile) {
+        String fileContent = new String(qlFile);
+        QLParser parser = createParser(fileContent);
 
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
         QLParser.FormContext formContext = parser.form();
