@@ -28,6 +28,14 @@ public class Section extends Component {
         return sectionId;
     }
 
+    public List<Component> getComponents() {
+        return components;
+    }
+
+    public List<DefaultRule> getRules() {
+        return rules;
+    }
+
     @Override
     public <T> T accept(ComponentVisitor<T> visitor) {
         return visitor.visit(this);

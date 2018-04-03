@@ -15,6 +15,14 @@ public class QuestionReference extends Component {
         this.widgetType = widgetType;
     }
 
+    public String getQuestionId() {
+        return questionId;
+    }
+
+    public WidgetType getWidgetType() {
+        return widgetType;
+    }
+
     @Override
     public <T> T accept(ComponentVisitor<T> visitor) {
         return visitor.visit(this);

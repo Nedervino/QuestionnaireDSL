@@ -1,8 +1,14 @@
 package qls.gui;
 
+import ql.ast.SourceLocation;
+import ql.ast.statements.Question;
+import ql.ast.types.BooleanType;
+import ql.environment.FormEnvironment;
 import ql.gui.QuestionUI;
+import qls.ast.components.Component;
 import qls.ast.components.QuestionReference;
 import qls.ast.components.Section;
+import qls.ast.visitors.ComponentVisitor;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -13,16 +19,28 @@ import java.util.List;
 public class SectionUI {
 
     private final Section section;
-    private final List<QuestionUI> questions;
     private final JPanel panel;
 
     public SectionUI(Section section) {
         this.section = section;
-        this.questions = getQuestionUIs(section.getQuestionReferences());
         panel = new JPanel();
         panel.setBorder(getBorderWithHeader());
-        for(QuestionUI question : questions) {
-            panel.add(question.getComponent());
+        for(Component component : section.getComponents()) {
+            component.accept(new ComponentVisitor<Void>() {
+
+                @Override
+                public Void visit(Section section) {
+                    panel.add(new SectionUI(section).getComponent());
+                    return null;
+                }
+
+                @Override
+                public Void visit(QuestionReference questionReference) {
+                    // panel.add(new QuestionUI(new FormEnvironment(), test).getComponent());
+                    panel.add(new JLabel(questionReference.getQuestionId()));
+                    return null;
+                }
+            });
         }
     }
 

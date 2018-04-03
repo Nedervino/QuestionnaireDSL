@@ -1,6 +1,10 @@
 package qls.gui;
 
+import ql.ast.SourceLocation;
+import ql.ast.statements.Question;
+import ql.ast.types.BooleanType;
 import ql.environment.Environment;
+import ql.environment.FormEnvironment;
 import ql.gui.QuestionUI;
 import qls.ast.Page;
 import qls.ast.components.Component;
@@ -32,11 +36,16 @@ public class PageUI {
 
                 @Override
                 public Void visit(QuestionReference questionReference) {
-                    // panel.add(new QuestionUI(environment, ))
+                    // Question test = new Question("hi", "hi", new BooleanType(null), new SourceLocation(0,0));
+                    // panel.add(new QuestionUI(new FormEnvironment(null), test).getComponent());
                     return null;
                 }
             });
         }
+    }
+
+    public String getTitle() {
+        return page.getPageId();
     }
 
     private TitledBorder getBorderWithHeader() {

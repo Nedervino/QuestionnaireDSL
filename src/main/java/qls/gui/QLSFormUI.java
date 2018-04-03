@@ -27,21 +27,21 @@ public class QLSFormUI extends FormUI {
     @Override
     public void display() {
 
-        JPanel pageContainer = new JPanel();
+        JTabbedPane tabbedPane = new JTabbedPane();
         for (PageUI page : pages) {
-            pageContainer.add(page.getComponent());
+            tabbedPane.add(page.getTitle(), page.getComponent());
         }
 
-        initialiseFrame(pageContainer);
+        initialiseFrame(tabbedPane);
     }
 
-    private void initialiseFrame(JPanel panel) {
+    private void initialiseFrame(JComponent component) {
         frame = new JFrame("Form Viewer");
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         frame.setSize(700, 700);
-        frame.add(panel);
+        frame.add(component);
         frame.setVisible(true);
     }
 }
