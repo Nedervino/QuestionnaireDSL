@@ -43,6 +43,7 @@ public class WidgetFactoryTest extends BaseQlTest {
 
     @Test
     public void createSpinboxWidget() {
+        //TODO combine form and stylesheet such that SpinBoxWidget setting is actually set
         WidgetFactory widgetFactory = new WidgetFactory();
         Question question = new Question("sellingPrice", "", new MoneyType(null), null);
         Widget widget = widgetFactory.createWidget(question, environment);
