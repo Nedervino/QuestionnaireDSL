@@ -46,6 +46,7 @@ choiceMap       : LEFTPARENTHESES yes=STRINGLITERAL COMMA no=STRINGLITERAL RIGHT
 style           : LEFTBRACKET styleProperty+ widget? RIGHTBRACKET;
 
 styleProperty   : 'width' COLON INTEGERLITERAL                                              #widthProperty
+                | 'height' COLON INTEGERLITERAL                                             #heightProperty
                 | 'font' COLON STRINGLITERAL                                                #fontProperty
                 | 'fontsize' COLON INTEGERLITERAL                                           #fontSizeProperty
                 | 'color' COLON HEXCOLOR                                                    #colorProperty

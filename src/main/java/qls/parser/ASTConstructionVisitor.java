@@ -34,8 +34,8 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitPage(QLSParser.PageContext ctx) {
         String pageId = ctx.IDENTIFIER().getText();
-        List<Component> components = ctx.component().stream()
-                .map(componentContext -> (Component) visit(componentContext))
+        List<Component> components = ctx.section().stream()
+                .map(sectionContext -> (Component) visit(sectionContext))
                 .collect(Collectors.toList());
         List<DefaultRule> rules = ctx.defaultRule().stream()
                 .map(defaultRuleContext -> (DefaultRule) visit(defaultRuleContext))
@@ -174,6 +174,11 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitWidthProperty(QLSParser.WidthPropertyContext ctx) {
         return new WidthProperty(Integer.parseInt(ctx.INTEGERLITERAL().getText()), getSourceLocation(ctx));
+    }
+
+    @Override
+    public ASTNode visitHeightProperty(QLSParser.HeightPropertyContext ctx) {
+        return new HeightProperty(Integer.parseInt(ctx.INTEGERLITERAL().getText()), getSourceLocation(ctx));
     }
 
     private SourceLocation getSourceLocation(ParserRuleContext ctx) {

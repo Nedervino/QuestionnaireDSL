@@ -14,7 +14,6 @@ public class QLSWidgetFactory extends WidgetFactory {
         final Question question = inputQuestion;
         final Environment environment = inputEnvironment;
 
-
         final boolean isEditable = !environment.questionIsComputed(question.getId());
 
 

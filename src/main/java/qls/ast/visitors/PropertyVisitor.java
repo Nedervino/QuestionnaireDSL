@@ -1,9 +1,6 @@
 package qls.ast.visitors;
 
-import qls.ast.properties.ColorProperty;
-import qls.ast.properties.FontProperty;
-import qls.ast.properties.FontSizeProperty;
-import qls.ast.properties.WidthProperty;
+import qls.ast.properties.*;
 
 public interface PropertyVisitor<T> {
 
@@ -15,4 +12,5 @@ public interface PropertyVisitor<T> {
 
     T visit(WidthProperty property);
 
+    T visit(HeightProperty property);
 }
