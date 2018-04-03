@@ -13,7 +13,7 @@ import java.io.File;
 public class StylesheetBuilder {
 
     public static Stylesheet createStylesheet(File qlsFile) {
-        String formContent = qlsFile.toString();
+        String formContent = IOHandler.toString(qlsFile);
         QLSParser parser = createParser(formContent);
 
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
