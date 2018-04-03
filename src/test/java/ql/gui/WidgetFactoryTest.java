@@ -16,6 +16,8 @@ import ql.utilities.IOHandler;
 import qls.ast.Stylesheet;
 import qls.parser.StylesheetBuilder;
 
+import java.io.File;
+
 import static org.junit.Assert.assertEquals;
 
 public class WidgetFactoryTest extends BaseQlTest {
@@ -30,7 +32,7 @@ public class WidgetFactoryTest extends BaseQlTest {
 
         StylesheetBuilder stylesheetBuilder = new StylesheetBuilder();
         String qlsFileName = "src/input/qls/correct/form1.qls";
-        byte[] qlsFile = IOHandler.loadFile(qlsFileName);
+        File qlsFile = IOHandler.loadFile(qlsFileName);
         Stylesheet stylesheet = stylesheetBuilder.createStylesheet(qlsFile);
 
     }

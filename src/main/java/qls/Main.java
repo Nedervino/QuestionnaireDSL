@@ -12,6 +12,7 @@ import qls.validator.StylesheetValidator;
 
 import javax.swing.*;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.PrintStream;
 
 /**
@@ -25,11 +26,11 @@ public class Main {
         outputInDialog();
 
         String qlFileName = "src/input/qls/correct/taxOfficeExample.ql";
-        byte[] qlFile = IOHandler.loadFile(qlFileName);
+        File qlFile = IOHandler.loadFile(qlFileName);
         Form form = FormBuilder.createForm(qlFile);
 
         String qlsFileName = "src/input/qls/correct/taxOfficeExample.qls";
-        byte[] qlsFile = IOHandler.loadFile(qlsFileName);
+        File qlsFile = IOHandler.loadFile(qlsFileName);
         Stylesheet stylesheet = StylesheetBuilder.createStylesheet(qlsFile);
 
         if (!FormValidator.passesChecks(form)) {

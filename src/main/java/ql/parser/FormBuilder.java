@@ -10,13 +10,15 @@ import ql.ast.expressions.Expression;
 import ql.ast.statements.Statement;
 import ql.utilities.IOHandler;
 
+import java.io.File;
+
 /**
  * This parses a QL form specification using ANTLR, and converts the resulting CST to a Form AST
  */
 public class FormBuilder {
 
-    public static Form createForm(byte[] qlFile) {
-        String fileContent = new String(qlFile);
+    public static Form createForm(File qlFile) {
+        String fileContent = IOHandler.toString(qlFile);
         QLParser parser = createParser(fileContent);
 
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();

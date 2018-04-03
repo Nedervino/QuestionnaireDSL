@@ -8,10 +8,12 @@ import qls.QLSLexer;
 import qls.QLSParser;
 import qls.ast.Stylesheet;
 
+import java.io.File;
+
 public class StylesheetBuilder {
 
-    public static Stylesheet createStylesheet(byte[] qlsFile) {
-        String formContent = new String(qlsFile);
+    public static Stylesheet createStylesheet(File qlsFile) {
+        String formContent = qlsFile.toString();
         QLSParser parser = createParser(formContent);
 
         ASTConstructionVisitor astConstructionVisitor = new ASTConstructionVisitor();
