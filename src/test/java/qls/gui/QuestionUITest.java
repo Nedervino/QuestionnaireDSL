@@ -4,6 +4,7 @@ import org.junit.Test;
 import ql.ast.Form;
 import qls.BaseQlsTest;
 import qls.ast.Stylesheet;
+import qls.gui.uicomponents.QLSFormUI;
 
 public class QuestionUITest extends BaseQlsTest {
 

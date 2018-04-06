@@ -1,4 +1,4 @@
-package ql.gui;
+package ql.gui.uicomponents;
 
 import javax.swing.*;
 import java.awt.*;

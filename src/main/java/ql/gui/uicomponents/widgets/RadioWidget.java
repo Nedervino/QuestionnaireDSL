@@ -1,4 +1,4 @@
-package ql.gui.widgets;
+package ql.gui.uicomponents.widgets;
 
 import ql.ast.statements.Question;
 import ql.environment.Environment;

@@ -3,8 +3,7 @@ package qls.gui;
 import ql.ast.statements.Question;
 import ql.environment.Environment;
 import ql.gui.WidgetFactory;
-import ql.gui.widgets.*;
-import qls.ast.defaultrules.DefaultWidgetRule;
+import ql.gui.uicomponents.widgets.*;
 import qls.ast.visitors.WidgetTypeVisitor;
 import qls.ast.widgets.*;
 

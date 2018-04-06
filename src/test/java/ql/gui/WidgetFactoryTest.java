@@ -9,9 +9,9 @@ import ql.ast.types.BooleanType;
 import ql.ast.types.MoneyType;
 import ql.environment.Environment;
 import ql.environment.FormEnvironment;
-import ql.gui.widgets.RadioWidget;
-import ql.gui.widgets.SpinboxWidget;
-import ql.gui.widgets.Widget;
+import ql.gui.uicomponents.widgets.RadioWidget;
+import ql.gui.uicomponents.widgets.SpinboxWidget;
+import ql.gui.uicomponents.widgets.Widget;
 import qls.ast.Stylesheet;
 import qls.parser.StylesheetBuilder;
 

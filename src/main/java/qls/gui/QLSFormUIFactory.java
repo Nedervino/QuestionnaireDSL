@@ -5,6 +5,7 @@ import ql.environment.Environment;
 import ql.environment.FormEnvironment;
 import ql.gui.FormUIFactory;
 import qls.ast.Stylesheet;
+import qls.gui.uicomponents.QLSFormUI;
 
 public class QLSFormUIFactory extends FormUIFactory {
 

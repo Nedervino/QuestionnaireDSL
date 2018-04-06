@@ -3,6 +3,7 @@ package ql.gui;
 import org.junit.Test;
 import ql.BaseQlTest;
 import ql.ast.Form;
+import ql.gui.uicomponents.FormUI;
 
 public class QuestionUITest extends BaseQlTest {
 

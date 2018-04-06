@@ -1,8 +1,8 @@
-package qls.gui;
+package qls.gui.uicomponents;
 
 import ql.environment.Environment;
-import ql.gui.FormUI;
-import ql.gui.QuestionUI;
+import ql.gui.uicomponents.FormUI;
+import ql.gui.uicomponents.QuestionUI;
 import qls.ast.Stylesheet;
 
 import javax.swing.*;
@@ -14,6 +14,7 @@ public class QLSFormUI extends FormUI {
     private final List<PageUI> pages;
     private JFrame frame;
 
+    //TODO: Not handling questions
     public QLSFormUI(List<QuestionUI> questions, Stylesheet stylesheet, Environment environment) {
         super(questions);
 

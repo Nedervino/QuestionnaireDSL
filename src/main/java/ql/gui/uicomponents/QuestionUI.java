@@ -1,10 +1,11 @@
-package ql.gui;
+package ql.gui.uicomponents;
 
 import ql.ast.statements.Question;
 import ql.environment.Environment;
 import ql.environment.EnvironmentListener;
 import ql.environment.values.Value;
-import ql.gui.widgets.Widget;
+import ql.gui.WidgetListener;
+import ql.gui.uicomponents.widgets.Widget;
 
 import javax.swing.*;
 import java.awt.*;

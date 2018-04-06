@@ -4,7 +4,9 @@ import ql.ast.Form;
 import ql.ast.statements.Question;
 import ql.environment.Environment;
 import ql.environment.FormEnvironment;
-import ql.gui.widgets.Widget;
+import ql.gui.uicomponents.FormUI;
+import ql.gui.uicomponents.QuestionUI;
+import ql.gui.uicomponents.widgets.Widget;
 
 import java.util.ArrayList;
 import java.util.List;

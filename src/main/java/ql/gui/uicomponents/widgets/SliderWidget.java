@@ -1,12 +1,9 @@
-package ql.gui.widgets;
+package ql.gui.uicomponents.widgets;
 
 import ql.ast.statements.Question;
 import ql.environment.Environment;
-import ql.environment.values.DecimalValue;
 import ql.environment.values.Value;
 import ql.gui.WidgetListener;
-import qls.ast.widgets.SliderType;
-import qls.ast.widgets.WidgetType;
 
 import javax.swing.*;
 import java.awt.*;
