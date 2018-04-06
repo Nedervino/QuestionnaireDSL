@@ -20,14 +20,14 @@ public class QuestionUI implements WidgetListener, EnvironmentListener {
     private final Environment environment;
     private final Question question;
 
-    public QuestionUI(Environment environment, Question question) {
+    public QuestionUI(Environment environment, Question question, Widget widget) {
         this.question = question;
         this.environment = environment;
 
         environment.registerChangeListener(this);
 
         label = new JLabel(question.getLabel());
-        widget = new WidgetFactory().createWidget(question, environment);
+        this.widget = widget;
         widget.registerChangeListener(this);
 
         panel = new JPanel(new BorderLayout());

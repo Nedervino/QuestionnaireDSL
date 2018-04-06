@@ -1,7 +1,10 @@
 package qls.gui;
 
+import ql.ast.statements.Question;
 import ql.environment.Environment;
 import ql.gui.QuestionUI;
+import ql.gui.WidgetFactory;
+import ql.gui.widgets.Widget;
 import qls.ast.components.Component;
 import qls.ast.components.QuestionReference;
 import qls.ast.components.Section;
@@ -37,7 +40,9 @@ public class SectionUI {
 
                 @Override
                 public Void visit(QuestionReference questionReference) {
-                    panel.add(new QuestionUI(environment, environment.getQuestion(questionReference.getQuestionId())).getComponent(), constraints);
+                    Question question = environment.getQuestion(questionReference.getQuestionId());
+                    Widget widget = new QLSWidgetFactory().createWidget(question, environment, questionReference.getWidgetType());
+                    panel.add(new QuestionUI(environment, question, widget).getComponent(), constraints);
                     return null;
                 }
             });

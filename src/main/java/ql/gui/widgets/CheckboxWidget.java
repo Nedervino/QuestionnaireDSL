@@ -11,23 +11,29 @@ import javax.swing.*;
 public class CheckboxWidget extends BaseWidget {
 
     private final JCheckBox checkBox;
+    private String label;
 
     public CheckboxWidget(Environment environment, Question question, boolean isEditable) {
+        this(environment, question, isEditable, "Yes");
+    }
+
+    public CheckboxWidget(Environment environment, Question question, boolean isEditable,String label) {
         super(environment, question, isEditable);
         checkBox = new JCheckBox();
+        checkBox.setText(label);
         setValue();
         setEditable(isEditable);
     }
 
     @Override
     public void setValue() {
-        BooleanValue value = (BooleanValue) environment.getQuestionValue(question.getId()).getValue();
+        BooleanValue value = (BooleanValue) environment.getQuestionValue(question.getId());
         checkBox.setSelected(value.getValue());
     }
 
     @Override
     public Value getValue() {
-        return new BooleanValue(checkBox.isSelected());
+        return parseValue(Boolean.toString(checkBox.isSelected()));
     }
 
     @Override

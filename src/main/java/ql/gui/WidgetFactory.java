@@ -17,12 +17,12 @@ public class WidgetFactory {
 
             @Override
             public Widget visit(BooleanType booleanType) {
-                return new RadioWidget(environment, question, isEditable);
+                return new CheckboxWidget(environment, question, isEditable);
             }
 
             @Override
             public Widget visit(DecimalType decimalType) {
-                return new SliderWidget(environment, question, isEditable);
+                return new TextFieldWidget(environment, question, isEditable);
             }
 
             @Override

@@ -30,9 +30,7 @@ public class BooleanValue implements Value<Boolean> {
 
     @Override
     public BooleanValue and(BooleanValue value) {
-        Boolean left = value.getValue();
-        Boolean right = value.getValue();
-        return new BooleanValue(left && right);
+        return new BooleanValue(value.getValue() && this.getValue());
     }
 
     @Override
@@ -42,7 +40,7 @@ public class BooleanValue implements Value<Boolean> {
 
     @Override
     public BooleanValue equal(BooleanValue value) {
-        return new BooleanValue(getValue().booleanValue() == value.getValue().booleanValue());
+        return new BooleanValue(value.getValue() == this.getValue());
     }
 
     @Override
@@ -52,9 +50,7 @@ public class BooleanValue implements Value<Boolean> {
 
     @Override
     public BooleanValue notEqual(BooleanValue value) {
-        Boolean left = value.getValue();
-        Boolean right = value.getValue();
-        return new BooleanValue(left != right);
+        return new BooleanValue(value.getValue() != this.getValue());
     }
 
     @Override
@@ -64,7 +60,7 @@ public class BooleanValue implements Value<Boolean> {
 
     @Override
     public BooleanValue or(BooleanValue value) {
-        return new BooleanValue(getValue() || value.getValue());
+        return new BooleanValue(value.getValue() || this.getValue());
     }
 
     @Override

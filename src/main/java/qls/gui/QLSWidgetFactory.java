@@ -10,16 +10,21 @@ import qls.ast.widgets.*;
 
 public class QLSWidgetFactory extends WidgetFactory {
 
-    public Widget createWidget(Question inputQuestion, Environment inputEnvironment, DefaultWidgetRule widgetRule) {
+    public Widget createWidget(Question inputQuestion, Environment inputEnvironment) {
+        return super.createWidget(inputQuestion, inputEnvironment);
+
+    }
+
+    public Widget createWidget(Question inputQuestion, Environment inputEnvironment, WidgetType widgetType) {
         final Question question = inputQuestion;
         final Environment environment = inputEnvironment;
 
         final boolean isEditable = !environment.questionIsComputed(question.getId());
 
 
-        if (widgetRule == null) return QLSWidgetFactory.super.createWidget(question, environment);
+        if (widgetType == null) return QLSWidgetFactory.super.createWidget(question, environment);
 
-        return widgetRule.getWidgetType().accept(new WidgetTypeVisitor<Widget>() {
+        return widgetType.accept(new WidgetTypeVisitor<Widget>() {
             @Override
             public Widget visit(DefaultType widget) {
                 return QLSWidgetFactory.super.createWidget(question, environment);
@@ -27,22 +32,31 @@ public class QLSWidgetFactory extends WidgetFactory {
 
             @Override
             public Widget visit(CheckboxType widget) {
-                return new CheckboxWidget(environment, question, isEditable);
+                if(widget.getYesLabel() == null) {
+                    return new CheckboxWidget(environment, question, isEditable);
+                }
+                return new CheckboxWidget(environment, question, isEditable, widget.getYesLabel());
             }
 
             @Override
             public Widget visit(DropdownType widget) {
-                return new DropdownWidget(environment, question, isEditable);
+                if(widget.getYesLabel() == null) {
+                    return new DropdownWidget(environment, question, isEditable);
+                }
+                return new DropdownWidget(environment, question, isEditable, widget.getYesLabel(), widget.getNoLabel());
             }
 
             @Override
             public Widget visit(RadioType widget) {
-                return new RadioWidget(environment, question, isEditable);
+                if(widget.getYesLabel() == null) {
+                    return new RadioWidget(environment, question, isEditable);
+                }
+                return new RadioWidget(environment, question, isEditable, widget.getYesLabel(), widget.getNoLabel());
             }
 
             @Override
             public Widget visit(SliderType widget) {
-                return new SliderWidget(environment, question, isEditable);
+                return new SliderWidget(environment, question, isEditable, widget.getStart(), widget.getEnd(), widget.getStep());
             }
 
             @Override
@@ -55,7 +69,6 @@ public class QLSWidgetFactory extends WidgetFactory {
                 return new TextFieldWidget(environment, question, isEditable);
             }
         });
-
     }
 
 

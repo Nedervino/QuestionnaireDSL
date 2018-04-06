@@ -17,9 +17,17 @@ public class RadioWidget extends BaseWidget {
     private final Map<String, JRadioButton> choiceButtonMap;
     private final JPanel panel;
     private final ButtonGroup buttonGroup;
+    private String trueLabel;
+    private String falseLabel;
 
     public RadioWidget(Environment environment, Question question, boolean isEditable) {
+        this(environment, question, isEditable, "Yes", "No");
+    }
+
+    public RadioWidget(Environment environment, Question question, boolean isEditable, String trueLabel, String falseLabel) {
         super(environment, question, isEditable);
+        this.trueLabel = trueLabel;
+        this.falseLabel = falseLabel;
 
         panel = new JPanel();
         panel.setPreferredSize(new Dimension(200, 50));
@@ -28,8 +36,8 @@ public class RadioWidget extends BaseWidget {
 
         buttonGroup = new ButtonGroup();
 
-        String[] defaultOptions = {"true", "false"};
-        for (String option : defaultOptions) {
+        String[] options = {this.trueLabel, this.falseLabel};
+        for (String option : options) {
             JRadioButton button = new JRadioButton(option);
             button.setActionCommand(option);
             buttonGroup.add(button);
@@ -45,9 +53,9 @@ public class RadioWidget extends BaseWidget {
         BooleanValue evaluatable = ((BooleanValue) environment.getQuestionValue(question.getId()));
         boolean value = evaluatable != null ? evaluatable.getValue() : false;
         if (value) {
-            buttonGroup.setSelected(choiceButtonMap.get("true").getModel(), true);
+            buttonGroup.setSelected(choiceButtonMap.get(trueLabel).getModel(), true);
         } else {
-            buttonGroup.setSelected(choiceButtonMap.get("false").getModel(), true);
+            buttonGroup.setSelected(choiceButtonMap.get(falseLabel).getModel(), true);
         }
     }
 
@@ -56,7 +64,8 @@ public class RadioWidget extends BaseWidget {
         for (Map.Entry entry : choiceButtonMap.entrySet()) {
             JRadioButton button = (JRadioButton) entry.getValue();
             if (button.isSelected()) {
-                return new BooleanValue((String) entry.getKey());
+                //TODO
+                return parseValue((String) entry.getKey());
             }
         }
         return new BooleanValue(false);

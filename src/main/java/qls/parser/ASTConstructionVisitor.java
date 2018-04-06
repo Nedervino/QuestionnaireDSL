@@ -45,7 +45,7 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitSection(QLSParser.SectionContext ctx) {
-        String sectionId = ctx.STRINGLITERAL().getText().substring(1, ctx.STRINGLITERAL().getText().length() - 1);
+        String sectionId = ctx.STRINGLITERAL().getText().replaceAll("^\"|\"$", "");
         List<Component> components = ctx.component().stream()
                 .map(componentContext -> (Component) visit(componentContext))
                 .collect(Collectors.toList());
@@ -117,7 +117,7 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitCheckboxType(QLSParser.CheckboxTypeContext ctx) {
         if (ctx.yes != null) {
-            return new CheckboxType(ctx.yes.getText(), getSourceLocation(ctx));
+            return new CheckboxType(ctx.yes.getText().replaceAll("^\"|\"$", ""), getSourceLocation(ctx));
         }
         return new CheckboxType(getSourceLocation(ctx));
     }
@@ -125,7 +125,9 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitDropdownType(QLSParser.DropdownTypeContext ctx) {
         if (ctx.choiceMap().yes != null && ctx.choiceMap().no != null) {
-            return new DropdownType(ctx.choiceMap().yes.getText(), ctx.choiceMap().no.getText(), getSourceLocation(ctx));
+            String trueLabel = ctx.choiceMap().yes.getText().replaceAll("^\"|\"$", "");
+            String falseLabel = ctx.choiceMap().no.getText().replaceAll("^\"|\"$", "");
+            return new DropdownType(trueLabel, falseLabel, getSourceLocation(ctx));
         }
         return new DropdownType(getSourceLocation(ctx));
     }
@@ -133,7 +135,9 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
     @Override
     public ASTNode visitRadioType(QLSParser.RadioTypeContext ctx) {
         if (ctx.choiceMap().yes != null && ctx.choiceMap().no != null) {
-            return new RadioType(ctx.choiceMap().yes.getText(), ctx.choiceMap().no.getText(), getSourceLocation(ctx));
+            String trueLabel = ctx.choiceMap().yes.getText().replaceAll("^\"|\"$", "");
+            String falseLabel = ctx.choiceMap().no.getText().replaceAll("^\"|\"$", "");
+            return new RadioType(trueLabel, falseLabel, getSourceLocation(ctx));
         }
         return new RadioType(getSourceLocation(ctx));
     }
@@ -163,7 +167,7 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitFontProperty(QLSParser.FontPropertyContext ctx) {
-        return new FontProperty(ctx.STRINGLITERAL().getText(), getSourceLocation(ctx));
+        return new FontProperty(ctx.STRINGLITERAL().getText().replaceAll("^\"|\"$", ""), getSourceLocation(ctx));
     }
 
     @Override

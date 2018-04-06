@@ -13,10 +13,15 @@ public class SpinboxWidget extends BaseWidget {
 
     private final JSpinner spinner;
 
+    //TODO
+    // public SpinboxWidget(Environment environment, Question question, boolean isEditable, List choices) {
+    //     super(environment, question, isEditable);
+    //     spinner = new JSpinner(new SpinnerListModel(choices.getItems()));
+    // }
+
+
     public SpinboxWidget(Environment environment, Question question, boolean isEditable) {
         super(environment, question, isEditable);
-        // String[] choices = {"1", "2", "3", "4"};
-        // spinner = new JSpinner(new SpinnerListModel(choices));
         spinner = new JSpinner();
         spinner.setPreferredSize(new Dimension(200, 50));
         setValue();
@@ -25,13 +30,13 @@ public class SpinboxWidget extends BaseWidget {
 
     @Override
     public void setValue() {
-        IntegerValue value = (IntegerValue) environment.getQuestionValue(question.getId());
-        spinner.setValue(Integer.valueOf(value.getValue()));
+        Value<Number> value = environment.getQuestionValue(question.getId());
+        spinner.setValue(value.getValue());
     }
 
     @Override
     public Value getValue() {
-        return new IntegerValue((int) spinner.getValue());
+        return parseValue(spinner.getValue().toString());
     }
 
     @Override

@@ -2,6 +2,7 @@ package qls.ast;
 
 import ql.ast.ASTNode;
 import ql.ast.SourceLocation;
+import ql.ast.statements.Question;
 import qls.ast.components.Component;
 import qls.ast.defaultrules.DefaultRule;
 

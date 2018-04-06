@@ -10,16 +10,22 @@ import javax.swing.*;
 
 public class DropdownWidget extends BaseWidget {
 
-    private final String TRUE_LABEL = "YES";
-    private final String FALSE_LABEL = "NO";
+    private String trueLabel;
+    private String falseLabel;
     private final JComboBox<String> dropdown;
 
     public DropdownWidget(Environment environment, Question question, boolean isEditable) {
+        this(environment, question, isEditable, "Yes", "No");
+    }
+
+    public DropdownWidget(Environment environment, Question question, boolean isEditable, String trueLabel, String falseLabel) {
         super(environment, question, isEditable);
+        this.trueLabel = trueLabel;
+        this.falseLabel = falseLabel;
 
         dropdown = new JComboBox<>();
-        dropdown.addItem(TRUE_LABEL);
-        dropdown.addItem(FALSE_LABEL);
+        dropdown.addItem(trueLabel);
+        dropdown.addItem(trueLabel);
         setValue();
         setEditable(isEditable);
     }
@@ -27,9 +33,9 @@ public class DropdownWidget extends BaseWidget {
     @Override
     public void setValue() {
         if ((boolean) environment.getQuestionValue(question.getId()).getValue()) {
-            dropdown.setSelectedItem(TRUE_LABEL);
+            dropdown.setSelectedItem(trueLabel);
         } else {
-            dropdown.setSelectedItem(FALSE_LABEL);
+            dropdown.setSelectedItem(falseLabel);
         }
     }
 

@@ -5,6 +5,8 @@ import ql.environment.Environment;
 import ql.environment.values.DecimalValue;
 import ql.environment.values.Value;
 import ql.gui.WidgetListener;
+import qls.ast.widgets.SliderType;
+import qls.ast.widgets.WidgetType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,18 +15,15 @@ public class SliderWidget extends BaseWidget {
 
     private final JSlider slider;
 
-    public SliderWidget(Environment environment, Question question, boolean isEditable) {
+    public SliderWidget(Environment environment, Question question, boolean isEditable, int start, int end, int step) {
         super(environment, question, isEditable);
 
         Value value = environment.getQuestionValue(question.getId());
-        Number number = value != null ? (Number) value.getValue() : 0;
-        final int CURRENT_VALUE = number.intValue();
-        final int START = 0;
-        final int END = CURRENT_VALUE + 10;
+        Number current = value != null ? (Number) value.getValue() : 0;
 
-        slider = new JSlider(START, END, CURRENT_VALUE);
-        slider.setMinorTickSpacing((END - START) / 10);
-        slider.setMajorTickSpacing((END - START) / 5);
+        slider = new JSlider(start, end, current.intValue());
+        slider.setMinorTickSpacing(step);
+        slider.setMajorTickSpacing(step*2);
         slider.setSnapToTicks(true);
         slider.setPaintTicks(true);
         slider.setPaintLabels(true);
@@ -43,7 +42,7 @@ public class SliderWidget extends BaseWidget {
 
     @Override
     public Value getValue() {
-        return new DecimalValue(slider.getValue());
+        return parseValue(Integer.toString(slider.getValue()));
     }
 
     @Override
