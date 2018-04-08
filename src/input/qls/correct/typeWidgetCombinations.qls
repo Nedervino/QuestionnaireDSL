@@ -1,0 +1,25 @@
+stylesheet taxOfficeExample
+{
+  page Housing
+  {
+    section "Selling" {
+        question q1 widget radio
+        question q2 widget dropdown
+        question q3 widget checkbox
+
+        question q4 widget slider(0,10,1)
+        question q5 widget spinbox
+        question q6 widget textfield
+
+        question q7 widget slider(0,10,1)
+        question q8 widget spinbox
+        question q9 widget textfield
+
+        question q10 widget slider(0,10,1)
+        question q11 widget spinbox
+        question q12 widget textfield
+        question q13 widget textfield
+        question q14 widget textfield
+    }
+  }
+}

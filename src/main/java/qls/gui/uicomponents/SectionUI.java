@@ -28,10 +28,6 @@ public class SectionUI extends BaseComponentUI {
         placeComponents(panel, section.getComponents(), environment, constraints);
     }
 
-    private List<QuestionUI> getQuestionUIs(List<QuestionReference> questionReferences) {
-        return new ArrayList<>();
-    }
-
     @Override
     protected TitledBorder getBorderWithHeader() {
         TitledBorder border = BorderFactory.createTitledBorder("Section " + section.getSectionId());

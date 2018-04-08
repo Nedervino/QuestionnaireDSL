@@ -24,8 +24,8 @@ public class DropdownWidget extends BaseWidget {
         this.falseLabel = falseLabel;
 
         dropdown = new JComboBox<>();
-        dropdown.addItem(trueLabel);
-        dropdown.addItem(trueLabel);
+        dropdown.addItem(this.trueLabel);
+        dropdown.addItem(this.falseLabel);
         setValue();
         setEditable(isEditable);
     }

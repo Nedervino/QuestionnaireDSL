@@ -26,14 +26,14 @@ public class Main {
 
         outputInDialog();
 
-        String qlFileName = "src/input/qls/correct/taxOfficeExample.ql";
+        String qlFileName = "src/input/qls/correct/typeWidgetCombinations.ql";
         String qlFile = IOHandler.loadFile(qlFileName);
 
         // String qlFile = IOHandler.loadFileUsingDialog(".ql");
 
         Form form = FormBuilder.createForm(qlFile);
 
-        String qlsFileName = "src/input/qls/correct/taxOfficeExample.qls";
+        String qlsFileName = "src/input/qls/correct/typeWidgetCombinations.qls";
         String qlsFile = IOHandler.loadFile(qlsFileName);
 
         Stylesheet stylesheet = StylesheetBuilder.createStylesheet(qlsFile);

@@ -124,7 +124,7 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitDropdownType(QLSParser.DropdownTypeContext ctx) {
-        if (ctx.choiceMap().yes != null && ctx.choiceMap().no != null) {
+        if (ctx.choiceMap() != null) {
             String trueLabel = ctx.choiceMap().yes.getText().replaceAll("^\"|\"$", "");
             String falseLabel = ctx.choiceMap().no.getText().replaceAll("^\"|\"$", "");
             return new DropdownType(trueLabel, falseLabel, getSourceLocation(ctx));
@@ -134,7 +134,7 @@ public class ASTConstructionVisitor extends QLSBaseVisitor<ASTNode> {
 
     @Override
     public ASTNode visitRadioType(QLSParser.RadioTypeContext ctx) {
-        if (ctx.choiceMap().yes != null && ctx.choiceMap().no != null) {
+        if (ctx.choiceMap() != null) {
             String trueLabel = ctx.choiceMap().yes.getText().replaceAll("^\"|\"$", "");
             String falseLabel = ctx.choiceMap().no.getText().replaceAll("^\"|\"$", "");
             return new RadioType(trueLabel, falseLabel, getSourceLocation(ctx));
