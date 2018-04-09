@@ -21,7 +21,7 @@ public class SliderWidget extends BaseWidget {
         end = current > end ? current : end;
         slider = new JSlider(start, end, current);
         slider.setMinorTickSpacing(step);
-        slider.setMajorTickSpacing(step*2);
+        slider.setMajorTickSpacing(step * 2);
         slider.setSnapToTicks(true);
         slider.setPaintTicks(true);
         slider.setPaintLabels(true);

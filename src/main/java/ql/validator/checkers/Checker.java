@@ -2,8 +2,6 @@ package ql.validator.checkers;
 
 import issuetracker.Error;
 import issuetracker.Warning;
-import ql.ast.Form;
-import qls.ast.Stylesheet;
 
 import java.util.List;
 

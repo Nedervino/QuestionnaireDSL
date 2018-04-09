@@ -17,7 +17,7 @@ public class CheckboxWidget extends BaseWidget {
         this(environment, question, isEditable, "Yes");
     }
 
-    public CheckboxWidget(Environment environment, Question question, boolean isEditable,String label) {
+    public CheckboxWidget(Environment environment, Question question, boolean isEditable, String label) {
         super(environment, question, isEditable);
         checkBox = new JCheckBox();
         checkBox.setText(label);

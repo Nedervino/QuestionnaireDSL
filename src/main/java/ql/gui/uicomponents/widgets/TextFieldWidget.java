@@ -4,7 +4,7 @@ import ql.ast.statements.Question;
 import ql.ast.types.*;
 import ql.ast.visitors.TypeVisitor;
 import ql.environment.Environment;
-import ql.environment.values.*;
+import ql.environment.values.Value;
 import ql.gui.WidgetListener;
 
 import javax.swing.*;

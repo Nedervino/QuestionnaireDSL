@@ -1,8 +1,8 @@
 package ql;
 
 import ql.ast.Form;
-import ql.gui.uicomponents.FormUI;
 import ql.gui.FormUIFactory;
+import ql.gui.uicomponents.FormUI;
 import ql.parser.FormBuilder;
 import ql.utilities.IOHandler;
 import ql.validator.FormValidator;

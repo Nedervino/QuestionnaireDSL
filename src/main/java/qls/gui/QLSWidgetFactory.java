@@ -4,7 +4,6 @@ import ql.ast.statements.Question;
 import ql.environment.Environment;
 import ql.gui.WidgetFactory;
 import ql.gui.uicomponents.widgets.*;
-import qls.ast.defaultrules.DefaultRule;
 import qls.ast.visitors.WidgetTypeVisitor;
 import qls.ast.widgets.*;
 
@@ -34,7 +33,7 @@ public class QLSWidgetFactory extends WidgetFactory {
 
             @Override
             public Widget visit(CheckboxType widget) {
-                if(widget.getYesLabel() == null) {
+                if (widget.getYesLabel() == null) {
                     return new CheckboxWidget(environment, question, isEditable);
                 }
                 return new CheckboxWidget(environment, question, isEditable, widget.getYesLabel());
@@ -42,7 +41,7 @@ public class QLSWidgetFactory extends WidgetFactory {
 
             @Override
             public Widget visit(DropdownType widget) {
-                if(widget.getYesLabel() == null) {
+                if (widget.getYesLabel() == null) {
                     return new DropdownWidget(environment, question, isEditable);
                 }
                 return new DropdownWidget(environment, question, isEditable, widget.getYesLabel(), widget.getNoLabel());
@@ -50,7 +49,7 @@ public class QLSWidgetFactory extends WidgetFactory {
 
             @Override
             public Widget visit(RadioType widget) {
-                if(widget.getYesLabel() == null) {
+                if (widget.getYesLabel() == null) {
                     return new RadioWidget(environment, question, isEditable);
                 }
                 return new RadioWidget(environment, question, isEditable, widget.getYesLabel(), widget.getNoLabel());

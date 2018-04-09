@@ -4,7 +4,6 @@ import issuetracker.Error;
 import issuetracker.Warning;
 import ql.ast.Form;
 import ql.validator.checkers.BaseChecker;
-import ql.validator.checkers.Checker;
 import qls.ast.Stylesheet;
 
 import java.util.List;

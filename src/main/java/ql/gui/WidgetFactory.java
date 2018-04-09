@@ -4,7 +4,10 @@ import ql.ast.statements.Question;
 import ql.ast.types.*;
 import ql.ast.visitors.TypeVisitor;
 import ql.environment.Environment;
-import ql.gui.uicomponents.widgets.*;
+import ql.gui.uicomponents.widgets.CheckboxWidget;
+import ql.gui.uicomponents.widgets.SpinboxWidget;
+import ql.gui.uicomponents.widgets.TextFieldWidget;
+import ql.gui.uicomponents.widgets.Widget;
 
 public class WidgetFactory {
 

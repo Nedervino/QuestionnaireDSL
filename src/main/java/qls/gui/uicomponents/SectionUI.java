@@ -1,16 +1,11 @@
 package qls.gui.uicomponents;
 
 import ql.environment.Environment;
-import ql.gui.uicomponents.QuestionUI;
-import qls.ast.components.QuestionReference;
 import qls.ast.components.Section;
-import qls.gui.uicomponents.BaseComponentUI;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class SectionUI extends BaseComponentUI {
 

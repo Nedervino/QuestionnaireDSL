@@ -2,7 +2,6 @@ package qls.gui.uicomponents;
 
 import ql.environment.Environment;
 import qls.ast.Page;
-import qls.gui.uicomponents.BaseComponentUI;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -23,7 +22,6 @@ public class PageUI extends BaseComponentUI {
 
         placeComponents(panel, page.getComponents(), environment, constraints);
     }
-
 
 
     public String getTitle() {
