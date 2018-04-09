@@ -2,14 +2,21 @@ package qls.validator.checkers;
 
 import issuetracker.Error;
 import issuetracker.Warning;
+import ql.ast.Form;
+import ql.validator.checkers.BaseChecker;
 import ql.validator.checkers.Checker;
 import qls.ast.Stylesheet;
 
 import java.util.List;
 
-public class WidgetCompatibilityChecker implements Checker<Stylesheet> {
+public class WidgetCompatibilityChecker extends BaseChecker {
+
+    public WidgetCompatibilityChecker(Form form, Stylesheet stylesheet) {
+
+    }
+
     @Override
-    public boolean passesTests(Stylesheet stylesheet) {
+    public boolean passesTests() {
         return false;
     }
 

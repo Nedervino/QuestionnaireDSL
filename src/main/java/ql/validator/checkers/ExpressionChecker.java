@@ -23,11 +23,14 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
 
     private SymbolTable symbolTable;
 
-    @Override
-    public boolean passesTests(Form form) {
-        issueTracker.reset();
+    public ExpressionChecker(Form form) {
+        super();
         symbolTable = new SymbolTable(form);
         form.accept(this);
+    }
+
+    @Override
+    public boolean passesTests() {
         return !issueTracker.hasErrors();
     }
 

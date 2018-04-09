@@ -17,4 +17,12 @@ public class QLSWidgetFactoryTest extends BaseQlsTest {
         formUI.display();
     }
 
+    @Test
+    public void canCreateMultipleComputedWidgetsPerType() {
+        Form form = createForm("src/input/qls/correct/typeWidgetCombinationsComputed.ql");
+        Stylesheet stylesheet = createStylesheet("src/input/qls/correct/typeWidgetCombinations.qls");
+        QLSFormUI formUI = new QLSFormUIFactory(stylesheet).getFormUI(form);
+        formUI.display();
+    }
+
 }

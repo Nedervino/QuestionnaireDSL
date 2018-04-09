@@ -1,5 +1,6 @@
 package qls.validator;
 
+import ql.ast.Form;
 import ql.validator.checkers.Checker;
 import qls.ast.Stylesheet;
 import qls.validator.checkers.QuestionReferenceChecker;
@@ -15,22 +16,22 @@ import qls.validator.checkers.WidgetCompatibilityChecker;
  */
 public class StylesheetValidator {
 
-    public static boolean passesChecks(Stylesheet stylesheet) {
+    public static boolean passesChecks(Form form, Stylesheet stylesheet) {
 
-        Checker questionReferenceChecker = new QuestionReferenceChecker();
-        Checker widgetCompatibilityChecker = new WidgetCompatibilityChecker();
+        Checker questionReferenceChecker = new QuestionReferenceChecker(form, stylesheet);
+        Checker widgetCompatibilityChecker = new WidgetCompatibilityChecker(form, stylesheet);
 
         //Check for missing question references, and references to undefined or the same questions
-        if (detectsErrors(questionReferenceChecker, stylesheet)) return false;
+        if (detectsErrors(questionReferenceChecker)) return false;
 
         //Check for widget assignments which are incompatible with question types
-        if (detectsErrors(widgetCompatibilityChecker, stylesheet)) return false;
+        if (detectsErrors(widgetCompatibilityChecker)) return false;
 
         return true;
     }
 
-    private static boolean detectsErrors(Checker checker, Stylesheet stylesheet) {
-        if (checker.passesTests(stylesheet)) {
+    private static boolean detectsErrors(Checker checker) {
+        if (checker.passesTests()) {
             checker.logWarnings();
             return false;
         }

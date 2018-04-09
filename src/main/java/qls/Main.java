@@ -43,7 +43,7 @@ public class Main {
             System.exit(1);
         }
 
-        if (!StylesheetValidator.passesChecks(stylesheet)) {
+        if (!StylesheetValidator.passesChecks(form, stylesheet)) {
             System.out.println("Stylesheet not passing validation. See error logs for more details");
             // System.exit(1);
         }

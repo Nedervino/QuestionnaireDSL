@@ -18,16 +18,15 @@ public class QuestionDuplicationChecker extends BaseChecker implements FormState
     private final SymbolTable symbolTable;
 
 
-    public QuestionDuplicationChecker() {
+    public QuestionDuplicationChecker(Form form) {
         super();
         this.questionLabels = new HashSet<>();
         this.symbolTable = new SymbolTable();
+        form.accept(this);
     }
 
     @Override
-    public boolean passesTests(Form form) {
-        issueTracker.reset();
-        form.accept(this);
+    public boolean passesTests() {
         return !issueTracker.hasErrors();
     }
 

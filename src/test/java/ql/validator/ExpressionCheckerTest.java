@@ -11,18 +11,11 @@ import static org.junit.Assert.*;
 
 public class ExpressionCheckerTest extends BaseQlTest {
 
-    private ExpressionChecker expressionChecker;
-
-    @Before
-    public void setUp() throws Exception {
-        expressionChecker = new ExpressionChecker();
-    }
-
     @Test
     public void shouldIssueErrorForUndefinedQuestionReference() {
         Form form = createForm("src/input/ql/incorrect/validator/undefinedQuestion.ql");
-
-        boolean passesTests = expressionChecker.passesTests(form);
+        ExpressionChecker expressionChecker = new ExpressionChecker(form);
+        boolean passesTests = expressionChecker.passesTests();
         assertFalse(passesTests);
         assertEquals(0, expressionChecker.getWarnings().size());
         assertEquals(1, expressionChecker.getErrors().size());
@@ -32,8 +25,8 @@ public class ExpressionCheckerTest extends BaseQlTest {
     @Test
     public void shouldIssueErrorForNonBooleanCondition() {
         Form form = createForm("src/input/ql/incorrect/validator/nonBooleanCondition.ql");
-
-        boolean passesTests = expressionChecker.passesTests(form);
+        ExpressionChecker expressionChecker = new ExpressionChecker(form);
+        boolean passesTests = expressionChecker.passesTests();
         assertFalse(passesTests);
         assertEquals(0, expressionChecker.getWarnings().size());
         assertEquals(1, expressionChecker.getErrors().size());
@@ -43,8 +36,8 @@ public class ExpressionCheckerTest extends BaseQlTest {
     @Test
     public void shouldIssueTypeErrorsForNonNumericMismatches() {
         Form form = createForm("src/input/ql/incorrect/validator/incompatibleBinaryExpressionTypes.ql");
-
-        boolean passesTests = expressionChecker.passesTests(form);
+        ExpressionChecker expressionChecker = new ExpressionChecker(form);
+        boolean passesTests = expressionChecker.passesTests();
         assertFalse(passesTests);
 
         assertEquals(0, expressionChecker.getWarnings().size());
@@ -57,8 +50,9 @@ public class ExpressionCheckerTest extends BaseQlTest {
     @Test
     public void shouldIssueErrorForNonNumericInArithmeticExpression() {
         Form form = createForm("src/input/ql/incorrect/validator/nonNumericInArithmeticExpression.ql");
+        ExpressionChecker expressionChecker = new ExpressionChecker(form);
 
-        boolean passesTests = expressionChecker.passesTests(form);
+        boolean passesTests = expressionChecker.passesTests();
         assertFalse(passesTests);
 
         assertEquals(0, expressionChecker.getWarnings().size());
@@ -76,8 +70,9 @@ public class ExpressionCheckerTest extends BaseQlTest {
     @Test
     public void shouldIssueNoErrorForNumericExpressionsWithMoneyType() {
         Form form = createForm("src/input/ql/correct/validator/numericExpressionsWithMoneyType.ql");
+        ExpressionChecker expressionChecker = new ExpressionChecker(form);
 
-        boolean passesTests = expressionChecker.passesTests(form);
+        boolean passesTests = expressionChecker.passesTests();
         assertTrue(passesTests);
 
         assertEquals(0, expressionChecker.getWarnings().size());
@@ -87,8 +82,9 @@ public class ExpressionCheckerTest extends BaseQlTest {
     @Test
     public void shouldIssueNoErrorForDifferentNumericCombinations() {
         Form form = createForm("src/input/ql/correct/validator/numericCombinations.ql");
+        ExpressionChecker expressionChecker = new ExpressionChecker(form);
 
-        boolean passesTests = expressionChecker.passesTests(form);
+        boolean passesTests = expressionChecker.passesTests();
         assertTrue(passesTests);
 
         assertEquals(0, expressionChecker.getWarnings().size());
@@ -98,8 +94,9 @@ public class ExpressionCheckerTest extends BaseQlTest {
     @Test
     public void shouldIssueNoErrorForNumericOrBooleanComparisons() {
         Form form = createForm("src/input/ql/correct/comparisonExpressions.ql");
+        ExpressionChecker expressionChecker = new ExpressionChecker(form);
 
-        boolean passesTests = expressionChecker.passesTests(form);
+        boolean passesTests = expressionChecker.passesTests();
         assertTrue(passesTests);
 
         assertEquals(0, expressionChecker.getWarnings().size());
@@ -109,8 +106,9 @@ public class ExpressionCheckerTest extends BaseQlTest {
     @Test
     public void shouldIssueErrorForNonBooleanInBooleanExpression() {
         Form form = createForm("src/input/ql/incorrect/validator/nonBooleanInBoolean.ql");
+        ExpressionChecker expressionChecker = new ExpressionChecker(form);
 
-        boolean passesTests = expressionChecker.passesTests(form);
+        boolean passesTests = expressionChecker.passesTests();
         assertFalse(passesTests);
 
         assertEquals(0, expressionChecker.getWarnings().size());
@@ -123,8 +121,9 @@ public class ExpressionCheckerTest extends BaseQlTest {
     @Test
     public void shouldIssueErrorForNonNumericOrBooleanInComparisonExpression() {
         Form form = createForm("src/input/ql/incorrect/validator/nonNumericOrBooleanInComparison.ql");
+        ExpressionChecker expressionChecker = new ExpressionChecker(form);
 
-        boolean passesTests = expressionChecker.passesTests(form);
+        boolean passesTests = expressionChecker.passesTests();
         assertFalse(passesTests);
 
         assertEquals(0, expressionChecker.getWarnings().size());

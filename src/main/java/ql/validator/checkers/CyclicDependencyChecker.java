@@ -27,15 +27,14 @@ public class CyclicDependencyChecker extends BaseChecker implements FormStatemen
 
     private final DependencyManager dependencyManager;
 
-    public CyclicDependencyChecker() {
+    public CyclicDependencyChecker(Form form) {
         super();
         this.dependencyManager = new DependencyManager();
+        form.accept(this);
     }
 
     @Override
-    public boolean passesTests(Form form) {
-        issueTracker.reset();
-        form.accept(this);
+    public boolean passesTests() {
         return !issueTracker.hasErrors();
     }
 

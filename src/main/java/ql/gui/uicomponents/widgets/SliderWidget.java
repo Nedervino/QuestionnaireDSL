@@ -16,9 +16,10 @@ public class SliderWidget extends BaseWidget {
         super(environment, question, isEditable);
 
         Value value = environment.getQuestionValue(question.getId());
-        Number current = value != null ? (Number) value.getValue() : 0;
-
-        slider = new JSlider(start, end, current.intValue());
+        int current = value != null ? ((Number) value.getValue()).intValue() : 0;
+        start = current < start ? current : start;
+        end = current > end ? current : end;
+        slider = new JSlider(start, end, current);
         slider.setMinorTickSpacing(step);
         slider.setMajorTickSpacing(step*2);
         slider.setSnapToTicks(true);

@@ -20,15 +20,14 @@ public class ForwardReferenceChecker extends BaseChecker implements FormStatemen
 
     private final Set<String> declarationHistory;
 
-    public ForwardReferenceChecker() {
+    public ForwardReferenceChecker(Form form) {
         super();
         this.declarationHistory = new HashSet<>();
+        form.accept(this);
     }
 
     @Override
-    public boolean passesTests(Form form) {
-        issueTracker.reset();
-        form.accept(this);
+    public boolean passesTests() {
         return !issueTracker.hasErrors();
     }
 

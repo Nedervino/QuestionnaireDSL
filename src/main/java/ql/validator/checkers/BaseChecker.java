@@ -7,7 +7,7 @@ import ql.ast.Form;
 
 import java.util.List;
 
-public abstract class BaseChecker implements Checker<Form> {
+public abstract class BaseChecker implements Checker {
 
     protected final IssueTracker issueTracker;
 
