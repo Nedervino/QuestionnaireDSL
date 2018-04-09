@@ -9,6 +9,7 @@ import ql.validator.FormValidator;
 
 import javax.swing.*;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.PrintStream;
 
 /**
@@ -25,7 +26,7 @@ public class Main {
         // String qlFileName = "src/input/ql/correct/ifElse.ql";
         // String qlFile = IOHandler.loadFile(qlFileName);
 
-        String qlFile = IOHandler.loadFileUsingDialog("ql");
+        File qlFile = IOHandler.loadFileUsingDialog("ql");
 
         Form form = FormBuilder.createForm(qlFile);
 

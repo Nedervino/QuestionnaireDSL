@@ -12,6 +12,7 @@ import qls.validator.StylesheetValidator;
 
 import javax.swing.*;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.PrintStream;
 
 /**
@@ -22,20 +23,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //TODO: pass file (non-string) instead of filecontents to formbuilder, shorten main method
-
         outputInDialog();
 
-        String qlFileName = "src/input/qls/correct/typeWidgetCombinations.ql";
-        String qlFile = IOHandler.loadFile(qlFileName);
-
-        // String qlFile = IOHandler.loadFileUsingDialog(".ql");
-
+        File qlFile = IOHandler.loadFile("src/input/qls/correct/typeWidgetCombinations.ql");
         Form form = FormBuilder.createForm(qlFile);
 
-        String qlsFileName = "src/input/qls/correct/typeWidgetCombinations.qls";
-        String qlsFile = IOHandler.loadFile(qlsFileName);
-
+        File qlsFile = IOHandler.loadFile("src/input/qls/correct/typeWidgetCombinations.qls");
         Stylesheet stylesheet = StylesheetBuilder.createStylesheet(qlsFile);
 
         if (!FormValidator.passesChecks(form)) {

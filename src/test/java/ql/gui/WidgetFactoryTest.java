@@ -12,8 +12,11 @@ import ql.environment.FormEnvironment;
 import ql.gui.uicomponents.widgets.RadioWidget;
 import ql.gui.uicomponents.widgets.SpinboxWidget;
 import ql.gui.uicomponents.widgets.Widget;
+import ql.utilities.IOHandler;
 import qls.ast.Stylesheet;
 import qls.parser.StylesheetBuilder;
+
+import java.io.File;
 
 import static org.junit.Assert.assertEquals;
 
@@ -27,9 +30,9 @@ public class WidgetFactoryTest extends BaseQlTest {
         Form form = createForm("src/input/ql/correct/if.ql");
         environment = new FormEnvironment(form);
 
-        StylesheetBuilder stylesheetBuilder = new StylesheetBuilder();
-        Stylesheet stylesheet = stylesheetBuilder.createStylesheet("src/input/qls/correct/form1.qls");
-
+        String qlsFileName = "src/input/qls/correct/form1.qls";
+        File qlsFile = IOHandler.loadFile(qlsFileName);
+        Stylesheet stylesheet = StylesheetBuilder.createStylesheet(qlsFile);
     }
 
     @Test
@@ -43,6 +46,7 @@ public class WidgetFactoryTest extends BaseQlTest {
 
     @Test
     public void createSpinboxWidget() {
+        //TODO combine form and stylesheet such that SpinBoxWidget setting is actually set
         WidgetFactory widgetFactory = new WidgetFactory();
         Question question = new Question("sellingPrice", "", new MoneyType(null), null);
         Widget widget = widgetFactory.createWidget(question, environment);

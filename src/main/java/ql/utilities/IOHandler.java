@@ -2,23 +2,18 @@ package ql.utilities;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class IOHandler {
 
-    public static String loadFile(String filePath) {
-        String fileContent = "";
-        try {
-            fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
-        } catch (IOException e) {
-            System.err.println("Couldn't process input source: " + e.getMessage());
-        }
-        return fileContent;
+    public static File loadFile(String filePath) {
+        return new File(filePath);
     }
 
-    public static String loadFileUsingDialog(String allowedExtension) {
+    public static File loadFileUsingDialog(String allowedExtension) {
         FileDialog fd = new FileDialog(new JFrame(), "Choose a file", FileDialog.LOAD);
         fd.setFilenameFilter((dir, name) -> name.endsWith(allowedExtension));
         fd.setVisible(true);
@@ -28,9 +23,18 @@ public class IOHandler {
             System.exit(0);
         } else {
             String absolutePath = fd.getDirectory().concat(fileName);
-            return loadFile(absolutePath);
+            File formContent = IOHandler.loadFile(absolutePath);
+            return formContent;
         }
         return null;
     }
 
+    public static String toString(File file) {
+        try {
+            return new String(Files.readAllBytes(file.toPath()));
+        } catch (IOException e) {
+            System.err.println("Couldn't process input source: " + e.getMessage());
+        }
+        return null;
+    }
 }

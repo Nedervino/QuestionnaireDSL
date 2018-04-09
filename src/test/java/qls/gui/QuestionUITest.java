@@ -19,6 +19,7 @@ public class QuestionUITest extends BaseQlsTest {
 
     @Test
     public void canDisplayAllComputedQuestionTypes() {
+        //TODO
         Form form = createForm("src/input/ql/correct/gui/allComputedQuestionTypes.ql");
         Stylesheet stylesheet = createStylesheet("");
         QLSFormUI formUI = new QLSFormUIFactory(stylesheet).getFormUI(form);
