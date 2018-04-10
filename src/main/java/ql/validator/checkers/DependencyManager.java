@@ -74,11 +74,11 @@ public class DependencyManager {
             return destination;
         }
 
-        public boolean isReflexive() {
+        protected boolean isReflexive() {
             return source.equals(destination);
         }
 
-        public boolean isTransitiveWith(DependencyPair otherPair) {
+        protected boolean isTransitiveWith(DependencyPair otherPair) {
             return destination.equals(otherPair.getSource());
         }
 

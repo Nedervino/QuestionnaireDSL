@@ -6,7 +6,8 @@ import ql.validator.checkers.Checker;
 import qls.BaseQlsTest;
 import qls.ast.Stylesheet;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class QuestionReferenceCheckerTest extends BaseQlsTest {
 

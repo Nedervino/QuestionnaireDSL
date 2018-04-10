@@ -11,8 +11,8 @@ import javax.swing.*;
 public class DropdownWidget extends BaseWidget {
 
     private final JComboBox<String> dropdown;
-    private String trueLabel;
-    private String falseLabel;
+    private final String trueLabel;
+    private final String falseLabel;
 
     public DropdownWidget(Environment environment, Question question, boolean isEditable) {
         this(environment, question, isEditable, "Yes", "No");

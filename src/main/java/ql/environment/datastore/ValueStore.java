@@ -18,7 +18,7 @@ public class ValueStore {
      * Sets a new question value and returns whether it was different from the previous stored entry
      *
      * @return <code>true</code> if the updated value differed from the previous value
-     *         <code>false</code> otherwise
+     * <code>false</code> otherwise
      */
     public boolean setValue(String questionIdentifier, Value value) {
         Value previousValue = valueMap.put(questionIdentifier, value);

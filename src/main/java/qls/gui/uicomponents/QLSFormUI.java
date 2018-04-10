@@ -14,7 +14,6 @@ public class QLSFormUI extends FormUI {
     private final List<PageUI> pages;
     private JFrame frame;
 
-    //TODO: Not handling questions
     public QLSFormUI(List<QuestionUI> questions, Stylesheet stylesheet, Environment environment) {
         super(questions);
 
@@ -25,7 +24,6 @@ public class QLSFormUI extends FormUI {
 
     @Override
     public void display() {
-
         JTabbedPane tabbedPane = new JTabbedPane();
         for (PageUI page : pages) {
             tabbedPane.add(page.getTitle(), page.getComponent());

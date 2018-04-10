@@ -4,17 +4,12 @@ import org.junit.Before;
 import org.junit.Test;
 import ql.BaseQlTest;
 import ql.ast.Form;
-import ql.ast.statements.Question;
-import ql.ast.types.BooleanType;
-import ql.ast.types.MoneyType;
 import ql.environment.Environment;
 import ql.environment.FormEnvironment;
-import ql.gui.uicomponents.widgets.*;
-import ql.utilities.IOHandler;
-import qls.ast.Stylesheet;
-import qls.parser.StylesheetBuilder;
-
-import java.io.File;
+import ql.gui.uicomponents.widgets.CheckboxWidget;
+import ql.gui.uicomponents.widgets.SpinboxWidget;
+import ql.gui.uicomponents.widgets.TextFieldWidget;
+import ql.gui.uicomponents.widgets.Widget;
 
 import static org.junit.Assert.assertEquals;
 

@@ -8,16 +8,6 @@ import qls.ast.visitors.WidgetTypeVisitor;
 import qls.ast.widgets.*;
 
 public class QLSWidgetFactory extends WidgetFactory {
-    //
-    // public Widget createWidget(Question inputQuestion, Environment inputEnvironment) {
-    //     return super.createWidget(inputQuestion, inputEnvironment);
-    //
-    // }
-
-    //TODO
-    // public Widget createWidget(Question inputQuestion, Environment inputEnvironment, DefaultRule defaultRule) {
-    //     return createWidget(inputQuestion, inputEnvironment, )
-    // }
 
     public Widget createWidget(Question inputQuestion, Environment inputEnvironment, WidgetType widgetType) {
         final Question question = inputQuestion;

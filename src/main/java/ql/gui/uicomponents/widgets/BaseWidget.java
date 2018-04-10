@@ -18,7 +18,7 @@ public abstract class BaseWidget implements Widget {
         this.isEditable = isEditable;
     }
 
-    public Value parseValue(String input) {
+    protected Value parseValue(String input) {
         return question.getType().accept(new TypeVisitor<Value>() {
             @Override
             public Value visit(BooleanType booleanType) {

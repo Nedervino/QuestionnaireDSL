@@ -1,11 +1,9 @@
 package ql.validator.symboltable;
 
 import ql.ast.Form;
-import ql.ast.statements.*;
+import ql.ast.statements.Question;
 import ql.ast.types.Type;
-import ql.ast.visitors.FormStatementVisitor;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

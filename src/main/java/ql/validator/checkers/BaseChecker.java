@@ -10,7 +10,7 @@ public abstract class BaseChecker implements Checker {
 
     protected final IssueTracker issueTracker;
 
-    public BaseChecker() {
+    protected BaseChecker() {
         this.issueTracker = new IssueTracker();
     }
 

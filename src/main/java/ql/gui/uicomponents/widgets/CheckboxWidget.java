@@ -11,7 +11,6 @@ import javax.swing.*;
 public class CheckboxWidget extends BaseWidget {
 
     private final JCheckBox checkBox;
-    private String label;
 
     public CheckboxWidget(Environment environment, Question question, boolean isEditable) {
         this(environment, question, isEditable, "Yes");

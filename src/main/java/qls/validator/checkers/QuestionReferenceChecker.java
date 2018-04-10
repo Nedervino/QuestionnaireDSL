@@ -13,55 +13,70 @@ import qls.ast.components.Section;
 import qls.ast.visitors.ComponentVisitor;
 import qls.ast.visitors.StylesheetPageVisitor;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * Checks Form and Stylesheet for duplicate references, references to non-existent ql questions,
  * and missing references for existing ql questions
  */
-public class QuestionReferenceChecker extends BaseChecker  {
+public class QuestionReferenceChecker extends BaseChecker {
 
     public QuestionReferenceChecker(Form form, Stylesheet stylesheet) {
         List<String> questionIds = new QuestionCollector(form).getQuestions()
                 .stream()
                 .map(Question::getId)
                 .collect(Collectors.toList());
+
         List<QuestionReference> questionReferences = new QuestionReferenceCollector(stylesheet).getQuestionReferences();
+
+        Map<String, QuestionReference> questionReferenceMap = new HashMap<>();
+        for (QuestionReference reference : questionReferences) {
+            questionReferenceMap.put(reference.getQuestionId(), reference);
+        }
 
         List<String> questionReferenceIds = questionReferences
                 .stream()
                 .map(QuestionReference::getQuestionId)
                 .collect(Collectors.toList());
 
+        findDuplicateReferences(questionReferences);
+
+        findReferencesToNonExistingQuestions(questionReferenceIds, questionIds, questionReferenceMap);
+
+        findMissingQuestionReferences(questionIds, questionReferenceIds);
+
+    }
+
+
+    private void findDuplicateReferences(List<QuestionReference> questionReferences) {
         Set<String> uniqueReferences = new HashSet<>();
         List<QuestionReference> duplicateQuestionReferences = questionReferences.stream()
                 .filter(r -> !uniqueReferences.add(r.getQuestionId()))
                 .collect(Collectors.toList());
 
-        for(QuestionReference question : duplicateQuestionReferences) {
+        for (QuestionReference question : duplicateQuestionReferences) {
             issueTracker.addError(question.getSourceLocation(), String.format("Multiple references for question \"%s\"", question.getQuestionId()));
         }
+    }
 
+    private void findReferencesToNonExistingQuestions(List<String> questionReferenceIds, List<String> questionIds, Map<String, QuestionReference> questionReferenceMap) {
         List<String> nonExistingReferences = new ArrayList<>(questionReferenceIds);
         nonExistingReferences.removeAll(questionIds);
 
-        //TODO
-        for(String questionId : nonExistingReferences) {
-            issueTracker.addError(new SourceLocation(0,0), String.format("Stylesheet contains reference to non-existing question \"%s\"", questionId));
+        for (String questionId : nonExistingReferences) {
+            QuestionReference reference = questionReferenceMap.get(questionId);
+            issueTracker.addError(reference.getSourceLocation(), String.format("Stylesheet contains reference to non-existing question \"%s\"", questionId));
         }
+    }
 
+    private void findMissingQuestionReferences(List<String> questionIds, List<String> questionReferenceIds) {
         List<String> nonReferredQuestions = new ArrayList<>(questionIds);
         nonReferredQuestions.removeAll(questionReferenceIds);
 
-        //TODO
-        for(String questionId : nonReferredQuestions) {
-            issueTracker.addError(new SourceLocation(0,0), String.format("Stylesheet misses reference to question \"%s\"", questionId));
+        for (String questionId : nonReferredQuestions) {
+            issueTracker.addError(new SourceLocation(0, 0), String.format("Stylesheet misses reference to question \"%s\"", questionId));
         }
-
     }
 
 
@@ -80,7 +95,7 @@ public class QuestionReferenceChecker extends BaseChecker  {
 
         @Override
         public Void visit(Stylesheet stylesheet) {
-            for(Page page : stylesheet.getPages()) {
+            for (Page page : stylesheet.getPages()) {
                 page.accept(this);
             }
             return null;
@@ -88,7 +103,7 @@ public class QuestionReferenceChecker extends BaseChecker  {
 
         @Override
         public Void visit(Page page) {
-            for(Component component : page.getComponents()) {
+            for (Component component : page.getComponents()) {
                 component.accept(this);
             }
             return null;
@@ -96,7 +111,7 @@ public class QuestionReferenceChecker extends BaseChecker  {
 
         @Override
         public Void visit(Section section) {
-            for(Component component : section.getComponents()) {
+            for (Component component : section.getComponents()) {
                 component.accept(this);
             }
             return null;

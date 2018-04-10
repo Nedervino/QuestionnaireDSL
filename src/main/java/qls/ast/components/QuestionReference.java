@@ -6,8 +6,8 @@ import qls.ast.widgets.WidgetType;
 
 public class QuestionReference extends Component {
 
-    String questionId;
-    WidgetType widgetType;
+    private final String questionId;
+    private final WidgetType widgetType;
 
     public QuestionReference(String questionId, WidgetType widgetType, SourceLocation sourceLocation) {
         super(sourceLocation);

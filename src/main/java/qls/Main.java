@@ -38,14 +38,14 @@ public class Main {
 
         if (!StylesheetValidator.passesChecks(form, stylesheet)) {
             System.out.println("Stylesheet not passing validation. See error logs for more details");
-            // System.exit(1);
+            System.exit(1);
         }
 
         FormUI formUI = new QLSFormUIFactory(stylesheet).getFormUI(form);
         formUI.display();
     }
 
-    public static void outputInDialog() {
+    private static void outputInDialog() {
         PrintStream printStream = new PrintStream(new ByteArrayOutputStream()) {
             public void println(String message) {
                 JOptionPane.showMessageDialog(null, message);

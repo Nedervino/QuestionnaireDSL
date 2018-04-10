@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class ExpressionChecker extends BaseChecker implements FormStatementVisitor<Void>, ExpressionVisitor<Type>, TypeVisitor<Type> {
 
-    private SymbolTable symbolTable;
+    private final SymbolTable symbolTable;
 
     public ExpressionChecker(Form form) {
         super();
@@ -32,7 +32,6 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
     /**
      * Checks if left and right child are compatible with each other
      *
-     * @param binaryOperation
      * @return ErrorType if incompatible, otherwise the dominating return type of the two children
      */
     private Type checkTypeCompatibility(BinaryOperation binaryOperation) {
@@ -62,8 +61,6 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
     /**
      * Checks if operand type is allowed within parent expression
      *
-     * @param actualType
-     * @param expectedType
      * @return the actual type if allowed, otherwise ErrorType
      */
     private Type verifyType(Type actualType, String expectedType) {

@@ -5,9 +5,9 @@ import qls.ast.visitors.WidgetTypeVisitor;
 
 public class SliderType extends WidgetType {
 
-    int start;
-    int end;
-    int step;
+    private final int start;
+    private final int end;
+    private final int step;
 
     public SliderType(int start, int end, int step, SourceLocation sourceLocation) {
         super(sourceLocation);
