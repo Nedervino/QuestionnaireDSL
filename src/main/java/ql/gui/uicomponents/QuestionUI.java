@@ -12,9 +12,6 @@ import java.awt.*;
 
 public class QuestionUI implements WidgetListener, EnvironmentListener {
 
-    //TODO: Inconsistent with input widgets
-    //TODO: Move Question / environment field from widget to QuestionUI
-
     private final JLabel label;
     private final Widget widget;
     private final JPanel panel;

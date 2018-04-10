@@ -30,7 +30,7 @@ public class StringValue implements Value<String> {
 
     @Override
     public BooleanValue notEqual(StringValue value) {
-        return new BooleanValue(value.getValue().equals(getValue()));
+        return new BooleanValue(!value.getValue().equals(getValue()));
     }
 
 }

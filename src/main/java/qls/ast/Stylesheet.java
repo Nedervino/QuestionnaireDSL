@@ -25,8 +25,4 @@ public class Stylesheet extends ASTNode {
         return new ArrayList<>(this.pages);
     }
 
-    // public <T> T accept(StylesheetVisitor<T> visitor) {
-    //     return visitor.visit(this);
-    // }
-
 }

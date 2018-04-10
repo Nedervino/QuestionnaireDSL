@@ -1,6 +1,7 @@
 package ql.validator.checkers.dependencies;
 
 import org.junit.Test;
+import ql.validator.checkers.DependencyManager;
 
 import java.util.Set;
 

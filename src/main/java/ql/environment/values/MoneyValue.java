@@ -4,7 +4,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 import java.math.BigDecimal;
 
-public class MoneyValue extends NumericValue<BigDecimal> {
+public class MoneyValue implements Value<BigDecimal> {
 
     private BigDecimal value;
 
@@ -36,8 +36,18 @@ public class MoneyValue extends NumericValue<BigDecimal> {
     }
 
     @Override
-    public Value divide(MoneyValue value) {
-        return new DecimalValue(value.getValue().doubleValue() / getValue().doubleValue());
+    public Value divide(IntegerValue value) {
+        return new MoneyValue(value.getValue().doubleValue() / getValue().doubleValue());
+    }
+
+    @Override
+    public Value divide(DecimalValue value) {
+        return new MoneyValue(value.getValue().doubleValue() / getValue().doubleValue());
+    }
+
+    @Override
+    public Value divide(Value value) {
+        return new MoneyValue(getValue().doubleValue() / ((Number) value.getValue()).doubleValue());
     }
 
     @Override
@@ -47,7 +57,7 @@ public class MoneyValue extends NumericValue<BigDecimal> {
 
     @Override
     public Value multiply(IntegerValue value) {
-        return new MoneyValue(getValue().doubleValue() * (double) value.getValue());
+        return new MoneyValue(getValue().doubleValue() * value.getValue().doubleValue());
     }
 
     @Override
@@ -96,23 +106,13 @@ public class MoneyValue extends NumericValue<BigDecimal> {
     }
 
     @Override
-    public Value and(Value value) {
-        return value.and(this);
-    }
-
-    @Override
-    public Value divide(Value value) {
-        return value.divide(this);
-    }
-
-    @Override
     public Value greaterThanEqual(Value value) {
-        return value.greaterThanEqual(this);
+        return value.lessThan(this).or(value.equal(this));
     }
 
     @Override
     public Value greaterThan(Value value) {
-        return value.greaterThan(this);
+        return value.lessThan(this);
     }
 
     @Override
@@ -122,12 +122,12 @@ public class MoneyValue extends NumericValue<BigDecimal> {
 
     @Override
     public Value lessThanEqual(Value value) {
-        return value.lessThanEqual(this);
+        return value.greaterThan(this).or(value.equal(this));
     }
 
     @Override
     public Value lessThan(Value value) {
-        return value.lessThan(this);
+        return value.greaterThan(this);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class MoneyValue extends NumericValue<BigDecimal> {
 
     @Override
     public Value subtract(Value value) {
-        return value.subtract(this);
+        return value.negative().add(this);
     }
 
 }

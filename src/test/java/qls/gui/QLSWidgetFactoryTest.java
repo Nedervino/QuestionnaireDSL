@@ -8,7 +8,6 @@ import qls.gui.uicomponents.QLSFormUI;
 
 public class QLSWidgetFactoryTest extends BaseQlsTest {
 
-
     @Test
     public void canCreateMultipleWidgetsPerType() {
         Form form = createForm("src/input/qls/correct/typeWidgetCombinations.ql");

@@ -19,12 +19,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //TODO: pass file (non-string) instead of filecontents to formbuilder
-
         outputInDialog();
-
-        // String qlFileName = "src/input/ql/correct/ifElse.ql";
-        // String qlFile = IOHandler.loadFile(qlFileName);
 
         File qlFile = IOHandler.loadFileUsingDialog("ql");
 

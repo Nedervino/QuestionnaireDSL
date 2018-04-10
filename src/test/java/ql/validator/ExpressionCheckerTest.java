@@ -61,11 +61,6 @@ public class ExpressionCheckerTest extends BaseQlTest {
         }
     }
 
-    // @Test
-    // public void shouldIssueNoErrorForStringConcatenation() {
-    //     assertFalse(true);
-    // }
-
     @Test
     public void shouldIssueNoErrorForNumericExpressionsWithMoneyType() {
         Form form = createForm("src/input/ql/correct/validator/numericExpressionsWithMoneyType.ql");

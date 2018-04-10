@@ -4,7 +4,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.Objects;
 
-public class DecimalValue extends NumericValue<Double> {
+public class DecimalValue implements Value<Double> {
 
     private final double value;
 
@@ -22,53 +22,18 @@ public class DecimalValue extends NumericValue<Double> {
     }
 
     @Override
-    public Value add(DecimalValue value) {
-        return new DecimalValue(value.getValue() + getValue());
+    public Value divide(IntegerValue value) {
+        return new DecimalValue(getValue() / value.getValue());
     }
 
     @Override
     public Value divide(DecimalValue value) {
-        return new DecimalValue(value.getValue() / getValue());
+        return new DecimalValue(getValue() / value.getValue());
     }
 
     @Override
-    public Value divide(IntegerValue value) {
-        return new MoneyValue(value.getValue() / getValue());
-    }
-
-    @Override
-    public Value divide(MoneyValue value) {
-        return new MoneyValue(value.getValue().doubleValue() / getValue());
-    }
-
-    @Override
-    public BooleanValue equal(DecimalValue value) {
-        return new BooleanValue(Objects.equals(value.getValue(), getValue()));
-    }
-
-    @Override
-    public BooleanValue greaterThanEqual(DecimalValue value) {
-        return new BooleanValue(value.getValue() >= getValue());
-    }
-
-    @Override
-    public BooleanValue greaterThan(DecimalValue value) {
-        return new BooleanValue(value.getValue() > getValue());
-    }
-
-    @Override
-    public BooleanValue lessThanEqual(DecimalValue value) {
-        return new BooleanValue(value.getValue() <= getValue());
-    }
-
-    @Override
-    public BooleanValue lessThan(DecimalValue value) {
-        return new BooleanValue(value.getValue() < getValue());
-    }
-
-    @Override
-    public Value multiply(DecimalValue value) {
-        return new DecimalValue(value.getValue() * getValue());
+    public Value divide(Value value) {
+        return new DecimalValue(getValue().doubleValue() / ((Number) value.getValue()).doubleValue());
     }
 
     @Override
@@ -77,18 +42,13 @@ public class DecimalValue extends NumericValue<Double> {
     }
 
     @Override
+    public Value multiply(DecimalValue value) {
+        return new DecimalValue(value.getValue() * getValue());
+    }
+
+    @Override
     public Value multiply(MoneyValue value) {
-        return new MoneyValue(value.getValue().doubleValue() * getValue());
-    }
-
-    @Override
-    public BooleanValue notEqual(DecimalValue value) {
-        return new BooleanValue(!Objects.equals(value.getValue(), getValue()));
-    }
-
-    @Override
-    public Value subtract(DecimalValue value) {
-        return new DecimalValue(value.getValue() - getValue());
+        return new MoneyValue(value.getValue().intValue() * getValue());
     }
 
     @Override
@@ -102,43 +62,13 @@ public class DecimalValue extends NumericValue<Double> {
     }
 
     @Override
-    public Value and(Value value) {
-        return value.and(this);
+    public Value add(IntegerValue value) {
+        return new DecimalValue(value.getValue() + getValue());
     }
 
     @Override
-    public Value divide(Value value) {
-        return value.divide(this);
-    }
-
-    @Override
-    public Value greaterThanEqual(Value value) {
-        return value.greaterThanEqual(this);
-    }
-
-    @Override
-    public Value greaterThan(Value value) {
-        return value.greaterThan(this);
-    }
-
-    @Override
-    public Value equal(Value value) {
-        return value.equal(this);
-    }
-
-    @Override
-    public Value lessThanEqual(Value value) {
-        return value.lessThanEqual(this);
-    }
-
-    @Override
-    public Value lessThan(Value value) {
-        return value.lessThan(this);
-    }
-
-    @Override
-    public Value notEqual(Value value) {
-        return value.notEqual(this);
+    public Value add(DecimalValue value) {
+        return new DecimalValue(value.getValue() + getValue());
     }
 
     @Override
@@ -148,7 +78,77 @@ public class DecimalValue extends NumericValue<Double> {
 
     @Override
     public Value subtract(Value value) {
-        return value.subtract(this);
+        return value.negative().add(this);
+    }
+
+    @Override
+    public Value subtract(IntegerValue value) {
+        return new DecimalValue(getValue() - value.getValue());
+    }
+
+    @Override
+    public Value subtract(DecimalValue value) {
+        return new DecimalValue(getValue() - value.getValue());
+    }
+
+    @Override
+    public Value equal(Value value) {
+        return new BooleanValue(Objects.equals(value.getValue(), getValue()));
+    }
+
+    @Override
+    public BooleanValue equal(DecimalValue value) {
+        return new BooleanValue(Objects.equals(value.getValue(), getValue()));
+    }
+
+    @Override
+    public BooleanValue greaterThanEqual(DecimalValue value) {
+        return new BooleanValue(getValue() >= value.getValue());
+    }
+
+    @Override
+    public Value greaterThanEqual(Value value) {
+        return value.lessThan(this).or(value.equal(this));
+    }
+
+    @Override
+    public BooleanValue greaterThan(DecimalValue value) {
+        return new BooleanValue(getValue() > value.getValue());
+    }
+
+    @Override
+    public Value greaterThan(Value value) {
+        return value.lessThan(this);
+    }
+
+    @Override
+    public BooleanValue lessThanEqual(DecimalValue value) {
+        return new BooleanValue(getValue() <= value.getValue());
+    }
+
+    @Override
+    public Value lessThanEqual(Value value) {
+        return value.greaterThan(this).or(value.equal(this));
+    }
+
+    @Override
+    public BooleanValue lessThan(DecimalValue value) {
+        return new BooleanValue(getValue() < value.getValue());
+    }
+
+    @Override
+    public Value lessThan(Value value) {
+        return value.greaterThan(this);
+    }
+
+    @Override
+    public BooleanValue notEqual(DecimalValue value) {
+        return new BooleanValue(!Objects.equals(value.getValue(), getValue()));
+    }
+
+    @Override
+    public Value notEqual(Value value) {
+        return value.notEqual(this);
     }
 
 }

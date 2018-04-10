@@ -1,12 +1,5 @@
 grammar QL;
 
-/*
-
-TODO:
-- Optionally add money-specific currency symbols to lexer
-*/
-
-
 
 form                : 'form' IDENTIFIER block;
 
