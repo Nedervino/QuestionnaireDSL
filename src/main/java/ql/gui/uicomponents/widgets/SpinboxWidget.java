@@ -12,13 +12,6 @@ public class SpinboxWidget extends BaseWidget {
 
     private final JSpinner spinner;
 
-    //TODO
-    // public SpinboxWidget(Environment environment, Question question, boolean isEditable, List choices) {
-    //     super(environment, question, isEditable);
-    //     spinner = new JSpinner(new SpinnerListModel(choices.getItems()));
-    // }
-
-
     public SpinboxWidget(Environment environment, Question question, boolean isEditable) {
         super(environment, question, isEditable);
         spinner = new JSpinner();

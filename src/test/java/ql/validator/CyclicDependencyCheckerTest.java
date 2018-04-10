@@ -16,9 +16,9 @@ public class CyclicDependencyCheckerTest extends BaseQlTest {
 
         boolean passesTests = cyclicDependencyChecker.passesTests();
         assertFalse(passesTests);
-        assertEquals(cyclicDependencyChecker.getWarnings().size(), 0);
-        assertEquals(cyclicDependencyChecker.getErrors().size(), 1);
-        assertEquals(cyclicDependencyChecker.getErrors().get(0).getMessage(), "Variable first involved in circular dependency");
+        assertEquals(0, cyclicDependencyChecker.getWarnings().size());
+        assertEquals(1, cyclicDependencyChecker.getErrors().size());
+        assertEquals("Variable first involved in circular dependency", cyclicDependencyChecker.getErrors().get(0).getMessage());
     }
 
     @Test
@@ -28,11 +28,11 @@ public class CyclicDependencyCheckerTest extends BaseQlTest {
 
         boolean passesTests = cyclicDependencyChecker.passesTests();
         assertFalse(passesTests);
-        assertEquals(cyclicDependencyChecker.getWarnings().size(), 0);
-        assertEquals(cyclicDependencyChecker.getErrors().size(), 3);
-        assertEquals(cyclicDependencyChecker.getErrors().get(0).getMessage(), "Variable third involved in circular dependency");
-        assertEquals(cyclicDependencyChecker.getErrors().get(1).getMessage(), "Variable second involved in circular dependency");
-        assertEquals(cyclicDependencyChecker.getErrors().get(2).getMessage(), "Variable first involved in circular dependency");
+        assertEquals(0, cyclicDependencyChecker.getWarnings().size());
+        assertEquals(3, cyclicDependencyChecker.getErrors().size());
+        assertEquals("Variable third involved in circular dependency", cyclicDependencyChecker.getErrors().get(0).getMessage());
+        assertEquals("Variable second involved in circular dependency", cyclicDependencyChecker.getErrors().get(1).getMessage());
+        assertEquals("Variable first involved in circular dependency", cyclicDependencyChecker.getErrors().get(2).getMessage());
     }
 
     @Test

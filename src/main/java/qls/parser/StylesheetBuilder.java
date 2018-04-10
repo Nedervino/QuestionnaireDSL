@@ -3,6 +3,7 @@ package qls.parser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import ql.parser.ExceptionErrorListener;
 import ql.utilities.IOHandler;
 import qls.QLSLexer;
 import qls.QLSParser;
@@ -28,9 +29,9 @@ public class StylesheetBuilder {
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
         QLSParser parser = new QLSParser(tokenStream);
 
-        // parser.removeErrorListeners();
-        // ExceptionErrorListener throwErrorListener = new ExceptionErrorListener();
-        // parser.addErrorListener(throwErrorListener);
+        parser.removeErrorListeners();
+        ExceptionErrorListener throwErrorListener = new ExceptionErrorListener();
+        parser.addErrorListener(throwErrorListener);
 
         return parser;
     }

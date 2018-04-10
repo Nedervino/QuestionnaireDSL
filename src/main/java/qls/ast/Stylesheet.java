@@ -2,6 +2,7 @@ package qls.ast;
 
 import ql.ast.ASTNode;
 import ql.ast.SourceLocation;
+import qls.ast.visitors.StylesheetPageVisitor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,4 +26,7 @@ public class Stylesheet extends ASTNode {
         return new ArrayList<>(this.pages);
     }
 
+    public <T> T accept(StylesheetPageVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
 }

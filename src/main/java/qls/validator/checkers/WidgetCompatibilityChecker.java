@@ -14,28 +14,4 @@ public class WidgetCompatibilityChecker extends BaseChecker {
 
     }
 
-    @Override
-    public boolean passesTests() {
-        return false;
-    }
-
-    @Override
-    public List<Error> getErrors() {
-        return null;
-    }
-
-    @Override
-    public List<Warning> getWarnings() {
-        return null;
-    }
-
-    @Override
-    public void logErrors() {
-
-    }
-
-    @Override
-    public void logWarnings() {
-
-    }
 }

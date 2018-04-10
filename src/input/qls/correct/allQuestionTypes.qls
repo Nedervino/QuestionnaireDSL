@@ -1,0 +1,14 @@
+stylesheet taxOfficeExample
+{
+  page Housing
+  {
+    section "Selling" {
+        question q1
+        question q2
+        question q3
+        question q4
+        question q5
+        question q6
+    }
+  }
+}

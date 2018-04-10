@@ -4,6 +4,7 @@ import ql.ast.ASTNode;
 import ql.ast.SourceLocation;
 import qls.ast.components.Component;
 import qls.ast.defaultrules.DefaultRule;
+import qls.ast.visitors.StylesheetPageVisitor;
 
 import java.util.List;
 
@@ -31,4 +32,9 @@ public class Page extends ASTNode {
     public List<DefaultRule> getRules() {
         return rules;
     }
+
+    public <T> T accept(StylesheetPageVisitor<T> visitor) {
+        return visitor.visit(this);
+    }
+
 }

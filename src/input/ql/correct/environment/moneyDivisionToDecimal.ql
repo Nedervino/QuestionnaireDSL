@@ -8,5 +8,5 @@ form test {
   "Should store as 4"
     value2: money = 4,00
   "Should evaluate to 0.8125"
-    result: decimal = value / value2
+    result: money = value / value2
 }
