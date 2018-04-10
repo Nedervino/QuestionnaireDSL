@@ -16,7 +16,7 @@ import ql.validator.symboltable.SymbolTable;
 import java.util.List;
 
 /**
- * Checks AST for references to undefined questions, conditions of non-boolean type,
+ * Checks Form for references to undefined questions, conditions of non-boolean type,
  * and invalid operand/operator type combinations
  */
 public class ExpressionChecker extends BaseChecker implements FormStatementVisitor<Void>, ExpressionVisitor<Type>, TypeVisitor<Type> {
@@ -27,11 +27,6 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
         super();
         symbolTable = new SymbolTable(form);
         form.accept(this);
-    }
-
-    @Override
-    public boolean passesTests() {
-        return !issueTracker.hasErrors();
     }
 
     /**

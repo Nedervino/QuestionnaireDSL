@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Checks AST for question duplications, giving errors for duplicate identifiers and warnings for duplicate labels
+ * Checks Form for question duplications, giving errors for duplicate identifiers and warnings for duplicate labels
  */
 public class QuestionDuplicationChecker extends BaseChecker implements FormStatementVisitor<Void> {
 
@@ -23,11 +23,6 @@ public class QuestionDuplicationChecker extends BaseChecker implements FormState
         this.questionLabels = new HashSet<>();
         this.symbolTable = new SymbolTable();
         form.accept(this);
-    }
-
-    @Override
-    public boolean passesTests() {
-        return !issueTracker.hasErrors();
     }
 
     @Override

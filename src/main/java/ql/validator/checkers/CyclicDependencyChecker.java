@@ -13,7 +13,6 @@ import ql.ast.expressions.unary.UnaryOperation;
 import ql.ast.statements.*;
 import ql.ast.visitors.ExpressionVisitor;
 import ql.ast.visitors.FormStatementVisitor;
-import ql.validator.checkers.dependencies.DependencyManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Checks AST for cyclic dependencies between questions
+ * Checks Form for cyclic dependencies between questions
  */
 public class CyclicDependencyChecker extends BaseChecker implements FormStatementVisitor<Void>, ExpressionVisitor<List<Variable>> {
 
@@ -34,11 +33,6 @@ public class CyclicDependencyChecker extends BaseChecker implements FormStatemen
     }
 
     @Override
-    public boolean passesTests() {
-        return !issueTracker.hasErrors();
-    }
-
-    @Override
     public List<Error> getErrors() {
         return issueTracker.getErrors();
     }
@@ -48,7 +42,6 @@ public class CyclicDependencyChecker extends BaseChecker implements FormStatemen
         return issueTracker.getWarnings();
     }
 
-    //TODO: Possible solve: return list of errors from dependencymanager
     private void logCircularDependencies() {
         for (DependencyManager.DependencyPair circularDependency : dependencyManager.getCircularDependencies()) {
             issueTracker.addError(new SourceLocation(0, 0), String.format("Variable %s involved in circular dependency", circularDependency.getSource()));

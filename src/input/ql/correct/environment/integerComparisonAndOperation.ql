@@ -3,8 +3,8 @@
 */
 
 form example {
-  "Should store as 15"
-    value: integer = 15
+  "Should store as 20"
+    value: integer = 20
   "Should store as negative 21"
     value2: integer = -21
   "Should store as negative 121"
@@ -15,4 +15,6 @@ form example {
     result: boolean = value > value2
   "Should evaluate to true"
     result2: boolean = (value3 + value4) >= value2
+  "Should evaluate to true"
+    result3: boolean = (value4 / value) == 5
 }

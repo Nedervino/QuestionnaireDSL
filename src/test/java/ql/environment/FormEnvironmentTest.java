@@ -37,7 +37,6 @@ public class FormEnvironmentTest extends BaseQlTest {
         assertEquals(4, value.getValue());
     }
 
-    //TODO
     @Test
     public void shouldKeepStateAfterSettingAndEvaluation() {
         Form form = createForm("src/input/ql/correct/gui/dependentValue.ql");
@@ -47,6 +46,21 @@ public class FormEnvironmentTest extends BaseQlTest {
         assertEquals(50, environment.getQuestionValue("q3").getValue());
         environment.evaluate();
         assertEquals(50, environment.getQuestionValue("q3").getValue());
+    }
+
+    @Test
+    public void shouldEvaluateForwardReference() {
+        Form form = createForm("src/input/ql/incorrect/validator/forwardReferenceQuestion.ql");
+        environment = new FormEnvironment(form);
+        environment.evaluate();
+        assertEquals(6, environment.getQuestionValue("first").getValue());
+        assertEquals(4, environment.getQuestionValue("second").getValue());
+        assertEquals(2, environment.getQuestionValue("third").getValue());
+        assertEquals(0, environment.getQuestionValue("fourth").getValue());
+        environment.setValue("fourth", new IntegerValue(2));
+        assertEquals(8, environment.getQuestionValue("first").getValue());
+        assertEquals(6, environment.getQuestionValue("second").getValue());
+        assertEquals(4, environment.getQuestionValue("third").getValue());
     }
 
     @Test
@@ -86,17 +100,6 @@ public class FormEnvironmentTest extends BaseQlTest {
     }
 
     @Test
-    public void shouldDownCastDecimalToInteger() {
-        Form form = createForm("src/input/ql/correct/environment/downcastDecimalToInteger.ql");
-        environment = new FormEnvironment(form);
-        environment.evaluate();
-
-        Value value = environment.getQuestionValue("result");
-
-        assertEquals(3, value.getValue());
-    }
-
-    @Test
     public void shouldMultiplyDecimals() {
         Form form = createForm("src/input/ql/correct/environment/decimalMultiplication.ql");
         environment = new FormEnvironment(form);
@@ -105,16 +108,6 @@ public class FormEnvironmentTest extends BaseQlTest {
         Value value = environment.getQuestionValue("result");
 
         assertEquals(13.0, value.getValue());
-    }
-
-    @Test
-    public void shouldDivideMoneyToDecimal() {
-        Form form = createForm("src/input/ql/correct/environment/moneyDivisionToDecimal.ql");
-        environment = new FormEnvironment(form);
-        environment.evaluate();
-
-        Value value = environment.getQuestionValue("result");
-        assertEquals(0.8125, value.getValue());
     }
 
     @Test
@@ -172,9 +165,10 @@ public class FormEnvironmentTest extends BaseQlTest {
 
         Value value = environment.getQuestionValue("result");
         Value value2 = environment.getQuestionValue("result2");
-
+        Value value3 = environment.getQuestionValue("result3");
         assertEquals(true, value.getValue());
         assertEquals(true, value2.getValue());
+        assertEquals(true, value3.getValue());
     }
 
     @Test

@@ -17,7 +17,7 @@ form ifElse {
         flag3: boolean = false
         if (!flag3) {
             ""
-            result: money = 10.00
+            result: money = 10,00
         }
     }
 }

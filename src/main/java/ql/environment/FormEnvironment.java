@@ -37,14 +37,20 @@ public class FormEnvironment implements FormStatementVisitor<List<String>>, Envi
 
     @Override
     public void evaluate() {
+        boolean reevaluationNecessary = false;
         for (Question question : getQuestions()) {
             if (expressionStore.hasExpression(question.getId())) {
-                //TODO: replace with static expressionEvaluator
                 Value value = expressionEvaluator.evaluate(expressionStore.getExpression(question.getId()));
-                valueStore.setValue(question.getId(), value);
+                if (valueStore.setValue(question.getId(), value)) {
+                    reevaluationNecessary = true;
+                }
             }
         }
-        notifyChangeListeners();
+        if (reevaluationNecessary) {
+            evaluate();
+        } else {
+            notifyChangeListeners();
+        }
     }
 
     @Override
@@ -68,11 +74,8 @@ public class FormEnvironment implements FormStatementVisitor<List<String>>, Envi
         if (questionIsComputed(questionId)) {
             return false;
         }
-        System.out.printf("Was: %s%n", getQuestionValue(questionId).getValue().toString());
         valueStore.setValue(questionId, value);
-        System.out.printf("Will be: %s%n", value.getValue().toString());
         evaluate();
-        System.out.printf("Is: %s%n", getQuestionValue(questionId).getValue().toString());
         return true;
     }
 
@@ -115,7 +118,19 @@ public class FormEnvironment implements FormStatementVisitor<List<String>>, Envi
     @Override
     public List<String> visit(Question question) {
         questionStore.addQuestion(question);
-        // Initialise environment with default values
+        initialiseDefaultValue(question);
+        return Collections.singletonList(question.getId());
+    }
+
+    @Override
+    public List<String> visit(ComputedQuestion question) {
+        questionStore.addQuestion(question);
+        initialiseDefaultValue(question);
+        expressionStore.addExpression(question.getId(), question.getExpression());
+        return Collections.singletonList(question.getId());
+    }
+
+    private void initialiseDefaultValue(Question question) {
         valueStore.setValue(question.getId(), question.getType().accept(new TypeVisitor<Value>() {
 
             @Override
@@ -154,14 +169,6 @@ public class FormEnvironment implements FormStatementVisitor<List<String>>, Envi
             }
 
         }));
-        return Collections.singletonList(question.getId());
-    }
-
-    @Override
-    public List<String> visit(ComputedQuestion question) {
-        questionStore.addQuestion(question);
-        expressionStore.addExpression(question.getId(), question.getExpression());
-        return Collections.singletonList(question.getId());
     }
 
     @Override

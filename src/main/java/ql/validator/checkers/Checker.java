@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface Checker {
 
-    //TODO: Handle allow for stylesheet parameter
-
+    /**
+     * Returns whether any errors were generated during checker construction
+     *
+     * @return <code>true</code> if no errors were generated during checker construction
+     * <code>false</code> otherwise
+     */
     boolean passesTests();
 
     List<Error> getErrors();

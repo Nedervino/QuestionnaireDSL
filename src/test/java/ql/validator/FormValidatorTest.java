@@ -45,9 +45,4 @@ public class FormValidatorTest extends BaseQlTest {
         assertTrue(FormValidator.passesChecks(form));
     }
 
-    @Test
-    public void shouldFailForForwardReference() throws Exception {
-        Form form = createForm("src/input/ql/incorrect/validator/forwardReferenceQuestion.ql");
-        assertFalse(FormValidator.passesChecks(form));
-    }
 }

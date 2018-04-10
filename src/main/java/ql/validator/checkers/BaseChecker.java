@@ -15,6 +15,11 @@ public abstract class BaseChecker implements Checker {
     }
 
     @Override
+    public boolean passesTests() {
+        return !issueTracker.hasErrors();
+    }
+
+    @Override
     public List<Error> getErrors() {
         return issueTracker.getErrors();
     }

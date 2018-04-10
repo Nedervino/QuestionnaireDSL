@@ -1,4 +1,4 @@
-package ql.validator.checkers.dependencies;
+package ql.validator.checkers;
 
 import java.util.HashSet;
 import java.util.Objects;
