@@ -25,10 +25,10 @@ public class Main {
 
         outputInDialog();
 
-        File qlFile = IOHandler.loadFile("src/input/qls/correct/typeWidgetCombinations.ql");
-        Form form = FormBuilder.createForm(qlFile);
+        File qlFile = IOHandler.loadFileUsingDialog("ql");
+        File qlsFile = IOHandler.loadFileUsingDialog("qls");
 
-        File qlsFile = IOHandler.loadFile("src/input/qls/correct/typeWidgetCombinations.qls");
+        Form form = FormBuilder.createForm(qlFile);
         Stylesheet stylesheet = StylesheetBuilder.createStylesheet(qlsFile);
 
         if (!FormValidator.passesChecks(form)) {

@@ -4,6 +4,7 @@ import ql.ast.statements.Question;
 import ql.environment.Environment;
 import ql.environment.values.Value;
 import ql.gui.WidgetListener;
+import ql.gui.uicomponents.QuestionStyle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,7 @@ public class SliderWidget extends BaseWidget {
 
     private final JSlider slider;
 
-    public SliderWidget(Environment environment, Question question, boolean isEditable, int start, int end, int step) {
+    public SliderWidget(Environment environment, Question question, boolean isEditable, int start, int end, int step, QuestionStyle style) {
         super(environment, question, isEditable);
 
         Value value = environment.getQuestionValue(question.getId());
@@ -26,9 +27,9 @@ public class SliderWidget extends BaseWidget {
         slider.setPaintTicks(true);
         slider.setPaintLabels(true);
 
-        slider.setPreferredSize(new Dimension(200, 50));
         setValue();
         setEditable(isEditable);
+        setStyle(style);
     }
 
     @Override
@@ -36,6 +37,13 @@ public class SliderWidget extends BaseWidget {
         Value value = environment.getQuestionValue(question.getId());
         Number number = value != null ? (Number) value.getValue() : 0;
         slider.setValue(number.intValue());
+    }
+
+    @Override
+    public void setStyle(QuestionStyle style) {
+        slider.setForeground(style.getColor());
+        slider.setFont(style.getFont());
+        slider.setPreferredSize(new Dimension(style.getWidth(), style.getHeight()));
     }
 
     @Override

@@ -7,6 +7,7 @@ import ql.gui.uicomponents.widgets.Widget;
 import qls.ast.components.Component;
 import qls.ast.components.QuestionReference;
 import qls.ast.components.Section;
+import qls.ast.defaultrules.DefaultStyleRule;
 import qls.ast.visitors.ComponentVisitor;
 import qls.gui.QLSWidgetFactory;
 
@@ -30,7 +31,10 @@ public abstract class BaseComponentUI {
                 @Override
                 public Void visit(QuestionReference questionReference) {
                     Question question = environment.getQuestion(questionReference.getQuestionId());
-                    Widget widget = new QLSWidgetFactory().createWidget(question, environment, questionReference.getWidgetType());
+
+                    DefaultStyleRule rule = null;
+
+                    Widget widget = new QLSWidgetFactory().createWidget(question, environment, questionReference.getWidgetType(), rule);
                     panel.add(new QuestionUI(environment, question, widget).getComponent(), constraints);
                     return null;
                 }

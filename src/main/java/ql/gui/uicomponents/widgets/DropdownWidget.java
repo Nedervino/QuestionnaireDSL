@@ -5,8 +5,10 @@ import ql.environment.Environment;
 import ql.environment.values.BooleanValue;
 import ql.environment.values.Value;
 import ql.gui.WidgetListener;
+import ql.gui.uicomponents.QuestionStyle;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class DropdownWidget extends BaseWidget {
 
@@ -15,10 +17,10 @@ public class DropdownWidget extends BaseWidget {
     private final String falseLabel;
 
     public DropdownWidget(Environment environment, Question question, boolean isEditable) {
-        this(environment, question, isEditable, "Yes", "No");
+        this(environment, question, isEditable, "Yes", "No", new QuestionStyle());
     }
 
-    public DropdownWidget(Environment environment, Question question, boolean isEditable, String trueLabel, String falseLabel) {
+    public DropdownWidget(Environment environment, Question question, boolean isEditable, String trueLabel, String falseLabel, QuestionStyle style) {
         super(environment, question, isEditable);
         this.trueLabel = trueLabel;
         this.falseLabel = falseLabel;
@@ -28,6 +30,7 @@ public class DropdownWidget extends BaseWidget {
         dropdown.addItem(this.falseLabel);
         setValue();
         setEditable(isEditable);
+        setStyle(style);
     }
 
     @Override
@@ -37,6 +40,13 @@ public class DropdownWidget extends BaseWidget {
         } else {
             dropdown.setSelectedItem(falseLabel);
         }
+    }
+
+    @Override
+    public void setStyle(QuestionStyle style) {
+        dropdown.setForeground(style.getColor());
+        dropdown.setPreferredSize(new Dimension(style.getWidth(), style.getHeight()));
+        dropdown.setFont(style.getFont());
     }
 
     @Override

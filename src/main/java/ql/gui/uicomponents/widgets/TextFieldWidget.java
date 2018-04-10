@@ -6,6 +6,7 @@ import ql.ast.visitors.TypeVisitor;
 import ql.environment.Environment;
 import ql.environment.values.Value;
 import ql.gui.WidgetListener;
+import ql.gui.uicomponents.QuestionStyle;
 
 import javax.swing.*;
 import javax.swing.text.DateFormatter;
@@ -23,11 +24,15 @@ public class TextFieldWidget extends BaseWidget {
     private final JFormattedTextField textField;
 
     public TextFieldWidget(Environment environment, Question question, boolean isEditable) {
+        this(environment, question, isEditable, new QuestionStyle());
+    }
+
+    public TextFieldWidget(Environment environment, Question question, boolean isEditable, QuestionStyle style) {
         super(environment, question, isEditable);
         textField = createTextField(question);
-        textField.setPreferredSize(new Dimension(200, 50));
         setValue();
         setEditable(isEditable);
+        setStyle(style);
     }
 
     @Override
@@ -53,6 +58,13 @@ public class TextFieldWidget extends BaseWidget {
         } else {
             textField.setValue(value.getValue());
         }
+    }
+
+    @Override
+    public void setStyle(QuestionStyle style) {
+        textField.setForeground(style.getColor());
+        textField.setPreferredSize(new Dimension(style.getWidth(), style.getHeight()));
+        textField.setFont(style.getFont());
     }
 
     @Override

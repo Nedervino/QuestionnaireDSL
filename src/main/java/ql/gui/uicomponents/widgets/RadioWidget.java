@@ -5,6 +5,7 @@ import ql.environment.Environment;
 import ql.environment.values.BooleanValue;
 import ql.environment.values.Value;
 import ql.gui.WidgetListener;
+import ql.gui.uicomponents.QuestionStyle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,15 +19,14 @@ public class RadioWidget extends BaseWidget {
     private final ButtonGroup buttonGroup;
 
     public RadioWidget(Environment environment, Question question, boolean isEditable) {
-        this(environment, question, isEditable, "Yes", "No");
+        this(environment, question, isEditable, "Yes", "No", new QuestionStyle());
     }
 
-    public RadioWidget(Environment environment, Question question, boolean isEditable, String trueLabel, String falseLabel) {
+    public RadioWidget(Environment environment, Question question, boolean isEditable, String trueLabel, String falseLabel, QuestionStyle style) {
         super(environment, question, isEditable);
         this.choiceButtonMap = new HashMap<>();
 
         panel = new JPanel();
-        panel.setPreferredSize(new Dimension(200, 50));
 
         buttonGroup = new ButtonGroup();
 
@@ -44,6 +44,7 @@ public class RadioWidget extends BaseWidget {
 
         setValue();
         setEditable(isEditable);
+        setStyle(style);
     }
 
     @Override
@@ -55,6 +56,15 @@ public class RadioWidget extends BaseWidget {
         } else {
             buttonGroup.setSelected(choiceButtonMap.get("false").getModel(), true);
         }
+    }
+
+    @Override
+    public void setStyle(QuestionStyle style) {
+        for (JRadioButton button : choiceButtonMap.values()) {
+            button.setForeground(style.getColor());
+            button.setFont(style.getFont());
+        }
+        panel.setPreferredSize(new Dimension(style.getWidth(), style.getHeight()));
     }
 
     @Override

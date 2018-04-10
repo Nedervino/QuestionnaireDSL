@@ -13,7 +13,8 @@ public class IOHandler {
     }
 
     public static File loadFileUsingDialog(String allowedExtension) {
-        FileDialog fd = new FileDialog(new JFrame(), "Choose a file", FileDialog.LOAD);
+        String title = allowedExtension.equals("ql") ? "Select a form" : "Select a stylesheet";
+        FileDialog fd = new FileDialog(new JFrame(), title, FileDialog.LOAD);
         fd.setFilenameFilter((dir, name) -> name.endsWith(allowedExtension));
         fd.setVisible(true);
         String fileName = fd.getFile();

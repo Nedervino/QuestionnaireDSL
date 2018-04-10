@@ -4,6 +4,7 @@ import ql.ast.statements.Question;
 import ql.environment.Environment;
 import ql.environment.values.Value;
 import ql.gui.WidgetListener;
+import ql.gui.uicomponents.QuestionStyle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,17 +14,28 @@ public class SpinboxWidget extends BaseWidget {
     private final JSpinner spinner;
 
     public SpinboxWidget(Environment environment, Question question, boolean isEditable) {
+        this(environment, question, isEditable, new QuestionStyle());
+    }
+
+    public SpinboxWidget(Environment environment, Question question, boolean isEditable, QuestionStyle style) {
         super(environment, question, isEditable);
         spinner = new JSpinner();
-        spinner.setPreferredSize(new Dimension(200, 50));
         setValue();
         setEditable(isEditable);
+        setStyle(style);
     }
 
     @Override
     public void setValue() {
         Value<Number> value = environment.getQuestionValue(question.getId());
         spinner.setValue(value.getValue());
+    }
+
+    @Override
+    public void setStyle(QuestionStyle style) {
+        spinner.setForeground(style.getColor());
+        spinner.setPreferredSize(new Dimension(style.getWidth(), style.getHeight()));
+        spinner.setFont(style.getFont());
     }
 
     @Override
