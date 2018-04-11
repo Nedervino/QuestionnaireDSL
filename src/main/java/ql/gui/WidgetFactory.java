@@ -4,6 +4,7 @@ import ql.ast.statements.Question;
 import ql.ast.types.*;
 import ql.ast.visitors.TypeVisitor;
 import ql.environment.Environment;
+import ql.gui.uicomponents.QuestionStyle;
 import ql.gui.uicomponents.widgets.CheckboxWidget;
 import ql.gui.uicomponents.widgets.SpinboxWidget;
 import ql.gui.uicomponents.widgets.TextFieldWidget;
@@ -16,7 +17,7 @@ public class WidgetFactory {
         final Environment environment = inputEnvironment;
         final boolean isEditable = !environment.questionIsComputed(question.getId());
 
-        return question.getType().accept(new TypeVisitor<Widget>() {
+        Widget widget = question.getType().accept(new TypeVisitor<Widget>() {
 
             @Override
             public Widget visit(BooleanType booleanType) {
@@ -54,6 +55,8 @@ public class WidgetFactory {
             }
 
         });
+        widget.setStyle(new QuestionStyle());
+        return widget;
     }
 
 

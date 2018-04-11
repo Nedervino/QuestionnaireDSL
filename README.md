@@ -16,8 +16,9 @@ The project is based on the [Language Workbench Challenge](https://homepages.cwi
 * Maven
 
 ### How to run
-* ```mvn antlr4:antlr4``` to generate parsers from grammar
+* ```mvn clean install``` to build and test the project, including parser generation
 * ```mvn exec:java``` to run
+* When updating the .g4 ANTLR grammars, rerun parser generation using ```mvn antlr4:antlr4```
 * Alternatively, instead of directly running generate a JAR with ```mvn package``` and run with ```java -cp target/querylanguage-1.0-jar-with-dependencies.jar qls.Main``` 
 
 ### Setup instructions for IntelliJ

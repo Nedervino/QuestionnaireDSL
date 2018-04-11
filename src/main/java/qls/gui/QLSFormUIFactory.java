@@ -19,7 +19,7 @@ public class QLSFormUIFactory extends FormUIFactory {
     public QLSFormUI getFormUI(Form form) {
         Environment environment = new FormEnvironment(form);
         environment.evaluate();
-        return new QLSFormUI(super.getFormUI(form).getQuestions(), stylesheet, environment);
+        return new QLSFormUI(super.getFormUI(form), stylesheet, environment);
     }
 
 }

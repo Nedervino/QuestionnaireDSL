@@ -50,6 +50,10 @@ public class QuestionUI implements WidgetListener, EnvironmentListener {
         widget.setVisible(visible);
     }
 
+    public String getQuestionId() {
+        return question.getId();
+    }
+
     @Override
     public void onInputValueUpdated(Question question, Value value) {
         environment.setValue(question.getId(), value);

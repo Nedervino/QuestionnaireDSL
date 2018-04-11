@@ -148,6 +148,11 @@ public class ExpressionChecker extends BaseChecker implements FormStatementVisit
         return visitComparisonExpression(notEqual);
     }
 
+    /**
+     * Checks if operands within comparison expression are either both numeric or both boolean
+     *
+     * @return BooleanType if operands were numeric or boolean, otherwise ErrorType
+     */
     private Type visitComparisonExpression(BinaryOperation operation) {
         Type returnedType = checkTypeCompatibility(operation);
         //If issue logged further down the tree, don't log new error

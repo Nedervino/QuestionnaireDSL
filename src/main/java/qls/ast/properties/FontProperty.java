@@ -18,7 +18,8 @@ public class FontProperty extends Property {
         return value;
     }
 
-    public Font getFont() { return new Font(value, Font.PLAIN, 15);
+    public Font getFont() {
+        return new Font(value, Font.PLAIN, 15);
     }
 
     @Override

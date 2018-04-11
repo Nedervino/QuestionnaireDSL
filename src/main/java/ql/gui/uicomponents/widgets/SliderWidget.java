@@ -13,7 +13,7 @@ public class SliderWidget extends BaseWidget {
 
     private final JSlider slider;
 
-    public SliderWidget(Environment environment, Question question, boolean isEditable, int start, int end, int step, QuestionStyle style) {
+    public SliderWidget(Environment environment, Question question, boolean isEditable, int start, int end, int step) {
         super(environment, question, isEditable);
 
         Value value = environment.getQuestionValue(question.getId());
@@ -29,7 +29,6 @@ public class SliderWidget extends BaseWidget {
 
         setValue();
         setEditable(isEditable);
-        setStyle(style);
     }
 
     @Override

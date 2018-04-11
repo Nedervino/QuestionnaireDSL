@@ -15,16 +15,15 @@ public class CheckboxWidget extends BaseWidget {
     private final JCheckBox checkBox;
 
     public CheckboxWidget(Environment environment, Question question, boolean isEditable) {
-        this(environment, question, isEditable, "Yes", new QuestionStyle());
+        this(environment, question, isEditable, "Yes");
     }
 
-    public CheckboxWidget(Environment environment, Question question, boolean isEditable, String label, QuestionStyle style) {
+    public CheckboxWidget(Environment environment, Question question, boolean isEditable, String label) {
         super(environment, question, isEditable);
         checkBox = new JCheckBox();
         checkBox.setText(label);
         setValue();
         setEditable(isEditable);
-        setStyle(style);
     }
 
     @Override

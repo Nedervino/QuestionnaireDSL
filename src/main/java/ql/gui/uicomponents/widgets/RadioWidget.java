@@ -19,10 +19,10 @@ public class RadioWidget extends BaseWidget {
     private final ButtonGroup buttonGroup;
 
     public RadioWidget(Environment environment, Question question, boolean isEditable) {
-        this(environment, question, isEditable, "Yes", "No", new QuestionStyle());
+        this(environment, question, isEditable, "Yes", "No");
     }
 
-    public RadioWidget(Environment environment, Question question, boolean isEditable, String trueLabel, String falseLabel, QuestionStyle style) {
+    public RadioWidget(Environment environment, Question question, boolean isEditable, String trueLabel, String falseLabel) {
         super(environment, question, isEditable);
         this.choiceButtonMap = new HashMap<>();
 
@@ -44,7 +44,6 @@ public class RadioWidget extends BaseWidget {
 
         setValue();
         setEditable(isEditable);
-        setStyle(style);
     }
 
     @Override

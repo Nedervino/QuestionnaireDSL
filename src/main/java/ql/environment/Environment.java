@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface Environment {
 
+    /**
+     * Re-evaluates all expressions belonging to questions, and notifies registered EnvironmentListeners
+     */
     void evaluate();
 
     List<Question> getQuestions();

@@ -24,7 +24,7 @@ public class FormUIFactory {
         return new FormUI(questions);
     }
 
-    private QuestionUI getQuestionUI(Environment environment, Question question) {
+    protected QuestionUI getQuestionUI(Environment environment, Question question) {
         Widget widget = new WidgetFactory().createWidget(question, environment);
         return new QuestionUI(environment, question, widget);
     }

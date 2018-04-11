@@ -1,7 +1,5 @@
 package ql.validator.checkers;
 
-import issuetracker.Error;
-import issuetracker.Warning;
 import ql.ast.Form;
 import ql.ast.SourceLocation;
 import ql.ast.expressions.Variable;
@@ -30,16 +28,6 @@ public class CyclicDependencyChecker extends BaseChecker implements FormStatemen
         super();
         this.dependencyManager = new DependencyManager();
         form.accept(this);
-    }
-
-    @Override
-    public List<Error> getErrors() {
-        return issueTracker.getErrors();
-    }
-
-    @Override
-    public List<Warning> getWarnings() {
-        return issueTracker.getWarnings();
     }
 
     private void logCircularDependencies() {

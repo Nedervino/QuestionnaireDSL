@@ -17,10 +17,10 @@ public class DropdownWidget extends BaseWidget {
     private final String falseLabel;
 
     public DropdownWidget(Environment environment, Question question, boolean isEditable) {
-        this(environment, question, isEditable, "Yes", "No", new QuestionStyle());
+        this(environment, question, isEditable, "Yes", "No");
     }
 
-    public DropdownWidget(Environment environment, Question question, boolean isEditable, String trueLabel, String falseLabel, QuestionStyle style) {
+    public DropdownWidget(Environment environment, Question question, boolean isEditable, String trueLabel, String falseLabel) {
         super(environment, question, isEditable);
         this.trueLabel = trueLabel;
         this.falseLabel = falseLabel;
@@ -30,7 +30,6 @@ public class DropdownWidget extends BaseWidget {
         dropdown.addItem(this.falseLabel);
         setValue();
         setEditable(isEditable);
-        setStyle(style);
     }
 
     @Override

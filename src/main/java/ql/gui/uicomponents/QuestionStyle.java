@@ -14,14 +14,14 @@ public class QuestionStyle {
      * Initialise with default style
      */
     public QuestionStyle() {
-        color = Color.RED;
-        fontsize = 20;
-        font = new Font("Comic Sans MS", Font.PLAIN, fontsize);
+        color = Color.BLACK;
+        fontsize = 15;
+        font = new Font("Verdana", Font.PLAIN, fontsize);
         width = 200;
-        height = 100;
+        height = 50;
     }
 
-    public QuestionStyle(Color color, Font font, int fontsize, int width, int height) {
+    public QuestionStyle(Color color, int fontsize, Font font, int width, int height) {
         this.color = color;
         this.fontsize = fontsize;
         this.font = font.deriveFont(fontsize);

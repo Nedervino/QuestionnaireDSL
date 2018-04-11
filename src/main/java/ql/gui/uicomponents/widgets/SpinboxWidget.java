@@ -14,15 +14,10 @@ public class SpinboxWidget extends BaseWidget {
     private final JSpinner spinner;
 
     public SpinboxWidget(Environment environment, Question question, boolean isEditable) {
-        this(environment, question, isEditable, new QuestionStyle());
-    }
-
-    public SpinboxWidget(Environment environment, Question question, boolean isEditable, QuestionStyle style) {
         super(environment, question, isEditable);
         spinner = new JSpinner();
         setValue();
         setEditable(isEditable);
-        setStyle(style);
     }
 
     @Override
@@ -33,7 +28,8 @@ public class SpinboxWidget extends BaseWidget {
 
     @Override
     public void setStyle(QuestionStyle style) {
-        spinner.setForeground(style.getColor());
+        Component spinComponent = spinner.getEditor().getComponent(0);
+        spinComponent.setForeground(style.getColor());
         spinner.setPreferredSize(new Dimension(style.getWidth(), style.getHeight()));
         spinner.setFont(style.getFont());
     }

@@ -24,15 +24,10 @@ public class TextFieldWidget extends BaseWidget {
     private final JFormattedTextField textField;
 
     public TextFieldWidget(Environment environment, Question question, boolean isEditable) {
-        this(environment, question, isEditable, new QuestionStyle());
-    }
-
-    public TextFieldWidget(Environment environment, Question question, boolean isEditable, QuestionStyle style) {
         super(environment, question, isEditable);
         textField = createTextField(question);
         setValue();
         setEditable(isEditable);
-        setStyle(style);
     }
 
     @Override

@@ -28,13 +28,13 @@ public class FormUI {
         initialiseFrame(questionContainer);
     }
 
-    private void initialiseFrame(JPanel panel) {
+    protected void initialiseFrame(JComponent component) {
         frame = new JFrame("Form Viewer");
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         frame.setSize(700, 700);
-        frame.add(panel);
+        frame.add(component);
         frame.setVisible(true);
     }
 }
